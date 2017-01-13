@@ -1,0 +1,26 @@
+{
+  "name": "minecraft-game",
+  "version": "1.0.1",
+  "description": "A very early version of minecraft",
+  "main": "steve.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [
+    "minecraft",
+    "game",
+    "fun",
+    "kids",
+    "lhl"
+  ],
+  "author": "Steve",
+  "license": "ISC"
+}
