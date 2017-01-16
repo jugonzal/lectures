@@ -22,6 +22,6 @@
   },
   "homepage": "https://github.com/fzero/lhl-lectures#readme",
   "dependencies": {
-    "request": "^2.75.0"
+    "request": "^2.79.0"
   }
 }
