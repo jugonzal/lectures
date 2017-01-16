@@ -2,13 +2,13 @@
   "name": "w2d1_examples",
   "version": "1.0.0",
   "description": "W2D1 Examples",
-  "main": "index.js",
+  "main": "request.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "That Guy",
+  "author": "Gonzalez",
   "license": "ISC",
   "dependencies": {
-    "request": "^2.75.0"
+    "request": "^2.79.0"
   }
 }

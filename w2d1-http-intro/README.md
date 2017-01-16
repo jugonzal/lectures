@@ -1,45 +1,29 @@
 # Introduction to HTTP
 
-## Starting from the very beginning
+## About HTTP
+Hello all.   The objective today was to get you to understand the "behind the
+scenes" of the web.   What happens when you type a given address in your browser?
 
-### What is a protocol?
-* It's a formalized way to communicate.
-    - Spoken language is a communications protocol, as is body language! But we're getting philosophical here...
-* In computer science, it's a set of rules defining a way for two systems to communicate in a way both can make sense of what's going on.
-
-### The web is like a lasagna of protocols
-* At the bottom layer there's **TCP** -> _Transmission Control Protocol_
-* On top of it there's **IP** -> _Internet Protocol_
-* And on top that we have **HTTP** -> _Hyper Text Transfer Protocol_
-* There are other protocols
-    - **FTP** -> _File Transfer Protocol_
-    - **SMTP** -> _Simple Mail Transfer Protocol_
-    - **XMPP** -> _Extensible Messaging and Presence Protocol_ (used by Slack!)
-    - **SSH** -> _Secure Shell_
-    - ...and hundreds of others
-
-### Servers
-- Applications that communicate over a network
-- Answer to requests on a specific IP address and port
-- For every IP, only **one** server can be listening on a given port
-    + You **can** have multiple servers listening on different ports on the same IP
-- Different protocols use different ports
-    + HTTP: 80 / HTTPS: 443
-    + FTP: 21
-    + SMTP: 25
-    + SSH: 22
+We learned about the ancient ways in which kids would share files through random
+servers before the web existed, all of which was possible in the 80s, but not
+very friendly.  The most important breakthrough came with the introduction of 
+HTTP, which allowed browsers to simplify the task of finding and retrieving 
+resources from all over the web.
 
 
 ## HTTP
 
-* It's the way browsers talk to servers
-* It's very simple: just some text structured in a specific way
-* It's a **client-server** protocol
-    - The **client** makes **requests**
-    - The server returns **responses**
-* It's **stateless**
-    - This means each request is a complete conversation. Once it's over, the server doesn't really keep any information about previous requests.
-    - Persistence (i.e. logged-in state, discussion threads and so on) is achieved through workarounds. The most popular is the use of cookies.
+Here is the original specifications for HTTP:
+
+https://tools.ietf.org/html/rfc2068
+
+While the document is very arid and dense, we learned a few things from it:
+
+- what are the acceptable URI, or resource identifiers.
+- the fact that we can *change* the web by using other methods such as POST or DELETE
+- the fact that a server can respond in one of many different ways, 200, 300, 400, 500
+- the fact that a server is stateless
+- the fact that a server can send a response in different formats: HTML, JSON
 
 
 ## HTTP Requests
@@ -50,7 +34,6 @@
 * `PUT/PATCH` - SEND data and UPDATE an object on the server
 * `DELETE` - DELETE data on the server
 
-Note how they map nicely to CRUD operations
 
 ### URI - Uniform Resource Indicator
 * Also known as **URL - Uniform Recource Locator**
@@ -119,9 +102,35 @@ Data to be sent to the server (optional)
 
 ## More stuff
 
-Unnecessarily extensive and detailed explanation of what happens when you type `google.com` and press enter on your browser:
-https://github.com/alex/what-happens-when
 
 ## Code discussed in class
 
+To better understand these concepts we played with a new command that is able
+to send ONE request and echo the response on screen:
+
+```
+curl google.com
+
+curl https://maps.googleapis.com/maps/api/geocode/json?address=46%20Spadina,%20Toronto&sensor=false
+```
+
+The second URL is a great example of a full URL that defines a resource, located
+somewhere in the realm of Google servers, using parameters to pass information
+into my request.
+
+
 Look inside the [`/code`](code) folder.
+
+
+Here we see a great example of when using callbacks makes perfect sense:  we are
+getting a resource from the web but the actual call will take a few milliseconds
+so we write a callback to deal with the aftermath of that request.
+
+We also spent some time wondering how to work with this response, since it came
+in JSON format.   Ultimately, the fact that we are in Javascript makes it very
+easy to deal with JSON data.
+
+Working with APIs will be all about learning about *resources* that are managed
+by other servers, and which are exposed to us through the various HTTP methods 
+(GET, POST, PUT, DELETE, etc), and then exchanging data back and forth.
+
