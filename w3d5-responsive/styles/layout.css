@@ -1,0 +1,84 @@
+/*
+ * http://www.paulirish.com/2012/box-sizing-border-box-ftw/
+ * https://css-tricks.com/international-box-sizing-awareness-day/
+ * Do not modify these two selectors, please
+ */
+.container, body {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-flow: row wrap;
+  flex-flow: row wrap; }
+
+.c1, #nav-bar, .c2, main, .c3, sidebar {
+  width: 100%; }
+
+@media (min-width: 600px) {
+  .c1, #nav-bar {
+    width: 60%;
+    -webkit-order: 2;
+    order: 2; }
+
+  .c2, main {
+    width: 40%;
+    -webkit-order: 1;
+    order: 1; }
+
+  .c3, sidebar {
+    width: 100%;
+    -webkit-order: 3;
+    order: 3; } }
+@media (min-width: 800px) {
+  .c2, main {
+    width: 20%; }
+
+  .c3, sidebar {
+    width: 20%; } }
+/*
+ * Global layout stuff
+ */
+body {
+  color: #244751;
+  background-color: #eee;
+  font-family: 'Roboto Condensed', sans-serif; }
+
+/*
+ * Additional CSS can be defined below or in other CSS files, as per instructions
+ */
+main {
+  background: white; }
+
+#nav-bar {
+  background: #00a087;
+  color: #e8fdff;
+  padding: 0 2em;
+  z-index: 999; }
+
+#nav-bar .logo {
+  float: left;
+  width: 80px;
+  height: 80px;
+  z-index: 1000; }
+
+#nav-bar > .header {
+  float: left;
+  margin-left: 10px;
+  font-size: 2em;
+  line-height: 80px;
+  z-index: 1000; }
+
+#nav-bar > .compose {
+  float: right;
+  opacity: 0.8;
+  position: relative;
+  background-color: lightblue;
+  top: 12px;
+  padding: 15px;
+  border: 1px solid black;
+  border-radius: 5px;
+  font-size: 1.2em;
+  z-index: 1000; }
+
+#nav-bar > .compose:hover {
+  opacity: 1; }
+
+/*# sourceMappingURL=layout.css.map */

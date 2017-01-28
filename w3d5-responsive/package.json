@@ -1,0 +1,15 @@
+{
+  "name": "w3d5-responsive",
+  "version": "1.0.0",
+  "description": "Hi all, today we devoted all our attention to CSS.  We started looking back at  the web of 10 years ago, when two major trends collided:  absolute positioning in CSS and smartphones.  They just didn't like each other and gave birth to a  whole range of new techniques aimed at designing better pages for smaller screens.",
+  "main": "index.js",
+  "scripts": {
+    "compile-sass": "./node_modules/node-sass/bin/node-sass --output styles",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+  }
+}
