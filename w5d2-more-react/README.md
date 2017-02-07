@@ -13,7 +13,12 @@ Here is that one awesome diagram with the overall lifecycle for a Component.  Re
   https://d2vvqscadf4c1f.cloudfront.net/RXZidTc7S5WEicK3fiNW_Screen%20Shot%202016-02-25%20at%2012.06.29%20PM.png
 
 In general, the Facebook documentation for React contains great guides:
-  https://facebook.github.io/react/docs/react-component.html
+
+https://facebook.github.io/react/docs/state-and-lifecycle.html
+
+But this guide also has a very useful description of all available lifecycle methods, including some of the rules and parameters each one of them can use:
+
+http://busypeoples.github.io/post/react-component-lifecycle/
 
 
 # Handling User Events
