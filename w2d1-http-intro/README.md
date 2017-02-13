@@ -100,8 +100,6 @@ Data to be sent to the server (optional)
     - http://httpbin.org
 
 
-## More stuff
-
 
 ## Code discussed in class
 
@@ -119,7 +117,7 @@ somewhere in the realm of Google servers, using parameters to pass information
 into my request.
 
 
-Look inside the [`/code`](code) folder.
+Look inside the [`/code`](https://github.com/jugonzal/lhl-lectures/tree/master/w2d1-http-intro/code) folder.
 
 
 Here we see a great example of when using callbacks makes perfect sense:  we are
@@ -133,4 +131,8 @@ easy to deal with JSON data.
 Working with APIs will be all about learning about *resources* that are managed
 by other servers, and which are exposed to us through the various HTTP methods 
 (GET, POST, PUT, DELETE, etc), and then exchanging data back and forth.
+
+## More stuff
+
+GitHub repo for this lecture: https://github.com/jugonzal/lhl-lectures/tree/master/w2d1-http-intro
 
