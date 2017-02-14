@@ -22,16 +22,28 @@ app.use(bodyParser.json()); // JSON
 // I'm also adding a logging middleware so we can see what's going on
 // with our server. More info: https://github.com/expressjs/morgan
 app.use(morgan('dev'));
-
+app.use(express.static('public'))
 
 // Routing functions go here
 app.get('/', (req, res) => {
   res.render('index');
 });
 
+app.get('/about', function(req, res) {
+  res.render('about');
+});
+
+app.get('/pr', (req, res) => {
+  res.render('media');
+});
+
+app.get('/media', (req, res) => {
+  res.render('media');
+});
+
 
 // Start the server
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}!`);
 });
