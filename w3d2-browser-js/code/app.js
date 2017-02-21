@@ -15,7 +15,7 @@ function $$(query) {
 var $button = $('#the-button');
 
 function buttonClick(ev) {
-  ev.stopPropagation(); // Stops event from propagating outwards
+  // ev.stopPropagation(); // Stops event from propagating outwards
   alert("You clicked meeeee!");
   $('#main-header').innerText = "YOU CLICKED THE BUTTON";
 }
@@ -24,7 +24,7 @@ $button.addEventListener('click', buttonClick);
 
 
 $('#inner-box').addEventListener('click', function(ev) {
-  ev.stopPropagation();
+  // ev.stopPropagation();
   alert("inner-box clicked!");
 });
 
