@@ -1,5 +1,5 @@
-const musicdb = require('./musicdb') // regular version
-// const musicdb = require('./musicdb-promises') // promises version
+// const musicdb = require('./musicdb') // regular version
+const musicdb = require('./musicdb-promises') // promises version
 
 var artistName = process.argv[2];
 var albumName = process.argv[3];

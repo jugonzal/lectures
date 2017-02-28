@@ -6,9 +6,9 @@ const pg = require('pg-then');
 // will be read if the config is not present
 // You can put this data on a .env file if you'd like.
 const config = {
-  user: 'fzero', //env var: PGUSER
-  database: 'week4', //env var: PGDATABASE
-  password: undefined, //env var: PGPASSWORD
+  user: 'labber', //env var: PGUSER
+  database: 'vagrant', //env var: PGDATABASE
+  password: 'labber', //env var: PGPASSWORD
   port: 5432 //env var: PGPORT
 };
 
@@ -18,6 +18,9 @@ const config = {
 // the same environment variables used by postgres cli tools.
 const db = new pg.Client(config);
 
+const getArtists = () => {
+  return db.query(`select * from artists`);
+};
 
 // Get all album tracks for an artist.
 // The callback receives result.rows from `pg`
@@ -45,5 +48,6 @@ const getAlbumTracks = (artistName, albumName, callback) => {
 // Add other query functions here and export them below
 
 module.exports = {
-  getAlbumTracks: getAlbumTracks
+  getAlbumTracks: getAlbumTracks,
+  getArtists: getArtists
 };

@@ -6,9 +6,9 @@ const pg = require('pg');
 // will be read if the config is not present
 // You can put this data on a .env file if you'd like.
 const config = {
-  user: 'fzero', //env var: PGUSER
-  database: 'week4', //env var: PGDATABASE
-  password: undefined, //env var: PGPASSWORD
+  user: 'labber', //env var: PGUSER
+  database: 'vagrant', //env var: PGDATABASE
+  password: 'labber', //env var: PGPASSWORD
   port: 5432 //env var: PGPORT
 };
 

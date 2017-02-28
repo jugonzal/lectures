@@ -1,11 +1,22 @@
-# LighthouseLabs W4D2 - SQL from Javascript
+## SQL from Javascript
 
 In this lecture we took our first steps to talk to a database (Postgres in this
 case) from Node. We've used the [pg](https://www.npmjs.com/package/pg) package
 (and alternatively [pg-then](https://www.npmjs.com/package/pg-then)) to
-implement the simplest query interface available. In today's breakout you'll
-learn about [knex](https://www.npmjs.com/package/knex), which makes it easier to
-build SQL queries in JS.
+implement the simplest query interface available. 
+
+As compact as [the demo code](album.js) is, it is a good opportunity to discuss the following:
+
+- When using databases, make sure you know which library/driver you are using to connect to your particular database server.  In our case `pg` is only good for connecting to PostgreSQL.
+```javascript
+const pg = require('pg');
+```
+
+- Make sure your connection settings are valid.  Test them using the `psql` interface. 
+
+- Notice how the `query` function takes a callback as a parameter. It is very important to remember that when it comes to databases, you will likely have to assume that data will come back *asynchronosuly*. This means that your code could do other things while it waits for data. This is a frequent source of errors when starting to write queries from javascript.
+
+- Sanitizing user input refers to the practice of making sure ANY parameters that are passed to a query have been checked and double-checked *before* they are used because the most common vulnerability in a web system is something called "SQL Injection".  
 
 The `pg-then` package uses [ES6
 promises](http://www.datchley.name/es6-promises/) to reduce callback hell when
@@ -16,3 +27,5 @@ do the exact same thing.
 
 The final lecture code can be found in the [`code`](code/) folder. DB setup and
 seed data can be found in the [`sql`](sql/) folder.
+
+Here is the [documentation](https://www.npmjs.com/package/pg) to the `pg` package we used.
