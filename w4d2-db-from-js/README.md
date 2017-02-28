@@ -5,7 +5,7 @@ case) from Node. We've used the [pg](https://www.npmjs.com/package/pg) package
 (and alternatively [pg-then](https://www.npmjs.com/package/pg-then)) to
 implement the simplest query interface available. 
 
-As compact as [the demo code](album.js) is, it is a good opportunity to discuss the following:
+As compact as [the demo code](albums.js) is, it is a good opportunity to discuss the following:
 
 - When using databases, make sure you know which library/driver you are using to connect to your particular database server.  In our case `pg` is only good for connecting to PostgreSQL.
 ```javascript
