@@ -15,7 +15,8 @@ app.set("view engine", "ejs")
 const data = {
   users: [
     { username: 'monica', password: 'testing' },
-    { username: 'khurram', password: 'testing2' }
+    { username: 'khurram', password: 'testing2' },
+    { username: 'juan', password: 'pwd'}
   ]
 }
 
