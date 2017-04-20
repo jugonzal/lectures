@@ -1,0 +1,28 @@
+<head>
+  <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+  
+</head>
+<body>
+  <h1>Testing AJAX</h1>
+  <h2>Watch what happens when I click here</h2>
+  <div id="data">
+  </div>
+<script>
+  function updateData() {
+    $.ajax({
+      url: 'address.html',
+      method: 'GET',
+      dataType: 'html'
+    }).then(data => {
+      console.log('Success ' + data);
+      console.log('This is ', this);
+      $( "#data" ).append( data);
+    }).catch(err => {
+      console.log(err);
+      alert('failed to like');
+    });    
+  }
+  document.querySelector("h2").addEventListener('click',updateData);
+  </script>
+</body>
+
