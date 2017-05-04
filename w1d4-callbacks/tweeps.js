@@ -1,49 +1,55 @@
-var tweeps = ['@lighthouselabs','@nytimesbits','@globalculture'];
-tweeps.push('@drumpf');
+var tweeps = ['@nytimes','@lighthouselabs','@wired'];
+tweeps.push ('@globalculture');
+tweeps.push ('@starwars');
 
-function addPadding (s) {
-  // var newS = ""
-  // for (var i =0 ; i< 15 - s.length; i++) {
-  //   newS += " ";
-  // }
-  // return s + newS;
-  return new Array(20 - s.length ).join( ' ' ).concat(s);
+function padding(str) {
+  var numberOfSpaces = 15 - str.length;
+  return ' '.repeat(numberOfSpaces);
 }
 
+// var displayStrategies = {
+//   nice: function (things) {
+//     for (var oneThing of things) {
+//       console.log("- ", oneThing);
+//     }
+//   },
+//   raw: function (things) {
+//     for (var oneThing of things) {
+//       console.log(oneThing);
+//     }
+//   },
+//   pretty: function (things) {
+//     for (var oneThing of things) {
+//       console.log("-> ", oneThing,padding(oneThing)," <-");
+//     }
 
-prettyPrintItem = function(item) {
-  console.log("Item --> ", addPadding(item), " <--");
+//   }
+
+// }
+
+function display(things, displayStrategy) {
+  for (var oneThing of things) {
+    displayStrategy(oneThing);
+  }  
 }
 
-function sloppyPrintItem (item) {
-  console.log("Sloppy",item,"<<--");
-}
-
-strategies = {
-  pretty: prettyPrintItem,
-  sloppy: sloppyPrintItem
-}
-
-somePrint = function (array, styleOfPrinting) {
-  for (var i =0; i < array.length; i++) {
-    styleOfPrinting(array[i]);
+var displayStrategies = {
+  nice: function (thing) {
+    console.log("- ", thing);
+  },
+  raw: function (thing) {
+    console.log(thing);
+  },
+  pretty: function (thing) {
+    console.log("-> ", thing,padding(thing)," <-");
   }
+
 }
 
-somePrint(tweeps, strategies.pretty);
-somePrint(tweeps, strategies.sloppy);
-somePrint(tweeps, sloppyPrintItem);
+display(tweeps, displayStrategies.pretty);
 
-somePrint(tweeps, function(item) {
-  console.log(item);
-});
-
-somePrint(tweeps, true ? 
-  function(item) {
-    console.log(item);
-  } 
-  : strategies.pretty);
-
-
+display(tweeps, function (oneThing) {
+  console.log('**',oneThing,'**');
+})
 
 
