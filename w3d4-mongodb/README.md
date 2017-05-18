@@ -2,7 +2,7 @@
 
 Credit where credit is due: the following lecture notes and example app were heavily based on [Khurram Virani's original notes](https://github.com/kvirani/express_mongo_todo_example) (thanks!).
 
-The code discussed in class can be found in [`/code`](code).
+The final Express/Mongo app discussed in class can be found in [`/code`](https://github.com/jugonzal/lhl-lectures/tree/master/w3d4-mongodb/code).
 
 ## Topics covered (Summary)
 
@@ -27,11 +27,12 @@ The code discussed in class can be found in [`/code`](code).
 Currently in our project we have a "global" object in memory to track our shortened URL records:
 
 ```javascript
-var urlDatabase = {
-  "abc": "http://",
-  "def": "http://"
-}
-```
+const data = {
+  users: [
+    { name: "Juan", age: 116 },
+    { name: "Someone else", age: 25 }
+  ]
+}```
 
 The biggest problem is that this data goes away when we restart our node process (something that we must assume can happen any time for many reasons).
 
@@ -105,7 +106,7 @@ A Mongo server has many Databases which have many collections within and these c
 We can store whatever we want in the documents. Here is an visual example of a todo app's mongo database, so we can see how we would use these different entities / layers to structure the data for an app like the one we are building this week:
 
 ```
-- Database: todo_app_db
+- Database: my_db
   - Collection: todos
     - Doc: {desc: '...', completed: true}
     - Doc: {desc: '...', completed: false}
@@ -122,14 +123,29 @@ We went over the mongo shell. Here are the commands we ran:
 
 ```javascript
 show dbs
-use todos_app
-db
-db.todos
-db.todos.insert({ desc: 'Example TODO', completed: false })
-db.todos.insert({ desc: 'Example Completed TODO', completed: true })
-db.todos.find()
-db.todos.find({completed: true})
-db.todos.find({id: ObjectId("unique-mongo-id-here")})
+use users
+show collections
+db.users.find()
+db.users.insert(
+  { name: "Juan", age: 116, projects: [
+    { id: "P1", eval: "L4"},         
+    { id: "P2", eval: "L3"}         
+    ] 
+  }
+)
+db.users.insert(
+  { name: "You", age: 16, projects: [
+    { id: "P1", eval: "L2"},         
+    { id: "P2", eval: "L4"}         
+    ] 
+  }
+)
+db.users.find()
+db.users.find().pretty()
+db.users.find({name: "Juan"}).pretty()
+db.users.find({'projects.eval': "L4"}).pretty()
+db.users.find({'projects.eval': "L4"}).limit(1).pretty()
+
 ```
 
 We talked about how:
@@ -170,7 +186,3 @@ So together we have:
 ```
 Browser      (Client) <> Node/Express (< Server / Client >) <> MongoDB (Server)
 ```
-
-Here's a simplified diagram on how a server setup with Express.js and MongoDB might look like:
-
-![Server-side diagram](https://fzero.github.io/lhl-lectures/assets/client-server-arch-with-database.svg)
