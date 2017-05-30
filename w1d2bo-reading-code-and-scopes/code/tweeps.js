@@ -1,50 +1,30 @@
-var theBest = ["@ThePracticalDev"];
+tweeps = ["@waxy", "@fzero", "@mozilla"]
 
-console.log(theBest);
-
-function addToArray(array, somethingToAdd) {
-  array.push(somethingToAdd);
+function twice (array) {
+  array.push(array[0]);
   return array;
 }
 
-theBest = addToArray(theBest, "@nytimesbits");
-theBest = addToArray(theBest, "@lighthouse_labs");
-theBest = addToArray(theBest, "@vancityDeadpool");
-theBest = addToArray(theBest, "@patonOrange");
-theBest = addToArray(theBest, "@justInTrudeau");
-theBest = addToArray(theBest, "@realDonaldito");
-
-console.log(theBest);
-
-function sortInAscending (a, b) {
-  return (a > b);
+function fourthrice (array) {
+  array = twice(array)
+  return twice(array);
 }
 
-function sortInDescending (a, b) {
-  return (a < b);
+var addTweeps = function (tweepsList, tweepToAdd, howMany) {
+  if (howMany) {
+    tweepsList.push(howMany(tweepToAdd))
+  } else {
+    tweepsList.push(tweepToAdd);
+  }
+  return tweepsList;
 }
 
-function sortArray(array, howToSortTheseThings) {
-  do {
-    var swapped = false;
-    for (i=0; i< array.length-1 ; i++) {
-      if (howToSortTheseThings(array[i], array[i+1])) {
-        var temp = array[i];
-        array[i] = array[i+1];
-        array[i+1] = temp;
-        swapped = true;
-      }
-    }
-  } while (swapped);
-  return array;
-}
+tweeps = addTweeps(tweeps, "@ThePracticalDev");
+tweeps = addTweeps(tweeps, "@globalculture");
+tweeps = addTweeps(tweeps, [123], fourthrice);
 
-// console.log(sortInAscending(6,2));
-console.log(sortArray([4,7,2,3,9,1], sortInAscending));
+// console.log("fourice: ", fourthrice([1,2]));
 
-console.log(sortArray([4,7,2,3,9,1], sortInDescending));
+// console.log("Twice: ",tweeps[6]([5]));
 
-console.log(sortArray(theBest, function(a, b) { 
-  return (a[1] > b[1]);
-} ))
-
+console.log("Tweeps: ",tweeps);
