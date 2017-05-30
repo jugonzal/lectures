@@ -30,7 +30,7 @@ for (let i in parameters) {
 
     if (parameters[i]%1 === 0) {
        // add them up -> Total
-       total = total + parameters[i];
+       total = total + Number(parameters[i]);
     }
 
   }
