@@ -20,19 +20,23 @@ var total = 0;
 // Given the full list of such parameters... (numberOfArguments)
 
 for (let i in parameters) {
-   console.log("Inside parameters: ", i, parameters[i]); 
-   console.log(" - using isNaN: ", isNaN(parameters[i]));
+   // console.log("Inside parameters: ", i, parameters[i]); 
+   // console.log(" - using isNaN: ", isNaN(parameters[i]));
    // console.log(" - divisible by 1: ", parameters[i]/!1);
-   console.log(" - using modulo (is it whole): ", parameters[i]%1 === 0);
-}
-
+   // console.log(" - using modulo (is it whole): ", parameters[i]%1 === 0);
 
   // if the current parameter is NOT a number
+  if (!isNaN(parameters[i])) {
 
-    // discard
+    if (parameters[i]%1 === 0) {
+       // add them up -> Total
+       total = total + parameters[i];
+    }
 
-  // else
+  }
 
-    // add them up -> Total
+}
 
 // Display the Total
+
+console.log("Total: ", total);
