@@ -32,7 +32,13 @@ waysToDisplay.console(displayData());
 // waysToDisplay.nice(displayData());
 
 displayData (waysToDisplay.nice);
-displayData (waysToDisplay.oneline);
+
+displayData (function (array) {
+  for (i=0; i<array.length; i++) {
+    console.log(i+1+". "+array[i]);
+  }
+});
+
 
 // for (let way in waysToDisplay) {
 //   waysToDisplay[way](tweeps);
