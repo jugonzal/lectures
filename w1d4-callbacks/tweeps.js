@@ -1,18 +1,4 @@
-
-var waysToDisplay = {
-  console: function (array) {
-    console.log("console.log ", array);  
-  },
-  nice: function (array) {
-    console.log("nicer display");
-    for (let i of array) {
-      console.log("- ", i);
-    }
-  },
-  oneline: function (array) {
-    console.log("--> ",array," <--");
-  }
-}
+strategies = require('./displayStrategies');
 
 // HERE ARE MY TEST CASES
 
@@ -27,20 +13,20 @@ function displayData (callback) {
 }
 
 
-waysToDisplay.console(displayData());
+strategies.console(displayData());
 
-// waysToDisplay.nice(displayData());
+// strategies.nice(displayData());
 
-displayData (waysToDisplay.nice);
+displayData (strategies.nice);
 
-waysToDisplay.numbered = function (array) {
+strategies.numbered = function (array) {
     for (i=0; i<array.length; i++) {
       console.log(i+1+". "+array[i]);
     }
   }
 
-for (let way in waysToDisplay) {
-  displayData(waysToDisplay[way]);
+for (let way in strategies) {
+  displayData(strategies[way]);
 }
 
 
