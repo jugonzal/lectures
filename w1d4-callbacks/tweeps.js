@@ -1,18 +1,22 @@
-var tweeps = ["@waxy", "@fzero", "@mozilla"]
 
-function consoleDisplay (array) {
-  console.log("console.log ", array);  
-}
-
-function nicerDisplay (array) {
-  console.log("nicer display");
-  for (let i of array) {
-    console.log("- ", i);
+var waysToDisplay = {
+  console: function (array) {
+    console.log("console.log ", array);  
+  },
+  nice: function (array) {
+    console.log("nicer display");
+    for (let i of array) {
+      console.log("- ", i);
+    }
   }
 }
 
-consoleDisplay(tweeps);
+// HERE ARE MY TEST CASES
+
+var tweeps = ["@waxy", "@fzero", "@mozilla"]
+
+waysToDisplay.console(tweeps);
 
 tweeps.push("@wired");
 
-nicerDisplay(tweeps);
+waysToDisplay.nice(tweeps);
