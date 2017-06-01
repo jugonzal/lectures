@@ -8,19 +8,30 @@ var waysToDisplay = {
     for (let i of array) {
       console.log("- ", i);
     }
+  },
+  oneline: function (array) {
+    console.log("--> ",array," <--");
   }
 }
 
 // HERE ARE MY TEST CASES
 
-var tweeps = ["@waxy", "@fzero", "@mozilla"]
+function displayData () {
+  var tweeps = ["@waxy", "@fzero", "@mozilla"]
+  tweeps.push("@wired");
+
+  return tweeps;
+}
+
 
 // waysToDisplay.console(tweeps);
 
-tweeps.push("@wired");
 
-// waysToDisplay.nice(tweeps);
+waysToDisplay.nice(displayData());
 
-for (let way in waysToDisplay) {
-  waysToDisplay[way](tweeps);
-}
+
+// for (let way in waysToDisplay) {
+//   waysToDisplay[way](tweeps);
+// }
+
+
