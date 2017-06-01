@@ -15,8 +15,12 @@ var waysToDisplay = {
 
 var tweeps = ["@waxy", "@fzero", "@mozilla"]
 
-waysToDisplay.console(tweeps);
+// waysToDisplay.console(tweeps);
 
 tweeps.push("@wired");
 
-waysToDisplay.nice(tweeps);
+// waysToDisplay.nice(tweeps);
+
+for (let way in waysToDisplay) {
+  waysToDisplay[way](tweeps);
+}
