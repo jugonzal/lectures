@@ -33,15 +33,14 @@ waysToDisplay.console(displayData());
 
 displayData (waysToDisplay.nice);
 
-displayData (function (array) {
-  for (i=0; i<array.length; i++) {
-    console.log(i+1+". "+array[i]);
+waysToDisplay.numbered = function (array) {
+    for (i=0; i<array.length; i++) {
+      console.log(i+1+". "+array[i]);
+    }
   }
-});
 
-
-// for (let way in waysToDisplay) {
-//   waysToDisplay[way](tweeps);
-// }
+for (let way in waysToDisplay) {
+  displayData(waysToDisplay[way]);
+}
 
 
