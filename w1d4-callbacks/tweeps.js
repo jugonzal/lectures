@@ -16,19 +16,23 @@ var waysToDisplay = {
 
 // HERE ARE MY TEST CASES
 
-function displayData () {
+function displayData (callback) {
   var tweeps = ["@waxy", "@fzero", "@mozilla"]
   tweeps.push("@wired");
 
-  return tweeps;
+  if (callback)
+    callback(tweeps);
+  else 
+    return tweeps;
 }
 
 
-// waysToDisplay.console(tweeps);
+waysToDisplay.console(displayData());
 
+// waysToDisplay.nice(displayData());
 
-waysToDisplay.nice(displayData());
-
+displayData (waysToDisplay.nice);
+displayData (waysToDisplay.oneline);
 
 // for (let way in waysToDisplay) {
 //   waysToDisplay[way](tweeps);
