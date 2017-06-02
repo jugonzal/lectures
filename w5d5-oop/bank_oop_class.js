@@ -3,18 +3,22 @@
 class Account {
   constructor(owner) {
     this.owner = owner;
-    this.balance = 0;
+    this._balance = 0;
     this.transactions = [];
   }
 
   deposit(amount) {
-    this.balance += amount;
-    this.transactions.push(`D${amount}`)
+    this._balance += amount;
+    this.transactions.push(`D+ ${amount}`)
   }
 
   withdraw(amount) {
-    this.balance -= amount;
-    this.transactions.push(`Withdraw ${amount}`)
+    this._balance -= amount;
+    this.transactions.push(`W- ${amount}`)
+  }
+
+  get balance() {
+    return this._balance;
   }
 
   log() {
@@ -32,46 +36,44 @@ class SavingsAccount extends Account {
     if(this.balance - amount > 0) {
       super.withdraw(amount);
     } else {
-      this.transactions.push(`W${amount}X`);
+      this.transactions.push(`W- ${amount} X`);
     }
   }
 }
 
-class AllFeesBankAccount extends SavingsAccount {
-  constructor(owner, fees) {
+class SparkAccount extends SavingsAccount {
+
+  constructor(owner) {
     super(owner);
-    this.fees = fees;
+    super.deposit(100);
+    // this.deposit(100); // this will call the new version of deposit
   }
 
   deposit(amount) {
     super.deposit(amount);
-    this.balance -= amount * this.fees;
-    this.transactions.push(`F${amount * this.fees}`)
+    super.deposit(amount * 0.1);
   }
 
-  withdraw(amount) {
-    super.withdraw(amount + amount * this.fees);
+  endOfMonth () {
+    if (super.balance > 0) {
+      super.deposit(5);
+    }
   }
-
 }
-
 
 /* program */
 
-let accountABC = new SavingsAccount("Bob");
-
-accountABC.deposit(500);
-accountABC.withdraw(100);
-accountABC.withdraw(1000);
-
+let accountABC = new SparkAccount("Bobby");
 accountABC.log();
 
+accountABC.deposit(20);
+accountABC.withdraw(12);
+accountABC.deposit(10);
+accountABC.withdraw(399);
+accountABC.endOfMonth();
+accountABC.log();
 
-let accountAB = new AllFeesBankAccount("Juan", 0.05);
+console.log("Show me the balance? ",++accountABC._balance);
 
-accountAB.deposit(500);
-accountAB.withdraw(100);
-accountAB.withdraw(1000);
 
-accountAB.log();
 
