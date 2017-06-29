@@ -1,32 +1,40 @@
-strategies = require('./displayStrategies');
+'use strict';
 
-// HERE ARE MY TEST CASES
+var tweeps = ["@waxy", "@fzero", "@mozilla"]
+tweeps.push("@wired");
 
-function displayData (callback) {
-  var tweeps = ["@waxy", "@fzero", "@mozilla"]
-  tweeps.push("@wired");
-
-  if (callback)
-    callback(tweeps);
-  else 
-    return tweeps;
-}
-
-
-strategies.console(displayData());
-
-// strategies.nice(displayData());
-
-displayData (strategies.nice);
-
-strategies.numbered = function (array) {
-    for (i=0; i<array.length; i++) {
-      console.log(i+1+". "+array[i]);
-    }
+function iterateArray (array, whateverWeDo) {
+  for (var i=0; i< array.length; i++) {
+    whateverWeDo(array[i]);
   }
-
-for (let way in strategies) {
-  displayData(strategies[way]);
 }
 
+var displayStrategies = {
+  consoleDisplay: function() {
+    console.log("Nothing");
+  },
+  verticalDisplay: function(item) {
+    console.log("- ",item);      
+  },
+  orderedDisplay: function(item, num) {
+    console.log((num+1) + ".) " + item);
+  },
+  numberedDisplay: function(item) {
+    console.log("#"+item);
+  }
+}
+
+iterateArray(tweeps,function(item) {
+    console.log(item);
+  });
+
+iterateArray(tweeps,displayStrategies.consoleDisplay);
+
+iterateArray(tweeps,displayStrategies.verticalDisplay);
+
+iterateArray(tweeps,displayStrategies.orderedDisplay);
+
+// displayStrategies.verticalDisplay(tweeps);
+
+// displayStrategies.testVertical(tweeps);
 
