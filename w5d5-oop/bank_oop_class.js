@@ -41,39 +41,33 @@ class SavingsAccount extends Account {
   }
 }
 
-class SparkAccount extends SavingsAccount {
-
-  constructor(owner) {
-    super(owner);
-    super.deposit(100);
-    // this.deposit(100); // this will call the new version of deposit
+// Every time money is involved the customer WINS.
+class YouWinAccount extends Account {
+  constructor(amount, kick) {
+    super(amount);
+    this._kick = kick;
   }
 
   deposit(amount) {
-    super.deposit(amount);
-    super.deposit(amount * 0.1);
+    super.deposit (amount);
+    // super.deposit (amount*0.1);
+    this._balance += amount * this._kick;
+    this.transactions.push(`D+ ${amount * this._kick} You Win.  Go buy something nice today.`)
+
   }
 
-  endOfMonth () {
-    if (super.balance > 0) {
-      super.deposit(5);
-    }
-  }
 }
 
 /* program */
 
-let accountABC = new SparkAccount("Bobby");
+let accountABC = new YouWinAccount("Juan",0.2);
+accountABC.deposit(100);
+// accountABC.withdraw(12);
 accountABC.log();
+// accountABC.balance += 20;
+accountABC._balance += 20;
+console.log("Please confirm balance ",accountABC.balance);
 
-accountABC.deposit(20);
-accountABC.withdraw(12);
-accountABC.deposit(10);
-accountABC.withdraw(399);
-accountABC.endOfMonth();
-accountABC.log();
-
-console.log("Show me the balance? ",++accountABC._balance);
 
 
 

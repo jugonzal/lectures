@@ -84,6 +84,7 @@ let accountABC = createSavingsAccount("Bob");
 
 accountABC = deposit(accountABC, 500);
 accountABC = withdraw(accountABC, 100);
+accountABC.balance = 5000;
 accountABC = withdraw(accountABC, 1000);
 
 console.log(toString(accountABC));
@@ -95,9 +96,9 @@ console.log(toString(withdraw(withdraw(deposit(createSavingsAccount("Bob"), 500)
 
 /* or... */
 
-thread(createSavingsAccount("Bob"),
-       [deposit, 500],
-       [withdraw, 100],
-       [withdraw, 1000],
-       [toString],
-       [console.log])
+// thread(createSavingsAccount("Bob"),
+//        [deposit, 500],
+//        [withdraw, 100],
+//        [withdraw, 1000],
+//        [toString],
+//        [console.log])
