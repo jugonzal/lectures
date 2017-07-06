@@ -10,39 +10,45 @@ app.set("view engine", "ejs");
 
 app.get("/", (req, res) => {
   console.log('Cookies so far: ', req.cookies);
-  res.render('welcome');
-  // if (req.cookies['spring'] == 'warm') {
-  //   res.render('stay');
-  // } else {
-  //   res.render('goaway');
-  // }
-});
-
-app.get("/warm", (req, res) => {
-  res.cookie('spring','warm');
-  res.render('stay');
-});
-
-app.get("/biz", (req, res) => {
-  res.cookie('tracker','We are listening to you');
-  res.render('biz');
-});
-
-app.get("/about", (req, res) => {
-  console.log("Are we tracking? ", req.cookies.tracker);
-  res.cookie('tracker','Still listening...')
-  res.render('about')
-})
-
-app.get("/language", (req, res) => {
-  if (req.cookies['lang'] == 'en') {
+  if (req.cookies['language'] === 'EN') {
     res.render('english');
-  } else if (req.cookies.lang == 'fr') {
+  } else if (req.cookies['language'] === 'FR') {
     res.render('french');
   } else {
-    res.redirect('/');
+    res.render('welcome');
   }
 });
+
+app.get("/english", (req, res) => {
+  res.cookie('language','EN');
+  res.redirect('/');
+});
+
+app.get("/french", (req, res) => {
+  res.cookie('language','FR');
+  res.redirect('/');
+});
+
+// app.get("/biz", (req, res) => {
+//   res.cookie('tracker','We are listening to you');
+//   res.render('biz');
+// });
+
+// app.get("/about", (req, res) => {
+//   console.log("Are we tracking? ", req.cookies.tracker);
+//   res.cookie('tracker','Still listening...')
+//   res.render('about')
+// })
+
+// app.get("/language", (req, res) => {
+//   if (req.cookies['lang'] == 'en') {
+//     res.render('english');
+//   } else if (req.cookies.lang == 'fr') {
+//     res.render('french');
+//   } else {
+//     res.redirect('/');
+//   }
+// });
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}!`);
