@@ -1,0 +1,58 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+body {
+  box-sizing: border-box;
+  font-size: 14px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+
+.row {
+  width: 100%;
+  clear: both;
+}
+
+.row, .col {
+  float: left;
+}
+
+.twelve {
+  width: 100%;
+}
+.eleven {
+  width: 91.67%;
+}
+.ten {
+  width: 83.33%;
+}
+.nine {
+  width: 75%;
+}
+.eight {
+  width: 66.67%;
+}
+.seven {
+  width: 58.33%;
+}
+.six {
+  width: 50%;
+}
+.five {
+  width: 41.67%;
+}
+.four {
+  width: 33.33%;
+}
+.three {
+  width: 25%;
+}
+.two {
+  width: 16.67%;
+}
+.one {
+  width: 8.33%;
+}
