@@ -1,30 +1,23 @@
-tweeps = ["@waxy", "@fzero", "@mozilla"]
+var imHere = true;
 
-function twice (array) {
-  array.push(array[0]);
-  return array;
+var tweeps = ['@wired','@techmeme','@mozilla'];
+
+function getFirst (someArray) {
+  // console.log(someArray[0]);
+  return someArray[0];
 }
 
-function fourthrice (array) {
-  array = twice(array)
-  return twice(array);
+var getFourth = function (someArray) {
+  return someArray[3];
 }
 
-var addTweeps = function (tweepsList, tweepToAdd, howMany) {
-  if (howMany) {
-    tweepsList.push(howMany(tweepToAdd))
-  } else {
-    tweepsList.push(tweepToAdd);
-  }
-  return tweepsList;
-}
+// why is this line causing a problem?
+// tweeps.push(getFourth(['one','two','three','four']));
 
-tweeps = addTweeps(tweeps, "@ThePracticalDev");
-tweeps = addTweeps(tweeps, "@globalculture");
-tweeps = addTweeps(tweeps, [123], fourthrice);
+tweeps.push(getFourth);
 
-// console.log("fourice: ", fourthrice([1,2]));
+// console.log('My tweeps so far ', tweeps);
 
-// console.log("Twice: ",tweeps[6]([5]));
-
-console.log("Tweeps: ",tweeps);
+console.log('The first Tweep is ',getFirst(tweeps));
+console.log('The 4th Tweep is ',tweeps[3](tweeps));
+console.log('My tweeps after ', tweeps);
