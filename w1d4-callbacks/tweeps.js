@@ -1,40 +1,42 @@
-'use strict';
+var tweeps = ['@mozilla','@wired','@fzero']
 
-var tweeps = ["@waxy", "@fzero", "@mozilla"]
-tweeps.push("@wired");
-
-function iterateArray (array, whateverWeDo) {
-  for (var i=0; i< array.length; i++) {
-    whateverWeDo(array[i]);
+var faces = {
+  smiley: function () {
+    return ' :) '
+  },
+  sadley: function () {
+    return ' :( '
+  },
+  winky: function () {
+    return ' ;) '
   }
 }
 
-var displayStrategies = {
-  consoleDisplay: function() {
-    console.log("Nothing");
-  },
-  verticalDisplay: function(item) {
-    console.log("- ",item);      
-  },
-  orderedDisplay: function(item, num) {
-    console.log((num+1) + ".) " + item);
-  },
-  numberedDisplay: function(item) {
-    console.log("#"+item);
+// function addSmiley (aTweep) {
+//   return (aTweep + ' :) ');
+// }
+
+// function addSadley (aTweep) {
+//   return (aTweep + ' :( ');
+// }
+
+function addFaces (myArray, whichFace) {
+  for (i = 0; i< myArray.length; i++) {
+    console.log(myArray[i] + whichFace());
+    // console.log(addSadley(tweeps[i]));
   }
 }
 
-iterateArray(tweeps,function(item) {
-    console.log(item);
-  });
+// var todaysMood = 'sadley'
 
-iterateArray(tweeps,displayStrategies.consoleDisplay);
+addFaces(tweeps, function() {
+  return ' 8)\n '
+})
 
-iterateArray(tweeps,displayStrategies.verticalDisplay);
+console.log('Faces ', faces);
 
-iterateArray(tweeps,displayStrategies.orderedDisplay);
 
-// displayStrategies.verticalDisplay(tweeps);
 
-// displayStrategies.testVertical(tweeps);
+
+
 
