@@ -41,31 +41,31 @@ class SavingsAccount extends Account {
   }
 }
 
-// Every time money is involved the customer WINS.
-class YouWinAccount extends Account {
-  constructor(amount, kick) {
-    super(amount);
-    this._kick = kick;
+class CoolAccount extends SavingsAccount {
+
+  constructor (owner, kick) {
+    super(owner)
+    this.kick = kick
   }
 
   deposit(amount) {
-    super.deposit (amount);
-    // super.deposit (amount*0.1);
-    this._balance += amount * this._kick;
-    this.transactions.push(`D+ ${amount * this._kick} You Win.  Go buy something nice today.`)
-
+    super.deposit(amount)
+    super.deposit(this.kick)
   }
 
 }
 
+
+
 /* program */
 
-let accountABC = new YouWinAccount("Juan",0.2);
-accountABC.deposit(100);
-// accountABC.withdraw(12);
+let accountABC = new CoolAccount("Juan",5);
+accountABC.deposit(500);
+accountABC.withdraw(100);
+accountABC.withdraw(1000);
 accountABC.log();
-// accountABC.balance += 20;
-accountABC._balance += 20;
+// accountABC.balance = 5000;
+// accountABC._balance = 5000;
 console.log("Please confirm balance ",accountABC.balance);
 
 

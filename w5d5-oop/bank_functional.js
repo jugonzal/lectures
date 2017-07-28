@@ -92,7 +92,7 @@ console.log(toString(accountABC));
 
 /* or... */
 
-console.log(toString(withdraw(withdraw(deposit(createSavingsAccount("Bob"), 500), 100), 1000)))
+console.log(toString(withdraw(withdraw(deposit(createAccount("Bob"), 500), 100), 1000)))
 
 /* or... */
 
