@@ -1,42 +1,68 @@
 var tweeps = ['@mozilla','@wired','@fzero']
 
-var faces = {
-  smiley: function () {
-    return ' :) '
-  },
-  sadley: function () {
-    return ' :( '
-  },
-  winky: function () {
-    return ' ;) '
+// console.log(tweeps)
+
+tweeps.push('@nasa')
+
+// this function will assign the rating to the
+// element.
+// for example: if rating is 5 ->  *****
+function starRating(rating) {
+  if (rating >= 4) {
+    return(' *****')
+  } else if (rating > 2) {
+    return(' ***')
+  } else {
+    return(' *')
   }
 }
 
-// function addSmiley (aTweep) {
-//   return (aTweep + ' :) ');
+function faceRating(rating) {
+  if (rating >= 4) {
+    return(' ;-)')
+  } else if (rating > 2) {
+    return(' :-|')
+  } else {
+    return(' :-(')
+  }  
+}
+
+
+// var starRating = {
+//   'bad': function() { return '*' },
+//   'meh': function() { return '***' },
+//   'good': function() { return '*****' }
 // }
 
-// function addSadley (aTweep) {
-//   return (aTweep + ' :( ');
+// var fakeFunction = `function() { return '*' }`
+
+
+// var someFunction = function(element) {
+//   console.log(element)
 // }
 
-function addFaces (myArray, whichFace) {
-  for (i = 0; i< myArray.length; i++) {
-    console.log(myArray[i] + whichFace());
-    // console.log(addSadley(tweeps[i]));
+// console.log(fakeFunction)
+// console.log(someFunction)
+var newestRating = starRating
+// console.log(newestRate)
+
+// console.log(fakeFunction())
+// console.log(someFunction('real thing'))
+
+
+// tweeps.push(someFunction)
+
+// console.log('where is the function: ', tweeps)
+
+function showRatings(data,ratings,how) {
+  for (i = 0; i< data.length; i++) {
+    console.log('- ',data[i],how(ratings[i]))
   }
 }
 
-// var todaysMood = 'sadley'
-
-addFaces(tweeps, function() {
-  return ' 8)\n '
+showRatings(tweeps,[3,4,2,5], function(theRating) {
+  return 'yay! you got '+theRating+' high fives'
 })
-
-console.log('Faces ', faces);
-
-
-
 
 
 
