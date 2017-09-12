@@ -24,7 +24,7 @@ server.listen(PORT, function onServerStart(){
 });
 ```
 
-From this point we kept adding simple logic via `if {}` statements to respond differently to various `request.url` values.  This approach may not be very elegant but it worked.  Feel free to revisit the full [code we wrote](https://github.com/jugonzal/lhl-lectures/tree/master/w2d2-webservers-101/code/basic.js) up to this point.
+From this point we kept adding simple logic via `if {}` statements to respond differently to various `request.url` values.  This approach may not be very elegant but it worked.  Feel free to revisit the full [code we wrote](https://github.com/jugonzal/lhl-lectures/tree/master/w2d2-webservers-101/basic/server.js) up to this point.
 
 ## Express.js
 
