@@ -43,16 +43,13 @@ app.get('/', (req, res) => {
 // will be under /apples.
 app.get('/apples', (req, res) => {
   let apples = appleDB.getAll();
-  res.render('apples/index', {apples: apples});
+  // let templateVar = apples
+  res.render('apples/index', {apples: apples, myName: 'juan'});
 });
 
 
 // Shows the form to add an apple.
 // The <form action> will point to POST /apples
-app.get('/apples/new', (req, res) => {
-  res.render('apples/new');
-});
-
 
 app.get('/apples/:id', (req, res) => {
   let apple = appleDB.get(req.params.id);
@@ -63,6 +60,11 @@ app.get('/apples/:id', (req, res) => {
     res.status(404).send("Apple not found!");
   }
 });
+
+app.get('/apples/new', (req, res) => {
+  res.render('apples/new');
+});
+
 
 
 // Receives data posted from /apples/new
@@ -88,7 +90,9 @@ app.get('/apples/:id/edit', (req, res) => {
 // a POST to a different route. The other workaround would be to
 // use the `method-override` npm package:
 // https://github.com/expressjs/method-override
-app.post('/apples/update', (req, res) => {
+app
+
+  .post('/apples/update', (req, res) => {
   let id = req.body.id;
   let editedApple = {
     type: req.body.type,
@@ -96,7 +100,9 @@ app.post('/apples/update', (req, res) => {
   };
   appleDB.update(id, editedApple);
   res.redirect("/apples");
-});
+})
+
+  .put('/apples/:id')
 
 /*
  * End of routing functions

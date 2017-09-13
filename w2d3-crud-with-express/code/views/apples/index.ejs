@@ -2,8 +2,11 @@
   <head>
     <title>List of apples!</title>
   </head>
+  <style>
+  h1 {font-family: arial;}
+  </style>
   <body>
-    <h1>All my apples!</h1>
+    <h1>All <%= myName %> apples!</h1>
     <p>
       <a href="/apples/new">Add new apple</a>
     </p>
@@ -22,5 +25,8 @@
         </div>
       <% } %>
     </div>
+    <script>
+    alert('This will only run in the browser')
+    </script>
   </body>
 </html>
