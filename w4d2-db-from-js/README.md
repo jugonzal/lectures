@@ -5,7 +5,7 @@ case) from Node. We've used the [pg](https://www.npmjs.com/package/pg) package
 (and alternatively [pg-then](https://www.npmjs.com/package/pg-then)) to
 implement the simplest query interface available. 
 
-As compact as [the demo code](albums.js) is, it is a good opportunity to discuss the following:
+As compact as [the demo code](https://github.com/jugonzal/lhl-lectures/tree/master/w4d2-db-from-js/albums.js) is, it is a good opportunity to discuss the following:
 
 - When using databases, make sure you know which library/driver you are using to connect to your particular database server.  In our case `pg` is only good for connecting to PostgreSQL.
 ```javascript
@@ -21,11 +21,10 @@ const pg = require('pg');
 The `pg-then` package uses [ES6
 promises](http://www.datchley.name/es6-promises/) to reduce callback hell when
 talking to Postgres. This is a highly recommended pattern for everything
-asynchronous! Check out [`musicdb.js`](code/musicdb.js) and
-[`musicdb-promises.js`](code/musicdb-promises.js) to see the differences. Both
+asynchronous! Check out [`musicdb.js`](https://github.com/jugonzal/lhl-lectures/tree/master/w4d2-db-from-js/code/musicdb.js) and
+[`musicdb-promises.js`](https://github.com/jugonzal/lhl-lectures/tree/master/w4d2-db-from-js/code/musicdb-promises.js) to see the differences. Both
 do the exact same thing.
 
-The final lecture code can be found in the [`code`](code/) folder. DB setup and
-seed data can be found in the [`sql`](sql/) folder.
+DB setup and seed data can be found in the [`sql`](https://github.com/jugonzal/lhl-lectures/tree/master/w4d2-db-from-js/sql/) folder.
 
 Here is the [documentation](https://www.npmjs.com/package/pg) to the `pg` package we used.

@@ -25,22 +25,43 @@ db.connect (error => {
 
   // if (typeof(someId) !== "number") throw error;
 
-  db.query(`select title from albums where id = ${someId}`, (error, results) => {
-    if (error) throw error;
-
-    // display all results received
+  db.query(`select * from albums where id = $1`,[someId])
+  .then(results => {
     results.rows.forEach(row => {
+      console.log(row)
       for (column in row) {
         console.log(column, row[column]);
       }
     });
+    return 'Yay!'
+  })
+  .then(mood => {
+    console.log(mood)
+    // db.end(error => {
+    //   if (error) throw error;
+    // });
 
-    console.log("Or grab one field",results.rows[0].title);
+  })
+  .catch(e => console.error(e.stack))
 
-    db.end(error => {
-      if (error) throw error;
-    });
-  });
+
+
+  // , (error, results) => {
+  //   if (error) throw error;
+
+  //   // display all results received
+  //   results.rows.forEach(row => {
+  //     for (column in row) {
+  //       console.log(column, row[column]);
+  //     }
+  //   });
+
+  //   console.log("Or grab one field",results.rows[0].title);
+
+  //   db.end(error => {
+  //     if (error) throw error;
+  //   });
+  // });
 
   console.log("Done with that.");
 
