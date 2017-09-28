@@ -10,6 +10,6 @@
   "author": "Fabio Neves",
   "license": "UNLICENSED",
   "dependencies": {
-    "request": "^2.75.0"
+    "request": "^2.83.0"
   }
 }
