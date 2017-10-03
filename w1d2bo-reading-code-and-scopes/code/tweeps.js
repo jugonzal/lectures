@@ -1,23 +1,20 @@
-var imHere = true;
-
-var tweeps = ['@wired','@techmeme','@mozilla'];
-
-function getFirst (someArray) {
-  // console.log(someArray[0]);
-  return someArray[0];
+var moreTweeps = function (aTweep, allTweeps) {
+  // console.log("inside, just starting: ",myTweeps)
+  // myTweeps = '@mozilla'
+  var extraTweep = '@lighthouselabs'
+  console.log("inside function: ",aTweep)
+  allTweeps.push(aTweep)
+  allTweeps.push(extraTweep)
+  return allTweeps 
 }
 
-var getFourth = function (someArray) {
-  return someArray[3];
-}
+var addTweeps = moreTweeps
 
-// why is this line causing a problem?
-// tweeps.push(getFourth(['one','two','three','four']));
+var myTweeps = ['@fzero']
 
-tweeps.push(getFourth);
+console.log("before: ",myTweeps)
 
-// console.log('My tweeps so far ', tweeps);
+myTweeps = addTweeps('@wired',addTweeps('@mozilla', myTweeps))
 
-console.log('The first Tweep is ',getFirst(tweeps));
-console.log('The 4th Tweep is ',tweeps[3](tweeps));
-console.log('My tweeps after ', tweeps);
+console.log("after: ",myTweeps)
+
