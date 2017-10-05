@@ -1,68 +1,71 @@
-var tweeps = ['@mozilla','@wired','@fzero']
+var tweeps = ['@mozilla', '@fzero', '@wired']
 
-// console.log(tweeps)
+// function displayTweeps (tweeps) {
+//   for (var i=0; i< tweeps.length; i++) {
+//     console.log("- ",tweeps[i]);
+//   }
+// }
 
-tweeps.push('@nasa')
+// var displayTweeps = function (tweeps) {
+//   for (var i=0; i< tweeps.length; i++) {
+//     console.log("- ",tweeps[i]);
+//   }
+// } 
 
-// this function will assign the rating to the
-// element.
-// for example: if rating is 5 ->  *****
-function starRating(rating) {
-  if (rating >= 4) {
-    return(' *****')
-  } else if (rating > 2) {
-    return(' ***')
-  } else {
-    return(' *')
+// var nicePrintTweeps = function (tweeps) {
+//   for (var i=0; i< tweeps.length; i++) {
+//     console.log("* ",tweeps[i]);
+//   }
+// } 
+
+var displayTweeps = function (tweeps, pleaseDo, extra) {
+  for (var i=0; i< tweeps.length; i++) {
+    pleaseDo(tweeps[i], extra);
+  }
+} 
+
+displayTweeps(tweeps,function(elem, ext) {
+  console.log(ext+elem)
+},"### ")
+
+// function displayWithDash (tweep) {
+//   console.log("- ",tweep);
+// }
+
+// function displayWithStar (tweep) {
+//   console.log("* ",tweep);
+// }
+
+
+// var showMyTweeps = displayTweeps
+// tweeps.push(displayTweeps)
+
+var display = {
+  // showThings: displayTweeps,
+  // niceThings: nicePrintTweeps,
+  // showFirst: function (tweeps) {
+  //   console.log(tweeps[0]);
+  // },
+  withDash: function (tweep) {
+    return "- "+tweep;
+  },
+  withStar: function (tweep) {
+    return "* "+tweep;
+  },
+  withSmiley: function (tweep) {
+    return "- "+tweep+" :-)";
   }
 }
 
-function faceRating(rating) {
-  if (rating >= 4) {
-    return(' ;-)')
-  } else if (rating > 2) {
-    return(' :-|')
-  } else {
-    return(' :-(')
-  }  
-}
+// console.log(thingsToDo)
 
+// tweeps[3](tweeps)
 
-// var starRating = {
-//   'bad': function() { return '*' },
-//   'meh': function() { return '***' },
-//   'good': function() { return '*****' }
-// }
+// tweeps.forEach(display.withDash)
+// thingsToDo.showFirst(tweeps)
 
-// var fakeFunction = `function() { return '*' }`
-
-
-// var someFunction = function(element) {
-//   console.log(element)
-// }
-
-// console.log(fakeFunction)
-// console.log(someFunction)
-var newestRating = starRating
-// console.log(newestRate)
-
-// console.log(fakeFunction())
-// console.log(someFunction('real thing'))
-
-
-// tweeps.push(someFunction)
-
-// console.log('where is the function: ', tweeps)
-
-function showRatings(data,ratings,how) {
-  for (i = 0; i< data.length; i++) {
-    console.log('- ',data[i],how(ratings[i]))
-  }
-}
-
-showRatings(tweeps,[3,4,2,5], function(theRating) {
-  return 'yay! you got '+theRating+' high fives'
+tweeps.forEach(function(element) {
+  console.log(display.withSmiley(element))
 })
-
 
 
