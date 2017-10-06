@@ -18,7 +18,11 @@ class Account {
   }
 
   get balance() {
-    return this._balance;
+    return this._balance - 2;
+  }
+  set balance(value) {
+    this._balance = value ;
+    // this.hacked = true
   }
 
   log() {
@@ -41,33 +45,37 @@ class SavingsAccount extends Account {
   }
 }
 
-class CoolAccount extends SavingsAccount {
-
-  constructor (owner, kick) {
+class RRSPAccount extends SavingsAccount {
+  constructor(owner, matching) {
     super(owner)
-    this.kick = kick
+    this._matching = matching
   }
 
   deposit(amount) {
     super.deposit(amount)
-    super.deposit(this.kick)
+    super.deposit(amount<this._matching?amount:this._matching)
   }
-
 }
-
-
 
 /* program */
 
-let accountABC = new CoolAccount("Juan",5);
-accountABC.deposit(500);
+let accountABC = new RRSPAccount("Juan",500);
+let accountLuke = new RRSPAccount("Luke",50);
+
+accountABC.deposit(600);
 accountABC.withdraw(100);
 accountABC.withdraw(1000);
 accountABC.log();
+// console.log("Your fees ", accountABC.fees)
 // accountABC.balance = 5000;
+// accountABC.hacked = true;
+console.log(accountABC)
 // accountABC._balance = 5000;
 console.log("Please confirm balance ",accountABC.balance);
 
+accountLuke.deposit(200)
+accountLuke.withdraw(80)
+accountLuke.log()
 
 
 

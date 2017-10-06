@@ -84,7 +84,7 @@ let accountABC = createSavingsAccount("Bob");
 
 accountABC = deposit(accountABC, 500);
 accountABC = withdraw(accountABC, 100);
-accountABC.balance = 5000;
+// accountABC.balance = 5000;
 accountABC = withdraw(accountABC, 1000);
 
 console.log(toString(accountABC));
@@ -92,7 +92,7 @@ console.log(toString(accountABC));
 
 /* or... */
 
-console.log(toString(withdraw(withdraw(deposit(createAccount("Bob"), 500), 100), 1000)))
+// console.log(toString(withdraw(withdraw(deposit(createAccount("Bob"), 500), 100), 1000)))
 
 /* or... */
 
