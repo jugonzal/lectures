@@ -1,5 +1,5 @@
 const express = require('express');
-const bodyParser = require('body-parser');
+// const bodyParser = require('body-parser');
 const morgan = require('morgan');
 
 // Initialize express
@@ -16,30 +16,30 @@ app.set("view engine", "ejs");
 // To work with forms and JSON data, we need to configure Express
 // to use the bodyParser middleware to convert those types of data
 // into JS objects inside our functions.
-app.use(bodyParser.urlencoded({extended: false})); // forms
-app.use(bodyParser.json()); // JSON
+// app.use(bodyParser.urlencoded({extended: false})); // forms
+// app.use(bodyParser.json()); // JSON
 
 // I'm also adding a logging middleware so we can see what's going on
 // with our server. More info: https://github.com/expressjs/morgan
 app.use(morgan('dev'));
-app.use(express.static('public'))
+app.use('/static', express.static('public'))
 
 // Routing functions go here
-app.get('/', (req, res) => {
-  res.render('index');
+app.get('/', function (req, res) {
+  res.send('Hello World')
 });
 
-app.get('/about', function(req, res) {
-  res.render('about');
+app.get('/family', function(req, res) {
+  res.render('family');
 });
 
-app.get('/pr', (req, res) => {
-  res.render('media');
+app.get('/for/:something', (req, res) => {
+  res.send("Thankful for "+req.params.something+" too")
 });
 
-app.get('/media', (req, res) => {
-  res.render('media');
-});
+// app.get('/media', (req, res) => {
+//   res.render('media');
+// });
 
 
 // Start the server

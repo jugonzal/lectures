@@ -1,66 +1,43 @@
-// let http = require('http');
-const express = require('express');
-const app = express();
-
-// define app constants
+let http = require('http');
 const PORT = 3000;
 
-app.set("view engine", "ejs");
-
-// read about how to use a public directory...
-app.use(express.static('public'));
-
-
-app.get('/', function (req, res) {
-  res.send(`<h1>Welcome to our Summer Events.</h1>
-        <br />Go to <a href='/toronto'>Toronto</a> 
-        or <a href='/montreal'>Montreal</a>`);
-});
-
-app.get('/toronto', function (req, res) {
-  res.render('toronto');
-})
-
-app.get('/montreal', function(req, res) {
-  res.render('montreal');
-})
-
-app.get('/city/:someCity', function(req, res) {
-  console.log('New city: ', req.params.someCity);
-  res.send('Comming to this city soon...');
-})
+var resources = {
+  '/family': "<html><body><h2>We are thankful</h2><p>...for all our loved ones</p></body></html>",
+  '/pumpkin': "We are thankful for our big belly",
+  '/turkey': "We are thankful for our food"
+}
 
 // create a server with a responder function
-// let server = http.createServer(function respondToRequests(request, response){
-//     // respond to all requests in this function
-//     console.log("Request: ", request.method, request.url)
+function handleNewRequest(request, response){
+    // respond to all requests in this function
+    console.log("Got request: ", request.method, request.url)
 
-//     if (request.url === '/toronto') {
-//       response.statusCode = 200;
-//       response.setHeader('content-type', 'text/html');
-//       response.end(`Larry The Duck at Harbourfront<br />
-//         <img src='https://pbs.twimg.com/media/DDl6BewXkAAIiES.jpg'>`);
-//     } else if (request.url === '/montreal') {
-//       response.statusCode = 200;
-//       response.setHeader('content-type', 'text/html');
-//       response.end(`Jazz Festival<br />
-//         <img src='http://www.montrealjazzfest.com/Content/Images/static/open_graph.jpg'>`);
-//     } else if (request.url === '/') {
-//       response.statusCode = 200;
-//       response.end(`<h1>Welcome to our Summer Events.</h1>
-//         <br />Go to <a href='/toronto'>Toronto</a> 
-//         or <a href='/montreal'>Montreal</a>`);
-//     } else {
-//       response.statusCode = 404;
-//       response.end(`Don't know anything about that`);
-//     }
-// });
+    if (resources[request.url]) {
+      response.end(resources[request.url])
+    } else {
+        response.statusCode = 404;
+        response.statusMessage = 'Not found here';        
+        response.end("We are just thankful for all things we don't have yet")     
+    }
 
-// // start the server
-// server.listen(PORT, function onServerStart(){
-//     console.log("Server listening on: http://localhost:%s", PORT);
-// });
+    // switch (request.url) {
+    //   case '/turkey':
+    //     response.end("We are thankful for our food")
+    //     break;
+    //   case '/pumpkin':
+    //     response.end("We are thankful for our big belly")
+    //     break;
+    //   case '/family':
+    //     response.end("<html><body><h2>We are thankful</h2><p>...for all our loved ones</p></body></html>")
+    //     break;
+    //   default:
+    // }
 
-app.listen(PORT, function () {
-  console.log('Example app listening on port 3000!')
-})
+}
+
+let server = http.createServer(handleNewRequest)
+
+// start the server
+server.listen(PORT, function onServerStart(){
+    console.log("Server listening on: http://localhost:%s", PORT);
+});
