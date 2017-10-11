@@ -1,3 +1,9 @@
+// C create
+// R read
+// U update
+// D delete
+
+
 // Our data is just an array of objects, and our id's will be
 // their indexes inside the array.
 // To mock a real database, we'll only allow the data
@@ -22,19 +28,19 @@ function getAll() {
   return data;
 }
 
-
+// READ
 function get(id) {
   id = Number(id); // Making sure id is a number
   return data[id];
 }
 
-
+// CREATE
 function add(apple) {
   data.push(apple);
   return true; // functions that change data return true on success
 }
 
-
+// UPDATE
 function update(id, editedApple) {
   id = Number(id);
   let apple = get(id);
@@ -47,7 +53,7 @@ function update(id, editedApple) {
   }
 }
 
-
+// DELETE
 function destroy(id) {
   id = Number(id);
   // Return false if apple doesn't exist

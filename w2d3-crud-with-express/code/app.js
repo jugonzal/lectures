@@ -44,13 +44,15 @@ app.get('/', (req, res) => {
 app.get('/apples', (req, res) => {
   let apples = appleDB.getAll();
   // let templateVar = apples
-  res.render('apples/index', {apples: apples, myName: 'juan'});
+  res.render('apples/index', {apples: apples});
 });
 
+app.get('/apples/new', (req, res) => {
+  res.render('apples/new');
+});
 
 // Shows the form to add an apple.
 // The <form action> will point to POST /apples
-
 app.get('/apples/:id', (req, res) => {
   let apple = appleDB.get(req.params.id);
   if (apple) {
@@ -60,11 +62,6 @@ app.get('/apples/:id', (req, res) => {
     res.status(404).send("Apple not found!");
   }
 });
-
-app.get('/apples/new', (req, res) => {
-  res.render('apples/new');
-});
-
 
 
 // Receives data posted from /apples/new
@@ -91,8 +88,8 @@ app.get('/apples/:id/edit', (req, res) => {
 // use the `method-override` npm package:
 // https://github.com/expressjs/method-override
 app
-
-  .post('/apples/update', (req, res) => {
+//.put('/apples/:id', (req, res) => {
+  .post('/apples/edit', (req, res) => {
   let id = req.body.id;
   let editedApple = {
     type: req.body.type,
@@ -102,7 +99,6 @@ app
   res.redirect("/apples");
 })
 
-  .put('/apples/:id')
 
 /*
  * End of routing functions
