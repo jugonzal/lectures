@@ -20,6 +20,26 @@ const data = {
   ]
 }
 
+function obfuscate (word) {
+  // let newWord = "";
+  // for (let i=0; i<word.length;i++) {
+  //   newWord += (word[i]+5);
+  // }
+  return 'X'+word;
+}
+
+function deobfuscate (word) {
+  // if (word) {
+  //   return 
+  // }
+  // let newWord = "";
+  // for (let i=1; i<word.length;i++) {
+  //   newWord += word[i];
+  // }
+  // return newWord;  
+  return word.substring(1)
+}
+
 function attemptLogin(username, password) {
   for (user of data.users) {
     if (user.username === username && user.password === password) {
@@ -31,7 +51,11 @@ function attemptLogin(username, password) {
 // Show the treasure if they are logged in, otherwise redirect to LOGIN page.
 app.get("/", (req, res) => {
   const currentUsername = req.cookies['username'];
-  if (currentUsername) {
+  let currentPassword = ""
+  if (req.cookies['password']) {
+     currentPassword = deobfuscate( req.cookies['password']);
+  } 
+  if (attemptLogin(currentUsername,currentPassword)) {
     res.render('treasure', { currentUser: currentUsername });
   } else {
     res.redirect("login");
@@ -51,6 +75,8 @@ app.post("/login", (req, res) => {
   if (user) {
     // success
     res.cookie('username', user.username); // Set-Cookie: lang=en
+    res.cookie('password', obfuscate(user.password)); // Set-Cookie: lang=en
+
     res.redirect('/');
   } else {
     // failed attempt

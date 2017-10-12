@@ -25,7 +25,7 @@ app.get("/english", (req, res) => {
 });
 
 app.get("/french", (req, res) => {
-  res.cookie('language','FR');
+  res.cookie('preferences','FR');
   res.redirect('/');
 });
 
