@@ -74,8 +74,9 @@ app.post("/login", (req, res) => {
 
   if (user) {
     // success
-    res.cookie('username', user.username); // Set-Cookie: lang=en
-    res.cookie('password', obfuscate(user.password)); // Set-Cookie: lang=en
+    // cookies set to expire in 1 hour
+    res.cookie('username', user.username, {expires: new Date(Date.now() + 1000*60*60)}); // Set-Cookie: lang=en
+    res.cookie('password', obfuscate(user.password), {expires: new Date(Date.now() + 1000*60*60)}); // Set-Cookie: lang=en
 
     res.redirect('/');
   } else {
