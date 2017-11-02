@@ -1,71 +1,52 @@
-var tweeps = ['@mozilla', '@fzero', '@wired']
+var tweeps = [
+  {twitter: '@fzero', name: 'Fabio'},
+  {twitter: '@mozilla'},
+  {twitter: '@wired'}
+  ]
 
-// function displayTweeps (tweeps) {
-//   for (var i=0; i< tweeps.length; i++) {
-//     console.log("- ",tweeps[i]);
-//   }
-// }
+var t = 'Some very important information'
 
-// var displayTweeps = function (tweeps) {
-//   for (var i=0; i< tweeps.length; i++) {
-//     console.log("- ",tweeps[i]);
-//   }
-// } 
+function visitTweeps (tweeps, howToVisitOneTweep) {
 
-// var nicePrintTweeps = function (tweeps) {
-//   for (var i=0; i< tweeps.length; i++) {
-//     console.log("* ",tweeps[i]);
-//   }
-// } 
+  // var visitOneTweep = function (tweep) {
+  //   //console.log(tweep.twitter)
+  //   return (tweep.twitter + '!!')
+  // }
 
-var displayTweeps = function (tweeps, pleaseDo, extra) {
-  for (var i=0; i< tweeps.length; i++) {
-    pleaseDo(tweeps[i], extra);
+  var allTweeps = []
+
+  for (var t=0; t<tweeps.length; t++) {
+    allTweeps.push(howToVisitOneTweep(tweeps[t]))
   }
-} 
 
-displayTweeps(tweeps,function(elem, ext) {
-  console.log(ext+elem)
-},"### ")
+  return allTweeps
+}
 
-// function displayWithDash (tweep) {
-//   console.log("- ",tweep);
-// }
-
-// function displayWithStar (tweep) {
-//   console.log("* ",tweep);
-// }
-
-
-// var showMyTweeps = displayTweeps
-// tweeps.push(displayTweeps)
-
-var display = {
-  // showThings: displayTweeps,
-  // niceThings: nicePrintTweeps,
-  // showFirst: function (tweeps) {
-  //   console.log(tweeps[0]);
-  // },
-  withDash: function (tweep) {
-    return "- "+tweep;
+var waysToVisit = {
+  visitOneTweep: function (tweep) {
+    //console.log(tweep.twitter)
+    return (tweep.twitter + '!!')
   },
-  withStar: function (tweep) {
-    return "* "+tweep;
-  },
-  withSmiley: function (tweep) {
-    return "- "+tweep+" :-)";
+  visitAnotherTweep: function (tweep) {
+    //console.log(tweep.twitter)
+    return ("@"+ tweep.name)
   }
 }
 
-// console.log(thingsToDo)
 
-// tweeps[3](tweeps)
+console.log(visitTweeps(tweeps, waysToVisit.visitOneTweep))
 
-// tweeps.forEach(display.withDash)
-// thingsToDo.showFirst(tweeps)
+// console.log(visitTweeps(tweeps, function(tweep) {
+//   return ("-> "+ tweep.twitter + ".")
+// }))
 
-tweeps.forEach(function(element) {
-  console.log(display.withSmiley(element))
+visitTweeps(tweeps, function(tweep) {
+  console.log ("-> "+ tweep.twitter + ".")
 })
 
 
+
+
+
+
+console.log('What is t ',t)
