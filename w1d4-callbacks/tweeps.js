@@ -33,7 +33,6 @@ var waysToVisit = {
   }
 }
 
-
 console.log(visitTweeps(tweeps, waysToVisit.visitOneTweep))
 
 // console.log(visitTweeps(tweeps, function(tweep) {
@@ -43,10 +42,5 @@ console.log(visitTweeps(tweeps, waysToVisit.visitOneTweep))
 visitTweeps(tweeps, function(tweep) {
   console.log ("-> "+ tweep.twitter + ".")
 })
-
-
-
-
-
 
 console.log('What is t ',t)
