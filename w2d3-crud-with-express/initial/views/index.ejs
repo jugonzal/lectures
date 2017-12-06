@@ -1,8 +1,15 @@
 <html>
   <head>
-    <title>Hello!</title>
+    <title>Tracks Collection</title>
   </head>
   <body>
-    <h1>Hello there!</h1>
+    <h1>Collection of Tracks</h1>
+    <ul>
+      <% for (let i=0; i< tracks.length; i++) { %>
+      <li>#<%=tracks[i].number %> - <%=tracks[i].name %> by <%=tracks[i].artist %> (<%=tracks[i].year %>)</li>
+      <% } %>
+    </ul>
+    <br>
+    <p>Add a <a href="/tracks/new">NEW Track</a> to this collection</p>
   </body>
 </html>

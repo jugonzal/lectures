@@ -1,0 +1,20 @@
+<html>
+  <head>
+    <title>Tracks Collection</title>
+  </head>
+  <body>
+    <h1>Show ONE Track</h1>
+
+    <form action="/tracks/<%=track.number %>?_method=PUT" method="POST">
+      <input type="number" name="number" value="<%=track.number %>">
+      <input type="text" name="name" value="<%=track.name %>">
+      <input type="text" name="artist" value="<%=track.artist %>">
+      <input type="number" name="year" value="<%=track.year %>">
+      <input type="submit" value="EDIT">
+    </form>
+    <form action="/tracks/<%=track.number %>?_method=DELETE" method="POST">
+      <input type="submit" value="DELETE">
+
+    </form>
+  </body>
+</html>
