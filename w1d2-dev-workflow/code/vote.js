@@ -20,9 +20,14 @@ var votes = {}
 for (var g = 0; g < genres.length; g++) {
   console.log(g, genres[g])
   //  do I have a variable for this particular genre
+  if (votes[genres[g]] == true) {
   //    count up this genre
+    console.log("count up")
   //  if not
+  } else {
   //    create that variable and set to 1
   //    do this in a way that is flexible
-  
+    votes[genres[g]] = 1
+    console.log("start count for ",genres[g])
+  }
 }
