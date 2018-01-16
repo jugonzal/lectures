@@ -18,16 +18,21 @@ var votes = {}
 //  start loop from beginning to end of array
 
 for (var g = 0; g < genres.length; g++) {
-  console.log(g, genres[g])
+  // console.log(g, genres[g])
   //  do I have a variable for this particular genre
-  if (votes[genres[g]] == true) {
+  // console.log("-> ",votes[genres[g]])
+  if (votes[genres[g]]) {
   //    count up this genre
-    console.log("count up")
+    // console.log("count up")
+    votes[genres[g]] += 1
+    // console.log("---> ",votes[genres[g]])
   //  if not
   } else {
   //    create that variable and set to 1
   //    do this in a way that is flexible
     votes[genres[g]] = 1
-    console.log("start count for ",genres[g])
+    // console.log("start count for ",genres[g])
   }
 }
+
+console.log(votes)
