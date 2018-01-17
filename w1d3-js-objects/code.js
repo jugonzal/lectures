@@ -1,53 +1,74 @@
-var loc = { '99': '99 Spadina',
-  '111': '111 Peter',
-  '199': '199 Spadina',
-  juan: 'Very secret location',
-  question: 'If you did loc 205 would it sill work?',
-  falsey: false,
-  number: 3.14159265,
-  empty: '',
-  array: [ 'this is crazy', 'second element' ],
-  'more arrays': [] 
+var office = {
+  address: '46 Spadina',
+  start: 2016,
+  name: 'Lighthouse Labs'
 }
 
-loc['latest'] = 'The latest news'
+var jobs = [office]
 
-loc.oneMore = 'Yet another one'
+jobs.push({
+  address: '99 Spadina',
+  start: 2002,
+  company: 'Blast Radius'
+})
 
-console.log(loc)
+jobs.push({
+  address: '111 Peter St',
+  start: 2007,
+  name: 'PlanetEye'
+})
 
-console.log(loc['juan'])
-console.log(loc.juan)
+jobs[0].mates = ['Dave']
+jobs[1].mates = ['Matt','Ricardo']
 
-loc.array.push('test')
-loc.array.push('second test')
+function displayJob (job) {
+  console.log('Company: ',job.name)
+  console.log('Started in: ',job.start)
+  console.log('Located at: ',job.address)
+  job.lastViewed = 'today'
 
-loc.world = {}
-loc.world.canada = 'Oh Canada'
-
-
-for (key in loc) {
-  if (key == 'juan') {
-    console.log('    IMPORTANT    !!!! ')
-  }
-  if (key == 'array') {
-    loc[key].push('MORE')
-  }
-  console.log("Key: ",key, "  and Value: ",loc[key])
+  // this will not affect the original object
+  job = {messed: 'up'}
+  console.log('inside ',job.messed)
 }
 
-var students = {
-  juan: {
-    marks: [10, 10, 10],
-    age: 90
-  },
-  izzy: {
-    marks: [6,7,8],
-    age: 25
-  }
+// displayJob(office)
+// displayJob(jobs[1])
+
+// console.log(jobs)
+
+
+function displayMe () {
+  console.log('Company: ',this.name)
+  console.log('Started in: ',this.start)
+  console.log('Located at: ',this.address)  
 }
 
-console.log(students.juan.marks)
+// office.display = displayMe
+
+// office.display()
 
 
+// console.log(office)
 
+for (var i=0; i< jobs.length; i++) {
+  jobs[i].display = displayMe
+  jobs[i].display()
+  // console.log('Friends at ',jobs[i].name,': ',jobs[i].mates)
+}
+
+for (var key in office) {
+  console.log(key, office[key])
+}
+
+var newOffice = {
+  address: '46 Spadina',
+  start: 2016,
+  name: 'Lighthouse Labs',
+  display: function () {
+    console.log('Company: ',this.name)
+    console.log('Started in: ',this.start)
+    console.log('Located at: ',this.address)  
+  }
+
+}
