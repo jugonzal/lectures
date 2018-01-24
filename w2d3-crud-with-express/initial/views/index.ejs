@@ -1,15 +1,15 @@
 <html>
   <head>
-    <title>Tracks Collection</title>
+    <title>LPs Collection</title>
   </head>
   <body>
-    <h1>Collection of Tracks</h1>
+    <h1>LPs Collection</h1>
+    <p>Here is my list of LPs</p>
     <ul>
-      <% for (let i=0; i< tracks.length; i++) { %>
-      <li>#<%=tracks[i].number %> - <%=tracks[i].name %> by <%=tracks[i].artist %> (<%=tracks[i].year %>)</li>
+      <% for (let lp of database) { %>
+        <li><%= lp.title %> by <%= lp.artist %> (<a href="/lps/<%= lp.year %>"><%= lp.year %></a>)</li>
       <% } %>
     </ul>
-    <br>
-    <p>Add a <a href="/tracks/new">NEW Track</a> to this collection</p>
+    <p>If you want to add a new LP, <a href="/create">click here</a></p>
   </body>
 </html>

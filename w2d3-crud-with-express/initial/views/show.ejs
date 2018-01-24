@@ -1,20 +1,18 @@
 <html>
   <head>
-    <title>Tracks Collection</title>
+    <title>LPs Collection</title>
   </head>
   <body>
-    <h1>Show ONE Track</h1>
-
-    <form action="/tracks/<%=track.number %>?_method=PUT" method="POST">
-      <input type="number" name="number" value="<%=track.number %>">
-      <input type="text" name="name" value="<%=track.name %>">
-      <input type="text" name="artist" value="<%=track.artist %>">
-      <input type="number" name="year" value="<%=track.year %>">
-      <input type="submit" value="EDIT">
+    <h1>Show ONE LP</h1>
+    <p>Use the form below to READ/UPDATE/DELETE the LP</p>
+    <form action="/lps/<%=year %>?_method=PUT" method="POST">
+      Title: <input name="title" value="<%= title%>">
+      Artist: <input name="artist" value="<%=artist %>">
+      Year: <input name="year" value="<%= year %>">
+      <input type="submit" value="UPDATE">
     </form>
-    <form action="/tracks/<%=track.number %>?_method=DELETE" method="POST">
+    <form action="/lps/<%=year %>?_method=DELETE" method="POST">
       <input type="submit" value="DELETE">
-
     </form>
   </body>
 </html>
