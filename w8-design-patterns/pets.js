@@ -4,45 +4,34 @@
 //  Lincoln the dog
 //  Wyatt the retriever
 
+const dbEngine = (function () {
+  // private stuff
+  const pets = [
+    {name: 'Geeky', type: 'gecko'},
+    {name: 'Sherman', type: 'dog'},
+    {name: 'Penny', type: 'cat'}
+  ]
 
-const petsDB = (function() {
-  let pets = [{
-    name: 'Geeky',
-    type: 'gecko'
-  }]
-
-  // CRUD  
-  // add a new pet (name, type)
-  function addPet (name, type) {
-    pets.push({name: name, type: type})
-  }
-
-  // get a pet by name
-  function getPet (name) {
-    for (let i=0; i< pets.length; i++) {
-      // console.log('Searching...', pets[i])
-      if (pets[i].name == name) {
-        // console.log('Bingo!', pets[i].name)
-        return pets[i]
+  function getPetByType (lookingForType) {
+    return pets.filter (pet => {
+      if (pet.type == lookingForType) {
+        return true
       }
-    }
-    // return null
+    })
   }
 
+  function addPet (pet) {
+    pets.push(pet)
+  }
+
+  addPet({name: 'Mimi', type: 'cat'})
+
+  // public stuff
   return {
-    add: addPet,
-    gett: getPet
+    getPet: getPetByType,
+    addPet: addPet
   }
 })();
 
-
-
-// change the type of a pet
-// remove a given pet by name
-
-// TEST
-
-petsDB.add ('Sherman','dog')
-petsDB.add ('Penny','cat')
-
-console.log(petsDB.gett('Sherman'))
+// console.log("DB: ",dbEngine.)
+console.log("the cats:",dbEngine.getPet('cat'))
