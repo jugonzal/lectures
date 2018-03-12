@@ -56,4 +56,6 @@ The following article provides a good starting point to compare the two:
 
 https://www.mongodb.com/blog/post/mongodb-vs-sql-day-14-queries
     
+http://www.tpc.org/tpce/results/tpce_perf_results.asp
+
 
