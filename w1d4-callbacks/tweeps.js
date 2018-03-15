@@ -1,46 +1,83 @@
 var tweeps = [
-  {twitter: '@fzero', name: 'Fabio'},
-  {twitter: '@mozilla'},
-  {twitter: '@wired'}
-  ]
+  { handle: '@fzero', said: 'Do I have to wake up early?'},
+  { handle: '@mozilla', said: 'Fight for your Internet freedom'},
+  { handle: '@wired', said: 'AI will scam your bitcoins'}
+  ];
 
-var t = 'Some very important information'
+tweeps.push({ handle: '@olympics', said: 'Everyone is a winner'});
 
-function visitTweeps (tweeps, howToVisitOneTweep) {
+tweeps[0].said = 'That would be my first try';
 
-  // var visitOneTweep = function (tweep) {
-  //   //console.log(tweep.twitter)
-  //   return (tweep.twitter + '!!')
-  // }
 
-  var allTweeps = []
+// function likeTweep (aHandle) {
+//   for (i = 0; i < tweeps.length; i++) {
+//     if (tweeps[i].handle == aHandle) {
+//       tweeps[i].like = true;
+//       return;
+//     }
+//   }
+// }
 
-  for (var t=0; t<tweeps.length; t++) {
-    allTweeps.push(howToVisitOneTweep(tweeps[t]))
-  }
+// var liking = likeTweep
+// likeTweep ('@wired')
+// tweeps.push(likeTweep)
+// tweeps[4]('@mozilla')
+// liking('@mozilla')
 
-  return allTweeps
-}
+// function modifyTweep (aHandle, field) {
+//   for (i = 0; i < tweeps.length; i++) {
+//     if (tweeps[i].handle == aHandle) {
+//       tweeps[i][field] = true;
+//       return;
+//     }
+//   }
+// }
 
-var waysToVisit = {
-  visitOneTweep: function (tweep) {
-    //console.log(tweep.twitter)
-    return (tweep.twitter + '!!')
+// function allCapsTweep (aHandle) {
+//   for (i = 0; i < tweeps.length; i++) {
+//     if (tweeps[i].handle == aHandle) {
+//       // tweeps[i][field] = true;
+//       tweeps[i].said = tweeps[i].said.toUpperCase()
+//       return;
+//     }
+//   }  
+// }
+
+var doToTweep = {
+  allCaps: function allCapsOneTweep (tweep) {
+    tweep.said = tweep.said.toUpperCase()
   },
-  visitAnotherTweep: function (tweep) {
-    //console.log(tweep.twitter)
-    return ("@"+ tweep.name)
+  like: function  (tweep) {
+    tweep.like = true
+  },
+  follow: function  (tweep) {
+   if (tweep.followers) {
+      tweep.followers ++;
+    } else {
+      tweep.followers = 1;
+    }
   }
 }
 
-console.log(visitTweeps(tweeps, waysToVisit.visitOneTweep))
+function updateTweep (aHandle, doSomething) {
+  for (i = 0; i < tweeps.length; i++) {
+    if (tweeps[i].handle == aHandle) {
+      doSomething(tweeps[i])
+    }
+  }  
+}
 
-// console.log(visitTweeps(tweeps, function(tweep) {
-//   return ("-> "+ tweep.twitter + ".")
-// }))
+updateTweep('@fzero', doToTweep.follow);
+updateTweep('@mozilla', doToTweep.like);
+updateTweep('@wired', function (tweep) {
+  tweep.smack = true;
+});
+// allCapsTweep ('@fzero');
+updateTweep ('@fzero', doToTweep.allCaps)
+updateTweep ('@mozilla', doToTweep.like)
+updateTweep ('@wired', doToTweep.follow)
+updateTweep ('@wired', doToTweep.follow)
+updateTweep ('@olympics', doToTweep.follow)
 
-visitTweeps(tweeps, function(tweep) {
-  console.log ("-> "+ tweep.twitter + ".")
-})
+console.log("My Tweeps: ", tweeps);
 
-console.log('What is t ',t)
