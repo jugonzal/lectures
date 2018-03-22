@@ -1,5 +1,6 @@
 const express = require("express")
 const bodyParser = require("body-parser")
+const bcrypt = require("bcrypt")
 
 const app = express()
 const PORT = process.env.PORT || 8000; // default port 8000
@@ -14,11 +15,12 @@ app.set("view engine", "ejs")
 
 const data = {
   users: [
-    { username: 'monica', password: 'testing' },
+    { username: 'monica', password: 'testing'},
     { username: 'khurram', password: 'testing2' },
     { username: 'juan', password: 'pwd'}
   ]
 }
+
 
 function obfuscate (word) {
   // let newWord = "";
@@ -42,7 +44,17 @@ function deobfuscate (word) {
 
 function attemptLogin(username, password) {
   for (user of data.users) {
-    if (user.username === username && user.password === password) {
+    // console.log("bcrypt compare: ",bcrypt.compareSync(password, user.password))
+    if (user.username === username && password === user.password) {
+      return user;
+    }
+  }
+}
+
+function checkClearLogin(username, password) {
+  for (user of data.users) {
+    console.log("bcrypt compare: ",bcrypt.compareSync(password, user.password))
+    if (user.username === username && bcrypt.compareSync(password, user.password)) {
       return user;
     }
   }
@@ -53,7 +65,7 @@ app.get("/", (req, res) => {
   const currentUsername = req.cookies['username'];
   let currentPassword = ""
   if (req.cookies['password']) {
-     currentPassword = deobfuscate( req.cookies['password']);
+     currentPassword = req.cookies['password'];
   } 
   if (attemptLogin(currentUsername,currentPassword)) {
     res.render('treasure', { currentUser: currentUsername });
@@ -70,13 +82,13 @@ app.post("/login", (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
 
-  const user = attemptLogin(username, password);
+  const user = checkClearLogin(username, password);
 
   if (user) {
     // success
     // cookies set to expire in 1 hour
     res.cookie('username', user.username, {expires: new Date(Date.now() + 1000*60*60)}); // Set-Cookie: lang=en
-    res.cookie('password', obfuscate(user.password), {expires: new Date(Date.now() + 1000*60*60)}); // Set-Cookie: lang=en
+    res.cookie('password', user.password, {expires: new Date(Date.now() + 1000*60*60)}); // Set-Cookie: lang=en
 
     res.redirect('/');
   } else {
@@ -92,9 +104,11 @@ app.get("/signup", (req, res) => {
 
 app.post("/signup", (req, res) => {
   const username = req.body.username;
-  const password = req.body.password;
+  const password = bcrypt.hashSync(req.body.password, 15);
+
   data.users.push({username: username, password: password});
   res.cookie('username', username); 
+  console.log("Users: ",data);
   res.redirect('/');
 })
 
