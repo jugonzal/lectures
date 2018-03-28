@@ -59,11 +59,16 @@ $(document).ready(() => {
       })
     }
 
+    // $.get(`${ROOT_URL}/posts`,function(data) {
+    //   renderArticles(data)
+    // })
 
     // make the AJAX call to load all the articles from the API
     $.get(`${ROOT_URL}/posts`)
     .then(renderArticles)
     .fail(handleError('loadArticles'));
+
+    //$.ajax
   }
 
   // load all comments for a given `article_id`
