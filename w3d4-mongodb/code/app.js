@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 8080;
 // MongoDB setup
 const Mongo = require("mongodb");
 const MongoClient = Mongo.MongoClient;
-const MONGODB_URI = "mongodb://127.0.0.1:27017/todo_app";
+const MONGODB_URI = "mongodb://127.0.0.1:27017/todos";
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: false}));
@@ -24,6 +24,7 @@ MongoClient.connect(MONGODB_URI, (err, mongoInstance) => {
   db = mongoInstance;
 });
 
+console.log(db)
 
 // EXPRESS ROUTES //
 
@@ -82,7 +83,7 @@ app.put("/todos/:id", (req, res) => {
     desc: req.body.desc,
     priority: Number(req.body.priority)
   }; // mongo doc
-  db.collection("todos").updateOne(filter, todo, (err, result) => {
+  db.collection("todos").updateOne(filter, {"$set":{"desc":req.body.desc}}, (err, result) => {
     if (err) {
       console.log("Something exploded on PUT /todos!");
     }
