@@ -193,7 +193,4 @@ INSERT INTO "tracks" (title, number, album_id) VALUES ('SPACE LION', 7, 9);
 INSERT INTO "tracks" (title, number, album_id) VALUES ('WALTZ for ZIZI', 8, 9);
 INSERT INTO "tracks" (title, number, album_id) VALUES ('PIANO BLACK', 9, 9);
 
-INSERT INTO "plays" (id, count, track_id) VALUES (1, 50, 91);
-INSERT INTO "plays" (id, count, track_id) VALUES (2, 40, 89);
-INSERT INTO "plays" (id, count, track_id) VALUES (3, 20, 87);
- 
+INSERT INTO "plays" (count, track_id) VALUES (1,87);
