@@ -52,7 +52,7 @@ var tree = {
 
 var display = {
     visit: function (node,level) {
-      console.log(level + ">" + node.value);
+      console.log(level + ">" + node.key);
     }
 };
 

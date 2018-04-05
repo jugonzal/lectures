@@ -2,36 +2,27 @@
 //  Sherman the dog
 //  Penny the cat
 //  Lincoln the dog
-//  Wyatt the retriever
+//  Coco the dog
 
-const dbEngine = (function () {
-  // private stuff
-  const pets = [
-    {name: 'Geeky', type: 'gecko'},
-    {name: 'Sherman', type: 'dog'},
-    {name: 'Penny', type: 'cat'}
-  ]
 
-  function getPetByType (lookingForType) {
-    return pets.filter (pet => {
-      if (pet.type == lookingForType) {
-        return true
-      }
-    })
+module.exports = (function() {
+
+  const db = {
+    'geeky': {name: 'Geeky', type: 'gecko'},
+    'sherman': {name: 'Sherman', type: 'dog'}
   }
 
-  function addPet (pet) {
-    pets.push(pet)
-  }
-
-  addPet({name: 'Mimi', type: 'cat'})
-
-  // public stuff
   return {
-    getPet: getPetByType,
-    addPet: addPet
+    read: function RinCRUD (key) {
+      return db[key]
+    },
+    create: function CinCRUD (petName, petType) {
+      db[petName.toLowerCase()] = {name: petName, type: petType}
+    },
+    update: function UinCRUD (key, petName, petType) {
+      db[key] = {name: petName, type: petType}
+    }    
   }
+
 })();
 
-// console.log("DB: ",dbEngine.)
-console.log("the cats:",dbEngine.getPet('cat'))
