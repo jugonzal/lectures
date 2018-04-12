@@ -1,83 +1,123 @@
 var tweeps = [
-  { handle: '@fzero', said: 'Do I have to wake up early?'},
-  { handle: '@mozilla', said: 'Fight for your Internet freedom'},
-  { handle: '@wired', said: 'AI will scam your bitcoins'}
-  ];
+  {who: '@mozilla', what:'all your data belongs to us'},
+  {who: '@wired', what:'the AI will scam your bitcoins'},
+  {
+    who: '@fzero',
+    what: 'I love cats'
+  }
+];
 
-tweeps.push({ handle: '@olympics', said: 'Everyone is a winner'});
 
-tweeps[0].said = 'That would be my first try';
+tweeps.push({who:'@creativecommons', what:'CC0'})
+
+// STAGE 0: making changes step by step directly in the array
+// tweeps[2].fav = true;
+// tweeps[1].likes = 99;
+
+// console.log(tweeps)
+
+// console.log(tweeps[2].what)
+// console.log(tweeps[3]['who'])
 
 
-// function likeTweep (aHandle) {
-//   for (i = 0; i < tweeps.length; i++) {
-//     if (tweeps[i].handle == aHandle) {
-//       tweeps[i].like = true;
-//       return;
+// STAGE 1: writing big functions to do one thing
+// function likeTweep(tweep) {
+//   for (var i=0; i< tweeps.length; i++) {
+//     if(tweeps[i].who == tweep) {
+//       if (tweeps[i].like) {
+//         tweeps[i].like += 1
+//       } else {
+//         tweeps[i].like = 1
+//       }
 //     }
 //   }
 // }
 
-// var liking = likeTweep
-// likeTweep ('@wired')
-// tweeps.push(likeTweep)
-// tweeps[4]('@mozilla')
-// liking('@mozilla')
-
-// function modifyTweep (aHandle, field) {
-//   for (i = 0; i < tweeps.length; i++) {
-//     if (tweeps[i].handle == aHandle) {
-//       tweeps[i][field] = true;
-//       return;
+// function flagTweep(tweep) {
+//   for (var i=0; i< tweeps.length; i++) {
+//     if(tweeps[i].who == tweep) {
+//       if (tweeps[i].flag) {
+//         tweeps[i].flag += 1
+//       } else {
+//         tweeps[i].flag = 1
+//       }
 //     }
 //   }
 // }
 
-// function allCapsTweep (aHandle) {
-//   for (i = 0; i < tweeps.length; i++) {
-//     if (tweeps[i].handle == aHandle) {
-//       // tweeps[i][field] = true;
-//       tweeps[i].said = tweeps[i].said.toUpperCase()
-//       return;
+// STAGE 2: finding ways to create generic functions
+// function changeTweep(tweep, action) {
+//   for (var i=0; i< tweeps.length; i++) {
+//     if(tweeps[i].who == tweep) {
+//       if (tweeps[i][action]) {
+//         tweeps[i][action] += 1
+//       } else {
+//         tweeps[i][action] = 1
+//       }
 //     }
-//   }  
+//   }
 // }
 
-var doToTweep = {
-  allCaps: function allCapsOneTweep (tweep) {
-    tweep.said = tweep.said.toUpperCase()
-  },
-  like: function  (tweep) {
-    tweep.like = true
-  },
-  follow: function  (tweep) {
-   if (tweep.followers) {
-      tweep.followers ++;
-    } else {
-      tweep.followers = 1;
+// function ALLCAPSTweep(tweep) {
+//   for (var i=0; i< tweeps.length; i++) {
+//     if(tweeps[i].who == tweep) {
+//       tweeps[i].what = tweeps[i].what.toUpperCase();
+//     }
+//   }
+// }
+
+// STAGE 3: CALLBACKS!!!!
+
+function toAllCaps(oneTweep) {
+  oneTweep.what = oneTweep.what.toUpperCase();
+}
+ //             {who...  what...}
+function likeIt(oneTweep) {
+  if (oneTweep.like) {
+    oneTweep.like += 1
+  } else {
+    oneTweep.like = 1
+  }
+}
+
+function show(oneTweep) {
+  console.log(oneTweep)
+}
+
+function flagIt(oneTweep) {
+  if (oneTweep.flag) {
+    oneTweep.flag += 1
+  } else {
+    oneTweep.flag = 1
+  }
+}
+
+//               @fzero   likeIt
+function findAnd(tweep, doSomething) {
+  for (var i=0; i< tweeps.length; i++) {
+    if(tweeps[i].who == tweep) {
+      doSomething(tweeps[i])
     }
   }
 }
 
-function updateTweep (aHandle, doSomething) {
-  for (i = 0; i < tweeps.length; i++) {
-    if (tweeps[i].handle == aHandle) {
-      doSomething(tweeps[i])
-    }
-  }  
-}
+// likeTweep('@fzero');
+// likeTweep('@fzero');
+// likeTweep('@fzero');
+// likeTweep('@mozilla');
+// flagTweep('@wired');
 
-updateTweep('@fzero', doToTweep.follow);
-updateTweep('@mozilla', doToTweep.like);
-updateTweep('@wired', function (tweep) {
-  tweep.smack = true;
-});
-// allCapsTweep ('@fzero');
-updateTweep ('@fzero', doToTweep.allCaps)
-updateTweep ('@mozilla', doToTweep.like)
-updateTweep ('@wired', doToTweep.follow)
-updateTweep ('@wired', doToTweep.follow)
-updateTweep ('@olympics', doToTweep.follow)
+// changeTweep('@fzero', 'like');
+// changeTweep('@fzero', 'like');
+// changeTweep('@fzero', 'like');
+// changeTweep('@mozilla', 'like');
+// changeTweep('@wired', 'flag');
+// changeTweep('@creativecommons', 'followers');
+// ALLCAPSTweep('@mozilla');
 
-console.log("My Tweeps: ", tweeps);
+findAnd('@fzero', likeIt)
+findAnd('@wired', flagIt)
+findAnd('@mozilla',toAllCaps)
+findAnd('@fzero', show)
 
+// console.log(tweeps);
