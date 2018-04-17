@@ -1,44 +1,43 @@
 const express = require('express');
 const app = express();
 
-var countVisitors = 0;
-
-app.use(function(req, res, next){
-    console.log(`Saw a new Request fly by... ${++countVisitors}`);
-    next();
-});
-
-app.use(function(req, res, next){
-    console.log(`Log Request: ${req.method} ${req.url}`);
-    next();
-});
-
 app.set("view engine", "ejs");
+app.use(express.static('public'))
+
+app.use(function(req, res, next){
+    console.log(`Log Method: ${req.method}`);
+    // req.method='PUT'
+    next();
+});
+
+app.use(function(req, res, next){
+    console.log(`Log URL: ${req.url}`);
+    next();
+});
+
 
 app.get('/', function (req, res) {
-  res.send(`
-        <html>
-          <body>
-            <h1>AWESOME Event Website</h1>
-            <p>Welcome to my awesome website</p>
-            <ul>
-              <li>Events in <a href="/toronto">Toronto</a></li>
-              <li>Events in <a href="/montreal">Montreal</a></li>
-            </ul>
-          </body>
-        </html>
-      `);
+  res.render('index');
 });
 
-app.get('/toronto', function (req, res) {
-  res.render('toronto')
+app.put('/', function (req, res) {
+  res.send('You should not PUT stuff here')
 })
 
-app.get('/montreal', function(req, res) {
-  res.render('montreal',{eventName: 'Awesome EVENTS' })
+app.get('/games/toronto', function (req, res) {
+  res.render('toronto',
+    {events: [
+      {team: 'Raptors', game: 'Washington'},
+      {team: 'TFC', game: 'CONCACAF'}
+    ],
+    var2 : 3.14159265 })
 })
 
-app.get('/calgary', function(req,res) {
+app.get('/games/montreal', function(req, res) {
+  res.render('montreal')
+})
+
+app.get('/games/calgary', function(req,res) {
   res.status(404).send('Under Construction!');
 })
 
