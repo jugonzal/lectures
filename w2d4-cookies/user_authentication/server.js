@@ -9,38 +9,18 @@ const PORT = process.env.PORT || 8000; // default port 8000
 app.use(bodyParser.urlencoded({ extended: false }))
 
 const cookieParser = require('cookie-parser');
-app.use(cookieParser());
+app.use(cookieParser('The chipmunk made a lot of noise'));
 
 app.set("view engine", "ejs")
 
 const data = {
   users: [
     { username: 'monica', password: 'testing'},
-    { username: 'khurram', password: 'testing2' },
-    { username: 'juan', password: 'pwd'}
+    { username: 'khurram', password: 'testing2' }
   ]
 }
 
 
-function obfuscate (word) {
-  // let newWord = "";
-  // for (let i=0; i<word.length;i++) {
-  //   newWord += (word[i]+5);
-  // }
-  return 'X'+word;
-}
-
-function deobfuscate (word) {
-  // if (word) {
-  //   return 
-  // }
-  // let newWord = "";
-  // for (let i=1; i<word.length;i++) {
-  //   newWord += word[i];
-  // }
-  // return newWord;  
-  return word.substring(1)
-}
 
 function attemptLogin(username, password) {
   for (user of data.users) {
@@ -53,7 +33,8 @@ function attemptLogin(username, password) {
 
 function checkClearLogin(username, password) {
   for (user of data.users) {
-    console.log("bcrypt compare: ",bcrypt.compareSync(password, user.password))
+    // console.log("bcrypt compare: ",bcrypt.compareSync(password, user.password))
+    console.log('Checking ',user.username, bcrypt.compareSync(password, user.password))
     if (user.username === username && bcrypt.compareSync(password, user.password)) {
       return user;
     }
@@ -105,6 +86,7 @@ app.get("/signup", (req, res) => {
 app.post("/signup", (req, res) => {
   const username = req.body.username;
   const password = bcrypt.hashSync(req.body.password, 15);
+  // const password = req.body.password;
 
   data.users.push({username: username, password: password});
   res.cookie('username', username); 
