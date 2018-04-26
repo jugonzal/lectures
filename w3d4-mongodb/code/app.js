@@ -83,7 +83,7 @@ app.put("/todos/:id", (req, res) => {
     desc: req.body.desc,
     priority: Number(req.body.priority)
   }; // mongo doc
-  db.collection("todos").updateOne(filter, {"$set":{"desc":req.body.desc}}, (err, result) => {
+  db.collection("todos").updateOne(filter, {"$set":todo}, (err, result) => {
     if (err) {
       console.log("Something exploded on PUT /todos!");
     }

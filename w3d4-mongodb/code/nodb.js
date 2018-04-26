@@ -1,28 +1,40 @@
 const data = {
-  users: [
-    { name: "Juan", age: 96 },
-    { name: "Someone else", age: 25 }
+  students: [
+    { name: 'Ben', likes: 'basketball', city: '6ix' },
+    { name: 'Steve', likes: 'home', city: 'Montreal'}
   ]
 }
 
-function countUsers () {
-  return data.users.length;
+function add (name, likes, city) {
+  data.students.push({name: name, likes: likes, city: city})
 }
 
-function addUsers (myName, myAge) {
-  data.users.push({name: myName, age: myAge})
+function edit (which, key, value) {
+  data.students[which][key] = value
 }
 
-
-for (let i=0; i< data.users.length;i++) {
-  if (data.users[i].age < 50) {
-    console.log(data.users[i])
-  }
+function myDelete (which) {
+  delete data.students[which]
 }
 
-console.log(data.users.filter(elem => elem.age < 50))
+function read (which) {
+  console.log(data.students[which])
+}
 
-data.users.sort((a,b)=>b.age - a.age)
+function find (student) {
+  data.students.forEach(s => {
+    if (s.name == student) {
+      console.log(s)
+    }
+  })
+}
 
-console.log("ALL: ", data.users);
+function saveAll () {
+  // write data.stringify to a file
+}
 
+add ('Dan', 'Hockey', 'Toronto')
+edit (2, 'city', '6ix')
+myDelete (1)
+read (0)
+find ('Dan')
