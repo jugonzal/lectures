@@ -23,11 +23,12 @@ WHERE albums.artist_id = artists.id AND tracks.album_id = albums.id;
 -- all artists with tags
 
 SELECT
-  artists.name AS artist,
-  GROUP_CONCAT(tags.name) AS tag
-FROM artists, tags
-JOIN artists_tags AS at ON at.artist_id = artists.id AND at.tag_id = tags.id
-GROUP BY artists.id;
+  a.name AS artist,
+  string_agg(t.name,', ') 
+FROM artists_tags AS at
+JOIN artists AS a ON at.artist_id = a.id 
+JOIN tags AS t ON at.tag_id = t.id
+GROUP BY artist;
 
 
 -- # of albums per artist
@@ -49,7 +50,7 @@ SELECT
 FROM artists
 JOIN albums ON albums.artist_id = artists.id
 GROUP BY artists.id
-HAVING album_count >= 2
+HAVING COUNT(albums.id) >= 2
 ORDER BY album_count DESC;
 
 
@@ -69,15 +70,16 @@ WHERE tracks.album_id = albums.id;
 
 -- average number of tracks in albums of each tag, in order
 
-SELECT
-  tags.name as tag,
-  COUNT(tracks.id) / COUNT(distinct albums.id) AS avg
-FROM tags, artists
-JOIN artists_tags AS at ON at.artist_id = artists.id AND at.tag_id = tags.id
-JOIN albums ON albums.artist_id = artists.id
-JOIN tracks ON albums.id = tracks.album_id
-GROUP BY tags.id
-ORDER BY avg DESC;
+  SELECT
+    tags.name as tag,
+    COUNT(tracks.id) / COUNT(distinct albums.id) AS avg
+  FROM tags, artists, artists_tags, albums, tracks
+  WHERE artists_tags.artist_id = artists.id
+  AND artists_tags.tag_id = tags.id
+  AND albums.artist_id = artists.id
+  AND albums.id = tracks.album_id
+  GROUP BY tags.id
+  ORDER BY avg DESC;
 
 
 -- demonstrate the usefulness of an outer join when we don't know where data will exist
