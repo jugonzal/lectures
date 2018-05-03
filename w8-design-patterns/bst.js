@@ -56,6 +56,13 @@ var display = {
     }
 };
 
+var myCount = 0;
+var countThem = {
+  visit: function (node, level) {
+    myCount ++;
+  }
+}
+
 
 tree.insert(1234, 1);
 tree.insert(7777, 2);
@@ -66,4 +73,6 @@ tree.insert(9999, 6);
 tree.insert(590, 7)
 tree.insert(14,8)
 tree.traverse(display)
+tree.traverse(countThem)
+console.log(myCount)
 // console.log(tree.get(9999));
