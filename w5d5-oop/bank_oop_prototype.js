@@ -64,11 +64,3 @@ accountABC.withdraw(1000);
 
 accountABC.log();
 
-
-/* or */
-
-new SavingsAccount("Bob")
-      .deposit(500)
-      .withdraw(100)
-      .withdraw(1000)
-      .log();

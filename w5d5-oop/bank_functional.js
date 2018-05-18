@@ -80,25 +80,39 @@ function toString(account) {
 
 /* program */
 
-let accountABC = createSavingsAccount("Bob");
+// let accountABC = createAccount("Juan");
 
-accountABC = deposit(accountABC, 500);
-accountABC = withdraw(accountABC, 100);
-// accountABC.balance = 5000;
-accountABC = withdraw(accountABC, 1000);
+// accountABC = deposit(accountABC, 500);
 
-console.log(toString(accountABC));
+// accountABC = withdraw(accountABC, 100);
+// // accountABC.balance = 5000;
+// accountABC = withdraw(accountABC, 1000);
+
+// console.log(toString(accountABC));
+
+
+/* or... */
+
+console.log(
+  toString(
+    withdraw(
+      withdraw(
+        deposit(
+          createSavingsAccount("Bob"), 
+          500), 
+        100), 
+      1000)
+    )
+  )
+
+// console.log(toString(bobsAccount))
 
 
 /* or... */
 
-// console.log(toString(withdraw(withdraw(deposit(createAccount("Bob"), 500), 100), 1000)))
-
-/* or... */
-
-// thread(createSavingsAccount("Bob"),
-//        [deposit, 500],
-//        [withdraw, 100],
-//        [withdraw, 1000],
-//        [toString],
-//        [console.log])
+thread(createSavingsAccount("Bob"),
+       [deposit, 500],
+       [withdraw, 100],
+       [withdraw, 1000],
+       [toString],
+       [console.log])

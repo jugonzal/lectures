@@ -1,32 +1,37 @@
 /* setup */
 
 class Account {
+
   constructor(owner) {
     this.owner = owner;
     this._balance = 0;
     this.transactions = [];
+    this.dontforget = true; // i did forget
   }
 
   deposit(amount) {
     this._balance += amount;
-    this.transactions.push(`D+ ${amount}`)
+    this.transactions.push(`DEPOSIT+ ${amount}`)
   }
 
   withdraw(amount) {
     this._balance -= amount;
-    this.transactions.push(`W- ${amount}`)
+    this.transactions.push(`WIT- ${amount}`)
   }
 
   get balance() {
-    return this._balance - 2;
+    // this.transactions.push(`BALANCE ${this._balance} `);
+    return this._balance;
   }
-  set balance(value) {
-    this._balance = value ;
-    // this.hacked = true
-  }
+  // set balance(value) {
+  //   this._balance = value ;
+  //   this.transactions.push(`RESET ${value}`)
+  //   // this.hacked = true
+  // }
 
   log() {
-    console.log(`${this.owner}: $${this.balance}`);
+    if (this.dontforget)    
+      console.log(`${this.owner}: $${this.balance}`);
     for(let transaction of this.transactions) {
       console.log("\t"+transaction);
     }
@@ -45,37 +50,30 @@ class SavingsAccount extends Account {
   }
 }
 
-class RRSPAccount extends SavingsAccount {
-  constructor(owner, matching) {
-    super(owner)
-    this._matching = matching
-  }
+class DreamAccount extends SavingsAccount {
+  constructor(owner, kick) {
+    super(owner);
+    this.kick = kick;
+  } 
 
-  deposit(amount) {
+  deposit (amount) {
+    let added = amount/100 * this.kick;
     super.deposit(amount)
-    super.deposit(amount<this._matching?amount:this._matching)
+    super.deposit(added)
   }
 }
 
 /* program */
 
-let accountABC = new RRSPAccount("Juan",500);
-let accountLuke = new RRSPAccount("Luke",50);
+let accountABC = new DreamAccount("Juan", 10);
 
-accountABC.deposit(600);
+accountABC.deposit(500);
 accountABC.withdraw(100);
 accountABC.withdraw(1000);
 accountABC.log();
-// console.log("Your fees ", accountABC.fees)
-// accountABC.balance = 5000;
-// accountABC.hacked = true;
-console.log(accountABC)
-// accountABC._balance = 5000;
-console.log("Please confirm balance ",accountABC.balance);
-
-accountLuke.deposit(200)
-accountLuke.withdraw(80)
-accountLuke.log()
+console.log('From getter: ',accountABC.balance);
+// accountABC._balance = 3000;``
+// console.log('From attribute: ',accountABC._balance);
 
 
 
