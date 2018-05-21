@@ -1,46 +1,36 @@
 <style>
 
-nav {
-  background-color: lightblue;
-}
+.nav-menu
 
-nav .menuitem {
+.menu li {
   display: inline;
+  width: 20%;
+  padding: 15px;
 }
 
-main {}
+/* This rule will not be visible */
+.menu ul > li { background: lightblue }
 
-/*main ul {}
+/* This rule will override the previous one */
+.menu li:hover { background: red }
 
-main ul li {
+.best + li { background: lightgrey; }
+
+.collection li {
+  width: 25%;
+  float: left;
 }
 
-main ul li img {}
+.collection > .notso { background: yellow; }
 
-.minecraft {
-        max-width: 150px;
-}*/
-
-main .collection {
+.collection img {
+  width : 30%;
+  display: block;
 }
-
-.collection .minecraft {
-      max-width: 15px;
-      display: block;
-}
-
-img {
-        max-width: 50px;
-}
-
-main ul li .minecraft {
-}
-
-main ul li button {}
 
 </style>
 <body>
-  <nav>
+  <nav class="menu" id="myMenu">
     <ul>
       <li class="menuitem">Home</li>
       <li class="menuitem">Next</li>
