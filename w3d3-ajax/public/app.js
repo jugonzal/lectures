@@ -21,7 +21,7 @@ $(document).ready(() => {
 
     return `
       <article class="post" data-article-id="${article.id}">
-        <a><h3>${article.title}</h3></a>
+        <a><h3 style="color:blue;">${article.title}</h3></a>
         <p>${article.body}</p>
       </article>
     `;
