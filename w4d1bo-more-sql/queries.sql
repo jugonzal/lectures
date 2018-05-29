@@ -36,6 +36,14 @@ WHERE artists_tags.artist_id = artists.id
   AND artists_tags.tag_id = tags.id
   AND tags.name = 'instrumental';
 
+
+-- SELECT *                   
+-- FROM tags, artists, artists_tags
+-- WHERE artists_tags.artist_id = artists.id
+--   AND artists_tags.tag_id =* tags.id
+--   AND tags.name = 'instrumental';
+
+
 -- at this point we started to wonder how to find those 
 -- artists that would have 2 different tags.   But this 
 -- solution proved elusive.   Simply adding another AND
@@ -61,6 +69,27 @@ FROM tags, artists, artists_tags
 WHERE artists_tags.artist_id = artists.id
   AND artists_tags.tag_id = tags.id 
   AND tags.name in ('instrumental', 'electronic') 
+GROUP BY artists.name 
+HAVING count(*) > 1;
+
+
+SELECT 
+  artists.name, 
+  string_agg(tags.name, ' - ')
+FROM tags, artists, artists_tags
+WHERE artists_tags.artist_id = artists.id
+  AND artists_tags.tag_id = tags.id 
+  AND tags.name in ('instrumental', 'electronic') 
+GROUP BY artists.name 
+HAVING count(*) > 1;
+
+EXPLAIN ANALYZE SELECT 
+  artists.name, 
+  string_agg(tags.name, ' - ')
+FROM artists_tags
+JOIN artists ON artists_tags.artist_id = artists.id
+JOIN tags ON artists_tags.tag_id = tags.id 
+WHERE tags.name in ('instrumental', 'electronic') 
 GROUP BY artists.name 
 HAVING count(*) > 1;
 
@@ -125,7 +154,7 @@ FROM tags, artists
 JOIN artists_tags AS at ON at.artist_id = artists.id AND at.tag_id = tags.id
 JOIN albums ON albums.artist_id = artists.id
 JOIN tracks ON albums.id = tracks.album_id
-GROUP BY tags.id
+GROUP BY tags.name
 ORDER BY avg DESC;
 
 
