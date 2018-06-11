@@ -1,5 +1,6 @@
 // api = require ("./googlemaps.js");
-api = require ("./weather.js")
+
+var api = require ("./weather.js")
 
 // var myPostalCode
 // api("46%20Spadina,Toronto", function(pc) {
@@ -8,6 +9,6 @@ api = require ("./weather.js")
 // })
 
 
-api(4118, function(w,t) {
-  console.log(w,t);
-})
+api("4118", function(out) {
+  console.log(out.the_temp);
+},2)
