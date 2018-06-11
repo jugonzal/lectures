@@ -110,6 +110,9 @@ to send ONE request and echo the response on screen:
 curl google.com
 
 curl https://maps.googleapis.com/maps/api/geocode/json?address=46%20Spadina,%20Toronto&sensor=false
+
+curl https://www.metaweather.com/api/location/4118/
+
 ```
 
 The second URL is a great example of a full URL that defines a resource, located
