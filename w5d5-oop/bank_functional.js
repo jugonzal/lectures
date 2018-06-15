@@ -39,8 +39,8 @@ function createAccount(owner) {
            transactions: [] };
 }
 
-function createSavingsAccount(owner) {
-  return set(createAccount(owner), {type: "savings"});
+function createProAccount(owner) {
+  return set(createAccount(owner), {type: "pro"});
 }
 
 function deposit(account, amount) {
@@ -49,27 +49,18 @@ function deposit(account, amount) {
               transactions: conj(account.transactions, `D${amount}`) });
 }
 
-function withdrawBase(account, amount) {
+function withdraw(account, amount) {
   return set(account,
     { balance: account.balance - amount,
       transactions: conj(account.transactions, `W${amount}`) });
 }
 
-function withdrawSavings(account, amount) {
-  if(account.balance - amount > 0) {
-    return withdrawBase(account, amount);
+function withdrawPro(account, amount) {
+  let tempAccount = withdraw(account, amount);
+  if (account.balance >= 1000) {
+    return deposit(tempAccount, 10)
   } else {
-    return set(account,
-               {transactions: conj(account.transactions, `W${amount}X`)});
-  }
-}
-
-function withdraw(account, amount) {
-  switch(account.type) {
-    case "savings":
-      return withdrawSavings(account, amount);
-    default:
-      return withdrawBase(account, amount);
+    return tempAccount;
   }
 }
 
@@ -80,13 +71,13 @@ function toString(account) {
 
 /* program */
 
-// let accountABC = createAccount("Juan");
+// let accountABC = createProAccount("Juan");
 
-// accountABC = deposit(accountABC, 500);
+// accountABC = deposit(accountABC, 1500);
 
-// accountABC = withdraw(accountABC, 100);
-// // accountABC.balance = 5000;
-// accountABC = withdraw(accountABC, 1000);
+// accountABC = withdrawPro(accountABC, 300);
+// // // accountABC.balance = 5000;
+// // accountABC = withdraw(accountABC, 1000);
 
 // console.log(toString(accountABC));
 
@@ -95,13 +86,13 @@ function toString(account) {
 
 console.log(
   toString(
-    withdraw(
-      withdraw(
+    withdrawPro(
+      withdrawPro(
         deposit(
-          createSavingsAccount("Bob"), 
-          500), 
-        100), 
-      1000)
+          createProAccount("Bob"), 
+          1500), 
+        400), 
+      200)
     )
   )
 
@@ -110,9 +101,9 @@ console.log(
 
 /* or... */
 
-thread(createSavingsAccount("Bob"),
-       [deposit, 500],
-       [withdraw, 100],
-       [withdraw, 1000],
-       [toString],
-       [console.log])
+// thread(createSavingsAccount("Bob"),
+//        [deposit, 500],
+//        [withdraw, 100],
+//        [withdraw, 1000],
+//        [toString],
+//        [console.log])
