@@ -2,29 +2,39 @@ p {
   font-family: 'Source Code Pro';
 }
 
-#header {
+header {
   background-color: black;
   color: white;
   font-size: 24px;
   padding: 8px 0 8px 16px;
 }
 
-#footer {
+header:hover {
+  color: red;
+}
+
+footer {
   height: 60px;
   background-color: #333;
   color: #eee;
   padding: 5px 30px;
 }
 
-#content {
+
+.blog {
   background-color: #eee;
   color: #333;
   height: 700px;
   padding: 8px;
 }
 
-.col.six {
-  background-color: red;
+.just-title > h1 {
+  font-family: barrio;
+  color: orange;
+}
+
+main h1 ~ p {
+  text-shadow: 1px 1px 1px grey;
 }
 
 #sidebar {
@@ -32,23 +42,6 @@ p {
   color: black;
   height: 700px;
   padding-top: 20px;
-}
-
-#sidebar:hover {
-  background-color: black;
-  color: #999;
-}
-
-#box.red {
-  background-color: red;
-}
-
-#box.blue {
-  background-color: blue;
-}
-
-.blue p {
-  color: yellow;
 }
 
 #box {

@@ -4,10 +4,13 @@
 //  Coco the dog
 //  Theo the yorkie
 
+
 class Pet {
+
   constructor (name, type) {
     this._name = name
     this._type = type
+
   }
 
   get name () {
@@ -15,15 +18,11 @@ class Pet {
   }
 
   get type () {
-    return this._type
+    return "the "+this._type
   }
 
-  set age (someAge) {
-    this._age = someAge
-  }
-
-  get age () {
-    return this._age
+  morph (newType) {
+    this._type = newType
   }
 }
 
@@ -32,8 +31,17 @@ class Pets {
     this._db = []
   }
 
-  create (pet) {
+  add (pet) {
     this._db.push(pet)
+  }
+
+  create (name, type) {
+    let newPet = new Pet(name, type)
+    this.add(newPet)
+  }
+
+  qCreate (name, type) {
+    this.add({_name: name, _type: type })
   }
 
   all () {
@@ -49,24 +57,22 @@ class Pets {
 
   search (key, value) {
     for (let i=0; i< this._db.length; i++) {
-      if (this._db[i][key] == value) 
+      if (this._db[i][key] === value) 
         return this._db[i]
     }    
   }
 
 }
 
-pets = new Pets()
-pet1 = new Pet('geeky','gecko')
-pet1.age = 3
-pets.create (pet1)
-pets.create (new Pet('sherman','dog'))
-pets.create (new Pet('larry','duck'))
-another = new Pet('theo','yorkie')
-another.age = 6
-pets.create(another)
+myGeeky = new Pet('Geeky','gecko')
+myGeeky.morph('leopard gecko')
+other = new Pet('Sherman','dog')
+lhlPets = new Pets();
+lhlPets.add(myGeeky)
+lhlPets.add(other)
+lhlPets.add(new Pet('Larry','duck'))
+lhlPets.create('Coco','dog')
+console.log(myGeeky.name, myGeeky.type)
+console.log(lhlPets.search('_name','Geeky'))
+console.log(lhlPets.search('_type','duck'))
 
-found = pets.search('name','theo')
-console.log(found.name, found.type, found.age)
-found = pets.search('age',3)
-console.log(found.name, found.type, found.age)
