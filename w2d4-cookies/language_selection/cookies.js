@@ -4,7 +4,7 @@ const PORT = process.env.PORT || 8000; // default port 8080
 
 // Use cookies!
 const cookieParser = require('cookie-parser');
-app.use(cookieParser());
+app.use(cookieParser('this is juan gonzalez and nobody knows im el zorro'));
 
 app.set("view engine", "ejs");
 

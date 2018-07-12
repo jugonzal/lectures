@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 8000; // default port 8000
 app.use(bodyParser.urlencoded({ extended: false }))
 
 const cookieParser = require('cookie-parser');
-app.use(cookieParser('juan is really el zorro'));
+app.use(cookieParser('The chipmunk made a lot of noise'));
 
 app.set("view engine", "ejs")
 
@@ -29,9 +29,7 @@ function validUser (username) {
 
 function checkLogin(username, password) {
   for (user of data.users) {
-    console.log("Checking ",user)
     if (user.username === username && password === user.password) {
-      console.log("Found")
       return user;
     }
   }
@@ -39,9 +37,7 @@ function checkLogin(username, password) {
 
 // Show the treasure if they are logged in, otherwise redirect to LOGIN page.
 app.get("/", (req, res) => {
-  // const currentUsername = req.cookies['username'];
-  const currentUsername = req.signedCookies['username'];
-  console.log("Route / coookie: ",req.signedCookies)
+  const currentUsername = req.cookies['username'];
   if (validUser(currentUsername)) {
     res.render('treasure', { currentUser: currentUsername });
   } else {
@@ -58,13 +54,12 @@ app.post("/login", (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
 
-  console.log("Route post /login cookie: ",req.cookies)
   const user = checkLogin(username, password);
 
   if (user) {
     // success
     // cookies set to expire in 1 hour
-    res.cookie('username', user.username, {signed:true, expires: new Date(Date.now() + 1000*60*60)}); // Set-Cookie: lang=en
+    res.cookie('username', user.username, {expires: new Date(Date.now() + 1000*60*60)}); // Set-Cookie: lang=en
     // res.cookie('password', user.password, {expires: new Date(Date.now() + 1000*60*60)}); // Set-Cookie: lang=en
 
     res.redirect('/');

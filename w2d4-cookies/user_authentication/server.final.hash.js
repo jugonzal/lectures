@@ -1,5 +1,7 @@
 const express = require("express")
 const bodyParser = require("body-parser")
+const bcrypt = require("bcrypt")
+
 
 const app = express()
 const PORT = process.env.PORT || 8000; // default port 8000
@@ -8,30 +10,32 @@ const PORT = process.env.PORT || 8000; // default port 8000
 app.use(bodyParser.urlencoded({ extended: false }))
 
 const cookieParser = require('cookie-parser');
-app.use(cookieParser('juan is really el zorro'));
+app.use(cookieParser('The chipmunk made a lot of noise'));
 
 app.set("view engine", "ejs")
 
 const data = {
   users: [
-    { username: 'monica', password: 'testing'},
-    { username: 'khurram', password: 'testing2' }
+    { username: 'monica', password: 'testing', unique: '9090'},
+    { username: 'khurram', password: 'testing2', unique: '8080' }
   ]
 }
 
 function validUser (username) {
   for (user of data.users) {
-    if (user.username === username ) {
+    if (user.unique === username ) {
       return user;
     }
   }  
 }
 
+function hashForUser(username) {
+  return Math.random().toString().substr(10,5);
+}
+
 function checkLogin(username, password) {
   for (user of data.users) {
-    console.log("Checking ",user)
-    if (user.username === username && password === user.password) {
-      console.log("Found")
+    if (user.username === username && bcrypt.compareSync(password, user.password)) {
       return user;
     }
   }
@@ -39,9 +43,7 @@ function checkLogin(username, password) {
 
 // Show the treasure if they are logged in, otherwise redirect to LOGIN page.
 app.get("/", (req, res) => {
-  // const currentUsername = req.cookies['username'];
-  const currentUsername = req.signedCookies['username'];
-  console.log("Route / coookie: ",req.signedCookies)
+  const currentUsername = req.cookies['username'];
   if (validUser(currentUsername)) {
     res.render('treasure', { currentUser: currentUsername });
   } else {
@@ -58,14 +60,12 @@ app.post("/login", (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
 
-  console.log("Route post /login cookie: ",req.cookies)
   const user = checkLogin(username, password);
 
   if (user) {
     // success
     // cookies set to expire in 1 hour
-    res.cookie('username', user.username, {signed:true, expires: new Date(Date.now() + 1000*60*60)}); // Set-Cookie: lang=en
-    // res.cookie('password', user.password, {expires: new Date(Date.now() + 1000*60*60)}); // Set-Cookie: lang=en
+    res.cookie('username', user.unique, {expires: new Date(Date.now() + 1000*60*2)}); // Set-Cookie: lang=en
 
     res.redirect('/');
   } else {
@@ -81,10 +81,13 @@ app.get("/signup", (req, res) => {
 
 app.post("/signup", (req, res) => {
   const username = req.body.username;
-  const password = req.body.password;
+  // const password = req.body.password;
+  const password = bcrypt.hashSync(req.body.password, 15);
 
-  data.users.push({username: username, password: password});
-  res.cookie('username', username, {expires: new Date(Date.now() + 1000*60*60)}); 
+  let uniqueID = hashForUser(username);
+  data.users.push({username: username, password: password, unique: uniqueID});
+  console.log(data);
+  res.cookie('username', uniqueID, {expires: new Date(Date.now() + 1000*60*5)}); 
   res.redirect('/');
 })
 
