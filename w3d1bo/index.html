@@ -1,0 +1,103 @@
+<html>
+<head>
+  <title>My title</title>
+  <style>
+
+    html {
+      background-color: aquamarine;
+    }
+    header {
+      color: orange;
+      font-size: 14px;
+    }
+
+    nav ul > li {
+      width: 20%;
+      float: left;
+    }
+
+    nav li:hover {
+      color: grey;
+    }
+
+    li:hover + li {
+      color: yellow;
+    }
+
+    aside {
+      font-family: arial;
+    }
+
+    #the-winner {
+      color: lightgreen;
+    }
+
+    .country {
+      color: darkgrey;
+      font-size: 2em;
+    }
+
+    section {
+      border-style: dotted;
+      border-color: red;
+      width: 70%;  
+      box-sizing: border-box;
+
+      float: left;
+      margin: 20px;
+      padding: 10px;
+    }
+
+    section.readable {
+      font-size: 1.5em;
+      padding: 20px;
+    }
+
+    aside {
+      border-style: dotted;
+      border-color: green;
+      width: 35%;
+      margin: 15px;      
+      float: right;
+    }
+
+    summary span {
+      border-style: dotted;
+      border-color: lightblue;      
+    }
+
+  </style>
+</head>
+<body>
+  <header>
+  	<h1>Final Rankings</h1>
+    <p>An app to get everyone up-to-date on your World Cup stats</p>
+  </header>
+  <nav>
+    <ul>
+      <li>Home</li>
+      <li>Rankings</li>
+      <li>About Us</li>
+    </ul>
+  </nav>
+  <section>
+    <h4>June 10, 2018</h4><p class="readable">We have been following the top performers and here is our forecast for the most likely winners of the World Cup: Brazil, Argentina and Germany</p>
+  </section>
+  <section>
+    <h4>June 20, 2018</h4>
+    <p class="readable">Allright, Argentina is not having the greatest tie out there, but the rest of our A.I. model is very robust and you should trust our forecast: Brazil, Mexico, Portugal</p>
+  </section>
+  <section>
+    <h4>June 30, 2018</h4>
+    <p class="readable">Listen, something is clearly not right with our model but we have tweaked our data and have generated new predictions.  This time we got it right: Brazil, England, Spain</p>
+  </section>
+	<aside>
+		<ol>
+			<li class="country" id="the-winner">France</li>
+			<li class="country" style="color:orange;">Croatia</li>
+			<li class="country" style="color:green;">Belgium</li>
+		</ol>
+	</aside>
+  <summary><span style="color:blue">Fr</span>an<span style="color:red">ce</span> won the World Cup.</summary>
+</body>
+</html>
