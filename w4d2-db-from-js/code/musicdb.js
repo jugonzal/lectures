@@ -6,9 +6,10 @@ const pg = require('pg');
 // will be read if the config is not present
 // You can put this data on a .env file if you'd like.
 const config = {
-  user: 'labber', //env var: PGUSER
+  user: 'vagrant', //env var: PGUSER
   database: 'vagrant', //env var: PGDATABASE
   password: 'labber', //env var: PGPASSWORD
+  host: 'localhost',
   port: 5432 //env var: PGPORT
 };
 
@@ -26,6 +27,28 @@ module.exports = (function() {
 
   // Get all album tracks for an artist.
   // The callback receives result.rows from `pg`
+
+  const getArtistTracks = (artistName, callback) => {
+
+      let query =
+        `select t.title 
+        from tracks t, albums b, artists a 
+        where t.album_id = b.id 
+        and b.artist_id = a.id 
+        and a.name = $1::text;`;
+
+      db.query(query, [artistName], (err, result) => {
+        if (err) {
+          console.log("Something went wrong:", err);
+          callback([]);
+        }
+        else {
+          callback(result.rows);
+        }
+        // db.end(); // Close db connection - if we don't do this the app doesn't close.
+      });
+  }
+
   const getAlbumTracks = (artistName, albumName, callback) => {
 
       let query =
@@ -51,7 +74,8 @@ module.exports = (function() {
   }
 
   return {
-    getAlbumTracks: getAlbumTracks   
+    getArtistTracks: getArtistTracks,
+    getAlbumTracks: getAlbumTracks,   
     closeEverything: function () {
       db.end();
     } 
