@@ -113,6 +113,14 @@ Use good git practices. Please.
   6. Push - send your commits from your local master to the remote master  | and lint
   7. Go to step 1 | and lint
 
+Here are a few things to remember:
+
+- master should always be sane - in other works, it should always contain runnable code
+- Use feature branching
+  - A very good tutorial: https://www.atlassian.com/git/tutorials/comparing-workflows/feature-branch-workflow
+  - Git cheatsheet: http://www.ndpsoftware.com/git-cheatsheet.html
+- Use database migrations and seeds
+  - Remember: each developer will have their own copy of the database, so migrations will be used to keep the schema in sync, while seeds will provide initial data (e.g admin users)
 
 ## Project Setup
 
