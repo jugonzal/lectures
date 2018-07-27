@@ -3,13 +3,6 @@ function Node(key, value) {
   this.value = value;
   this.left = null;
   this.right = null;
-  this.accept = function (visitor,level) {
-    visitor.visit(this,level);
-    if (this.left) 
-      this.left.accept(visitor,level+"--")
-    if (this.right)
-      this.right.accept(visitor,level+"--")
-  }
 }
 
 var tree = {
@@ -32,11 +25,6 @@ var tree = {
       this._root = node;
     }
   },
-  traverse: function(visitor) {
-    if (this._root) {
-      this._root.accept(visitor,"|")
-    }
-  },
   get: function (key) {
     var currentNode = this._root;
     while (currentNode) {
@@ -50,20 +38,6 @@ var tree = {
   }
 };
 
-var display = {
-    visit: function (node,level) {
-      console.log(level + ">" + node.key);
-    }
-};
-
-var myCount = 0;
-var countThem = {
-  visit: function (node, level) {
-    myCount ++;
-  }
-}
-
-
 tree.insert(1234, 1);
 tree.insert(7777, 2);
 tree.insert(123, 3);
@@ -74,10 +48,9 @@ tree.insert(590, 7)
 tree.insert(14,8)
 tree.insert(600,9)
 tree.insert(6000,10)
-tree.traverse(display)
-tree.traverse(countThem)
-console.log(myCount)
-// console.log(tree.get(9999));
 
+console.log(tree)
+console.log(tree._root.key)
+console.log(tree._root.left.key, '<- ->', tree._root.right.key )
 
 
