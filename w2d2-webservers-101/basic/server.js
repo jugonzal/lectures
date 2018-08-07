@@ -1,30 +1,41 @@
-let http = require('http');
+var httpServer = require('http');
 
-const PORT = 3000;
+function homePage () {
+  return 'Welcome to my Site. Go <a href="/left">left</a> or go <a href="/right">right</a>'
+}
 
-// create a server with a responder function
-let server = http.createServer(function whatShouldDoOnRequest (request, response){
-    var fullRequest = request.method+' '+request.url;
-    console.log("Request: ", fullRequest);
-    // response.end("Thank you for your request")
+var server = httpServer.createServer(function (request, response) {
+  // var ip = response.socket.remoteAddress;
+  // var port = response.socket.remotePort;
 
-    if (request.url == '/') {
-      var page = "<html><body><h1>Sports LHL</h1><p>Where you will find a list of all games in <a href='/games/toronto'>Toronto</a> tonight</p></body></html>"
-      response.end(page)
-    } else if (request.url == '/games/toronto') {
-      var page = "<html><body><h1>Sports LHL</h1><p>Here are the games in Toronto tonight</p>"
-      page += "<ul>"
-      page += "   <li>Raptors are playing Washinton</li>"
-      page += "   <li>Jays are playing baseball</li>"
-      page += "   <li>Wrong guys are playing curling</li>"
-      page += "</ul>"
-      page += "</body></html>"
-      response.end(page)
-    }
+  // console.log('Request: ', request)
+  // response.end(`This is stuff I know about you:
+  //   Your IP address is ${ip}
+  //   your source port is ${port}
+  //   your client seems to be a ${request.headers['user-agent']}
+  //   you typed this host ${request.headers.host}
+  //   you asked for this URL ${request.url} with method ${request.method}`);
+
+  var page = '<html><body>'
+
+  if (request.url === '/') {
+    page += homePage()
+  } else if (request.url === '/left') {
+    page += 'Welcome to the LEFT'
+  } else if (request.url === '/right') {
+    page += 'Welcome to the RIGHT'
+  } else {
+    page +='You are lost... Go back <a href="/">Home</a>'
+  }
+
+  page += '</body></html>'
+  response.end(page)
 
 });
 
-// start the server
-server.listen(PORT, function onServerStart(){
-    console.log("Server listening on: http://localhost:%s", PORT);
+server.on('clientError', (err, socket) => {
+  socket.end('HTTP/1.1 400 Bad Request\r\n\r\n');
 });
+
+server.listen(8000);
+console.log('Server listening...')
