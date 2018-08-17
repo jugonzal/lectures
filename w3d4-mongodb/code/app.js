@@ -81,6 +81,7 @@ app.put("/todos/:id", (req, res) => {
   let filter = { _id: Mongo.ObjectId(id) };
   const todo = {
     desc: req.body.desc,
+    completed: req.body.completed === 'true'? true : false,
     priority: Number(req.body.priority)
   }; // mongo doc
   db.collection("todos").updateOne(filter, {"$set":todo}, (err, result) => {
