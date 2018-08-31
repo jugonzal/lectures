@@ -1,0 +1,20 @@
+{
+  "name": "family",
+  "version": "1.0.0",
+  "description": "This is a module that can tell you the father and grandfather of people",
+  "main": "family.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "Juan",
+  "license": "ISC",
+  "dependencies": {},
+  "directories": {
+    "test": "test"
+  },
+  "devDependencies": {
+    "assert": "^1.4.1",
+    "mocha": "^5.2.0",
+    "chai": "^4.1.2"
+  }
+}
