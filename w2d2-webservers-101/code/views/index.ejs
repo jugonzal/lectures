@@ -1,8 +1,9 @@
 <html><body>
-  <h1>Sports LHL</h1>
+  <h1>Sports LHL (tm)</h1>
   <p>Where you will find a list of all games in <a href='/games/toronto'>Toronto</a> or <a href='/games/montreal'>Montreal</a> tonight</p>
-  <form action="/contact">
+  <form action="/contact" method="POST">
     <input name="name">
     <input type="submit">
   </form>
+  <p>calculated at <%= new Date() %></p>
 </body></html>

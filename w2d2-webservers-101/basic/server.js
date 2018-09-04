@@ -1,41 +1,41 @@
-var httpServer = require('http');
+let http = require('http');
 
-function homePage () {
-  return 'Welcome to my Site. Go <a href="/left">left</a> or go <a href="/right">right</a>'
-}
+// define app constants
+const PORT = 3000;
 
-var server = httpServer.createServer(function (request, response) {
-  // var ip = response.socket.remoteAddress;
-  // var port = response.socket.remotePort;
+// create a server with a responder function
+let server = http.createServer(function respondToRequests(request, response){
+    console.log("Request: ", request.method, request.url)
 
-  // console.log('Request: ', request)
-  // response.end(`This is stuff I know about you:
-  //   Your IP address is ${ip}
-  //   your source port is ${port}
-  //   your client seems to be a ${request.headers['user-agent']}
-  //   you typed this host ${request.headers.host}
-  //   you asked for this URL ${request.url} with method ${request.method}`);
-
-  var page = '<html><body>'
-
-  if (request.url === '/') {
-    page += homePage()
-  } else if (request.url === '/left') {
-    page += 'Welcome to the LEFT'
-  } else if (request.url === '/right') {
-    page += 'Welcome to the RIGHT'
-  } else {
-    page +='You are lost... Go back <a href="/">Home</a>'
-  }
-
-  page += '</body></html>'
-  response.end(page)
-
+    if (request.url === '/') {
+      response.end(`
+        <html>
+          <body>
+            <img style="float: right" height="50px" src="https://pbs.twimg.com/profile_images/378800000328970347/40e96c650dad499b060a4f24ddc68c6e_400x400.png">
+            <h1>Lighthouse Labs</h1>
+            <h2>Fall <a href="/courses">Courses</a></h2>
+          </body>
+        </html>
+        `); 
+    } else if (request.url === '/courses') {
+      response.end(`
+       <html>
+          <body>
+            <h1>Lighthouse Labs</h1>
+            <h2>Fall Courses</h2>
+            <ul>
+              <li>Web Bootcamp</li>
+              <li>iOS Bootcamp</li>
+            </ul>
+          </body>
+        </html>
+         `)
+    } else {
+      response.end('Big 404')
+    }
 });
 
-server.on('clientError', (err, socket) => {
-  socket.end('HTTP/1.1 400 Bad Request\r\n\r\n');
+// start the server
+server.listen(PORT, function onServerStart(){
+    console.log("Server listening on: http://localhost:%s", PORT);
 });
-
-server.listen(8000);
-console.log('Server listening...')

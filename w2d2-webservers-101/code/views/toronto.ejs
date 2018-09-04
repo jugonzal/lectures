@@ -1,12 +1,12 @@
 <html>
   <body>
-    <h1>Sports LHL as of <%= 'August 7, 2018' %></h1>
+    <h1>Sports LHL as of <%= new Date() %></h1>
     <p>Here are the <%= events.length %> games in Toronto tonight</p>
     <ul>
       <% for (var i=0; i< events.length; i++) { %>
         <li>
           <%= events[i].team %> is playing <%= events[i].game %>
-          <img src="<%= events[i].image %>">
+          <img height="50px" src="<%= events[i].image %>">
         </li> 
       <% } %>
     </ul>
