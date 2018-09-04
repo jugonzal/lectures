@@ -62,7 +62,33 @@ And as the code above suggests, we found very convenient to "use" a extension to
 ```
 app.set('view engine', 'ejs');
 ```
+You'll learn a lot more about how to use templates.  They are not just a place
+to manage your static HTML, but can have logic within using the `<%  %>` tag.
 
 All these extensions to Express are [middleware](http://expressjs.com/en/guide/using-middleware.html), which is a way of adding functionality to the server.  
 
-Please look at the [code](https://github.com/jugonzal/lhl-lectures/tree/master/w2d2-webservers-101/code) we wrote in class to get a full Express server configured with some middleware to use EJS templates, server static files in a public directory and display some useful logs with morgan.
+Please look at the [code](https://github.com/jugonzal/lhl-lectures/tree/master/w2d2-webservers-101/code) we wrote in class to get a full Express server configured with some middleware to use EJS templates, server static files in a public directory and manage data from forms.
+
+Note that when submitting a form:
+
+```html
+<form action="/someURL" method="POST">
+  <input name="name">
+  <input type="submit">
+</form>
+```
+
+and then using the `body-parser` library to get those values
+
+```javascript
+const bodyParser = require('body-parser');
+
+// for parsing application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: true })); 
+
+app.post('/someURL', function(req, res) {
+  console.log('Hello... ',req.body)
+    // req.body will contain any fields submitted in the form
+});
+```
+
