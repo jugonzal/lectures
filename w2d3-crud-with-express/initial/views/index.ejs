@@ -7,7 +7,7 @@
     <p>Here is my list of LPs</p>
     <ul>
       <% for (let lp of database) { %>
-        <li><%= lp.title %> by <%= lp.artist %> (<a href="/lps/<%= lp.year %>"><%= lp.year %></a>)</li>
+        <li><%= lp.title %> by <%= lp.artist %> (<a href="/lps/year/<%=lp.year %>"><%= lp.year %>)</a></li>
       <% } %>
     </ul>
     <p>If you want to add a new LP, <a href="/create">click here</a></p>

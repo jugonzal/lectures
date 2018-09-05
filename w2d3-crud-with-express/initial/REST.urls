@@ -1,0 +1,32 @@
+
+GET /lps
+GET /lps/year/1966
+GET /lps/artist/miles
+GET /lps/kind-of-blue
+POST /lps
+  { payload }
+PUT /lps/kind-of-blue
+  { payload }
+
+DELETE /lps/kind-of-blue
+
+
+
+GET /bootcamps
+POST /bootcamps
+--- DELETE /bootcamps
+
+GET /bootcamps/web
+PUT /bootcamps/web
+or POST /bootcamps/web/update
+DELETE /bootcamps/web
+or POST /bootcamps/web/delete
+
+GET /bootcamps/web/cohorts/january/students/ken
+GET /bootcamps/web/cohorts/january/students/yves
+
+app.get('/bootcamps/:boot/cohorts/:month/students/:who' ,{
+  req.params.boot
+  req.params.month
+  req.params.who
+})
