@@ -1,74 +1,83 @@
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-  <title>My title</title>
+  <meta charset="utf-8">
+  <title>Nintendo Games</title>
   <style>
-    header {
-      color: orange;
-      font-size: 14px;
+    h1 {
+      font-size: 1.5em;
     }
 
-    aside {
-      font-family: arial;
+    .Publisher {
+      color: yellow;
     }
 
-    #the-winner {
-      color: lightgreen;
+    #weblogs li {
+      font-style: "Courier New"
     }
 
-    .country {
-      color: darkgrey;
-      font-size: 2em;
-    }
-
-    section {
+    main {
+      border-width: 2px; 
+      border-color: red; 
       border-style: dotted;
-      border-color: red;
-      width: 300px;  
-      box-sizing: border-box;
+    }
 
+    span {
+      height: 20px;
+    }
+
+    nav h4 {
+      width: 18%;
       float: left;
-      margin: 20px;
-      padding: 10px;
+    }
+
+    nav h4:hover {
+      background-color: red;
+    }
+
+    main {
+      width: 49%;
+      float: left;
+    }
+
+    main p {
+      padding: 5px;
+      margin: 3px;
     }
 
     aside {
-      border-style: dotted;
-      border-color: green;
-      width: 35%;
-      margin: 15px;      
+      width: 49%;
       float: right;
-    }
-
-    summary span {
-      border-style: dotted;
-      border-color: lightblue;      
     }
 
   </style>
 </head>
 <body>
   <header>
-  	<h1>Final Rankings</h1>
+    <h1>My Nintendo Games Obesssion</h1>
+    <p>Hi, my name is Juan and I play a lot of games.  Welcome to my pages</p>
+    <nav>
+      <h4>Main</h4> <h4>Collection</h4> <h4>About Me</h4>
+    </nav>
   </header>
-  <nav>
-    <ul>
-      <li>Home</li>
-      <li>Rankings</li>
-      <li>About Us</li>
+  <main>
+    <p>Here is my collection of games</p>
+    <ul id="collection">
+      <li>
+        <div>Mario Bros
+          (<span class="Publisher" style="color:red">Nintendo</span>)
+        </div>
+      </li>
+      <li>Donkey Kong<span class="Publisher">Atari</span></li>
+      <li>Breakout<span class="Publisher">Sega</span></li>
     </ul>
-  </nav>
-  <section>
-    <p>We have been following the top performers and here is our forecast for the most likely winners of the World Cup</p>
-    <p>Our forecast is based on years and years of intensive statistical analysis collected at hundreds of locations as teams made progress through the preliminary rounds</p>
-  </section>
-	<aside>
-		<ol>
-			<li class="country" id="the-winner">Mexico</li>
-			<li class="country" style="color:lightblue;">Portugal</li>
-			<li class="country" style="color:lightgrey;">Brazil</li>
-		</ol>
-	</aside>
-  <summary><span>Mexico</span> will win. Full Stop.
-  </summary>
+    <p>If you like games too, contact me... </p>
+  </main>
+  <aside>
+    <p>Here are some of the other pages I've found to be awesome</p>
+    <ul id="weblogs">
+      <li>A very cool page about <a href="nintendo.com">Nintendo</a></li>
+    </ul>
+  </aside>
 </body>
 </html>
