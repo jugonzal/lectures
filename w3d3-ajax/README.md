@@ -6,6 +6,8 @@ Today we revisited an important milestone in the history of web application: the
 
 He proposed using a small gem from the native javascript toolkit called [`XMLHTTPRequest`](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest) to make web pages more interactive.  These days it is impossible to think of a good web application that doesn't use AJAX.
 
+BTW, you can find the [full code for our lecture in my github](https://github.com/jugonzal/lhl-lectures/tree/master/w3d3-ajax).
+
 XHR calls aren't very straightforward to make...
 ```js
 function reqListener () {
