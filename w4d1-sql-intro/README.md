@@ -90,26 +90,11 @@ In other words, `INNER JOIN`s need reciprocity, while `OUTER JOIN`s don't care.
 
 When the type of `JOIN` isn't specified, SQL will assume you're talking about a `LEFT INNER JOIN`.
 
-## Creating the database and loading some data
+I've created a [seed script for music database](https://github.com/jugonzal/lhl-lectures/blob/master/w4d1-sql-intro/pgseed.sql) 
+that you can use to recreate the database we used during lecture.  This can be run simly with:
 
-We're using [SQLite](https://sqlite.org/) for our example database. To recreate the data discussed in class on your machine, follow the steps below:
-
-1. Import schema and load initial data: `sqlite3 music.db < sql/setup_seed.sql`
-2. Open the `sqlite3` REPL: `sqlite3 music.db`
-3. Once inside you can use both sqlite REPL commands (they always start with a dot) and SQL statements:
-```sql
--- List all tables
-.tables
-
--- Check the schema of a given table
-.schema "artists"
-
--- Configure the REPL: this will turn on columns and headers
-.mode column
-.headers on
-
--- Now let's list all artists. Remember: all SQL statements must end with ;
-SELECT * from artists;
+```shell
+psql < pgseed.sql
 ```
 
-There are several example queries in the [`/sql/queries.sql`](sql/queries.sql) file. You can copy-paste them into the SQLite REPL to test them.
+You can also find all the various [examples of queries](https://github.com/jugonzal/lhl-lectures/blob/master/w4d1-sql-intro/queries.sql) we ran in class.
