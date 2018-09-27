@@ -1,123 +1,100 @@
+// we created this array of objects
+// but we also talked about other alternatives
+// such as using the handle as a key
+
 var tweeps = [
-  {who: '@mozilla', what:'all your data belongs to us'},
-  {who: '@wired', what:'the AI will scam your bitcoins'},
-  {
-    who: '@fzero',
-    what: 'I love cats'
-  }
-];
+  { who: '@fzero', 
+    said: "Callbacks are control flow as designed by M.C. Escher."},
+  { who: '@om',
+    said: "For @facebook people = money"},
+  { who: '@ryanmerkley',
+    said: "Stunning exhibit opening today at the @agotoronto: 'Anthropocene'"},
+  { who: '@mozilla',
+    said: "In our #internethealth Report, we put a spotlight on the open-source software you never knew you were using."}
+]
 
+// Our first stage was to manually change one tweep at a time
 
-tweeps.push({who:'@creativecommons', what:'CC0'})
+// tweeps[0].liked = true;
+// tweeps[2].liked = true;
+tweeps[3].flag = "Important"
+console.log(tweeps[0].who)
 
-// STAGE 0: making changes step by step directly in the array
-// tweeps[2].fav = true;
-// tweeps[1].likes = 99;
+// Then we figured out we could write simple functions to do
+// the same thing
 
-// console.log(tweeps)
-
-// console.log(tweeps[2].what)
-// console.log(tweeps[3]['who'])
-
-
-// STAGE 1: writing big functions to do one thing
-// function likeTweep(tweep) {
-//   for (var i=0; i< tweeps.length; i++) {
-//     if(tweeps[i].who == tweep) {
-//       if (tweeps[i].like) {
-//         tweeps[i].like += 1
-//       } else {
-//         tweeps[i].like = 1
-//       }
-//     }
-//   }
-// }
-
-// function flagTweep(tweep) {
-//   for (var i=0; i< tweeps.length; i++) {
-//     if(tweeps[i].who == tweep) {
-//       if (tweeps[i].flag) {
-//         tweeps[i].flag += 1
-//       } else {
-//         tweeps[i].flag = 1
-//       }
-//     }
-//   }
-// }
-
-// STAGE 2: finding ways to create generic functions
-// function changeTweep(tweep, action) {
-//   for (var i=0; i< tweeps.length; i++) {
-//     if(tweeps[i].who == tweep) {
-//       if (tweeps[i][action]) {
-//         tweeps[i][action] += 1
-//       } else {
-//         tweeps[i][action] = 1
-//       }
-//     }
-//   }
-// }
-
-// function ALLCAPSTweep(tweep) {
-//   for (var i=0; i< tweeps.length; i++) {
-//     if(tweeps[i].who == tweep) {
-//       tweeps[i].what = tweeps[i].what.toUpperCase();
-//     }
-//   }
-// }
-
-// STAGE 3: CALLBACKS!!!!
-
-function toAllCaps(oneTweep) {
-  oneTweep.what = oneTweep.what.toUpperCase();
-}
- //             {who...  what...}
-function likeIt(oneTweep) {
-  if (oneTweep.like) {
-    oneTweep.like += 1
-  } else {
-    oneTweep.like = 1
-  }
+function addTweep (who, what) {
+  tweeps.push({who: who, said: what})
 }
 
-function show(oneTweep) {
-  console.log(oneTweep)
-}
+// Then we found a way to make those simple functions a bit
+// more generic
+// in this function we used the bracket notation 
 
-function flagIt(oneTweep) {
-  if (oneTweep.flag) {
-    oneTweep.flag += 1
-  } else {
-    oneTweep.flag = 1
-  }
-}
-
-//               @fzero   likeIt
-function findAnd(tweep, doSomething) {
+function addLabel (what, label) {
+  // go through every item in the array
   for (var i=0; i< tweeps.length; i++) {
-    if(tweeps[i].who == tweep) {
-      doSomething(tweeps[i])
+    // is this the right tweep ?
+    if (tweeps[i].said === what) {
+      // then like it!
+      tweeps[i][label] = true;
     }
   }
 }
 
-// likeTweep('@fzero');
-// likeTweep('@fzero');
-// likeTweep('@fzero');
-// likeTweep('@mozilla');
-// flagTweep('@wired');
+// but soon realied there were certain things that our
+// function above could not do, such as changing what was said
 
-// changeTweep('@fzero', 'like');
-// changeTweep('@fzero', 'like');
-// changeTweep('@fzero', 'like');
-// changeTweep('@mozilla', 'like');
-// changeTweep('@wired', 'flag');
-// changeTweep('@creativecommons', 'followers');
-// ALLCAPSTweep('@mozilla');
+function wowTweep (what) {
+  // go through every item in the array
+  for (var i=0; i< tweeps.length; i++) {
+    // is this the right tweep ?
+    if (tweeps[i].said === what) {
+      // then like it!
+      // tweeps[i][label] = true;
+      tweeps[i].said += '!!!!!'
+    }
+  }
+}
 
-findAnd('@fzero', likeIt)
-findAnd('@wired', flagIt)
-findAnd('@mozilla',toAllCaps)
-findAnd('@fzero', show)
+// so we upgraded our skills with CALLBACKS.
+// writing little simple functions...
 
-// console.log(tweeps);
+function doWow (tweep) {
+  tweep.said += '!!!!!'
+}
+
+function doLike (tweep) {
+  tweep.like = true
+}
+
+function doUpper (tweep) {
+  tweep.said = tweep.said.toUpperCase()
+}
+
+// that can be passed as a parameter to a very
+// generic function.  That parameter is "action"
+// in this example
+
+function doSomething (what, action) {
+  // go through every item in the array
+  for (var i=0; i< tweeps.length; i++) {
+    // is this the right tweep ?
+    if (tweeps[i].said === what) {
+      // whatever "action" does will be done next
+      action(tweeps[i]);
+    }
+  }
+}
+
+
+addTweep('@classOf2018','functions are cool')
+// addLabel('functions are cool','liked')
+// addLabel("Callbacks are control flow as designed by M.C. Escher.",'dangerous')
+// wowTweep ('functions are cool')
+doSomething('functions are cool', doLike)
+doSomething('functions are cool', doWow)
+doSomething("In our #internethealth Report, we put a spotlight on the open-source software you never knew you were using.",doUpper)
+
+// this was the basis for our tests.  Show me the whole data structure at the end
+console.log("My tweeps: ",tweeps)
