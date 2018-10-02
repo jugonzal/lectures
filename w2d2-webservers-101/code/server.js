@@ -1,10 +1,11 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const db = require('./data');
+const PORT = 8000;
 
 app.set("view engine", "ejs");
 app.use(express.static('public'))
-
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
 
@@ -14,36 +15,28 @@ app.use(function (req,res,next) {
 })
 
 app.get('/', function (req, res) {
+  // res.send('Hello!')
   res.render('index')
 });
 
-app.post('/contact', function(req, res) {
-  console.log('Hello... ',req.body)
-
-});
-
-app.get('/games/toronto', function (req, res) {
-  res.render('toronto',
-    {events: [
-      {team: 'Raptors', game: 'Washington', image: '/raptors.jpg'},
-      {team: 'TFC', game: 'CONCACAF', image: '/tfc.png'},
-      {team: 'Maple Leafs', game: 'Browns', image: '/ultimate.png'}
-    ],
-    var2 : 3.14159265 })
+app.get('/articles', function(req, res) {
+  console.log('Params ',req.url)
+  res.render('articles', { articles: db.all() , pi: 3.14159265})
 })
 
-app.get('/games/montreal', function (req, res) {
-  res.render('montreal')
+app.get('/articles/:id', function(req, res) {
+  res.render('one', {article: db.one(req.params.id)})
 })
 
-app.get('/games/calgary', function(req,res) {
-  res.status(404).send('Under Construction!');
+// html += '<form action="/articles" method="post"><input type="text" name="filter"><input type="submit" value="Filter"></form>'
+app.post('/articles', function(req, res) {
+  console.log('Filter... ',db.search(req.body.filter))
+  res.render('articles', {articles: db.search(req.body.filter)})
 })
 
 
-
-app.listen(8000, function () {
-  console.log('Example app listening on port 8000!')
+app.listen(PORT, function () {
+  console.log('Example app listening on port '+PORT)
 })
 
 

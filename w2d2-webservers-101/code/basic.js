@@ -4,7 +4,11 @@ const PORT = 3000;
 var resources = {
   '/family': "<html><body><h2>We are thankful</h2><p>...for all our loved ones</p></body></html>",
   '/pumpkin': "We are thankful for our big belly",
-  '/turkey': "We are thankful for our food"
+  '/turkey': "We are thankful for our food",
+  '/': "Be Thankful you arrived",
+  '/about': require('./about')
+  // '/article/1': ,
+  // '/article/2':
 }
 
 // create a server with a responder function
@@ -19,20 +23,6 @@ function handleNewRequest(request, response){
         response.statusMessage = 'Not found here';        
         response.end("We are just thankful for all things we don't have yet")     
     }
-
-    // switch (request.url) {
-    //   case '/turkey':
-    //     response.end("We are thankful for our food")
-    //     break;
-    //   case '/pumpkin':
-    //     response.end("We are thankful for our big belly")
-    //     break;
-    //   case '/family':
-    //     response.end("<html><body><h2>We are thankful</h2><p>...for all our loved ones</p></body></html>")
-    //     break;
-    //   default:
-    // }
-
 }
 
 let server = http.createServer(handleNewRequest)

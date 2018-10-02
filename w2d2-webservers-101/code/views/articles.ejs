@@ -1,11 +1,17 @@
 <html><body>
   <h1>My new blog site</h1>
-  <form action="/articles" method="GET">
-    <input name="filter">
-    <input type="submit" value="Filter!">
-  </form>
 
  <p>This is where you will see the list of all my articles</p>
+
+ <ul>
+
+  <% articles.forEach(function(oneArticle) { %>
+
+  <li><a href="/articles/<%=oneArticle.id %>"><%= oneArticle.title %></a></li>
+
+  <% }) %>
+ </ul>
+
  <footer>
   <p>Current date and time is <%= new Date() %></p>
 </footer>

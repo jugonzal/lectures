@@ -1,0 +1,1 @@
+module.exports = "<html><body>This is all there is to know about us</body></html>"
