@@ -1,0 +1,30 @@
+
+
+GET   /   home page
+GET   /articles
+GET   /articles/search/:keyword
+POST  /articles
+GET   /articles/1
+DELETE /articles/1
+PUT   /articles/1
+
+GET   /users/juan/articles
+POST  /users/juan/articles
+GET   /users/juan/articles/27
+GET   /articles/27
+
+GET     /users
+GET     /users/juan
+POST    /users
+GET     /users/jose
+DELETE  /users/jose
+PUT     /users/juan
+
+GET     /ar
+
+
+
+/  ->   /public
+        /Sites
+/music  /Sites/music
+

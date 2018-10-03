@@ -1,0 +1,20 @@
+<html><body>
+  <h1>My new blog site</h1>
+
+ <p>This is where you will see the list of all my articles</p>
+
+ <p>You can <a href="/new">ADD</a> a new article</p>
+
+ <ul>
+
+  <% articles.forEach(function(oneArticle) { %>
+
+  <li><a href="/articles/<%=oneArticle.id %>"><%= oneArticle.title %></a></li>
+
+  <% }) %>
+ </ul>
+
+ <footer>
+  <p>Current date and time is <%= new Date() %></p>
+</footer>
+</body></html>

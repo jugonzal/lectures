@@ -1,0 +1,14 @@
+<html><body>
+  <h1>My new blog site</h1>
+  <h3><%= article.title%></h3>
+  <form action="/articles/<%=article.id%>?_method=PUT" method="POST"> 
+    <input name="user" value="<%=article.userId%>">
+    <input name="title" value="<%=article.title%>">
+    <input name="content" type="text" value="<%= article.body %>" maxlength="50">
+    <input type="submit" value="Update!">
+  </form>
+  <p>Go back to <a href="/">home page</a></p>
+ <footer>
+  <p>Current date and time is <%= new Date() %></p>
+</footer>
+</body></html>
