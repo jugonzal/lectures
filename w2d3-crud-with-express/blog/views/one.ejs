@@ -4,7 +4,7 @@
   <form action="/articles/<%=article.id%>?_method=PUT" method="POST"> 
     <input name="user" value="<%=article.userId%>">
     <input name="title" value="<%=article.title%>">
-    <input name="content" type="text" value="<%= article.body %>" maxlength="50">
+    <textarea name="content" rows="10" cols="60"><%= article.body %></textarea>
     <input type="submit" value="Update!">
   </form>
   <p>Go back to <a href="/">home page</a></p>

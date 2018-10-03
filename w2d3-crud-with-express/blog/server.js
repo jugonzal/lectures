@@ -47,7 +47,11 @@ app.put('/articles/:id', function(req, res) {
 
 // html += '<form action="/articles" method="post"><input type="text" name="filter"><input type="submit" value="Filter"></form>'
 app.post('/articles', function(req, res) {
-  db.add (req.body)
+  try {
+    db.add (req.body)
+  } catch (err) {
+    console.log("something went wrong ", err)
+  }
   res.redirect('/articles')
 })
 
