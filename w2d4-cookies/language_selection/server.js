@@ -1,39 +1,38 @@
 const express = require("express");
 const app = express();
+const parser = require("cookie-parser")
 const PORT = process.env.PORT || 8000; // default port 8080
 
-const cookieParser = require('cookie-parser');
-app.use(cookieParser('this is juan gonzalez and nobody knows im el zorro'));
 
-app.use(function(req,res,next) {
-  console.log("Cookies: ", req.headers.cookie)
-  console.log("CookieParser: ", req.cookies)
+app.use(parser('you should be just fine'))
+
+app.use(function(req, res, next) {
+  console.log("Headers: ", req.headers.cookie)
+  console.log("Cookies: ", req.cookies)
+  console.log("Signed: ", req.signedCookies)
   next()
 })
-
-// const Preferences = {
-//   language: undefined
-// }
 
 app.set("view engine", "ejs");
 
 app.get("/", (req, res) => {
-  if (req.cookies.language === 'EN') {
+  let preferredLanguage = req.cookies.lang
+  if (preferredLanguage == 'EN') {
     res.render("english")
-  } else if (req.cookies.language === 'FR') {
+  } else if (preferredLanguage == 'FR') {
     res.render("french")
   } else {
-    res.render("choose_language");
+    res.render("choose_language");  
   }
 });
 
 app.get("/choose_english", (req, res) => {
-  res.cookie ('language','EN')
+  res.cookie('lang','EN',{signed: true})
   res.render("english");
 })
 
 app.get("/choose_french", (req, res) => {
-  res.cookie ('language','FR')
+  res.cookie('lang','FR',{signed: true})
   res.render("french");
 });
 
