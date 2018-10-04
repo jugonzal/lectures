@@ -1,15 +1,9 @@
 ## Managing State in HTTP
 
-- About Cookies
-  - From the browser
-  - From DevTools
-  - HTTP Headers
+We started the morning with a few exercises, we explored cookies as they exists/travel in the request header, response header and through our DevTools/Application dashboard... or even `document.cookie` in the console.
 
-- Cookies for Authentication
-  - Can we used the default (unencrypted cookies)? Why not?
-    -
 
-## Cookies are:
+### Cookies are:
 
 - Used to identify diff information about a "client" (ie browser / user)
 - KV (Key-value) pair of data
@@ -28,12 +22,15 @@
 
 We used two diff mini express projects to demo.
 
-### 1. language_selection
+### [language_selection](https://github.com/jugonzal/lhl-lectures/tree/master/w2d4-cookies/language_selection)
 
 The first was use language switched: We demo'd using a `lang` cookie to switch between the preferred language for a user/browser. The user could click English or French to toggle their `lang` cookie.
 
 
-### 2. user_authentication
+### [user_authentication](https://github.com/jugonzal/lhl-lectures/tree/master/w2d4-cookies/user_authentication)
 
 Another more "sensitive" thing we usually want to store in a cookie is the user's username (usually their ID if that existed). However, we see that we need to encrypt the cookie b/c we a) don't want the user to SEE it perhaps but more importantly b) we don't want it to be easily tamper-able by the user or people in the middle.
 
+  - [Simple authentication](https://github.com/jugonzal/lhl-lectures/blob/master/w2d4-cookies/user_authentication/server.initial.js) where cookies are used to store user/pwd.  Not great!
+  - [Encrypted authentication](https://github.com/jugonzal/lhl-lectures/blob/master/w2d4-cookies/user_authentication/server.final.js) where password has been encrypted to our OWN protection, but sill weak.
+  - [Token authentication](https://github.com/jugonzal/lhl-lectures/blob/master/w2d4-cookies/user_authentication/server.final.hash.js) where the only thing stored in a cookie is a random/unique token created upon authentication.
