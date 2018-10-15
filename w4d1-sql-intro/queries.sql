@@ -25,8 +25,7 @@ WHERE albums.artist_id = artists.id AND tracks.album_id = albums.id;
 
 SELECT
   a.name AS artist,
-  string_agg(t.name,', '),
-  count(*)
+  string_agg(t.name,', ')
 FROM artists_tags AS at
 JOIN artists AS a ON at.artist_id = a.id 
 JOIN tags AS t ON at.tag_id = t.id
