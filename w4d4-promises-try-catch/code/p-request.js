@@ -1,14 +1,14 @@
 const request = require('request');
 
 function promisifiedGet(url) {
-  let future = new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     // throw "will not finish my promise"
     request.get(url, (err, response) => {
       if (err) {
         reject(err);
       }
       else {
-        resolve(response.body);
+        resolve(response.body); // make good on that promise... return
       }
     });
   });
