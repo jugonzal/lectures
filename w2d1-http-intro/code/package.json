@@ -9,6 +9,6 @@
   "author": "Gonzalez",
   "license": "ISC",
   "dependencies": {
-    "request": "^2.79.0"
+    "request": "^2.88.0"
   }
 }
