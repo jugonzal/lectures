@@ -1,0 +1,14 @@
+<html>
+<head></head>
+
+<body>
+	<h1><%= user.name %></h1>
+	<form action="/users/<%= user.id %>?_method=PUT" method="POST">
+		User name: <input name="username" value="<%= user.username %>">
+		Email: <input name="email" value="<%= user.email %>">
+		Phone: <input name="phone" value="<%= user.phone %>">
+    <input type="submit" value="Update!">
+	</form>
+	<a href="/">Home</a>
+	<a href="/users">All Users</a>	
+</body>
