@@ -18,18 +18,22 @@ We started the morning with a few exercises, we explored cookies as they exists/
 - Domain specific: It would not make sense for `news.ycombinator.com` to be able to read my `facebook.com` cookies
 - Also have other options like expiration, httpsOnly
 
-## Demos:
+Bottom line, I'm sorry that through this lecture I shared my paranoia about security, 
+but I think you are old enough to know how the world works.
 
-We used two diff mini express projects to demo.
+## Demos
 
-### [language_selection](https://github.com/jugonzal/lhl-lectures/tree/master/w2d4-cookies/language_selection)
+We used two diff mini projects to demo:
 
 The first was use language switched: We demo'd using a `lang` cookie to switch between the preferred language for a user/browser. The user could click English or French to toggle their `lang` cookie.
 
+- [language_selection](https://github.com/jugonzal/lhl-lectures/tree/master/w2d4-cookies/language_selection)
+
+Another more "sensitive" thing we usually want to store in a cookie is the user's username (usually their ID if that existed). However, we see that we need to encrypt the cookie b/c we a) don't want the user to SEE it perhaps but more importantly b) we don't want it to be easily tamper-able by the user or people in the middle.
 
 ### [user_authentication](https://github.com/jugonzal/lhl-lectures/tree/master/w2d4-cookies/user_authentication)
 
-Another more "sensitive" thing we usually want to store in a cookie is the user's username (usually their ID if that existed). However, we see that we need to encrypt the cookie b/c we a) don't want the user to SEE it perhaps but more importantly b) we don't want it to be easily tamper-able by the user or people in the middle.
+In this folder you will find three different versions of the same app, with progressively better security:
 
   - [Simple authentication](https://github.com/jugonzal/lhl-lectures/blob/master/w2d4-cookies/user_authentication/server.initial.js) where cookies are used to store user/pwd.  Not great!
   - [Encrypted authentication](https://github.com/jugonzal/lhl-lectures/blob/master/w2d4-cookies/user_authentication/server.final.js) where password has been encrypted to our OWN protection, but sill weak.
