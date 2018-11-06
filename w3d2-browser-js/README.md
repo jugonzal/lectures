@@ -17,10 +17,25 @@ Here is a short reference of some of the objects available to you, just because 
         - Refers to the browser window or tab
         - Includes location, navigation history and so on
         - It's the top object that contains all global variables
+
+```javascript
+window.location.href 
+window.history.back()
+```
+
     * The `navigator` object
         - Contains information about the browser itself
         - Version, enabled features and so on.
         - Even the actual `geolocation` of the machine can be retrieved.
+
+```javascript
+navigator.userAgent
+navigator.geolocation.getCurrentPosition(position => {
+ console.log(position) 
+})
+navigator.getBattery().then(battery => console.log(battery.level))
+```
+
     * The `document` object
         - Contains the website being displayed inside the window
         - All elements, css and scripts are inside `document`.
@@ -33,15 +48,23 @@ The first trick we learned was to use "CSS" selectors to manipulate actual HTML 
 
 We played mostly with `document.querySelector` to not only find the elements within our HTML in a programmatic way, but realized that by doing so we have access to the *actual* HTML in the page.   
 
-```
-document.querySelector("#someId");
-document.querySelector(".someClass");
-document.querySelector("img");
+```javascript
+var title = document.getElementById("firstHeading")
+title.innerText = "Juan Gonzalez"
+var avatar = document.getElementsByTagName("img")[0] // notice this assumes first item in array
+avatar.srcset="https://www.lighthouselabs.ca/uploads/team_member/avatar/134/medium_JuanPhoto.png"
 
-var myImgTitle = document.createElement('H1');
-myImgTitle.style.backgroundColor = 'blue';
-myImgTitle.innerText = "Title To Image";
-document.querySelector("img").insertAdjacentElement('beforebegin', myImgTitle);
+list = document.querySelector('#toc ul')
+todo = document.createElement("li")
+todo.innerText="Very last thing to do..."
+list.appendChild(todo)
+
+title.innerHTML="Juan Gonzalez - Inventor of Javascript<button>Verify!</button>"
+var myButton = document.querySelector("button")
+myButton.addEventListener('click', function(ev) { 
+    console.log("Verified!") } )
+title.addEventListener('mouseover', function(ev) { 
+    console.log("Event: ", ev) } )
 
 ```
 In the sequence above, we are finding the first `img` tag in a document and adding a `<H1>` tag just before it.  Give it a try.
