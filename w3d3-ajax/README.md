@@ -9,14 +9,17 @@ He proposed using a small gem from the native javascript toolkit called [`XMLHTT
 BTW, you can find the [full code for our lecture in my github](https://github.com/jugonzal/lhl-lectures/tree/master/w3d3-ajax).
 
 XHR calls aren't very straightforward to make...
-```js
+
+```javascript
 function reqListener () {
-  console.log(this.responseText);
+  $articles = document.querySelector("#articles")
+  console.log(this.responseText)
+  $articles.innerHTML = this.responseText
 }
 
-var oReq = new XMLHttpRequest();
+const oReq = new XMLHttpRequest();
 oReq.addEventListener("load", reqListener);
-oReq.open("GET", "http://www.example.org/example.txt");
+oReq.open("GET", "article.html");
 oReq.send();
 ```
 
@@ -25,7 +28,8 @@ oReq.send();
 ## jQuery AJAX
 
 Here is how to do a [jQuery AJAX](http://api.jquery.com/jQuery.ajax/) call:
-```js
+
+```javascript
 $.ajax('http://localhost:5000/breweries')
 .done((response) => {
   console.log(response)
@@ -33,6 +37,16 @@ $.ajax('http://localhost:5000/breweries')
 .fail(() => {
   console.err('The call failed')
 })
+```
+
+or the shorthand for handling JSON:
+
+```javascript
+$.getJSON('/articles.jso')
+.then( data => { 
+    console.log(data.length) 
+    } )
+.catch( error => console.log("BOOOO... ",error))
 ```
 
 A bonus is that the response from the server is automatically turned into JS objects and you don't have to manually convert `response` via `JSON.parse()`.
@@ -46,5 +60,12 @@ When dealing with AJAX requests there exists a min of 3 outcomes:
 Also you can use the `jQuery.get()`, `jQuery.getJSON()`, `jQuery.post()` calls, but they are just helper functions that call `jQuery.ajax` behind the scenes.
 
 The jQuery documentation is usually very good, so you should learn to navigate the various ways to use [ajax from jQuery](http://api.jquery.com/jquery.ajax/)
+
+During the lecture we had "the talk" about Promises.  This [Introduction to Promises](https://developers.google.com/web/fundamentals/primers/promises) from Google may be a good place to read about them, 
+particularly in the context of using them with AJAX.
+
+We also talk about the security implications of using AJAX. The correct way to 
+look for information about this topic is [AJAX CORS](https://stackoverflow.com/questions/5750696/how-to-get-a-cross-origin-resource-sharing-cors-post-request-working)
+or _cross origin resource sharing_.
 
 Cheers.
