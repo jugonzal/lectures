@@ -1,4 +1,4 @@
-While I used [The Sermon](https://www.dropbox.com/s/qcmhr8tuufykp3u/The%20Sermon%20-%20Jul242017.pdf) during our chat, here are many of the same points broken out with a few examples.
+While I used [The Sermon](https://drive.google.com/file/d/1042sh9j9qnpP3dp2WGn6GTGHS7GT3n_L/view?usp=sharing) during our chat, here are many of the same points broken out with a few examples.
 
 ## Pick a Project
 
@@ -68,116 +68,6 @@ Follow conventions:
 - Read/Show: GET /photos/:id
 - Update/Edit: PUT /photos/:id
 - Remove/Destroy: DELETE /photos/:id
-
-### Design
-
-Design is important. Allow it to highlight your strengths but don't focus on it.
-
-Fonts
-
-Use only one or two fonts.
-
-- [https://fonts.google.com/](https://fonts.google.com/)
-
-Colours
-
-With the tools available it is easy to choose colours that go well together.
-
-- [https://color.adobe.com/](https://color.adobe.com/)
-- [https://flatuicolors.com/](https://flatuicolors.com/)
-- [https://coolors.co/](https://coolors.co/)
-- [http://colormind.io/](http://colormind.io/)
-
-Inspiration
-
-- [https://dribbble.com/](https://dribbble.com/)
-
-CSS Frameworks
-
-- [Bootstrap](http://getbootstrap.com/)
-- [Foundation](https://foundation.zurb.com/)
-
-
-## Git
-
-Use good git practices. Please.
-
-  0. Clone - get your own local version to work on | and lint
-  1. Branch - DO NOT CODE ON MASTER | and lint
-  2. Code & Test - on your feature branch until it works and has no discernible deficiencies | and lint
-  3. Checkout master - this should not have changed; this should have not changed | and lint
-  4. Pull & Test - pull will get all of the merged features from your collaborators | and lint
-     so make sure that it run on your machine | and lint
-  5. Merge & Test - merge from your feature branch into your local master and then | and lint
-     make sure that your feature works when merged with all the other new stuff, right? | and lint
-  6. Push - send your commits from your local master to the remote master  | and lint
-  7. Go to step 1 | and lint
-
-Here are a few things to remember:
-
-- master should always be sane - in other works, it should always contain runnable code
-- Use feature branching
-  - A very good tutorial: https://www.atlassian.com/git/tutorials/comparing-workflows/feature-branch-workflow
-  - Git cheatsheet: http://www.ndpsoftware.com/git-cheatsheet.html
-- Use database migrations and seeds
-  - Remember: each developer will have their own copy of the database, so migrations will be used to keep the schema in sync, while seeds will provide initial data (e.g admin users)
-
-## Project Setup
-
-Do this together.
-
-  1. create exactly one GitHub repository
-  2. add all your team members as collaborators
-  3. one person clone the skeleton
-  4. change the remote to the new repo
-  5. push to the new repo
-  6. everybody else clone the new repo
-  7. do the "getting started" section of the readme on one person's computer, as well as
-     - actually do what the readme says instead of doing something else...please
-       - COPY the `.env.example` file, do not rename it
-     - the `.env.example` file has a very confusing line in it that breaks things
-       - the line that says `DB_SSL=true if heroku` is NUTS - delete it
-     - in `package.json` delete the dev dependency on sqlite3 because you're
-       not using and it causes installation issues
-     - run `npm outdated` to see what the latest versions of your dependencies are
-       - you _may_ update the versions in your `package.json` file  
-     - do the above before `npm i`
-     - before running the migrations, double check that the info in `.env` is 100%
-       correct
-       - if the named database doesn't exist, create it
-     - read all the code in all the files in the skeleton together and make sure
-       everyone knows what they are all for
-     - Make sure your app loads, check for console output
-
-
-## Dividing Tasks
-
-There is no perfect way to do this. You need to figure this out within your team. Here are some options.
-
-Vertical
-
-- Break the project out into features
-- Prioritize the features
-- Each developer would build a feature full stack
-
-Horizontal
-
-- Break the project down into technical domains
-- One or more developers will be responsible for an entire domain
-- Domains could be ui, api (routes), db
-
-__Communication is critical no matter which way you divide the tasks.__
-
-
-## Communication
-
-EVERYONE NEEDS TO KNOW WHAT EVERYONE IN THE TEAM IS DOING AT ALL TIMES.
-
-  1. find your group
-  2. exchange contact info (phone numbers, email addresses)
-  3. create a private Slack group
-  4. install the Slack app on your phone and enable notifications
-
 
 ### Browser
 
@@ -261,7 +151,122 @@ app.get('/users/:id/photos', (request, response) => {
 
 In the case that I want to create a single page app, or even just query data from an api then this JSON response would be enough.
 
+### Design
+
+Design is important. Allow it to highlight your strengths but don't focus on it.
+
+Fonts
+
+Use only one or two fonts.
+
+- [https://fonts.google.com/](https://fonts.google.com/)
+
+Colours
+
+With the tools available it is easy to choose colours that go well together.
+
+- [https://color.adobe.com/](https://color.adobe.com/)
+- [https://flatuicolors.com/](https://flatuicolors.com/)
+- [https://coolors.co/](https://coolors.co/)
+- [http://colormind.io/](http://colormind.io/)
+
+Inspiration
+
+- [https://dribbble.com/](https://dribbble.com/)
+
+CSS Frameworks
+
+- [Bootstrap](http://getbootstrap.com/)
+- [Foundation](https://foundation.zurb.com/)
+
+## Project Setup
+
+Do this together.
+
+  1. create exactly one GitHub repository
+  2. add all your team members as collaborators
+  3. one person clone the skeleton
+  4. change the remote to the new repo
+  5. push to the new repo
+  6. everybody else clone the new repo
+  7. do the "getting started" section of the readme on one person's computer, as well as
+     - actually do what the readme says instead of doing something else...please
+       - COPY the `.env.example` file, do not rename it
+     - the `.env.example` file has a very confusing line in it that breaks things
+       - the line that says `DB_SSL=true if heroku` is NUTS - delete it
+     - in `package.json` delete the dev dependency on sqlite3 because you're
+       not using and it causes installation issues
+     - run `npm outdated` to see what the latest versions of your dependencies are
+       - you _may_ update the versions in your `package.json` file  
+     - do the above before `npm i`
+     - before running the migrations, double check that the info in `.env` is 100%
+       correct
+       - if the named database doesn't exist, create it
+     - read all the code in all the files in the skeleton together and make sure
+       everyone knows what they are all for
+     - Make sure your app loads, check for console output
+
+
+## Git
+
+Use good git practices. Please.
+
+  0. Clone - get your own local version to work on | and lint
+  1. Branch - DO NOT CODE ON MASTER | and lint
+  2. Code & Test - on your feature branch until it works and has no discernible deficiencies | and lint
+  3. Checkout master - this should not have changed; this should have not changed | and lint
+  4. Pull & Test - pull will get all of the merged features from your collaborators | and lint
+     so make sure that it run on your machine | and lint
+  5. Merge & Test - merge from your feature branch into your local master and then | and lint
+     make sure that your feature works when merged with all the other new stuff, right? | and lint
+  6. Push - send your commits from your local master to the remote master  | and lint
+  7. Go to step 1 | and lint
+
+Here are a few things to remember:
+
+- master should always be sane - in other works, it should always contain runnable code
+- Use feature branching
+  - A very good tutorial: https://www.atlassian.com/git/tutorials/comparing-workflows/feature-branch-workflow
+  - Git cheatsheet: http://www.ndpsoftware.com/git-cheatsheet.html
+- Use database migrations and seeds
+  - Remember: each developer will have their own copy of the database, so migrations will be used to keep the schema in sync, while seeds will provide initial data (e.g admin users)
+
+
+## Dividing Tasks
+
+There is no perfect way to do this. You need to figure this out within your team. Here are some options.
+
+Vertical
+
+- Break the project out into features
+- Prioritize the features
+- Each developer would build a feature full stack
+
+Horizontal
+
+- Break the project down into technical domains
+- One or more developers will be responsible for an entire domain
+- Domains could be ui, api (routes), db
+
+__Communication is critical no matter which way you divide the tasks.__
+
+
+## Communication
+
+EVERYONE NEEDS TO KNOW WHAT EVERYONE IN THE TEAM IS DOING AT ALL TIMES.
+
+  1. find your group
+  2. exchange contact info (phone numbers, email addresses)
+  3. create a private Slack group
+  4. install the Slack app on your phone and enable notifications
+
+
+
 ### Deployment
 
 http://localhost:3000  <-- that's all.
+
+### Resources
+
+https://gist.github.com/donburks/c460f0b8bc8edab03fd4a7f150178e37
 
