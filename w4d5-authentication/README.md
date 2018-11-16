@@ -1,30 +1,40 @@
-Hi all, we had already gone through the basic principles of managing user
-authentication on Week 2.  Still, we did a quick review of what we had covered
-back then:  cookies, sessions, encryption, best practices for managing passwords.
+Hi all, we had already gone through the basic principles of managing user authentication on Week 2.  Still, we did a quick review of what we had covered back then:  cookies, sessions, encryption, best practices for managing passwords.
 
-Yet, I convinced you that this whole encryption needed another look and things got
-interesting.  The first thing we did was to understand the most basic implementation
+Yet, I convinced you that this whole encryption needed another look and things got interesting.  We started by talking about the [Byzantine General's Problem](https://en.wikipedia.org/wiki/Byzantine_fault_tolerance#Byzantine_Generals'_Problem) which provides good context for realizing we can't just rely on a secure medium to exchange valuable information when trying to reach consensus.
+
+From there we went on to understand the most basic implementation
 of encryption (VERY WEAK!):
 
 [ROT13](https://en.wikipedia.org/wiki/ROT13)
 
-`ABCDEFGHIJKLM
+```
+ABCDEFGHIJKLM
 |||||||||||||
-NOPQRSTUVWXYZ`
+NOPQRSTUVWXYZ
+```
 
 In this case the word `HELLO` becomes `URYYB`.  Or `LONG` becomes `YBAT`.
 We talked about the weaknesses of this algorithm and other simple encryption methods.
 Among them the fact that they can be easily detected by simple
-frequency analysis. More importantly, this algorithm is *symmetrical* which means
-that if I have the encrypted version of a word, I can work backwards to recover it.
+frequency analysis. More importantly, this algorithm is *symmetrical* which means that if I have the encrypted version of a word, I can work backwards to recover it.
 
-This is why Public Key cryptography is the standard these days:  it provides a robust
-set of algorithms with fairly decent strength, but more importantly it is assymetrical.
-By generating two keys, one public and one private, messages can only move in one 
-direction:
+This is why Public Key cryptography is the standard these days:  it provides a robust set of algorithms with fairly decent strength, but more importantly it is assymetrical.
 
-Message -> Public Key -> Encrypted Message -> Private Key -> Decrypted Message
-Message -> Private Key -> Signed Message -> Public Key -> Verified Message
+The [Diffie Hellman key exchange](https://en.wikipedia.org/wiki/Diffie%E2%80%93Hellman_key_exchange) provides an elegant solution to the problem of negotiating a common secret across an unreliable medium. But if you really want to get into this stuff I suggest you go back to study [Modular Arithmetic](https://en.wikipedia.org/wiki/Modular_arithmetic#Computational_complexity) because many modern encryption algorithms are based on it.
+
+The essence of PKI or public key infrastructure is that by generating two keys, one public and one private, messages can only move in one direction:
+
+Message 
+  -> Public Key 
+    -> Encrypted Message 
+      -> Private Key 
+        -> Decrypted Message
+
+Message 
+  -> Private Key 
+    -> Signed Message 
+      -> Public Key 
+        -> Verified Message
 
 Notice how I'm talking about Encrypted vs Signed messages.  They are both encrypted just
 the same, but the fact that I typically make my Public key available to EVERYONE,
@@ -39,6 +49,8 @@ want to add the passphrase as an extra layer of security.
 
 We talked briefly about how `HTTPS` is, in fact, using Public Key Infrastructure to make
 every single HTTP request between a browser and a server secure.  You can read more about [HTTPS on Wikipedia](https://en.wikipedia.org/wiki/HTTPS)
+
+WARNING: The following code is here for reference but until the big companies that provide Single-Sign-On services come forward with a code of conduct that guarantees these transactions will be protected, I'm not endorsing this as a proper technique.
 
 With that in mind we worked on a very common problem related to User Authentication:
 Single Sign-on.  We have all seen the myriad of websites that allow you to go
