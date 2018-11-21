@@ -63,6 +63,13 @@ var countThem = {
   }
 }
 
+var mySum = 0;
+var addThemUp = {
+  visit: function (node, level) {
+    mySum += node.value;
+  }
+}
+
 
 tree.insert(1234, 1);
 tree.insert(7777, 2);
@@ -76,7 +83,9 @@ tree.insert(600,9)
 tree.insert(6000,10)
 tree.traverse(display)
 tree.traverse(countThem)
+tree.traverse(addThemUp)
 console.log(myCount)
+console.log(mySum)
 // console.log(tree.get(9999));
 
 
