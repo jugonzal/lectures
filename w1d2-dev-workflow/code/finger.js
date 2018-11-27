@@ -1,52 +1,60 @@
-// This is the code...
+// - input 2 numbers between 6 and 10
 
-function calcJoinedFingers (f) {
-  return f - 5;
+function oneParam(which) {
+  return process.argv.slice(2)[which]
 }
 
-function calcRoamingFingers (f) {
-  return 10 - f;
+var left = oneParam(0)
+var right = oneParam(1)
+
+// console.log(left)
+// console.log(right)
+
+// - group fingers in left hand to represent first number according to this mapping:
+//   - thumb = 6
+//   - index = 7
+//   - middle = 8
+//   - ringer = 9
+//   - pinky = 10
+
+
+function  calcGrouped(n) {
+  return n - 5
 }
 
-//1. Let's say I want to multiply two numbers (single digits) from 6-10
-// we should probably get them from command line
+// var leftGrouped = calcGrouped(left)
 
-var left = process.argv[2];
-var right = process.argv[3];
+//  - do the same with my right hand for the second number
 
-console.log('Left: ', left);
-console.log('Right: ', right);
+// var rightGrouped = calcGrouped(right)
 
-// 2. I use my fingers to represent each number in one hand...  with following mapping:
-//   thumb - 6
-//   index - 7
-//   middle - 8
-//   ringer - 9
-//   pinky - 10
+// console.log("left grouped", leftGrouped)
+// console.log("right grouped", rightGrouped)
 
-var leftJoinedFingers = calcJoinedFingers(left);
-var rightJoinedFingers = calcJoinedFingers(right);
-var leftRoamingFingers = calcRoamingFingers(left);
-var rightRoamingFingers = calcRoamingFingers(right);
+//  - join those 2 groups of fingers
+//  - count them and multiply by 10   <--- RESULT 1
 
-console.log('Left Hand: joined - roaming ', leftJoinedFingers, leftRoamingFingers);
-console.log('Right Hand: joined - roaming ', rightJoinedFingers, rightRoamingFingers);
-  
-// 3. Join all the fingers that represent the 2 numbers being multiplied
-var joinedFingers = (calcJoinedFingers(left) + calcJoinedFingers(right)) * 10;
+var grouped = (calcGrouped(left) + calcGrouped(right)) * 10
 
-// 4. Then count how many fingers there are joined....    X 10
-// joinedFingers *= 10;
-// joinedFingers = joinedFingers * 10;
+//  - count my left fingers left floating
 
-console.log('Joined: ', joinedFingers);
-// 5. Lastly count roaming fingers from left hand and multiply by roaming fingers in right hand.
+function calcFloating(n) {
+  return 10 - n
+}
 
-var roamingFingers = calcRoamingFingers(left) * calcRoamingFingers(right);
-console.log('Roaming: ', roamingFingers);
+// var leftFloating = calcFloating(left)
+// var rightFloating = calcFloating(right)
 
-// 6. Final step: add step #4 with step #5
+// console.log("left floating", leftFloating)
+// console.log("right floating", rightFloating)
 
-console.log('Final: ', joinedFingers + roamingFingers);
-console.log('Proof: ', left * right)
+//  - and multiply them by the fingers left floating in my right hand
 
+var floating = calcFloating(left) * calcFloating(right)
+
+//  - then ADD that number to RESULT 1
+
+var final = grouped + floating
+
+console.log ("final ", final)
+console.log ("proof ", left * right)
