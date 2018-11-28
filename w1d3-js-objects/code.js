@@ -1,102 +1,122 @@
 // Today we'll talk about Objects
+console.log('Javascript Objects')
 
-// start by creating a bunch of variables
+// start by creating a bunch of variables...
+// strings, numbers, arrays
 
-var company = 'Lighthouse Labs';
-var started = 'January 2017';
-var role = 'Web Instructor';
-var friends = ['Dave','Fabio'];
+var name = 'Lighthouse Labs';
+var hoursPerDay = 12;
+var active = true;
+var startDate = 'January 2017';
+var peers = ['perry', 'umair', 'esther'];
 
-console.log('who is my friend then? ', friends);
+// console.log('One of my peers', peers[2]);
 
 // then we'll attempt to better organize them
+// using key:value pairs
 
-var job = {
-  company : 'Lighthouse Labs', 
-  started : 'January 2017',
-  401 : 'my savings',
-  courses : [{
-    name: 'web'
-  },{
-    name: 'blockchain'
-  }]
+var lhl = {
+  name: 'Lighthouse Labs',
+  hoursPerDay: 12,
+  active: true,
+  startDate: 'January 2017',
+  peers: ['perry', 'umair', 'esther']
 }
 
-job.role = 'Web Instructor';
-job.friends = [];
 
-var previous = {
-  company : 'Videogami',
-  started : 'June 2012',
-  role: 'Founder',
-  friends: ['Slava']
-}
+// and learn how much more convenient this is
+
+console.log('Name of that company: ', lhl.name);
 
 // show the various ways in which you can manipulate the data
+// dot-notation & bracket-notation
 
-console.log('when did I start ? ', job.started)
-console.log('when did I start the previous one ? ', previous.started)
+console.log('When I started: ',lhl.startDate);
+console.log('Name of one of my peers there: ',lhl.peers[0]);
 
-friends.push('Tim')
-// job.friends.push('Dave')
-// job.friends.push('Fabio')
-job.friends.push('Diego')
-job['401'] = 'didnt work'
-job['friends'].push('Tim')
-// job['friends'].push(previous.friends[0])
+lhl.courses = ['Web Bootcamp'];
 
-// console.log('what is my job? ', previous)
 
-job.courses[0]['weeks'] = 10
-job.courses[1]['weeks'] = 12
-// console.log('my courses nowadays', job.courses)
+var uoft = {
+  name: 'University of Toronto',
+  hoursPerDay: 3,
+  active: false,
+  startDate: 'January 2013',
+  peers: ['eyal'],
+  courses: ['CSC309 - Web Programming','Ethics']
+}
+
+var gigs = [lhl, uoft]
+
+console.log('found it:', gigs[1].courses[0])
+
+
+console.log('Name of Course: ', lhl.courses)
+console.log('Name of Course: ', uoft['courses'])
+
+uoft['location'] = 'St. George'
+
+// careful with using anything else but words as keys
+uoft[123] = 416123123
 
 
 // now create functions to do some of that work...
 // acting on individual fields first...
 
-function newFriend (gig, friend) {
-  gig.friends.push(friend)
+lhl.weeks = 10
+lhl.daysPerWeek = 5
+uoft.weeks = 12
+uoft.daysPerWeek = 1
+
+function totalHours(place) {
+  var minutesPerHour = 60;
+  return place.weeks * place.daysPerWeek * place.hoursPerDay; 
 }
 
-function changeCompany(gig, newName) {
-  gig.company = newName
-  // console.log('changed it: ', gig.company)
-}
+console.log("At LHL: ",totalHours(lhl))
+console.log("At UofT: ",totalHours(uoft))
 
-newFriend(job, 'Dave')
-newFriend(job, 'Fabio')
-newFriend(job, previous.friends[0])
 
-changeCompany (job, 'LHL')
 
+
+// console.log(uoft.123)
 
 // and then acting on the overall object
 // talk about objects passed as reference
 
+function changeName(gig, newName) {
+  gig.name = newName;
+}
+
+changeName(uoft, 'U. of T.')
+
+// and realize the advantage of bracket notation 
+// to create more powerful functions
+function changeSomething(gig, whatProperty, newValue) {
+  console.log('changeSomething: ',whatProperty)
+  gig[whatProperty] = newValue;
+}
+
+changeSomething(uoft, 'startDate', 'January 2014');
+changeSomething(uoft, 'active', true);
+changeSomething(uoft, 'peers', []);
+
+
 // lastly create a generic function that can be "plugged" 
 // into an object to explain `this`
 
-function addFriend (friend) {
-  this.friends.push(friend)
+lhl.totalHours = function () {
+  var minutesPerHour = 60;
+  return this.weeks * this.daysPerWeek * this.hoursPerDay; 
 }
 
-job.add = addFriend
-previous.addFriend = addFriend
+uoft.totalHours = lhl.totalHours
+console.log("Hours in LHL: ",lhl.totalHours())
+console.log("Hours in UofT: ",uoft.totalHours())
 
-job.add('all of you')
-previous.addFriend('other people')
+console.log('Everything about LHL: ', lhl);
+console.log('Everything about UoT: ', uoft);
+
+// and improve the object by adding functions to it
 
 
-console.log('what is my job? ', previous)
-
-// a more advanced function
-
-job.daysSince = function () {
-  return (new Date(this.started))/1000/60/60/24
-}
-
-console.log('what is my job? ', job)
-console.log(job.daysSince())
-
-// addFriend('E')  //  ????
