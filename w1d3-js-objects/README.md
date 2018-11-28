@@ -1,5 +1,8 @@
 # Javascript Objects (and other data types)
 
+Hi all, if you are just looking for the code we wrote
+during class, you can find it in my [lectures repo/W1D3]()
+
 ## Primitive data types
 
 We know these guys already:
