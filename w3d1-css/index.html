@@ -4,22 +4,20 @@
   <meta charset="utf-8">
   <title>Nintendo Games</title>
   <style>
+
+    * {
+      border-style: dotted;
+      border-color: red;
+    }
+
     h1 {
       font-size: 1.5em;
-    }
-
-    .Publisher {
-      color: yellow;
-    }
-
-    #weblogs li {
-      font-style: "Courier New"
     }
 
     main {
       border-width: 2px; 
       border-color: red; 
-      border-style: dotted;
+      /*border-style: dotted;*/
     }
 
     span {
@@ -28,6 +26,7 @@
 
     nav h4 {
       width: 18%;
+      margin-right: 25px;
       float: left;
     }
 
@@ -50,6 +49,10 @@
       float: right;
     }
 
+    ul#weblogs li {
+      background-color: lightblue;      
+    }
+
   </style>
 </head>
 <body>
@@ -64,19 +67,19 @@
     <p>Here is my collection of games</p>
     <ul id="collection">
       <li>
-        <div>Mario Bros
+        <div>Super Mario World
           (<span class="Publisher" style="color:red">Nintendo</span>)
         </div>
       </li>
-      <li>Donkey Kong<span class="Publisher">Atari</span></li>
-      <li>Breakout<span class="Publisher">Sega</span></li>
+      <li>Donkey Kong Country<span class="Publisher">Atari</span></li>
+      <li>The Legend of Zelda<span class="Publisher">Sega</span></li>
     </ul>
     <p>If you like games too, contact me... </p>
   </main>
   <aside>
     <p>Here are some of the other pages I've found to be awesome</p>
     <ul id="weblogs">
-      <li>A very cool page about <a href="nintendo.com">Nintendo</a></li>
+      <li><a href="http://nintendo.wikia.com/wiki/List_of_Nintendo_games_by_year_(US)">List of Nintendo games</a></li>
     </ul>
   </aside>
 </body>
