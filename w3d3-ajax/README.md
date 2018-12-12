@@ -19,7 +19,7 @@ function reqListener () {
 
 const oReq = new XMLHttpRequest();
 oReq.addEventListener("load", reqListener);
-oReq.open("GET", "article.html");
+oReq.open("GET", "articles.json");
 oReq.send();
 ```
 
@@ -30,7 +30,7 @@ oReq.send();
 Here is how to do a [jQuery AJAX](http://api.jquery.com/jQuery.ajax/) call:
 
 ```javascript
-$.ajax('http://localhost:5000/breweries')
+$.ajax('http://localhost:8000/article.html')
 .done((response) => {
   console.log(response)
 })
@@ -42,7 +42,7 @@ $.ajax('http://localhost:5000/breweries')
 or the shorthand for handling JSON:
 
 ```javascript
-$.getJSON('/articles.jso')
+$.getJSON('/articles.json')
 .then( data => { 
     console.log(data.length) 
     } )
