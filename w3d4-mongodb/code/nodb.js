@@ -1,30 +1,42 @@
 const data = {
   students: [
-    { name: 'Ben', course: 'web', city: 'Toronto' },
-    { name: 'Steve', course: 'ios', city: 'Montreal', marks: [10,9,10]}
+    { name: 'Ben', likes: 'basketball', city: '6ix' },
+    { name: 'Steve', likes: 'home', city: 'Montreal'},
+    { name: 'Diego', likes: 'pokemon', city: 'lostboy'}
   ]
 }
 
-function add (newEntry) {
-  lockData()
-  readFromDisk()
-  data.students.push(newEntry)
-  saveToDisk()
+function add (name, likes, city, age) {
+  data.students.push({name: name, likes: likes, city: city, age: age})
 }
 
-function addStudent (name, course, city) {
-  let newStudent = {}
-  newStudent.name = name
-  newStudent.course = course
-  newStudent.city = city
-  add(newStudent)
+function edit (which, key, value) {
+  data.students[which][key] = value
 }
 
-function findStudent (name) {
-  return data.students.find(element => element.name == name)
+function myDelete (which) {
+  delete data.students[which]
 }
 
-addStudent('Dan','web','Toronto')
+function read (which) {
+  console.log(data.students[which])
+}
 
+function find (student) {
+  data.students.forEach(s => {
+    if (s.name == student) {
+      console.log(s)
+    }
+  })
+}
+
+function saveAll () {
+  // write data.stringify to a file
+}
+
+add ('Dan', 'Hockey', 'Toronto', 25)
+edit (2, 'city', '6ix')
+myDelete (1)
+read (0)
+find ('Dan')
 console.log(data)
-console.log(findStudent('Steve'))

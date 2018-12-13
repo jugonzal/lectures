@@ -4,6 +4,7 @@ Credit where credit is due: the following lecture notes and example app were hea
 
 The final Express/Mongo app discussed in class can be found in [`/code`](https://github.com/jugonzal/lhl-lectures/tree/master/w3d4-mongodb/code).
 
+Also, you'll notice that the video attached is not our actual lecture, but close enough.  This one ran last month so it is very close to the real thing.
 
 
 ## Topics covered (Summary)
@@ -165,7 +166,7 @@ The `_id` is a "Primary Key" that uniquely identifies each object (document) wit
 
 It is automatically added to any object we insert and we can use it to find single object from a collection (see example above).
 
-## Demo 2: Simple Todo List (Express app w/ Mongo)
+## Demo: Simple Todo List (Express app w/ Mongo)
 
 We walked through the Todo Node/Express app which only has index, new/create and delete functionality. It uses Mongo as its data store and we went through the `app.js` file in detail to see how it does it.
 
