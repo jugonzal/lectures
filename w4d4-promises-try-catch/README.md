@@ -1,3 +1,16 @@
+
+- simple scenario for error handling
+- async
+- how to handle error conditions with async (callbacks)
+- better way: promises
+- create your own
+- build error traps around promises
+- async/await
+- combine with simple error handling scenario
+
+
+
+
 # Errors and Promises
 
 The name of this lecture sounds like a whiny album by a shoegazer band from
@@ -44,3 +57,27 @@ The main idea goes like this:
 See [`promises.js`](code/promises.js) for an introductory example and
 [`p-request.js`](code/p-request.js) for a practical use of promises being used
 with the `request` module.
+
+## async/await
+
+The ultimate pattern for dealing with async issues AND having a simple error handling flow looks like this:
+
+```
+(async () => {
+  try {
+    let body = await promisifiedGet(url)
+    console.log("1st inside doGet ",body)
+    body = await promisifiedGet(process.argv[3])
+    console.log("2nd inside doGet ",body)
+    return body
+  } catch (e) {
+    console.log('bad bad bad ',e)
+  }
+})()
+```
+
+The `await` keyword will stop the code until the given promise is resolved.  If something goes wrong with that promises, the rejection is thrown as an error, which means you can rely on a simple `try/catch` block to do your error handling.
+
+There, the best of both worlds.
+
+
