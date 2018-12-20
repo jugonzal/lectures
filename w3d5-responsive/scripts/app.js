@@ -50,6 +50,20 @@ var data = [
       "text": "Es ist nichts schrecklicher als eine tätige Unwissenheit."
     },
     "created_at": 1461113796368
+  },
+   {
+    "user": {
+      "name": "Gonzalez",
+      "avatars": {
+        "small":   "https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc_50.png",
+        "regular": "https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc.png",
+        "large":   "https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc_200.png"
+      },
+      "handle": "@gomexico" },
+    "content": {
+      "text": "Mexico will win the World Cup"
+    },
+    "created_at": 1461113959088
   }
 ];
 

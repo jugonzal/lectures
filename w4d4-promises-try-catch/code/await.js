@@ -1,7 +1,7 @@
 const request = require('request');
 
 function promisifiedGet(url) {
-  let future = new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     // throw "will not finish my promise"
     request.get(url, (err, response) => {
       if (err) {
@@ -12,8 +12,6 @@ function promisifiedGet(url) {
       }
     });
   });
-
-  return future;
 }
 
 // In this next section we are "chaining" to API requests
@@ -23,20 +21,32 @@ function promisifiedGet(url) {
 const url = process.argv[2];
 console.log(`URL: ${url}`);
 
-async function doGet (url) {
+(async () => {
   try {
     let body = await promisifiedGet(url)
-    console.log("inside ",body.split('>')[0])
+    console.log("1st inside doGet ",body)
+    body = await promisifiedGet(process.argv[3])
+    console.log("2nd inside doGet ",body)
     return body
   } catch (e) {
     console.log('bad bad bad ',e)
   }
-}
+})()
 
-let body = "not yet..."
-body = doGet(url)
-.then(() => console.log("at the end... ", body))
 
+// async function twoGets() {
+//     let body = await promisifiedGet(url)
+//     console.log("1st inside doGet ",body)
+//     body = await promisifiedGet(process.argv[3])
+//     console.log("2nd inside doGet ",body)
+//     return body
+// }
+
+// try {
+//   twoGets()
+// } catch (e) {
+//     console.log('bad twoGets bad ',e)
+//   }
 
 // console.log(`HTML body is ${doGet(url).} `);
 

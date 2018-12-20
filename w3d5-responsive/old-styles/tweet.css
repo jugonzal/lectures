@@ -30,6 +30,13 @@ article .tweet-pic {
   float: left;
 }
 
+@media (max-width: 500px) {
+  article .tweet-pic {
+    display: none;
+  }
+
+}
+
 article .tweet-username {
   float: left;
   font-size: 1.7em;
@@ -44,6 +51,13 @@ article .tweet-userhandle {
 article .tweet-body {
   padding: 20px;
 }
+
+@media (max-width: 500px) {
+  article .tweet-body {
+    font-size: 2em;
+  }
+}
+
 
 article footer {
   padding: 10px;

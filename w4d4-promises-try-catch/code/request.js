@@ -11,6 +11,10 @@ function get(url, callback) {
     })
 }
 
+// Try with these URLs: 
+//    https://reqres.in/api/users/2?delay=3
+//    ht_tps://reqres.bin/api/users/2?delay=3  // malformed URL
+//    https://reqres.bin/api/users/2?delay=3  // DNS error
 const url = process.argv[2];
 console.log(`URL: ${url}`);
 
