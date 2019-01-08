@@ -1,11 +1,40 @@
-# How do I dev?
+# The Dev Workflow
 
-Today we've discussed how to break a problem into its constituent parts and use the tools at our disposal to solve it.
-This involved using the Node repl, using `console.log` statements, googling a lot and using [`node debug`](https://nodejs.org/api/debugger.html) to run our small application step by step.
+Hello all, today was about learning some of the tricks of the trade, emphasizing the process that you should follow as a developer.
 
-The code discussed in class can be found in the [`/code`](code) folder.
+We used the "Rally Racing" as an analogy for Pair-programming and I hope that helps you take better advantage of yours pairs this morning.
+
+## The Problem
+
+Over the past month I've been catching up on my coding challenges and found this one challenge that I thought would be a good problem of us to review together: [Advent of Code Day 1](https://adventofcode.com/2018/day/1)
+
+When you read a complex set of requirements it is easy to get lost in the details, but our very first lesson was to _abstract_ some of the key issues and focus on them instead. When all was read and understood, this challenge was as simple as writing a function that would add a series of numbers. By then we had committed in our minds to use `arrays` for that purpose.
+
+Still, there were a few functions that were needed to solve our problem that we had not used widely before, so we spent the first few minutes using the Node REPL to _play_. Such was the case of [string.split()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split).
+
+As usual you can find the full code we worked on in my github repo, under the [W1D2 project / arrays.js](https://github.com/jugonzal/lectures/blob/master/w1d2-dev-workflow/code/arrays.js)
+
+## Debugging
+
+I also introduced the *debugger*, a special mode in which you can follow the execution of your code. Invoke it by running [`node debug`](https://nodejs.org/api/debugger.html).
+
+The more _fancy_ debugging tool is invoked by following these 2 steps: 
+
+In your terminal
+``` 
+$ node --inspect-brk arrays.js
+
+Debugger listening on ws://127.0.0.1:9229/87bdfe7e-a44c-4545-9808-b6c7f1458561
+
+```
+Once you get confirmation of the debugger listening, go to your Chrome and type `chrome://inspect`
+
+You should see a special chrome page that among other things is listing the *current debug sessions available*. You'll find them with a green icon. Click on the _inspect_ link right besides to activate your session.
 
 ## Bonus: PythonTutor
 
-[PythonTutor](http://pythontutor.com) is a nice tool to visualize how our code runs. Despite the name, it can analyze several languages including Javascript.
-<a href="http://pythontutor.com/visualize.html#code=function%20convert_values(values%29%20%7B%0A%20%20var%20numbers%20%3D%20%5B%5D%3B%0A%0A%20%20for(var%20value%20of%20values%29%20%7B%0A%20%20%20%20var%20number%20%3D%20Number(value%29%0A%20%20%20%20if%20(!isNaN(number%29%29%20%7B%0A%20%20%20%20%20%20numbers.push(number%29%0A%20%20%20%20%7D%0A%20%20%7D%0A%20%20return%20numbers%3B%0A%7D%0A%0A%0Afunction%20sum(values%29%20%7B%0A%20%20var%20total%20%3D%200%3B%0A%20%20var%20numbers%20%3D%20convert_values(values%29%3B%0A%0A%20%20for(var%20number%20of%20numbers%29%20%7B%0A%20%20%20%20total%20%2B%3D%20number%3B%0A%20%20%7D%0A%0A%20%20return%20total%3B%0A%7D%0A%0A%0Avar%20args%20%3D%20%5B5,%20%22banana%22,%205,%20%22apple%22,%2010%5D%3B%0Aconsole.log(%60The%20sum%20of%20the%20numbers%20is%20%24%7Bsum(args%29%7D.%60%29&cumulative=false&curInstr=0&heapPrimitives=false&mode=display&origin=opt-frontend.js&py=js&rawInputLstJSON=%5B%5D&textReferences=false">Here's a link to some code similar to what we've discussed in class inside PythonTutor.</a>
+PythonTutor is a nice tool to visualize how our code runs. Despite the name, it can analyze several languages including Javascript. You can try visualizing the code we wrote:
+
+[PythonTutor visualization](https://goo.gl/iQddAZ)
+
+You'll find a series of buttons at the bottom of the page to navigate the execution of the code *one step at a time*.
