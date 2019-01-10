@@ -1,120 +1,92 @@
 var tweeps = [
-  { tweep: '@fzero', 
-    said: "Callbacks are control flow as designed by M.C. Escher."
-  },
-  { tweep: '@om',
-    said: "For @facebook people = money"
-  },
-  { tweep: '@ryanmerkley',
-    said: "Stunning exhibit opening today at the @agotoronto: 'Anthropocene'"
-  }
+  { who: '@fzero', 
+    said: "Callbacks are control flow as designed by M.C. Escher."},
+  { who: '@om',
+    said: "For @facebook people = money"},
+  { who: '@ryanmerkley',
+    said: "Stunning exhibit opening today at the @agotoronto: 'Anthropocene'"},
+  { who: '@mozilla',
+    said: "In our #internethealth Report, we put a spotlight on the open-source software you never knew you were using."}
 ]
-
-// Need to add this: creativecommons: CC0
-
-tweeps.push({ 
-  tweep: '@creativecommons',
-  said: "CC0!"
-})
 
 // STAGE 0: Our first stage is to 
 // manually change one tweep at a time
 
-// tweeps[2].done = true;
-// tweeps[0].like = true;
+for (i = 0; i < tweeps.length; i++) {
+  // console.log('my first tweep ',tweeps[i].who,' said ',tweeps[i].said)
+}
 
-// console.log("Is this done? ",tweeps[1].done)
+// tweeps[0].agree = true
+// tweeps[2].like = true
+
+// console.log(tweeps)
 
 // STAGE 1: writing functions to do one thing
 // Explore the various styles of functions: 
 // declaration vs expression
 
-function likeTweep (handle) { 
-
-  // I wanted to leave a function inside a function
-  // as a reminder that this is NOT a callback
-  // but it is a valid thing to do
-  function arrayLength () {
-    return tweeps.length;
-  }
-
-  for (var i = 0; i < arrayLength(); i++) {
-    if (tweeps[i].tweep === handle) {
-      tweeps[i].like = true;
-    }
-  }
-}
-
-// likeTweep('@fzero');
-// likeTweep('@ryanmerkley');
-
-var done = function (handle) {
-  for (var aTweep of tweeps) {
-    if (aTweep.tweep === handle) {
-      aTweep.done = true;
-    }
-  }
-}
-
-// done('@om')
-
-
-// doneTweep('@fzero');
-
-// STAGE 2: finding ways to create generic functions, 
-// using bracket notation
-
-function changeTweep(handle, flag) {
-  for (var aTweep of tweeps) {
-    if (aTweep.tweep === handle) {
-      aTweep[flag] = true;
-    }
-  }
-}
-
-// changeTweep('@fzero', 'like');
-// changeTweep('@ryanmerkley', 'like');
-// changeTweep('@fzero', 'done');
-// changeTweep('@om','insightful')
-
-// STAGE 3: certain things that our function above 
-// can not do, such as changing what was said. 
-// Need CALLBACKS!!!!  (upper)
-
-// make a tweep all CAPS
-
-function allCaps (tweep) {
-  tweep.said = tweep.said.toUpperCase()
-}
-
-function like (tweep) {
+function likeTweep(tweep) {
   tweep.like = true
 }
 
-function isDone (tweep) {
-  tweep.done = true
+// var agreeTweep = null;
+
+
+var agreeing = function agreeTweep(tweep) {
+  tweep.agree = true
 }
 
-function xTweep(handle, callback) {
-  for (var aTweep of tweeps) {
-    if (aTweep.tweep === handle) {
-      callback(aTweep);
-    }
+// agreeing(tweeps[2])
+
+
+// STAGE 2: finding ways to create generic functions, using bracket notation
+
+function flagTweep(tweep, flag) {
+  tweep[flag] = true
+}
+
+// for (let tweep of tweeps) {
+//   flagTweep(tweep, 'like')
+//   flagTweep(tweep, 'read')
+// }
+
+
+// STAGE 3: certain things that our function above 
+// can not do, such as changing what was said. Need CALLBACKS!!!!
+
+function outrageTweep(tweep) {
+  tweep.said += ' !!!!'
+}
+
+// function changeTweep(tweep, change) {
+//   if (change == 'like')
+//     flagTweep(tweep, 'like')
+//   if (change == 'outrage')
+//     outrageTweep(tweep)
+// }
+
+function changeTweeps(change) {
+  for (let tweep of tweeps) {
+    change(tweep)
   }
 }
 
-xTweep('@fzero', allCaps);
-xTweep('@om', like);
-xTweep('@ryanmerkley', isDone);
+changeTweeps(likeTweep)
 
-// STAGE 4: "on demand" callbacks by using expressions
 
-xTweep('@ryanmerkley', function (tweep) {
-  tweep.said += '!!!!'
-});
 
-xTweep('@om', function() {
-  console.log('Callback was called!!!');
+// var modifyAllTweeps = changeTweeps
+// modifyAllTweeps(yell)
+
+
+changeTweeps(function (tweep) {
+  tweep.said = tweep.said.toUpperCase()
 })
 
-console.log("ALL: ", tweeps)
+
+
+
+console.log(tweeps)
+
+
+
