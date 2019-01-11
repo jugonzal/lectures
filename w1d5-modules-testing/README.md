@@ -2,6 +2,79 @@
 
 HT to Fabio for [the original version of this README](https://github.com/fzero/lhl-lectures/blob/master/w1d5-modules-testing/README.md)
 
+## Just want the `Family` code?
+
+Take a look inside [`/family`](https://github.com/jugonzal/lhl-lectures/tree/master/w1d5-modules-testing/family) for the complete example including modules, packages and tests.
+
+## Writing better code
+
+I started the lecture today by writing what seemed like a perfectly good function:
+
+```javascript
+function greatestGeneration() {
+  var greatest = []
+  for (person of ancestry) {
+    if (person.born >= 1900 && person.born < 1930) {
+      if (person.sex === 'm') {
+        greatest.push(person)
+      }
+    }
+  }
+  return greatest
+}
+```
+
+While we were quite happy with the version and we found it useful, we talked about the fact that it made a reference to `ancestry`, which becomes a dependency and in general it decreases the quality of code.  We talked about perhaps passing the data as a parameter as a potential mitigation strategy.
+
+From here we found a better way of packaging the function *with* the data:
+
+```javascript
+
+function greatestGeneration() {
+  var greatest = []
+  for (person of this.ancestry) {   
+    if (person.born >= 1900 && person.born < 1930) {
+      if (person.sex === 'm') {
+        greatest.push(person)
+      }
+    }
+  }
+  return greatest
+}
+
+var bundle = {
+  ancestry: ancestry,
+  greatest: greatestGeneration
+}
+
+console.log(bundle.greatest())
+```
+
+With this approach, both the function *and* the data are bundled together into an object making that dependency explicit.  Notice how when we invoke the function, it is assumed that the function will act on *its own data*.  
+
+Of course, all of this was just a preamble to show you what the ideal version of the code should look like:
+
+```javascript
+function isGreatestGeneration (person) {
+  return person.born >= 1900 && person.born < 1930
+}
+
+function isMale(person) {
+  return person.sex === 'm'
+}
+
+console.log(ancestry
+  .filter(isMale)
+  .filter(isGreatestGeneration)
+  )
+```
+
+The function `filter` is built into *every* array, making it the ideal way to solve our problem without writing too much code.  Notice how elegant the final version is, acting on the array itself, sending the data through as many stages of filtering as needed by chaining those calls, using callbacks where each individual callback is a very simple function that does ONE thing alone.
+
+The rest of the lecture we learned how to create a proper set of tests for our new functions, organizing them into a module that can be imported (`require()`) into others.
+
+## About Modules
+
 Until this point we've been working with very simple and short programs, but that will change very soon. To avoid unnecessary complications, we'll need a way to divide our apps into different files in a logical way. That's what **modules** are for.
 
 You can also create modules in a way that can be reused in different apps. These are called **packages**.
@@ -80,6 +153,7 @@ module.exports = {
 ```
 
 `module.exports` expects an object, but you can also export values and functions individually using `exports.key = value`. The following `exports` example is equivalent to the one above:
+
 ```js
 exports.sayHello = sayHello;
 exports.sayHi = sayHi;
@@ -153,6 +227,3 @@ describe('squared', function() {
 });
 ```
 
-## Our Family code
-
-Take a look inside [`/family`](https://github.com/jugonzal/lhl-lectures/tree/master/w1d5-modules-testing/family) for the complete example including modules, packages and tests.

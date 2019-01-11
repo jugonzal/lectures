@@ -2,26 +2,44 @@
 var assert = require('chai').assert;
 var expect = require('chai').expect;
 
-var ppl = require('../aboutPeople');
 
-describe('Testing About People', function() {
+describe('Testing Ancestry', function() {
+  var ancestryCode = require('../ancestry.js');
 
-  describe('testing alive()', function() {
+  describe('testing Gender function', function() {
 
     // Chai has two test styles: assert and expect.
     // We'll use assert style for these tests
 
-    it('should tell me this person is alive', function() {
-      assert.equal(ppl.alive({died:null}), true, "Should be alive ")
-    });
-
-    it('should tell me this other person is dead', function() {
-      assert.equal(ppl.alive({died:1980}), false, "should be dead")
-    });
-
-    it('should break because we dont know', function() {
-      assert.equal(ppl.alive({funny: true}), false, "doesnt have a died attribute")
+    it('should tell me this person is male', function() {
+      assert.equal(ancestryCode.isMale({sex:'m'}), true, 'should be male')
     })
+
+    it('should tell me this person is not male', function() {
+      assert.equal(ancestryCode.isMale({sex:'f'}), false, 'should be female')
+    })
+
+    it('should not break if gender is missing', function() {
+      assert.equal(ancestryCode.isMale({whoknows: true}), false,'should treat others as Not male')
+    })
+
+  })
+
+  describe('testing the GreatestGeneration function', function() {
+
+  })
+
+    // it('should tell me this person is alive', function() {
+    //   assert.equal(ppl.alive({died:null}), true, "Should be alive ")
+    // });
+
+    // it('should tell me this other person is dead', function() {
+    //   assert.equal(ppl.alive({died:1980}), false, "should be dead")
+    // });
+
+    // it('should break because we dont know', function() {
+    //   assert.equal(ppl.alive({funny: true}), false, "doesnt have a died attribute")
+    // })
 
       
 
@@ -37,7 +55,7 @@ describe('Testing About People', function() {
     //   expect(family.findPa("Carolus Haverbeke")).to.be.a('string');
     // })
 
-  });
+  // });
 
   // describe ('findGrandPa()', function () {
 
