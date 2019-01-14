@@ -1,249 +1,47 @@
-RUBY + OOP
 
-CLASS, INITIALIZE, INSTANCE VARIABLES and INSTANCE METHODS
+## How does it compare with JS ?
 
-  we can define a new class just by doing:
+- OOP vs. (mostly) functional
+  - Everything is an object and every is based on a class
+  - Classes can inherit code from other classes
 
-    class Foo
-    end
+- Methods & blocks vs. functions & callbacks
+  - Methods are the same as functions, but Ruby doesn't allow you to store methods in variables
+  - Every time you write the name of a method **you're actually calling it and getting its return value**. In other words, there's no difference between `do_something` and `do_something()` like in Javascript - the method always executes!
+  - Whenever you need to pass code to a method, you use **blocks**, which are distant cousins to callbacks.
 
-  we can create "instances" of a class by doing:
+- Concurrency Model
+  - I/O blocking and general lack of callbacks
+  - Javascript doesn't wait, but Ruby does.
+  - You can actually write something like `body = HTTP.get('http://wikipedia.org/kittens')` and it will work.
 
-    f = Foo.new
+- Scoping
+  - Block-scoping vs. function scoping: local variables in ruby are scoped to each **block** instead of each **method**.
+  - You also have instance variables (identified by an `@` symbol at the beginning), class variables (`@@`, accessible to all instances of a class) and global variables (`$` at the beginning).
+  - All variables without _sygils_ (the symbols at the beginning) are **local by default**.
 
-  an empty class is not useful, we want to use it to define methods and variables that all "instances" of that class have
+- Ruby gems vs. npm packages (a.k.a. There's a gem for that™)
 
+## Basic techniques
 
+```ruby
+list = [1, 2, 3, 4, 5];
 
-  a special method "initialize" is called whenever we create a instance
-    ie. Foo.new()
+list.each do |num|
+  puts num * 2
+end
 
-  it is optional (but we almost always use it)
+# filter
+new_list = list.select do |num|
+  num > 3
+end
 
-  initialize can take arguments (which we pass to .new)
+puts new_list
 
-  we use initialize most often to set the starting values of instance variables
+# find first that matches(evals to true)
+just_one = list.detect do |num|
+  num > 3
+end
 
-  instance variables are variables that belong to each instance
-
-  instance variables can be accessed by other methods
-    but CANNOT be directly access from "outside" the object
-
-
-  class BankAccount
-    def initialize(start_balance)
-      @balance = start_balance
-    end
-
-    def balance
-      @balance
-    end
-  end
-
-
-
-
-
-
-ATTR_READER, ATTR_WRITER, ATTR_ACCESSOR
-
-   it's annoying to have to write the following for every instance variable we want to by able to "read" or "write" from the outside:
-
-   # reader
-   def foo
-    @foo
-   end
-
-   # writer
-   def foo= (foo)
-    @foo = foo
-   end
-
-   ruby has shortcuts:
-
-     attr_reader :foo    # creates the .foo 'reader' method above
-
-     attr_writer :foo    # creates the .foo= 'writer' method above
-
-     attr_accessor :foo   # creates both methods
-
-
-  it becomes very useful when you need to do it for many methods:
-    ex:
-       attr_accessor :name, :id, :email, :address
-
-
-
-
-INHERITANCE and SUPER
-
-  its useful to be able to create new classes that "inherit" all the methods from another class, and make some small changes
-    ex. BankAccount and SavingsAccount
-
-  we do this with the following syntax:
-
-    class SavingsAccount < BankAccount
-    end
-
-
-  when we do this, it's useful for the new class to be able to overwrite the methods in its "superclass"/"parent"
-     if we define a method in the "subclass"/"child" it will overwrite the parent's methods
-
-     ex.
-       class BankAccount
-          def some_method
-            5
-          end
-       end
-
-
-
-      class SavingsAccount < BankAccount
-         def some_method
-           10
-         end
-       end
-
-
-   ...but it's also useful to be able to refer to the method we're overwriting, and ruby let's us do that by the magic method "super"
-     (see bank_account.rb)
-
-
-
-CLASS VARIABLES
-
-  class Foo
-
-     @@bar = 0
-
-     # instance methods can access class variables
-     # but there only one class variable!
-     # whereas instance variables exist for EACH instance
-
-     def some_instance_method()
-       @@bar += 1
-     end
-
-  end
-
-
-
-
-
-
-CLASS METHODS
-
-  class Foo
-
-     def self.foobar
-       # ....
-     end
-
-  end
-
-  Foo.foobar()
-
-
-PRIVATE INSTANCE METHODS
-
-    instance methods are "public" by default
-      ie. they can be accessed "outside" the object
-
-
-    it is possible to make instance methods private
-      (so they cannot be accessed outside the instance)
-
-    this is useful in indicating that certain methods are "implementation details" only
-
-    you do it by putting "private" above a method, ex.
-        def Foo
-            def some_public_method
-              some_private_method(5)
-            end
-
-
-
-            private
-
-            def some_private_method(n)
-              # ...
-            end
-        end
-
-        f = Foo.new
-
-        f.some_public_method    # works
-
-        f.some_private_method(10)  # not allowed, b/c private!
-
-    once you use "private" all methods below it become private
-
-
-
-
-NAMESPACING w/ MODULES
-
-  problem:
-    - projects often use many libraries (which include multiple classes defined by someone else)
-    - classes are globals
-    -> may run into a situation where two libraries define the same class
-         (one will overwrite or randomly extend the other ====> bad)
-
-  solution:
-    - when defining classes, can "nest" them inside of a module
-
-    instead of just:
-      class Account
-       ...
-      end
-
-      a = Account.new
-
-    we write:
-      module Bank
-        class Account
-          ...
-        end
-      end
-
-      a = Bank::Account.new
-
-
-
-
-
-"MULTI-INHERITANCE" w/ MODULES
-
-   inheritance is sometimes not a good food for your problem  
-  
-     ex. bank has various types of account types it offers, and each can have a combination of "aspects", like: gives interest or not, charges per transaction or not, waves fees when a certain minimum is hit, etc.
-
-    may not be able to create an inheritance tree that works
-       (end up having classes like AccountInterestGivingAndPerTransaction  AccountWaveFeesAndInterestGiving ...)
-
-    alternative: modules
-
-    modules can have instance variables and methods, and they can be "included" by classes, but, they themselves cannot be instantiated
-
-     module Foo
-       def bar(value)
-         @xyz = value
-       end
-     end
-
-     class Something
-       include Foo
-     end
-
-
-    ex.
-      class BusinessAccount
-        include InterestGiving
-        include OverdraftProtected
-        include TransactionFeeCharing
-        include TransactionFeeWaivingWithMinimumBalance
-      end
-
-
-
-
+puts just_one
+```
