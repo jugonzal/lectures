@@ -6,37 +6,49 @@ const data = {
   ]
 }
 
-function add (name, likes, city, age) {
-  data.students.push({name: name, likes: likes, city: city, age: age})
+// console.log(data.students[1].likes)
+
+// console.log(data.students.filter(student => student.name === 'Ben')[0].likes)
+
+function create (student) {
+  data.students.push(student)
+  saveAll()
 }
 
-function edit (which, key, value) {
-  data.students[which][key] = value
-}
-
-function myDelete (which) {
+function remove (which) {
   delete data.students[which]
+  saveAll()
 }
 
-function read (which) {
-  console.log(data.students[which])
+// function read (which) {
+//   console.log(data.students[which])
+// }
+
+function update (name, key, value) {
+  loadAll()
+  find(name)[key] = value
+  saveAll()
 }
 
-function find (student) {
-  data.students.forEach(s => {
-    if (s.name == student) {
-      console.log(s)
-    }
-  })
+function find (name) {
+  return data.students.filter(student => student.name === name)[0]
+}
+
+function loadAll () {
+  // check no LOCKS
+  // retrieve all the data
 }
 
 function saveAll () {
-  // write data.stringify to a file
+  // LOCK the DATA
+  // make sure my data is written to a file
+  // UNLOCK
 }
 
-add ('Dan', 'Hockey', 'Toronto', 25)
-edit (2, 'city', '6ix')
-myDelete (1)
-read (0)
-find ('Dan')
+for (let i = 1; i< 100 ; i++) {
+  create({ name: 'Hillary', likes: 'coding '+i+' apps', city: 'Toronto' })
+}
+update('Steve','likes','football')
+remove (1)
+// console.log(find ('Hillary'))
 console.log(data)
