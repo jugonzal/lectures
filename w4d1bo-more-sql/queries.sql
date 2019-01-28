@@ -1,6 +1,6 @@
 -- all tracks, with artist name and album name
 
-SELECT
+EXPLAIN ANALYZE SELECT
   tracks.title AS title,
   albums.title AS album,
   artists.name AS artist
@@ -34,14 +34,8 @@ SELECT *
 FROM tags, artists, artists_tags
 WHERE artists_tags.artist_id = artists.id
   AND artists_tags.tag_id = tags.id
-  AND tags.name = 'instrumental';
-
-
--- SELECT *                   
--- FROM tags, artists, artists_tags
--- WHERE artists_tags.artist_id = artists.id
---   AND artists_tags.tag_id =* tags.id
---   AND tags.name = 'instrumental';
+  AND (tags.name = 'instrumental'
+  OR tags.name = 'electronic');
 
 
 -- at this point we started to wonder how to find those 
@@ -57,7 +51,8 @@ SELECT *
 FROM tags, artists, artists_tags
 WHERE artists_tags.artist_id = artists.id
   AND artists_tags.tag_id = tags.id 
-  AND tags.name in ('instrumental', 'electronic');
+  AND tags.name in (
+    select name from tags where id > 2);
 
 -- Lastly, to solve the question about which artists
 -- are categorized in two tags, we used GROUP BY 
@@ -68,18 +63,19 @@ SELECT
 FROM tags, artists, artists_tags
 WHERE artists_tags.artist_id = artists.id
   AND artists_tags.tag_id = tags.id 
-  AND tags.name in ('instrumental', 'electronic') 
+  AND tags.name in (
+    select name from tags where id > 2) 
 GROUP BY artists.name 
 HAVING count(*) > 1;
 
 
 SELECT 
   artists.name, 
-  string_agg(tags.name, ' - ')
+  string_agg(tags.name, ' - ') as which
 FROM tags, artists, artists_tags
 WHERE artists_tags.artist_id = artists.id
   AND artists_tags.tag_id = tags.id 
-  AND tags.name in ('instrumental', 'electronic') 
+  AND tags.name in (select name from tags where id > 2) 
 GROUP BY artists.name 
 HAVING count(*) > 1;
 
@@ -150,12 +146,23 @@ WHERE tracks.album_id = albums.id;
 SELECT
   tags.name as tag,
   COUNT(tracks.id) / COUNT(distinct albums.id) AS avg
-FROM tags, artists
-JOIN artists_tags AS at ON at.artist_id = artists.id AND at.tag_id = tags.id
-JOIN albums ON albums.artist_id = artists.id
-JOIN tracks ON albums.id = tracks.album_id
-GROUP BY tags.name
+FROM tags, artists, artists_tags AS at, albums, tracks
+WHERE at.artist_id = artists.id AND at.tag_id = tags.id
+AND albums.artist_id = artists.id
+AND albums.id = tracks.album_id
+GROUP BY tag
 ORDER BY avg DESC;
+
+
+-- demonstrate the usefulness of an outer join 
+-- when we don't know where data will exist
+
+select albums.title, sum(count) 
+from tracks
+left outer join plays on plays.track_id = tracks.id
+inner join albums on tracks.album_id = albums.id
+group by albums.title;
+
 
 
 
