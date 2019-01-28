@@ -2,55 +2,37 @@
 //  Sherman the dog
 //  Larry the duck
 
-class Pet {
-  constructor (data) {
-    this._name = data.name
-    this.species = data.species
+var Module = (function () {
+
+  const pets = {
+    'geeky': 'gecko',
+    'sherman': 'dog',
+    'larry': 'duck'
   }
 
-  get name () {
-    return this._name
+  function all() {
+    return Object.keys(pets)
   }
 
-  display () {
-    console.log(this)
-  }
-}
-
-class Collection {
-  constructor () {
-    this.db = []
+  function get(name) {
+    return pets[name]
   }
 
-  factoryMethod (data) {
-    return null;
+  function add(name, type) {
+    pets[name] = type
   }
 
-  add (data) {
-    let item = this.factoryMethod(data)
-    this.db.push(item)
+  return {
+    get: get,
+    add: add,
+    all: all
   }
 
-  find (condition) {
-    return this.db.find(condition)
-  }
+})();
 
-  display () {
-    console.log(this)
-  }  
 
-}
+Module.add('coco',{type: 'cat', age: 3})
+console.log(Module.all())
+console.log('geeky: ',Module.get('geeky'))
 
-class Pets extends Collection {
-  factoryMethod (data) {
-    return new Pet(data)
-  }
-}
-
-geeky = new Pet ('Geeky','Gecko');
-sherman = new Pet ('Sherman','Dog')
-collection = new Pets()
-collection.add({name: 'geeky', species: 'gecko'})
-collection.add({name: 'sherman', species: 'dog'})
-collection.display()
-// console.log(collection.find('Sherman'))
+// console.log(pets)
