@@ -1,8 +1,14 @@
 
 function Do () {
-  let something = undefined
 
-  throw "Not comfortable around undefined variables"
+  try {
+    // something.run()
+    let a = 2 + 3
+    throw "Tantrum"
+  } catch (e) {
+    console.log("Sorry")
+  }
+
   
 }
 

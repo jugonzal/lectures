@@ -1,14 +1,18 @@
 
-- simple scenario for error handling
-- async
+Hey all,  
+
+I know today's lecture was a challenging one. Proper handling of async conditions is difficult and the source of many errors at runtime.
+
+This is what we covered today:
+
+- simple scenario for error handling `try/catch`
+- test with asynchronous functions
 - how to handle error conditions with async (callbacks)
 - better way: promises
-- create your own
+- create your own Promise
 - build error traps around promises
 - async/await
 - combine with simple error handling scenario
-
-
 
 
 # Errors and Promises
@@ -20,6 +24,8 @@ the 90s, but we're actually still talking about Javascript.
 
 * `try` / `catch` and control flow with errors
 * Works fine with synchronous code, breaks horribly with async. [MDN has extensive documentation on it.](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Statements/try...catch)
+
+Look at [`simple.js`](https://github.com/jugonzal/lectures/tree/master/w4d4-promises-try-catch/code/simple.js) as an example of using `try`/`catch`.
 
 Clearly we need something better, because dealing with errors in async code
 usually means you need to deal with them inside callbacks. We've seen plenty of
@@ -34,6 +40,8 @@ db.query(query, [artistName, albumName], (err, result) => {
   // Do something with `result` here
 }
 ```
+
+You can also explore [`request.js`](https://github.com/jugonzal/lectures/tree/master/w4d4-promises-try-catch/code/request.js) to see what happens when certain error conditions happen. Not all of them will be handled nicely by the `try`/`catch` block.
 
 ## Promises to the rescue
 
@@ -54,9 +62,7 @@ The main idea goes like this:
 * When errors happen: `.catch((oops) => console.log("Things went boom, yo"))`
   * The chain will be halted and `.catch` will be called immediately with the error as first argument
 
-See [`promises.js`](code/promises.js) for an introductory example and
-[`p-request.js`](code/p-request.js) for a practical use of promises being used
-with the `request` module.
+See [`promises.js`](https://github.com/jugonzal/lectures/tree/master/w4d4-promises-try-catch/code/promises.js) for an introductory example and [`p-request.js`](https://github.com/jugonzal/lectures/tree/master/w4d4-promises-try-catch/code/p-request.js) for a practical use of promises being used with the `request` module.
 
 ## async/await
 
@@ -78,6 +84,10 @@ The ultimate pattern for dealing with async issues AND having a simple error han
 
 The `await` keyword will stop the code until the given promise is resolved.  If something goes wrong with that promises, the rejection is thrown as an error, which means you can rely on a simple `try/catch` block to do your error handling.
 
-There, the best of both worlds.
+Notice that you can **only** use the `await` keyword inside an `async` function. This means you should not use it in the main context, but look at my code for a way to work around that.
+
+There, the best of both worlds. You'll find this implemented in [`await.js`](https://github.com/jugonzal/lectures/tree/master/w4d4-promises-try-catch/code/await.js)
+
+
 
 
