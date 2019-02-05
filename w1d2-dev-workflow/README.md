@@ -2,7 +2,7 @@
 
 Hello all, today was about learning some of the tricks of the trade, emphasizing the process that you should follow as a developer.
 
-We used the "Rally Racing" as an analogy for Pair-programming and I hope that helps you take better advantage of yours pairs this morning.
+We talked about some simple tips to help you manage the work coming up, such as finding time to relax your brain from a complex problem by simply stepping away from your computer for a while.
 
 ## The Problem
 
@@ -12,9 +12,13 @@ When you read a complex set of requirements it is easy to get lost in the detail
 
 Still, there were a few functions that were needed to solve our problem that we had not used widely before, so we spent the first few minutes using the Node REPL to _play_. Such was the case of [string.split()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split).
 
+Once we were very confident with the various elements needed to solve the solution, it was a breeze to simply write the program in one shot.
+
 As usual you can find the full code we worked on in my github repo, under the [W1D2 project / arrays.js](https://github.com/jugonzal/lectures/blob/master/w1d2-dev-workflow/code/arrays.js)
 
 ## Debugging
+
+We talked about using `console.log()` as a way to figure out what is going on inside your code for those cases when things don't appear to be working as you expect. 
 
 I also introduced the *debugger*, a special mode in which you can follow the execution of your code. Invoke it by running [`node debug`](https://nodejs.org/api/debugger.html).
 
