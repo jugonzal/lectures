@@ -11,65 +11,23 @@ Take a look inside [`/family`](https://github.com/jugonzal/lhl-lectures/tree/mas
 I started the lecture today by writing what seemed like a perfectly good function:
 
 ```javascript
-function greatestGeneration() {
-  var greatest = []
-  for (person of ancestry) {
-    if (person.born >= 1900 && person.born < 1930) {
-      if (person.sex === 'm') {
-        greatest.push(person)
-      }
+function greatestGeneration () {
+  var newArray = [];
+  ancestry.forEach(function(person) {
+    if (person.born >= 1900 && person.born <= 1924) {
+      // console.log("Found one: ", person)
+      newArray.push(person)
     }
-  }
-  return greatest
+  })
+  return newArray;
 }
 ```
 
-While we were quite happy with the version and we found it useful, we talked about the fact that it made a reference to `ancestry`, which becomes a dependency and in general it decreases the quality of code.  We talked about perhaps passing the data as a parameter as a potential mitigation strategy.
+While we were quite happy with the version and we found it useful, we realized that a better version of that function would not hard code the years and so we decided to refactor it to accept some parameters.
 
-From here we found a better way of packaging the function *with* the data:
+However, at this point we wanted to make sure that any changes to our code would not *break* it so decided to create a test harness for it.  The first version was very rudimentary but eventually we found a way to write them using Mocha/Chai.
 
-```javascript
-
-function greatestGeneration() {
-  var greatest = []
-  for (person of this.ancestry) {   
-    if (person.born >= 1900 && person.born < 1930) {
-      if (person.sex === 'm') {
-        greatest.push(person)
-      }
-    }
-  }
-  return greatest
-}
-
-var bundle = {
-  ancestry: ancestry,
-  greatest: greatestGeneration
-}
-
-console.log(bundle.greatest())
-```
-
-With this approach, both the function *and* the data are bundled together into an object making that dependency explicit.  Notice how when we invoke the function, it is assumed that the function will act on *its own data*.  
-
-Of course, all of this was just a preamble to show you what the ideal version of the code should look like:
-
-```javascript
-function isGreatestGeneration (person) {
-  return person.born >= 1900 && person.born < 1930
-}
-
-function isMale(person) {
-  return person.sex === 'm'
-}
-
-console.log(ancestry
-  .filter(isMale)
-  .filter(isGreatestGeneration)
-  )
-```
-
-The function `filter` is built into *every* array, making it the ideal way to solve our problem without writing too much code.  Notice how elegant the final version is, acting on the array itself, sending the data through as many stages of filtering as needed by chaining those calls, using callbacks where each individual callback is a very simple function that does ONE thing alone.
+Before looking into our tests, take a look at the final version of our `greatestGeneration()` function and see how it is built on `filter` which is built into *every* array, making it the ideal way to solve our problem without writing too much code.  Notice how elegant the final version is, acting on the array itself, sending the data through as many stages of filtering as needed by chaining those calls, using callbacks where each individual callback is a very simple function that does ONE thing alone.
 
 The rest of the lecture we learned how to create a proper set of tests for our new functions, organizing them into a module that can be imported (`require()`) into others.
 
@@ -107,6 +65,7 @@ There are some things `npm init` won't do for you that you should probably do ma
 * `start` is NOT created automatically, but it's very useful. It should contain the terminal command used to start the project (e.g. `node index.js`). With this in place, you can start your project by typing `npm start` on the terminal.
 
 Here's a complete `package.json` example:
+
 ```json
 {
   "name": "w1d5",
@@ -132,6 +91,7 @@ Here's a complete `package.json` example:
 ## Creating a module
 
 A module is a normal JS file that **exports functions and values to be used in other files**. Example:
+
 ```js
 function sayHello(name) {
   console.log("HELLO " + name.toUpperCase() + "!");
@@ -164,6 +124,7 @@ exports.sayHi = sayHi;
 ### Using a module
 
 Use `require` to load a module and store the exported objects inside a variable. Remember that functions are values in Javascrtipt!
+
 ```js
 var hello = require('./module.js');
 
@@ -174,11 +135,13 @@ hello.sayHello("everybody");
 ### Libraries installed with `npm install` are modules too
 
 When you run `npm install` in a project, it will look at `package.json` and install all dependencies in the `node_modules` folder. From then on you can load them with a regular `require` (no need to include the full path).
-```sh
+
+```
 # Installs the request library (https://github.com/request/request)
 # This will update the package.json file
 $ npm install request --save
 ```
+
 ```js
 // On your js file
 var request = require('request');

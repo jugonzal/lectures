@@ -53,45 +53,81 @@ const ancestry = [
   {"name": "Jacobus Bernardus van Brussel", "sex": "m", "born": 1736, "died": 1809, "father": "Jan van Brussel", "mother": "Elisabeth Haverbeke"}
 ];
 
-// write out steps... 
-// big function
-// add parameter
-// bundled into object
-// filter version
+// first version before refactor
 
-// var genObj = {
-//   ancestry: ancestry,
-//   greatest: greatestGeneration
-// }
-
-// function greatestGeneration() {
-//   var greatest = []
-//   for (person of this.ancestry) {
-//     if (person.born >= 1900 && person.born < 1930) {
-//       if (person.sex === 'm') {
-//         greatest.push(person)
-//       }
+// born between 1910 and 1924
+// function greatestGeneration () {
+//   var newArray = [];
+//   ancestry.forEach(function(person) {
+//     if (person.born >= 1900 && person.born <= 1924) {
+//       // console.log("Found one: ", person)
+//       newArray.push(person)
 //     }
-//   }
-//   return greatest
+//   })
+//   return newArray;
 // }
 
-// console.log(genObj.greatest())
+// and the tests we wrote for the above
 
-function isGreatestGeneration (person) {
-  return person.born >= 1900 && person.born < 1930
+// if (greatestGeneration()[1].name === 'Clara Aernoudts') {
+//   console.log("All good. Found Clara")
+// } else {
+//   console.log("Something broke!")
+// }
+
+// if (greatestGeneration().length === 3) {
+//   console.log("Found all 3 of them")
+// }
+
+//refactored version
+// adding parameters to look for ANY generations
+
+function generation (start, end) {
+  var newArray = [];
+  ancestry.forEach(function(person) {
+    if (person.born >= start && person.born <= end) {
+      // console.log("Found one: ", person)
+      newArray.push(person)
+    }
+  })
+  return newArray;
 }
 
-function isMale(person) {
-  return person.sex === 'm'
+
+
+function greatestGeneration () {
+  // return generation(1900,1924)
+  return ancestry.filter(function(people) {
+    return people.born >= 1900 && people.born <= 1924
+  })
 }
 
-console.log(ancestry
-  .filter(isMale)
-  .filter(isGreatestGeneration)
-  )
+function victorians() {
+  return generation(1820, 1840)
+}
 
+function boomers() {
+  return generation(1946, 1964)
+}
+
+// we decided to export some
 module.exports = {
-  isMale: isMale,
-  isGreatestGeneration: isGreatestGeneration
+  boomers: boomers,
+  victorians: victorians,
+  greatest: greatestGeneration
 }
+
+// New version of the tests
+// These were eventually ported to Mocha /test folder
+
+// if (generation(1900,1924)[1].name === 'Clara Aernoudts') {
+//   console.log("All good. Found Clara")
+// } else {
+//   console.log("Something broke!")
+// }
+
+// if (generation(1900,1924).length === 3) {
+//   console.log("Found all 3 of them")
+// }
+
+// console.log(generation(1820, 1840))
