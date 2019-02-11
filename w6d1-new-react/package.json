@@ -12,7 +12,10 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "react": "./node_modules/.bin/babel full.jsx > public/app.js"
+    "react": "./node_modules/.bin/babel full.jsx > public/app.js",
+    "step1": "./node_modules/.bin/babel simple.jsx > public/app.js",
+    "step2": "./node_modules/.bin/babel middle.jsx > public/app.js",
+    "step3": "./node_modules/.bin/babel full.jsx > public/app.js"
   },
   "keywords": [],
   "author": "",

@@ -30,7 +30,7 @@ class ExchangeApp extends React.Component {
 
     this.state = { 
       items: [], 
-      date: '2018-03-10',
+      date: '2019-01-28',
       text: '',
       rates: { } 
     };
@@ -42,7 +42,7 @@ class ExchangeApp extends React.Component {
   }
 
   refreshRates () {
-    fetch("http://api.fixer.io/"+this.state.date)
+    fetch("https://api.exchangeratesapi.io/"+this.state.date)
     .then(response => {  //// 
       console.log(response.status, response.statusCode)
       if (response.ok) {
