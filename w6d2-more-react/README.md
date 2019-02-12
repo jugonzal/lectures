@@ -1,45 +1,16 @@
-React Boilerplate
-=====================
+Hi all,
 
-A minimal and light dev environment for ReactJS.
+Today we had the opportunity to go deeper into the _React thinking_.  I would say the most important part of our lecture was the conversation about _software reuse_ and how React promotes good software by forcing us to think about components and the ways in which our components should be reusable.
 
-### Usage
+If you are looking for the code we wrote in class, you can find it in my [repo/w6d2-more-react](https://github.com/jugonzal/lectures/tree/master/w6d2-more-react) folder.
 
-Clone the boilerplate and create your own git repo.
+When looking at the code, take note of the following:
 
-```
-git clone git@github.com:lighthouse-labs/react-simple-boilerplate.git
-cd react-simple-boilerplate
-git remote rm origin
-git remote add origin [YOUR NEW REPOSITORY]
-# Manually update your package.json file
-```
+- State is (mostly) managed by the top component. 
+- The top component sets a few functions that will be passed to its subcomponents for the purpose of "reporting back"
+- Components use these functions to handle events and react provides a full range of hooks for them
+- It is important to remember to `bind` a method to the correct context, which is usually known at the time of the constructor. We talked about alternatives, but stick to best practices for performance reasons.
+- Some times you want a component to do things at very specific times, so react gives you a series
+of _component lifecyle methods_ which are like event listeners for important stages in the life of a given component. 
 
-Install the dependencies and start the server.
-
-```
-npm install
-npm start
-open http://localhost:3000
-```
-
-### Static Files
-
-You can store static files like images, fonts, etc in the `build` folder.
-
-For example, if you copy a file called my_image.png into the build folder you can access it using `http://localhost:3000/build/my_image.png`.
-
-### Linting
-
-This boilerplate project includes React ESLint configuration.
-
-```
-npm run lint
-```
-
-### Dependencies
-
-* React
-* Webpack
-* [babel-loader](https://github.com/babel/babel-loader)
-* [webpack-dev-server](https://github.com/webpack/webpack-dev-server)
+During our lecture I used the [React documentation](https://reactjs.org/).  You should too; it is very good.  
