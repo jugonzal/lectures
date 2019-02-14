@@ -4,6 +4,8 @@ const bodyParser = require("body-parser")
 const app = express()
 const PORT = process.env.PORT || 8000; // default port 8000
 
+app.use(express.static('public'))
+
 // parse application/x-www-form-urlencoded form data into req.body
 app.use(bodyParser.urlencoded({ extended: false }))
 
