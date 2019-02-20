@@ -19,7 +19,7 @@ function reqListener () {
 
 const oReq = new XMLHttpRequest();
 oReq.addEventListener("load", reqListener);
-oReq.open("GET", "articles.json");
+oReq.open("GET", "article.html");
 oReq.send();
 ```
 
