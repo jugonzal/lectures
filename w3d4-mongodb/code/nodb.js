@@ -1,54 +1,38 @@
 const data = {
-  students: [
-    { name: 'Ben', likes: 'basketball', city: '6ix' },
-    { name: 'Steve', likes: 'home', city: 'Montreal'},
-    { name: 'Diego', likes: 'pokemon', city: 'lostboy'}
-  ]
+  users: [
+    { name: "Juan", course: 'web' },
+    { name: "Dave", course: 'ios' }
+  ],
+  create: create
 }
 
-// console.log(data.students[1].likes)
+let canIWrite = true
 
-// console.log(data.students.filter(student => student.name === 'Ben')[0].likes)
-
-function create (student) {
-  data.students.push(student)
-  saveAll()
+function saveToFile() {
+  if (canIWrite) 
+    canIWrite = false
+  console.log("saving... ")
+  canIWrite = true
 }
 
-function remove (which) {
-  delete data.students[which]
-  saveAll()
+function loadFromFile() {
+  console.log("loading...")
 }
 
-// function read (which) {
-//   console.log(data.students[which])
-// }
-
-function update (name, key, value) {
-  loadAll()
-  find(name)[key] = value
-  saveAll()
+function create (newUser) {
+  loadFromFile()
+  this.users.push(newUser)
+  saveToFile()
 }
 
-function find (name) {
-  return data.students.filter(student => student.name === name)[0]
+function search (field, value) {
+  loadFromFile()
+  return data.users.filter(usr => usr[field] == value)
 }
 
-function loadAll () {
-  // check no LOCKS
-  // retrieve all the data
-}
+data.create({name: 'bob', course: 'juggling', city: 'Calgary'})
+data.create({name: 'dylan', course: 'ios', city: 'Toronto'})
 
-function saveAll () {
-  // LOCK the DATA
-  // make sure my data is written to a file
-  // UNLOCK
-}
-
-for (let i = 1; i< 100 ; i++) {
-  create({ name: 'Hillary', likes: 'coding '+i+' apps', city: 'Toronto' })
-}
-update('Steve','likes','football')
-remove (1)
-// console.log(find ('Hillary'))
 console.log(data)
+
+console.log(search('course','ios'))

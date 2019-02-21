@@ -39,7 +39,10 @@ app.get("/todos", (req, res) => {
     const templateVars = {
       todos: results
     };
-    res.render("todos/index", templateVars);
+    if (!err)
+      res.render("todos/index", templateVars);
+    else
+      res.status(500).send("DB not responding... <a href='/todos'>Try again</a>")
   });
 });
 

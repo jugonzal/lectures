@@ -32,8 +32,8 @@ Currently in our project we have a "global" object in memory to track our shorte
 ```javascript
 const data = {
   users: [
-    { name: "Juan", age: 116 },
-    { name: "Someone else", age: 25 }
+    { name: "Juan", course: 'web' },
+    { name: "Dave", course: 'ios' }
   ]
 }
 ```
