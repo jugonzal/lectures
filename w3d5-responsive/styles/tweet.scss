@@ -1,0 +1,73 @@
+
+section#tweets-container {
+  margin: 2em 0;
+}
+
+article.tweet:hover{
+  opacity: 1;
+}
+
+article.tweet:hover .tweet-icons {
+  color: #888888;
+  visibility: visible;
+}
+
+article.tweet {
+  opacity: 0.5;
+  margin: 1em 2em;
+  border: 1px solid #888888;
+  border-radius: 5px;
+  overflow: auto;
+
+
+}
+
+article header {
+  padding: 10px;
+  background: #eee;
+  height: 70px;
+}
+
+article .tweet-pic {
+  float: left;
+}
+
+article .tweet-username {
+  float: left;
+  font-size: 1.7em;
+  font-weight: 700;
+  margin-left: 10px;
+}
+
+article .tweet-userhandle {
+  float: right;
+}
+
+article .tweet-body {
+  padding: 20px;
+}
+
+article footer {
+  padding: 10px;
+  border-top: 1px solid #888888;
+  overflow: auto;
+}
+
+article .tweet-date {
+        float: left;
+  margin: 5px;
+}
+
+article .tweet-icons {
+  margin: 5px;
+  float: right;
+  visibility: hidden;
+}
+
+article .tweet-icons > * {
+  margin-right: 6px;
+}
+
+article .tweet-icons .fa-flag:hover, article .tweet-icons .fa-retweet:hover, article .tweet-icons .fa-heart:hover {
+  color: red;
+}

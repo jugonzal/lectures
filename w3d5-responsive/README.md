@@ -33,8 +33,8 @@ At that point we discovered SASS and learned a few techniques to leverage their
 `import` and `extend` directives to apply a whole CSS template to a pre-existing
 stylesheet we had designed.
 
-For example, assuming a given CSS pattern we find on the web, we can bring it into
-our project as `_responsive.scss`:
+I won't share the full code as you are still working on your Tweeter project,
+but here is how that example we saw in class works, assuming a given CSS pattern we find on the web, we can bring it into our project as `_responsive.scss`:
 
 ``` 
 .container {
