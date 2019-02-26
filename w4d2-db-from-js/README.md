@@ -1,11 +1,10 @@
 ## SQL from Javascript
 
 In this lecture we took our first steps to talk to a database (Postgres in this
-case) from Node. We've used the [pg](https://www.npmjs.com/package/pg) package
-(and alternatively [pg-then](https://www.npmjs.com/package/pg-then)) to
+case) from Node. We've used the [pg](https://www.npmjs.com/package/pg) package to
 implement the simplest query interface available. 
 
-As compact as [the demo code](https://github.com/jugonzal/lhl-lectures/tree/master/w4d2-db-from-js/albums.js) is, it is a good opportunity to discuss the following:
+As compact as [the demo code](https://github.com/jugonzal/lectures/tree/master/w4d2-db-from-js/code) is, it is a good opportunity to discuss the following:
 
 - When using databases, make sure you know which library/driver you are using to connect to your particular database server.  In our case `pg` is only good for connecting to PostgreSQL.
 ```javascript
@@ -26,13 +25,8 @@ psql -d vagrant -U vagrant -h 127.0.0.1 -p 5432 -W
 
 - We talked about proper code structure to create a database layer. This involved using what is known as the _module pattern_ which relies on a self-executing function and closures to make sure the database is managed by a module but all its functions are available to other areas of the code. 
 
-The `pg-then` package uses [ES6
-promises](http://www.datchley.name/es6-promises/) to reduce callback hell when
-talking to Postgres. This is a highly recommended pattern for everything
-asynchronous! Check out [`musicdb.js`](https://github.com/jugonzal/lhl-lectures/tree/master/w4d2-db-from-js/code/musicdb.js) and
-[`musicdb-promises.js`](https://github.com/jugonzal/lhl-lectures/tree/master/w4d2-db-from-js/code/musicdb-promises.js) to see the differences. Both
-do the exact same thing.
+During class I used a newer approach to handle the _waiting for results_ using `async/await`.  We'll have another opportunity this week to review this but please take a look at the `async function allAlbums` as an example of how to simplify your code. However remember that you should have a _newer_ version of Node.js if you are going to atttempt this.
 
 DB setup and seed data can be found in the [`sql`](https://github.com/jugonzal/lhl-lectures/tree/master/w4d2-db-from-js/sql/) folder.
 
-Here is the [documentation](https://www.npmjs.com/package/pg) to the `pg` package we used.
+Here is the [documentation](https://node-postgres.com/) to the `pg` package we used.
