@@ -1,8 +1,7 @@
-module.exports = (function() {
 
-    // declare private variables and/or functions
 
-const ancestry = [
+const ancestry = {
+  data: [
   {"name": "Carolus Haverbeke", "sex": "m", "born": 1832, "died": 1905, "father": "Carel Haverbeke", "mother": "Maria van Brussel"},
   {"name": "Emma de Milliano", "sex": "f", "born": 1876, "died": 1956, "father": "Petrus de Milliano", "mother": "Sophia van Damme"},
   {"name": "Maria de Rycke", "sex": "f", "born": 1683, "died": 1724, "father": "Frederik de Rycke", "mother": "Laurentia van Vlaenderen"},
@@ -42,8 +41,22 @@ const ancestry = [
   {"name": "Anna van Hecke", "sex": "f", "born": 1607, "died": 1670, "father": "Paschasius van Hecke", "mother": "Martijntken Beelaert"},
   {"name": "Maria Sturm", "sex": "f", "born": 1835, "died": 1917, "father": "Charles Sturm", "mother": "Seraphina Spelier"},
   {"name": "Jacobus Bernardus van Brussel", "sex": "m", "born": 1736, "died": 1809, "father": "Jan van Brussel", "mother": "Elisabeth Haverbeke"}
-];
+  ],
+  checkAll: checkAll
+  };
 
+function checkAll (condition) {
+    let subset = { 
+      data: [],
+      checkAll: this.checkAll
+    }
+    this.data.forEach(p => {
+      if (condition(p)) {
+        subset.data.push(p)
+      }
+    })
+    return subset
+    }
 function deadAfter1918(p) {
   return p.died > 1918
 }
@@ -56,24 +69,25 @@ function isFemale(p) {
   return p.sex == 'f'
 }
 
+// console.log(isMale(ancestry[0]))
 
-function menDeadRecently() {
-  return ancestry
-    .filter(deadAfter1918)
-    .filter(isMale)
-}
 
-function womenDeadRecently() {
-  return ancestry
-    .filter(deadAfter1918)
-    .filter(isFemale)
-}
+// function checkAll (all, condition) {
+//   let subset = []
+//   all.forEach(p => {
+//     if (condition(p)) {
+//       subset.push(p)
+//     }
+//   })
+//   return subset
+// }
 
- return {
-      // declare public variables and/or functions
-      menDeadRecently: menDeadRecently,
-      womenDeadRecently: womenDeadRecently
-    }
+// console.log(checkAll(checkAll(ancestry, deadAfter1918), isMale))
 
-})();
+
+console.log(ancestry
+  .checkAll(deadAfter1918)
+  .checkAll(isMale)
+)
+
 

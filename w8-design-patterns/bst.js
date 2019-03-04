@@ -70,6 +70,12 @@ var addThemUp = {
   }
 }
 
+var allValues = ""
+var concatThemUp = {
+  visit: function (node, level) {
+    allValues += node.key
+  }
+}
 
 tree.insert(1234, 1);
 tree.insert(7777, 2);
@@ -81,11 +87,15 @@ tree.insert(590, 7)
 tree.insert(14,8)
 tree.insert(600,9)
 tree.insert(6000,10)
+tree.insert(800,11)
+
 tree.traverse(display)
 tree.traverse(countThem)
 tree.traverse(addThemUp)
+tree.traverse(concatThemUp)
 console.log(myCount)
 console.log(mySum)
+console.log(allValues)
 // console.log(tree.get(9999));
 
 
