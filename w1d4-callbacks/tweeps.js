@@ -1,90 +1,92 @@
 var tweeps = [
   { who: '@fzero', 
     said: "Callbacks are control flow as designed by M.C. Escher."},
-  { who: '@om',
-    said: "For @facebook people = money"},
-  { who: '@ryanmerkley',
-    said: "Stunning exhibit opening today at the @agotoronto: 'Anthropocene'"},
+  { who: '@kevinroose',
+    said: "The solution to Bad Facebook is always More Facebook"},
+  { who: '@0xUID',
+    said: "Macintosh OS X was beautiful, intuitive and user-friendly......and it was #UNIX!"},
   { who: '@mozilla',
-    said: "In our #internethealth Report, we put a spotlight on the open-source software you never knew you were using."}
+    said: "learn how to create your own VR experiences with A-Frame"}
 ]
 
 // STAGE 0: Our first stage is to 
 // manually change one tweep at a time
 
-for (i = 0; i < tweeps.length; i++) {
-  // console.log('my first tweep ',tweeps[i].who,' said ',tweeps[i].said)
-}
+// tweeps[0].like = true;
+// tweeps[2].like = true;
+// tweeps[2]['like'] = true;
 
-// tweeps[0].agree = true
-// tweeps[2].like = true
-
-// console.log(tweeps)
+tweeps.push({who: '@private',said: 'I dont give it away'});
 
 // STAGE 1: writing functions to do one thing
 // Explore the various styles of functions: 
 // declaration vs expression
 
-function likeTweep(tweep) {
-  tweep.like = true
+// likeTweeps(0)
+// likeTweeps(2)
+
+function likeTweeps (index) {
+  tweeps[index].like = true;
+  return 5;
 }
 
-// var agreeTweep = null;
-
-
-var agreeing = function agreeTweep(tweep) {
-  tweep.agree = true
+var bookmarkTweeps = function (index) {
+  tweeps[index].bookmark = new Date();
 }
 
-// agreeing(tweeps[2])
+// bookmarkTweeps(1)
 
 
 // STAGE 2: finding ways to create generic functions, using bracket notation
 
-function flagTweep(tweep, flag) {
-  tweep[flag] = true
-}
-
-// for (let tweep of tweeps) {
-//   flagTweep(tweep, 'like')
-//   flagTweep(tweep, 'read')
+// function changeTweeps (index, key, value) {
+//   if (!value) {
+//     tweeps[index][key] = true;
+//   } else {
+//     tweeps[index][key] = value;
+//   }
 // }
+
+// changeTweeps(3,'flag')
+// changeTweeps(3,'remind')
+// changeTweeps(0,'ignored')
+// changeTweeps(0,'like')
+// changeTweeps(2,'like')
+// changeTweeps(1,'bookmark',new Date())
 
 
 // STAGE 3: certain things that our function above 
 // can not do, such as changing what was said. Need CALLBACKS!!!!
 
-function outrageTweep(tweep) {
-  tweep.said += ' !!!!'
+function exclamations (index) {
+  tweeps[index].said += '!!!!'
 }
 
-// function changeTweep(tweep, change) {
-//   if (change == 'like')
-//     flagTweep(tweep, 'like')
-//   if (change == 'outrage')
-//     outrageTweep(tweep)
-// }
+function changeTweeps (index, callback) {
+  callback(index)
+}
 
-function changeTweeps(change) {
-  for (let tweep of tweeps) {
-    change(tweep)
+changeTweeps(1, exclamations)
+changeTweeps(2, bookmarkTweeps)
+changeTweeps(0, likeTweeps)
+
+// as a final example of a very good function,
+// consider the following:
+
+function changeAllTweeps (callback) {
+  for (t = 0; t< tweeps.length; t++) {
+    callback(t)
   }
 }
 
-changeTweeps(likeTweep)
+// I've created a function that does ONE thing very
+// well, but at the same time is so generic that could
+// be used to make ANY change across all my tweeps.
+// That is the ultimate goal.
 
-
-
-// var modifyAllTweeps = changeTweeps
-// modifyAllTweeps(yell)
-
-
-changeTweeps(function (tweep) {
-  tweep.said = tweep.said.toUpperCase()
+changeAllTweeps(function(index) {
+  tweeps[index].said = tweeps[index].said.toUpperCase()
 })
-
-
-
 
 console.log(tweeps)
 

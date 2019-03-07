@@ -12,4 +12,3 @@ A few things that I should've mentioned while talking about functions:
 
 You can find all of the code we wrote in [my github repo](https://github.com/jugonzal/lhl-lectures/blob/master/w1d4-callbacks/tweeps.js)
 
-
