@@ -1,3 +1,3 @@
 var gens = require('./ancestry')
 
-console.log(gens.greatest())
+console.log(gens.greatestGeneration())

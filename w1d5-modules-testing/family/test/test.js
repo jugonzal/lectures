@@ -4,32 +4,24 @@ var expect = require('chai').expect;
 describe('Testing Ancestry', function() {
   var ancestryCode = require('../ancestry.js');
 
-  describe('testing greatest() function', function() {
+  describe('testing greatestGeneration() function', function() {
 
     // Chai has two test styles: assert and expect.
     // We'll use assert style for these tests
 
     it('should have 3 people in its greatest generation', function() {
-      assert.lengthOf(ancestryCode.greatest() , 3, 'should be 3 people')
+      assert.lengthOf(ancestryCode.greatestGeneration() , 3, 'should be 3 people')
     })
 
     it('should find Clara in the greatest generation', function() {
-      assert.equal(ancestryCode.greatest()[1].name, 'Clara Aernoudts', 'should have been Clara')
+      assert.equal(ancestryCode.greatestGeneration()[1].name, 'Clara Aernoudts', 'should have been Clara')
+    })
+
+    it('should return people born between 1900 and 1924', function() {
+      expect(ancestryCode.greatestGeneration()[0].born).to.be.at.most(1924)
+      // assert.equal(, 1908, 'maybe not checking the correct years?' )
     })
   })
 
-  describe('testing victorians() function', function() {
-
-    // Chai has two test styles: assert and expect.
-    // We'll use assert style for these tests
-
-    it('should have 2 people in its victorians generation', function() {
-      assert.equal(ancestryCode.victorians().length , 2, 'should be 2 people')
-    })
-
-    it('should find Maria in the victorians generation', function() {
-      assert.equal(ancestryCode.victorians()[1].name, 'Maria Sturm', 'should have been Maria')
-    })
-  })
 
 })
