@@ -2,9 +2,9 @@ var request = require('request');
 
 // Get request
 // Some URLs:
-// 	http://jsonplaceholder.typicode.com/albumms?userId=8
+// 	http://jsonplaceholder.typicode.com/albums?userId=8
 //  https://techmeme.com/img/techmeme135.png
-request.get('http://google.ca', function (error, response, body) {
+request.get('http://jsonplaceholder.typicode.com/albums?userId=8', function (error, response, body) {
 	// console.log('Got it!');
 	if (error) {
 		console.log("There was an ERROR: ", error);

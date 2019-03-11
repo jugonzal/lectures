@@ -107,33 +107,21 @@ To better understand these concepts we played with a new command that is able
 to send ONE request and echo the response on screen:
 
 ```
-curl google.com
-
-curl https://www.metaweather.com/api/location/4118/
+curl http://jsonplaceholder.typicode.com/albums
 
 ```
 
-The second URL is a great example of a full URL that defines a resource, located
-somewhere in the realm of Google servers, using parameters to pass information
-into my request.
+Then we learned how to do the exact same thing from Javascript by using a module called `request`.
 
-
-Look inside the [`/code`](https://github.com/jugonzal/lhl-lectures/tree/master/w2d1-http-intro/code) folder.
+Look inside the [`/code`](https://github.com/jugonzal/lectures/tree/master/w2d1-http-intro/code) folder.
 
 
 Here we see a great example of when using callbacks makes perfect sense:  we are
 getting a resource from the web but the actual call will take a few milliseconds
 so we write a callback to deal with the aftermath of that request.
 
-We also spent some time wondering how to work with this response, since it came
-in JSON format.   Ultimately, the fact that we are in Javascript makes it very
-easy to deal with JSON data.
-
-Working with APIs will be all about learning about *resources* that are managed
-by other servers, and which are exposed to us through the various HTTP methods 
-(GET, POST, PUT, DELETE, etc), and then exchanging data back and forth.
 
 ## More stuff
 
-GitHub repo for this lecture: https://github.com/jugonzal/lhl-lectures/tree/master/w2d1-http-intro
+GitHub repo for this lecture: https://github.com/jugonzal/lectures/tree/master/w2d1-http-intro
 
