@@ -1,45 +1,33 @@
 var request = require('request');
 
-module.exports = function getWeather(woeid, callback, when) {
-  var query = 'https://www.metaweather.com/api/location/'+woeid+'/';
-
-  // console.log("REQUEST: ", query);
-  if (when == undefined) {
-    when = 0;
-  }
-  request.get(query, 
+function getWeather(city, callback) {
+  request.get(
+    "https://www.metaweather.com/api/location/"+city+"/", 
     function(error, response, body) {
       if (!error && response.statusCode == 200) {
-        // console.log(body)
+        // console.log('got the weather:', body)
+
+        // JSON.parse helps us convert something that 
+        // "looks" like data into an actual data object
         var data = JSON.parse(body);
-        // console.log('just got results inside:', data.consolidated_weather[0].weather_state_name + ' ' + data.consolidated_weather[0].the_temp);
-        callback(data.consolidated_weather[when]);
+
+        // console.log(data.consolidated_weather[0].weather_state_name )
+        callback(data.consolidated_weather[0].weather_state_name )
+        // + " " + 
+        //   data.consolidated_weather[0].the_temp
       }
-      console.log ("DONE with everything");
     }
-  );  
-  // callback("DONE with function");
+  )  
 }
+  
+// We tried this approach but got _undefined_
+// console.log("Toronto: " , getWeather(4118))
+// console.log("Montreal: ", getWeather(3534))
 
-// console.log(getWeather("4118"));
+getWeather(4118, function(data) {
+  console.log("Toronto: ",data)
+})
 
-// getWeather("4118", function (output) {
-//   console.log(output)
-//   if (output.the_temp > 20) {
-//     console.log("You should be out there")
-//   }
-// });
-
-
-
-
-
-
-
-
-
-
-// getForecast(4118, function(theWeather, theTemp) {
-//   console.log("REAL forecast:",theWeather.toUpperCase());
-//   console.log("REAL temp:",theTemp + 5);
-// })
+getWeather(3534, function(data) {
+  console.log("Montreal: ",data)
+})
