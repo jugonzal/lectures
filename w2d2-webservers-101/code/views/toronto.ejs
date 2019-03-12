@@ -1,14 +1,14 @@
 <html>
+  <head>
+    <title>Welcome to Toronto!</title>
+    <style>
+      body {
+        background-color: #cccccc;
+      }
+    </style>
+  </head>
   <body>
-    <h1>Sports LHL as of <%= new Date() %></h1>
-    <p>Here are the <%= events.length %> games in Toronto tonight</p>
-    <ul>
-      <% for (var i=0; i< events.length; i++) { %>
-        <li>
-          <%= events[i].team %> is playing <%= events[i].game %>
-          <img height="50px" src="<%= events[i].image %>">
-        </li> 
-      <% } %>
-    </ul>
+    <h1>Weather in Toronto for <%= new Date() %></h1>
+    <p>Today is mildly cold.</p>
   </body>
 </html>

@@ -1,41 +1,37 @@
 let http = require('http');
 
-// define app constants
-const PORT = 3000;
+const PORT = 8000;
 
-// create a server with a responder function
-let server = http.createServer(function respondToRequests(request, response){
-    console.log("Request: ", request.method, request.url)
-
-    if (request.url === '/') {
-      response.end(`
-        <html>
-          <body>
-            <img style="float: right" height="50px" src="https://pbs.twimg.com/profile_images/378800000328970347/40e96c650dad499b060a4f24ddc68c6e_400x400.png">
-            <h1>Lighthouse Labs</h1>
-            <h2>Fall <a href="/courses">Courses</a></h2>
-          </body>
-        </html>
-        `); 
-    } else if (request.url === '/courses') {
-      response.end(`
-       <html>
-          <body>
-            <h1>Lighthouse Labs</h1>
-            <h2>Fall Courses</h2>
-            <ul>
-              <li>Web Bootcamp</li>
-              <li>iOS Bootcamp</li>
-            </ul>
-          </body>
-        </html>
-         `)
-    } else {
-      response.end('Big 404')
-    }
+let server = http.createServer(function (request, response){
+  let route =  request.method + ' ' + request.url;
+  console.log('Route: ', route);
+  // switch (route) {
+  //   case 'GET /toronto':
+  //     response.end('It is mildly cold in Toronto today.');
+  //     break;
+  // }
+  if (route === 'GET /toronto') {
+    response.end('It is mildly cold in Toronto today.')
+  } else if (route == 'GET /montreal') {
+    response.end('We think it must be very cold in Montreal. Probably.')
+  } else if (route  == 'GET /') {
+    response.end(`
+      <html>
+      <body>
+        <h1>Juan's meteorological service</h1>
+        <p>Welcome and please select one of the following citiers:<p>
+        <ul>
+          <li><a href='/toronto'>Toronto</a></li>
+          <li><a href='/montreal'>Montreal</a></li>
+        </ul>
+      </body>
+      </html>`)
+  } else {
+    response.statusCode = 404;
+    response.end('I have never been there...')
+  }
 });
 
-// start the server
-server.listen(PORT, function onServerStart(){
-    console.log("Server listening on: http://localhost:%s", PORT);
+server.listen(PORT, function (){
+    console.log("Server listening on: http://localhost: ", PORT);
 });
