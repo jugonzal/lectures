@@ -22,18 +22,24 @@ const url = process.argv[2];
 const url2 = process.argv[3];
 // console.log(`URL: ${url}`);
 
+// when the following two promises are created, 
+// realize that the actual request will be sent
+// for both...  but we defer the processing of the
+// outcome to later.
 let p1 = promisifiedGet(url)
-let p2 = promisifiedGet(url2)
+// let p2 = promisifiedGet(url2)
 
-Promise.all([p1,p2])
-.then((data) => {
-  console.log(`First Data is ${data[0]}.`);
-  throw "First promise ERROR"
+
+p1.then((data) => {
+  console.log(`First Data is ${data}.`);
+  // Throwing an error will trigger the .catch block
+  // just like try/catch... Nice!
+  //
+  // throw "First promise ERROR"
   return 1
 })
 // .then(id => {
-//     promisifiedGet(url2)
-//     .then((data) => {
+//     p2.then((data) => {
 //       console.log(`Second Data is ${data}.`);
 //       // throw "Second promise ERROR"
 //     })
@@ -51,7 +57,7 @@ Promise.all([p1,p2])
 // at the same time.  Useful to dispatch many tasks at once
 // and wait for all of them to be finished.
 
-// Promise.all([
+// Promise.race([
 //   promisifiedGet('http://reqres.in/api/users/2?delay=1'),
 //   promisifiedGet('http://reqres.in/api/user/1?delay=3')
 //   ])

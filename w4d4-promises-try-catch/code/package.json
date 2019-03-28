@@ -1,18 +1,15 @@
 {
-  "name": "w4d4",
+  "name": "code",
   "version": "1.0.0",
-  "description": "LighthouseLabs - W4D4",
-  "main": "promises.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "echo \"Use node <file.js> to run each script:\" && ls *.js"
-  },
-  "author": "Fabio Neves",
-  "license": "UNLICENSED",
+  "description": "W4D4 lecture on Error and Promises",
+  "main": "simple.js",
   "dependencies": {
-    "connect-timeout": "^1.9.0",
-    "express": "^4.16.4",
-    "morgan": "^1.9.1",
-    "request": "^2.83.0"
-  }
+    "request": "^2.88.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
 }
