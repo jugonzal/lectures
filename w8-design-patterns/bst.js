@@ -1,22 +1,26 @@
-function Node(key, value) {
+function Node(key) {
   this.key = key;
-  this.value = value;
   this.left = null;
   this.right = null;
-  this.accept = function (visitor,level) {
-    visitor.visit(this,level);
-    if (this.left) 
-      this.left.accept(visitor,level+"--")
+  this.accept = function(visitor) {
+    if (this.left)
+      this.left.accept(visitor)
+    visitor.visit(this)
     if (this.right)
-      this.right.accept(visitor,level+"--")
+      this.right.accept(visitor)
   }
 }
 
 var tree = {
   _root: null,
+
+  accept: function(visitor) {
+    if (this._root)
+      this._root.accept(visitor)
+  },
         
-  insert: function (key, value) {
-    var node = new Node(key, value);
+  insert: function (key) {
+    var node = new Node(key);
     if (this._root) {
       var currentNode = this._root;
       while (currentNode) {
@@ -32,16 +36,11 @@ var tree = {
       this._root = node;
     }
   },
-  traverse: function(visitor) {
-    if (this._root) {
-      this._root.accept(visitor,"|")
-    }
-  },
   get: function (key) {
     var currentNode = this._root;
     while (currentNode) {
       if (currentNode.key === key) {
-        return currentNode.value;
+        return currentNode;
       }
       var dir = (currentNode.key > key) ? 'left' : 'right';
       currentNode = currentNode[dir];
@@ -50,53 +49,39 @@ var tree = {
   }
 };
 
-var display = {
-    visit: function (node,level) {
-      console.log(level + ">" + node.key);
-    }
-};
-
-var myCount = 0;
-var countThem = {
-  visit: function (node, level) {
-    myCount ++;
+let sortVisitor = {
+  visit: function(Node) {
+    console.log(Node.key)
   }
 }
 
-var mySum = 0;
-var addThemUp = {
-  visit: function (node, level) {
-    mySum += node.value;
+let countVisitor = {
+  count: 0,
+  visit: function(Node) {
+    this.count++
   }
 }
 
-var allValues = ""
-var concatThemUp = {
-  visit: function (node, level) {
-    allValues += node.key
-  }
-}
+tree.insert(1234);
+tree.insert(7777);
+tree.insert(123);
+tree.insert(-1123);
+tree.insert(0);
+tree.insert(9999);
+tree.insert(590)
+tree.insert(14)
+tree.insert(600)
+tree.insert(6000)
+tree.insert(800)
+tree.insert(934)
+tree.insert(1237)
+tree.insert(7)
 
-tree.insert(1234, 1);
-tree.insert(7777, 2);
-tree.insert(123, 3);
-tree.insert(-1123, 4);
-tree.insert(0, 5);
-tree.insert(9999, 6);
-tree.insert(590, 7)
-tree.insert(14,8)
-tree.insert(600,9)
-tree.insert(6000,10)
-tree.insert(800,11)
+console.log(tree)
+console.log(tree._root.key)
+console.log(tree._root.left.key, '<- ->', tree._root.right.key )
 
-tree.traverse(display)
-tree.traverse(countThem)
-tree.traverse(addThemUp)
-tree.traverse(concatThemUp)
-console.log(myCount)
-console.log(mySum)
-console.log(allValues)
-// console.log(tree.get(9999));
+tree.accept(sortVisitor)
 
-
-
+tree.accept(countVisitor)
+console.log('Nodes: ',countVisitor.count)

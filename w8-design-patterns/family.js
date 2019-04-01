@@ -1,7 +1,4 @@
-
-
-const ancestry = {
-  data: [
+const ancestry = [
   {"name": "Carolus Haverbeke", "sex": "m", "born": 1832, "died": 1905, "father": "Carel Haverbeke", "mother": "Maria van Brussel"},
   {"name": "Emma de Milliano", "sex": "f", "born": 1876, "died": 1956, "father": "Petrus de Milliano", "mother": "Sophia van Damme"},
   {"name": "Maria de Rycke", "sex": "f", "born": 1683, "died": 1724, "father": "Frederik de Rycke", "mother": "Laurentia van Vlaenderen"},
@@ -41,53 +38,20 @@ const ancestry = {
   {"name": "Anna van Hecke", "sex": "f", "born": 1607, "died": 1670, "father": "Paschasius van Hecke", "mother": "Martijntken Beelaert"},
   {"name": "Maria Sturm", "sex": "f", "born": 1835, "died": 1917, "father": "Charles Sturm", "mother": "Seraphina Spelier"},
   {"name": "Jacobus Bernardus van Brussel", "sex": "m", "born": 1736, "died": 1809, "father": "Jan van Brussel", "mother": "Elisabeth Haverbeke"}
-  ],
-  checkAll: checkAll
-  };
+  ];
 
-function checkAll (condition) {
-    let subset = { 
-      data: [],
-      checkAll: this.checkAll
-    }
-    this.data.forEach(p => {
-      if (condition(p)) {
-        subset.data.push(p)
-      }
-    })
-    return subset
-    }
-function deadAfter1918(p) {
-  return p.died > 1918
+function deadAfter1980(p) {
+  return p.died > 1980
 }
 
-function isMale(p) {
-  return p.sex == 'm'
+function theFather(person) {
+  return ancestry.filter(p => person.father == p.name)[0]
 }
 
-function isFemale(p) {
-  return p.sex == 'f'
+function onePersonAfter1980() {
+  return ancestry.filter(deadAfter1980)[0]
 }
 
-// console.log(isMale(ancestry[0]))
-
-
-// function checkAll (all, condition) {
-//   let subset = []
-//   all.forEach(p => {
-//     if (condition(p)) {
-//       subset.push(p)
-//     }
-//   })
-//   return subset
-// }
-
-// console.log(checkAll(checkAll(ancestry, deadAfter1918), isMale))
-
-
-console.log(ancestry
-  .checkAll(deadAfter1918)
-  .checkAll(isMale)
-)
+console.log(theFather(theFather(onePersonAfter1980())))
 
 
