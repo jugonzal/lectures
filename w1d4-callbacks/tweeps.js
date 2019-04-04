@@ -9,84 +9,83 @@ var tweeps = [
     said: "learn how to create your own VR experiences with A-Frame"}
 ]
 
-// STAGE 0: Our first stage is to 
-// manually change one tweep at a time
+  // STAGE 0: Our first stage is to 
+  // manually change one tweep at a time
 
-// tweeps[0].like = true;
-// tweeps[2].like = true;
-// tweeps[2]['like'] = true;
+// console.log(tweeps[1].who)
+// console.log(tweeps[2].who)
 
-tweeps.push({who: '@private',said: 'I dont give it away'});
+// tweeps[0].when = new Date('2018-11-28')
 
-// STAGE 1: writing functions to do one thing
-// Explore the various styles of functions: 
-// declaration vs expression
+// console.log(tweeps[1].when)
+// console.log(tweeps[0].when.toString())
 
-// likeTweeps(0)
-// likeTweeps(2)
+// tweeps[0]['where'] = 'Toronto'
 
-function likeTweeps (index) {
-  tweeps[index].like = true;
-  return 5;
-}
+  // STAGE 1: writing functions to do one thing
+  // Explore the various styles of functions: 
+  // declaration vs expression
+  // Also, what happens to variables that go into functions?
 
-var bookmarkTweeps = function (index) {
-  tweeps[index].bookmark = new Date();
-}
+// this will NOT work because the function doesnt exist yet
+// timestamp(tweeps[0])
 
-// bookmarkTweeps(1)
-
-
-// STAGE 2: finding ways to create generic functions, using bracket notation
-
-// function changeTweeps (index, key, value) {
-//   if (!value) {
-//     tweeps[index][key] = true;
-//   } else {
-//     tweeps[index][key] = value;
-//   }
+// function timestamp (tweep) {
+//   tweep.timestamp = new Date();
 // }
 
-// changeTweeps(3,'flag')
-// changeTweeps(3,'remind')
-// changeTweeps(0,'ignored')
-// changeTweeps(0,'like')
-// changeTweeps(2,'like')
-// changeTweeps(1,'bookmark',new Date())
-
-
-// STAGE 3: certain things that our function above 
-// can not do, such as changing what was said. Need CALLBACKS!!!!
-
-function exclamations (index) {
-  tweeps[index].said += '!!!!'
+var timestamp = function (tweep) {
+  tweep.timestamp = new Date();
 }
 
-function changeTweeps (index, callback) {
-  callback(index)
+var approval = function (tweep) {
+  tweep.approved = true;
 }
 
-changeTweeps(1, exclamations)
-changeTweeps(2, bookmarkTweeps)
-changeTweeps(0, likeTweeps)
+// timestamp(tweeps[1])
+// approval(tweeps[3])
 
-// as a final example of a very good function,
-// consider the following:
 
-function changeAllTweeps (callback) {
-  for (t = 0; t< tweeps.length; t++) {
-    callback(t)
+  // STAGE 2: finding ways to create generic functions, 
+  // using bracket notation
+
+// function changeTweep(tweep, key, value) {
+//   tweep[key] = value
+// }
+
+// changeTweep(tweeps[1], 'timestamp', new Date())
+// changeTweep(tweeps[3], 'approved', true)
+// // changeTweep(tweeps[3], 17, "seventeen")
+
+// for (i=0; i<tweeps.length; i++) {
+//   changeTweep(tweeps[i], 'ID', i)
+// }
+
+  // STAGE 3: certain things that our function above 
+  // can not do, such as changing what was said. 
+
+function changeOneTweep (handle, doSomething) {
+  for (tweep of tweeps) {
+    if (tweep.who == handle) {
+      doSomething(tweep)
+    }
   }
 }
 
-// I've created a function that does ONE thing very
-// well, but at the same time is so generic that could
-// be used to make ANY change across all my tweeps.
-// That is the ultimate goal.
+changeOneTweep('@fzero', timestamp)
+changeOneTweep('@mozilla', timestamp)
 
-changeAllTweeps(function(index) {
-  tweeps[index].said = tweeps[index].said.toUpperCase()
+changeOneTweep('@mozilla', function (tweep) {
+  tweep.said = tweep.said.toUpperCase();
+  tweep.when = (new Date()).toString();
 })
+
+
+  // I've created a function that does ONE thing very
+  // well, but at the same time is so generic that could
+  // be used to make ANY change across all my tweeps.
+  // That is the ultimate goal.
+
 
 console.log(tweeps)
 
