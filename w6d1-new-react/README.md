@@ -50,6 +50,6 @@ Once we understood the fundamental process for creating JSX, we started to look 
 - components can pass data to their children by using `props`
 - anything that a component needs to remember is known as `state`, but I made the suggestion that only the top-level component should manage state and all data should flow top-down from there.
 
-You'll find the [`simple.jsx`](https://github.com/jugonzal/lectures/blob/master/w6d1-new-react/simple.jsx), [`middle.jsx`](https://github.com/jugonzal/lectures/blob/master/w6d1-new-react/middle.jsx) and [`full.jsx`](https://github.com/jugonzal/lectures/blob/master/w6d1-new-react/full.jsx) versions of our app. 
+You'll find a nice progression through the various examples we reviewed today, starting with [`step1.jsx`](https://github.com/jugonzal/lectures/blob/master/w6d1-new-react/step1.jsx).
 
 We'll continue learning about the tooling that makes React development so popular.
