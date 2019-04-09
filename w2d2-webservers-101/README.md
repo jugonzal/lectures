@@ -24,7 +24,7 @@ server.listen(PORT, function onServerStart(){
 });
 ```
 
-From this point we kept adding simple logic via `if {}` statements to respond differently to various `request.url` values.  This approach may not be very elegant but it worked.  Feel free to revisit the full [code we wrote](https://github.com/jugonzal/lhl-lectures/tree/master/w2d2-webservers-101/basic/server.js) up to this point.
+From this point we kept adding simple logic via `if {}` statements to respond differently to various `request.url` values.  This approach may not be very elegant but it worked.  Feel free to revisit the full [code we wrote](https://github.com/jugonzal/lectures/tree/master/w2d2-webservers-101/basic/server.js) up to this point.
 
 ## Express.js
 
@@ -36,7 +36,7 @@ First, to make sure we can use Express:
 
 And then set up in your code:
 
-```
+```javascript
 const express = require('express');
 const app = express();
 
@@ -52,22 +52,24 @@ app.listen(PORT, () => {
 
 We continued to enhance our server by adding new "routes" or URLs that the server should understand.  In each case we would simply add another snippet such as:
 
-```
+```javascript
 app.get('/about', function(req, res) {
   res.render('about');
 });
 ```
 
 And as the code above suggests, we found very convenient to "use" a extension to Express that is capable of using EJS templates.  By doing so we can keep our javascript code in one place and our template files (mostly HTML) in a separate `views` folder, thanks to this one line:
-```
+
+```javascript
 app.set('view engine', 'ejs');
 ```
+
 You'll learn a lot more about how to use templates.  They are not just a place
 to manage your static HTML, but can have logic within using the `<%  %>` tag.
 
 All these extensions to Express are [middleware](http://expressjs.com/en/guide/using-middleware.html), which is a way of adding functionality to the server.  
 
-Please look at the [code](https://github.com/jugonzal/lhl-lectures/tree/master/w2d2-webservers-101/code) we wrote in class to get a full Express server configured with some middleware to use EJS templates, server static files in a public directory and manage data from forms.
+Please look at the [code](https://github.com/jugonzal/lectures/tree/master/w2d2-webservers-101/code) we wrote in class to get a full Express server configured with some middleware to use EJS templates, server static files in a public directory and manage data from forms.
 
 Note that when submitting a form:
 

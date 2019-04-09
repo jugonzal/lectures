@@ -2,34 +2,43 @@ let http = require('http');
 
 const PORT = 8000;
 
+// request.method
+// request.url
+// response.end
+// response.statusCode
+
 let server = http.createServer(function (request, response){
-  let route =  request.method + ' ' + request.url;
-  console.log('Route: ', route);
-  // switch (route) {
-  //   case 'GET /toronto':
-  //     response.end('It is mildly cold in Toronto today.');
-  //     break;
-  // }
-  if (route === 'GET /toronto') {
-    response.end('It is mildly cold in Toronto today.')
-  } else if (route == 'GET /montreal') {
-    response.end('We think it must be very cold in Montreal. Probably.')
-  } else if (route  == 'GET /') {
+  let route = request.method + ' ' + request.url;
+
+  if (route === 'GET /') {
     response.end(`
       <html>
       <body>
-        <h1>Juan's meteorological service</h1>
-        <p>Welcome and please select one of the following citiers:<p>
+        <h1>Juan's Weather Station</h1>
+        <h3>Pick a City</h3>
         <ul>
-          <li><a href='/toronto'>Toronto</a></li>
-          <li><a href='/montreal'>Montreal</a></li>
+          <li><a href='/toronto/today'>Toronto</a></li>
+          <li><a href='/chicago/today'>Chicago</a></li>
         </ul>
       </body>
-      </html>`)
-  } else {
-    response.statusCode = 404;
-    response.end('I have never been there...')
+      </html>`)    
   }
+  else if (route === 'GET /toronto/today') {
+    response.end(`
+      <html>
+      <body>
+        <h1>Juan's Weather Station</h1>
+        <h3>Toronto</h3>
+        <p>The weather in Toronto is 10 degrees and kind of cloudy</p>
+      </body>
+      </html>`)
+  } else if (route === 'GET /toronto/tomorrow') {
+    response.end("The weather tomorrow will be crappy, rainy.  Don't forget your umbrella")
+  }   else {
+    response.statusCode = 404
+    response.end("We just sent our crew to find out.  Visit again, please.")
+  }
+
 });
 
 server.listen(PORT, function (){

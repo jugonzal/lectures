@@ -8,7 +8,10 @@
     </style>
   </head>
   <body>
-    <h1>Weather in Toronto for <%= new Date() %></h1>
-    <p>Today is mildly cold.</p>
+    <% var today = new Date(); %>
+    <h1>Weather in <%=city %></h1>
+    <h3> for <%= today.toString() %></h3>
+    <p>Today is kind of cloudy.</p>
+    <img src="/static/<%= forecast %>">
   </body>
 </html>

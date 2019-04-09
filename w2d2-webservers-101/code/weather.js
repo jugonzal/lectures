@@ -1,6 +1,6 @@
 const express = require('express');
 // const bodyParser = require('body-parser');
-const morgan = require('morgan');
+// const morgan = require('morgan');
 
 // Initialize express
 const app = express();
@@ -21,22 +21,30 @@ app.set("view engine", "ejs");
 
 // I'm also adding a logging middleware so we can see what's going on
 // with our server. More info: https://github.com/expressjs/morgan
-app.use(morgan('dev'));
-// app.use('/static', express.static('public'))
+// app.use(morgan('dev'));
+app.use('/static', express.static('public'))
 
-app.use(function(req, res, next) {
-  console.log(`Request: ${req.method} ${req.url}`);
-  next()
-})
+// app.use(function(req, res, next) {
+//   console.log(`Request: ${req.method} ${req.url}`);
+//   next()
+// })
 
 
 // Routing functions go here
 app.get('/', function (req, res) {
-  res.send('Hello World')
+  res.send('Welcome to Express Weather!')
 });
 
+app.get('/toronto', function(req, res) {
+  res.render('toronto')
+})
+
 app.get('/city/:someCity', (req, res) => {
- 	res.render(req.params.someCity)
+	console.log("Req Params: ", req.params)
+  let templateVars = { 
+  	city: req.params.someCity,
+  	forecast: "MetaWeather-LightCloud.png" }
+  res.render('toronto',templateVars)
 });
 
 // app.get('/media', (req, res) => {
@@ -45,7 +53,7 @@ app.get('/city/:someCity', (req, res) => {
 
 
 // Start the server
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}!`);
 });
