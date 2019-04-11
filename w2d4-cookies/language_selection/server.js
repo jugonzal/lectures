@@ -1,48 +1,39 @@
 const express = require("express");
 const app = express();
-const parser = require("cookie-parser");
+const parser = require("cookie-parser")
 const PORT = process.env.PORT || 8000; // default port 8000
+
+// var preference = null;
+
+app.use(parser('chipmunks are very noisy'))
+
+app.use(function(req, res, next) {
+  console.log("Request: ", req.url)
+  console.log("Headers: ", req.headers)
+  console.log("Cookies: ", req.cookies)
+  console.log("Signed: ", req.signedCookies)
+  next()
+})
 
 app.set("view engine", "ejs");
 
-// let chosen_language = null;
-
-function echoRequest (req, res, next) {
-  console.log("Request Cookie: ", req.headers.cookie);
-  console.log("Cookies Parsed: ", req.cookies)
-  console.log("Signed Cookies: ", req.signedCookies)
-  next();
-}
-
-// function grabCookie (req, res, next) {
-//   if (req.headers.cookie) {
-
-//   }
-// }
-
-app.use(parser('good idea to initialize with some random phrase'))
-app.use(echoRequest)
-
 app.get("/", (req, res) => {
-  if (!req.signedCookies.chosen_language) {
-    res.render("choose_language"); 
+  if (req.signedCookies.preference == 'EN') {
+    res.render("english")
+  } else if (req.signedCookies.preference == 'FR') {
+    res.render("french")
   } else {
-    res.render(req.signedCookies.chosen_language);
-  } 
-  // } else if (chosen_language == 'EN') {
-  //   res.render("english");
-  // } else if (chosen_language == 'FR') {
-  //   res.render("french");
-  // }
+    res.render("choose_language");  
+  }
 });
 
 app.get("/choose_english", (req, res) => {
-  res.cookie('chosen_language', 'english', {signed: true});
+  res.cookie('preference','EN', {signed: true});
   res.render("english");
 })
 
 app.get("/choose_french", (req, res) => {
-  res.cookie('chosen_language', 'french', {signed: true});
+  res.cookie('preference','FR', {signed: true});
   res.render("french");
 });
 

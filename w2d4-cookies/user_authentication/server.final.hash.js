@@ -2,9 +2,10 @@ const express = require("express")
 const bodyParser = require("body-parser")
 const bcrypt = require("bcrypt")
 
-
 const app = express()
 const PORT = process.env.PORT || 8000; // default port 8000
+
+app.use(express.static('public'))
 
 // parse application/x-www-form-urlencoded form data into req.body
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -44,8 +45,9 @@ function checkLogin(username, password) {
 // Show the treasure if they are logged in, otherwise redirect to LOGIN page.
 app.get("/", (req, res) => {
   const currentUsername = req.cookies['username'];
-  if (validUser(currentUsername)) {
-    res.render('treasure', { currentUser: currentUsername });
+  currentUser = validUser(currentUsername)
+  if (currentUser) {
+    res.render('treasure', { currentUser: currentUser.username });
   } else {
     res.redirect("login");
   }
@@ -64,7 +66,7 @@ app.post("/login", (req, res) => {
 
   if (user) {
     // success
-    // cookies set to expire in 1 hour
+    // cookies set to expire in 2 minutes
     res.cookie('username', user.unique, {expires: new Date(Date.now() + 1000*60*2)}); // Set-Cookie: lang=en
 
     res.redirect('/');

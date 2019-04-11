@@ -5,6 +5,8 @@ const bcrypt = require("bcrypt")
 const app = express()
 const PORT = process.env.PORT || 8000; // default port 8000
 
+app.use(express.static('public'))
+
 // parse application/x-www-form-urlencoded form data into req.body
 app.use(bodyParser.urlencoded({ extended: false }))
 
@@ -15,9 +17,13 @@ app.set("view engine", "ejs")
 
 const data = {
   users: [
-    { username: 'monica', password: 'testing'},
-    { username: 'khurram', password: 'testing2' }
+    { username: 'monica', password: 'testing', token: '1234'},
+    { username: 'khurram', password: '12345' }
   ]
+}
+
+function createToken() {
+  Math.random().toString().substr(5,5)
 }
 
 function validUser (username) {
@@ -30,7 +36,7 @@ function validUser (username) {
 
 function checkLogin(username, password) {
   for (user of data.users) {
-    if (user.username === username && bcrypt.compareSync(password, user.password)) {
+    if (user.username === username && password === user.password) {
       return user;
     }
   }
@@ -60,7 +66,7 @@ app.post("/login", (req, res) => {
   if (user) {
     // success
     // cookies set to expire in 1 hour
-    res.cookie('username', user.username); // Set-Cookie: lang=en
+    res.cookie('username', user.username, {expires: new Date(Date.now() + 1000*60*60)}); // Set-Cookie: lang=en
     // res.cookie('password', user.password, {expires: new Date(Date.now() + 1000*60*60)}); // Set-Cookie: lang=en
 
     res.redirect('/');
@@ -77,13 +83,12 @@ app.get("/signup", (req, res) => {
 
 app.post("/signup", (req, res) => {
   const username = req.body.username;
-  // const password = req.body.password;
-  const password = bcrypt.hashSync(req.body.password, 15);
+  const password = req.body.password;
+  console.log("password: ", req.body.password);
+  console.log("bcrypt: ",bcrypt.hashSync(req.body.password, 15));
 
-  const newUser = {username: username, password: password}
-  console.log('New User: ', newUser)
-  data.users.push(newUser);
-  res.cookie('username', username); 
+  data.users.push({username: username, password: password});
+  res.cookie('username', username, {expires: new Date(Date.now() + 1000*60*60)}); 
   res.redirect('/');
 })
 
