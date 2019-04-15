@@ -5,70 +5,54 @@
   <title>Nintendo Games</title>
   <style>
 
-    * {
-      border-style: dotted;
-      border-color: red;
-    }
+  
+  h1 {
+    color: red;
+  }
 
-    h1 {
-      font-size: 1.5em;
-    }
+  * {
+    border: solid 1px red;
+  }
 
-    main {
-      border-width: 2px; 
-      border-color: red; 
-      /*border-style: dotted;*/
-    }
+  li {
+    margin: 5px 20px 5px 20px;
+    padding: 3px;
+  }
 
-    span {
-      height: 20px;
-    }
+  aside li {
+    background-color: salmon;
+  }
 
-    nav h4 {
-      width: 18%;
-      margin-right: 25px;
-      float: left;
-    }
+  .Publisher {
+    background-color: lightblue;
+  }
 
-    nav h4:hover {
-      background-color: red;
-    }
+  main {
+    width: 60%;
+    float: left;
+    box-sizing: border-box;
+  }
 
-    main {
-      width: 49%;
-      float: left;
-    }
+  #weblogs {
+    width: 40%;
+    float: right;
+    box-sizing: border-box;
+  }
 
-    main p {
-      padding: 5px;
-      margin: 3px;
-    }
+</style>
 
-    aside {
-      width: 49%;
-      float: right;
-    }
-
-    ul#weblogs li {
-      background-color: lightblue;      
-    }
-
-  </style>
 </head>
 <body>
   <header>
     <h1>My Nintendo Games Obesssion</h1>
-    <p>Hi, my name is Juan and I play a lot of games.  Welcome to my pages</p>
-    <nav>
-      <h4>Main</h4> <h4>Collection</h4> <h4>About Me</h4>
-    </nav>
+    <p>Hi, my name is Juan and I play a lot of games.  Welcome to my page</p>
   </header>
+
   <main>
-    <p>Here is my collection of games</p>
-    <ul id="collection">
+    <p style="font-family: arial;">Here is my collection of games</p>
+    <ul>
       <li>
-        <div>Super Mario World
-          (<span class="Publisher" style="color:red">Nintendo</span>)
+        <div>Super Mario World (Nintendo)
         </div>
       </li>
       <li>Donkey Kong Country<span class="Publisher">Atari</span></li>
@@ -76,10 +60,12 @@
     </ul>
     <p>If you like games too, contact me... </p>
   </main>
-  <aside>
+
+  <aside id="weblogs">
     <p>Here are some of the other pages I've found to be awesome</p>
-    <ul id="weblogs">
+    <ul>
       <li><a href="http://nintendo.wikia.com/wiki/List_of_Nintendo_games_by_year_(US)">List of Nintendo games</a></li>
+      <li><a href="http://emulator.online/nes/">Nintendo Emulator</a></li>
     </ul>
   </aside>
 </body>
