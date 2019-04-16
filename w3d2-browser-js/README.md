@@ -1,6 +1,6 @@
 # Client-side Javascript 
 
-Code discussed in class can be found inside [`/code`](https://github.com/jugonzal/lhl-lectures/tree/master/w3d2-browser-js/code).
+Code discussed in class can be found inside [`/code` in my repo](https://github.com/jugonzal/lectures/tree/master/w3d2-browser-js/code).
 
 ## History
 
@@ -38,7 +38,9 @@ navigator.userAgent
 navigator.geolocation.getCurrentPosition(position => {
  console.log(position) 
 })
-navigator.getBattery().then(battery => console.log(battery.level))
+
+// only in Chrome
+// navigator.getBattery().then(battery => console.log(battery.level))
 ```
 
     * The `document` object

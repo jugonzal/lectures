@@ -38,12 +38,6 @@ $('#outer-box').addEventListener('click', function(ev) {
   alert("outer-box clicked!");
 });
 
-
-$('#soundcloud').addEventListener('click', function(ev){
-  ev.preventDefault(); // Stops the default action from happening - opening
-  alert("LOL NOPE");   // a link in this case.
-});
-
 $('#the_form').addEventListener('submit', function(ev) {
   ev.preventDefault(); // Same here - don't actually submit the form
   var name = $('#name').value;
