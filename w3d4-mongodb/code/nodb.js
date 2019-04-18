@@ -6,29 +6,24 @@ const data = {
   create: create
 }
 
-let canIWrite = true
-
-function saveToFile() {
-  if (canIWrite) 
-    canIWrite = false
-  console.log("saving... ")
-  canIWrite = true
+function writingToDisk() {
+  console.log("writing to disk...")
 }
 
-function loadFromFile() {
+function loadFromTheDisk() {
   console.log("loading...")
 }
 
 function create (newUser) {
-  loadFromFile()
+  loadFromTheDisk()
   this.users.push(newUser)
-  saveToFile()
+  writingToDisk()
 }
 
 function search (field, value) {
-  loadFromFile()
   return data.users.filter(usr => usr[field] == value)
 }
+
 
 data.create({name: 'bob', course: 'juggling', city: 'Calgary'})
 data.create({name: 'dylan', course: 'ios', city: 'Toronto'})

@@ -2,9 +2,7 @@
 
 Credit where credit is due: the following lecture notes and example app were heavily based on [Khurram Virani's original notes](https://github.com/kvirani/express_mongo_todo_example) (thanks!).
 
-The final Express/Mongo app discussed in class can be found in [`/code`](https://github.com/jugonzal/lhl-lectures/tree/master/w3d4-mongodb/code).
-
-Also, you'll notice that the video attached is not our actual lecture, but close enough.  This one ran last month so it is very close to the real thing.
+The final Express/Mongo app discussed in class can be found in [`/w3d4-mongodb/code`](https://github.com/jugonzal/lectures/tree/master/w3d4-mongodb/code) under my lectures repo.
 
 
 ## Topics covered (Summary)
