@@ -62,8 +62,8 @@ SELECT
 FROM artists
 JOIN albums ON albums.artist_id = artists.id
 GROUP BY artist
-HAVING COUNT(albums.id) >= 2;
-ORDER BY album_count DESC;
+HAVING COUNT(albums.id) >= 2
+ORDER BY artist DESC;
 
 
 
@@ -102,8 +102,10 @@ SELECT *
 FROM tags, artists, artists_tags
 WHERE artists_tags.artist_id = artists.id
   AND artists_tags.tag_id = tags.id
-  AND (tags.name = 'instrumental'
-  OR tags.name = 'electronic');
+  AND tags.name = 'instrumental';
+
+
+--  OR tags.name = 'electronic';
 
 
 -- at this point we started to wonder how to find those 
