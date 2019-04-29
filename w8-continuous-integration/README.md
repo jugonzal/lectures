@@ -1,6 +1,6 @@
 ## Continuous Integration
 
-My very first question today was about _estimation_. As it is often the case, we _think_ we are good at estimating, but soon realize how poorly we do it.  In the spawn of a few minutes, we went to thinking "4 lines of code" was a good estimate for pretty much any problem to realizing perhaps we need 200 lines to implement a simple set of CRUD functions for a mongo database...  and still we forgot to consider all the integration and deployment effort.
+My very first question today was about _estimation_. As it is often the case, we _think_ we are good at estimating, but soon realize how poorly we do it.  In the spawn of a few minutes, we went from thinking "4 lines of code" was a good estimate for pretty much any problem to realizing perhaps we need 200 lines to implement a simple set of CRUD functions for a mongo database...  and still we forgot to consider all the integration and deployment effort.
 
 I mentioned [The Mythical Man-Month](https://en.wikipedia.org/wiki/The_Mythical_Man-Month) as reference for the discussion. While the book was written for a very different software culture to the one we have nowadays, many of its points are still relevant today.
 
@@ -22,7 +22,7 @@ Every time you add a new external dependency you must consider what configuratio
 
 Each time your code or configuration changes, you should create a new version, always moving forward. These versions are going to allow you to Build.  You should run your full validation/testing framework against each build.
 
-### Build + Config -> Release
+### Build + ENV -> Release
 
 A given build should be able to run across multiple environments by simply applying the correct configuration for that environment.  That means that when creating a new build you should consider not only the configuration required for your local environment but for all environments possible.
 
