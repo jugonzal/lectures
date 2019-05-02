@@ -6,79 +6,102 @@ var tweeps = [
   { who: '@0xUID',
     said: "Macintosh OS X was beautiful, intuitive and user-friendly......and it was #UNIX!"},
   { who: '@mozilla',
-    said: "learn how to create your own VR experiences with A-Frame"}
+    said: "Today, Mozilla is publishing the 2019 #InternetHealth Report"}
 ]
 
   // STAGE 0: Our first stage is to 
   // manually change one tweep at a time
 
-// console.log(tweeps[1].who)
-// console.log(tweeps[2].who)
+// tweeps[0].when = new Date("May 1, 2019");
+// tweeps[0].when = tweeps[0].when.toString();
 
-// tweeps[0].when = new Date('2018-11-28')
+// tweeps[3].when = (new Date("04/23/2019")).toString();
 
-// console.log(tweeps[1].when)
-// console.log(tweeps[0].when.toString())
+// tweeps[1].liked = true;
+// tweeps[2]['liked'] = true;
+// var myKey = 'liked';
+// // tweeps[3].myKey = true;   <-- this will not work!
+// tweeps[3][myKey] = true;
 
-// tweeps[0]['where'] = 'Toronto'
+
 
   // STAGE 1: writing functions to do one thing
   // Explore the various styles of functions: 
   // declaration vs expression
   // Also, what happens to variables that go into functions?
 
-// this will NOT work because the function doesnt exist yet
-// timestamp(tweeps[0])
-
-// function timestamp (tweep) {
-//   tweep.timestamp = new Date();
+// function likeTweep (nameOfTweep) {
+//   for (i=0; i< tweeps.length; i++) {
+//     if (tweeps[i].who === nameOfTweep) {
+//       tweeps[i].like = true;
+//     }
+//   }
 // }
 
-var timestamp = function (tweep) {
-  tweep.timestamp = new Date();
-}
+// function timestamp () {
+//   for (i=0; i< tweeps.length; i++) {
+//     tweeps[i].when = (new Date()).toString();
+//   }
+// }
 
-var approval = function (tweep) {
-  tweep.approved = true;
-}
 
-// timestamp(tweeps[1])
-// approval(tweeps[3])
+// console.log(typeof likeTweep);
+
+// var reallyLikeTweep = likeTweep;
+
+// reallyLikeTweep('@fzero');
+// timestamp();
 
 
   // STAGE 2: finding ways to create generic functions, 
   // using bracket notation
 
-// function changeTweep(tweep, key, value) {
-//   tweep[key] = value
+// function changeTweep (nameOfTweep, doWhat, value) {
+//   for (i=0; i< tweeps.length; i++) {
+//     if (tweeps[i].who === nameOfTweep) {
+//       tweeps[i][doWhat] = value;
+//     }
+//   }
 // }
 
-// changeTweep(tweeps[1], 'timestamp', new Date())
-// changeTweep(tweeps[3], 'approved', true)
-// // changeTweep(tweeps[3], 17, "seventeen")
+// changeTweep('@fzero','like', true);
+// changeTweep('@fzero','like', false);
+// changeTweep('@mozilla','useful', 'yes');
+// changeTweep('@fzero','when',(new Date()))
 
-// for (i=0; i<tweeps.length; i++) {
-//   changeTweep(tweeps[i], 'ID', i)
-// }
+
 
   // STAGE 3: certain things that our function above 
   // can not do, such as changing what was said. 
 
-function changeOneTweep (handle, doSomething) {
-  for (tweep of tweeps) {
-    if (tweep.who == handle) {
-      doSomething(tweep)
+function changeTweep (nameOfTweep, doSomething) {
+  for (i=0; i< tweeps.length; i++) {
+    if (tweeps[i].who === nameOfTweep) {
+      console.log(doSomething, tweeps[i])
+      doSomething(tweeps[i])
     }
   }
 }
 
-changeOneTweep('@fzero', timestamp)
-changeOneTweep('@mozilla', timestamp)
+function likeTweep(tweep) {
+  // console.log('likeTweep', tweep)
+  tweep.like = true;
+}
 
-changeOneTweep('@mozilla', function (tweep) {
-  tweep.said = tweep.said.toUpperCase();
-  tweep.when = (new Date()).toString();
+changeTweep('@fzero',likeTweep);
+
+changeTweep('@mozilla',function(tweep) {
+  tweep.when = (new Date());
 })
+
+changeTweep('@kevinroose', function(tweep) {
+  tweep.said = tweep.said.toUpperCase();
+})
+
+console.log(tweeps);
+
+// changeTweep('@fzero','like', false);
+// changeTweep('@fzero','when',(new Date()))
 
 
   // I've created a function that does ONE thing very
@@ -86,8 +109,10 @@ changeOneTweep('@mozilla', function (tweep) {
   // be used to make ANY change across all my tweeps.
   // That is the ultimate goal.
 
+// Javascript provides a range of high order function like `map`
+//
+tweeps.map(function(tweep) {
+  tweep.when = (new Date())
+})
 
-console.log(tweeps)
-
-
-
+console.log(tweeps);
