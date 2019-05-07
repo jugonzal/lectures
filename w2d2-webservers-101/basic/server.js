@@ -8,39 +8,31 @@ const PORT = 8000;
 // response.statusCode
 
 let server = http.createServer(function (request, response){
-  let route = request.method + ' ' + request.url;
+  var route = request.method + ": " + request.url;
 
-  if (route === 'GET /') {
+  if (route === 'GET: /') {
     response.end(`
       <html>
       <body>
-        <h1>Juan's Weather Station</h1>
-        <h3>Pick a City</h3>
+        <h1>Weather Forecast AI</h1>
+        <p>Please click on one of our cities:</p>
         <ul>
-          <li><a href='/toronto/today'>Toronto</a></li>
-          <li><a href='/chicago/today'>Chicago</a></li>
+          <li><a href="/weather/toronto">Toronto</a></li>
+          <li><a href="/weather/montreal">Montreal</a></li>
         </ul>
       </body>
-      </html>`)    
+      </html>
+      `);
+  } else if (route === 'GET: /weather/toronto') {
+    response.end("Today is kind of rainy...")
+  } else if (route === 'GET: /weather/montreal') {
+    response.end("We think it is still snowing")
+  } else {
+    response.statusCode = 404;
+    response.end("Honestly, we don't know");
   }
-  else if (route === 'GET /toronto/today') {
-    response.end(`
-      <html>
-      <body>
-        <h1>Juan's Weather Station</h1>
-        <h3>Toronto</h3>
-        <p>The weather in Toronto is 10 degrees and kind of cloudy</p>
-      </body>
-      </html>`)
-  } else if (route === 'GET /toronto/tomorrow') {
-    response.end("The weather tomorrow will be crappy, rainy.  Don't forget your umbrella")
-  }   else {
-    response.statusCode = 404
-    response.end("We just sent our crew to find out.  Visit again, please.")
-  }
-
 });
 
 server.listen(PORT, function (){
-    console.log("Server listening on: http://localhost: ", PORT);
+  console.log("Server listening on: http://localhost: ", PORT);
 });

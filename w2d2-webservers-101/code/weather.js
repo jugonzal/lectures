@@ -1,6 +1,6 @@
 const express = require('express');
-// const bodyParser = require('body-parser');
-// const morgan = require('morgan');
+const bodyParser = require('body-parser');
+const morgan = require('morgan');
 
 // Initialize express
 const app = express();
@@ -16,18 +16,18 @@ app.set("view engine", "ejs");
 // To work with forms and JSON data, we need to configure Express
 // to use the bodyParser middleware to convert those types of data
 // into JS objects inside our functions.
-// app.use(bodyParser.urlencoded({extended: false})); // forms
+app.use(function(req, res, next) {
+  console.log(req);
+  next()
+})
+
+app.use(bodyParser.urlencoded({extended: false})); // forms
 // app.use(bodyParser.json()); // JSON
 
 // I'm also adding a logging middleware so we can see what's going on
 // with our server. More info: https://github.com/expressjs/morgan
-// app.use(morgan('dev'));
+app.use(morgan('dev'));
 app.use('/static', express.static('public'))
-
-// app.use(function(req, res, next) {
-//   console.log(`Request: ${req.method} ${req.url}`);
-//   next()
-// })
 
 
 // Routing functions go here
@@ -35,9 +35,9 @@ app.get('/', function (req, res) {
   res.send('Welcome to Express Weather!')
 });
 
-app.get('/toronto', function(req, res) {
-  res.render('toronto')
-})
+// app.get('/toronto', function(req, res) {
+//   res.render('toronto',{city: "Toronto"})
+// })
 
 app.get('/city/:someCity', (req, res) => {
 	console.log("Req Params: ", req.params)
@@ -51,9 +51,15 @@ app.get('/city/:someCity', (req, res) => {
 //   res.render('media');
 // });
 
+app.post('/pay', function(req, res) {
+  console.log('Hello... ',req.body)
+  res.render('toronto',{city: 'Ottawa'})
+    // req.body will contain any fields submitted in the form
+});
+
 
 // Start the server
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}!`);
 });

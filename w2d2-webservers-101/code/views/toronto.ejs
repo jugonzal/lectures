@@ -1,17 +1,27 @@
 <html>
   <head>
-    <title>Welcome to Toronto!</title>
+    <title>Welcome to <%= city %>!</title>
     <style>
       body {
-        background-color: #cccccc;
+        background-color: salmon;
       }
     </style>
   </head>
   <body>
-    <% var today = new Date(); %>
-    <h1>Weather in <%=city %></h1>
-    <h3> for <%= today.toString() %></h3>
-    <p>Today is kind of cloudy.</p>
-    <img src="/static/<%= forecast %>">
+    <h1>Weather in <%= city %></h1>
+    <h3><%= new Date()%></h3>
+    <p>Today is very rainy... at least this morning.</p>
+    <img src="/static/MetaWeather-Showers.png">
+    <ul>
+    <% for (i=0;i<10;i++) { %>
+      <li>value is <%= i %></li>
+    <% } %>
+    </ul>
+    <form action="/pay" method="POST">
+      <input name="FirstName">
+      <input name="LastName">
+      <input name="Profession">
+      <input type="submit">
+    </form>
   </body>
 </html>
