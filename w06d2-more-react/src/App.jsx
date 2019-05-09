@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 
-class ExchangeApp extends React.Component {
+class App extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = { 
       items: [], 
-      date: '2019-01-15',
+      date: '2019-01-28',
       text: '',
       rates: { } 
     };
@@ -18,22 +18,20 @@ class ExchangeApp extends React.Component {
   }
 
   refreshRates () {
-    if (this.state.date.length == 10) {
-      fetch("https://api.exchangeratesapi.io/"+this.state.date)
-      .then(response => {  //// 
-        console.log(response.status, response.statusCode)
-        if (response.ok) {
-          return response.json()
-        } else {
-          throw "No Rates"
-        }
-      })
-      .then(json => {
-        console.log("GOT ",json)
-        this.setState({rates: json.rates})
-      })
-      .catch(error => console.log(error))
-    }
+    fetch("https://api.exchangeratesapi.io/"+this.state.date)
+    .then(response => {  //// 
+      console.log(response.status, response.statusCode)
+      if (response.ok) {
+        return response.json()
+      } else {
+        throw "No Rates"
+      }
+    })
+    .then(json => {
+      console.log("GOT ",json)
+      this.setState({rates: json.rates})
+    })
+    .catch(error => console.log(error))
   }
 
   componentDidMount() {
@@ -43,7 +41,7 @@ class ExchangeApp extends React.Component {
   render() {
     return (
       <div>
-        <h3>Currency Exchange Rates for 
+        <h3>Currency Exchange Rates for<br /> 
           <DatePicker 
             currentDate={this.state.date} 
             dateChange={this.handleDateChange}
@@ -125,5 +123,4 @@ function Item(props) {
   )
 }
 
-export default ExchangeApp;
-
+export default App;
