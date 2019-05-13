@@ -13,7 +13,7 @@ During our exploration of how these two paradigms differ from each other these a
 
 It was nice to work on Ruby and discover its general properties:
 
-- Classes are templates that need to be instatiated (`new`)
+- Classes are templates that need to be instantiated (`new`)
 - Each instance of a class will have its own *state*, typically all the variables with a `@` prefix
 - Methods are the only way you can interact with an object, and doing so can be thought as *sending a message to an object*.
 - The objective of methods is to manage the lifecycle of *state*. 
