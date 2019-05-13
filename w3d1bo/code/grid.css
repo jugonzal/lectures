@@ -1,0 +1,25 @@
+
+.row {
+  width: 100%;
+  clear: both;
+}
+
+.row, .col {
+  float: left;
+  padding: 5px;
+}
+.five {
+  width: 100%;
+}
+.four {
+  width: 80%;
+}
+.three {
+  width: 60%;
+}
+.two {
+  width: 40%;
+}
+.one {
+  width: 20%;
+}
