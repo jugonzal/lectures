@@ -1,4 +1,4 @@
--const express = require("express");
+const express = require("express");
 const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
 
@@ -35,7 +35,7 @@ app.get('/', (req, res) => {
 
 // Fetch from Mongo all todos
 app.get("/todos", (req, res) => {
-  db.collection("todos").find().toArray((err, results) => {
+  db.collection("todos").find({priority: {$lt: 75}}).toArray((err, results) => {
     const templateVars = {
       todos: results
     };

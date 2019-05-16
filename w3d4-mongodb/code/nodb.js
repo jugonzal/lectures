@@ -1,33 +1,30 @@
+
 const data = {
   users: [
     { name: "Juan", course: 'web' },
     { name: "Dave", course: 'ios' }
   ],
-  create: create
+  insert: function (user) {
+    loadFromFisk()
+    this.users.push (user)
+    saveToDisk()
+  },
+  find: function (key, value) {
+    return this.users.filter(usr => usr[key] === value)
+  }
 }
 
-function writingToDisk() {
-  console.log("writing to disk...")
-}
-
-function loadFromTheDisk() {
-  console.log("loading...")
-}
-
-function create (newUser) {
-  loadFromTheDisk()
-  this.users.push(newUser)
-  writingToDisk()
-}
-
-function search (field, value) {
-  return data.users.filter(usr => usr[field] == value)
-}
+function loadFromDisk() {}
+function saveToDisk() {}
 
 
-data.create({name: 'bob', course: 'juggling', city: 'Calgary'})
-data.create({name: 'dylan', course: 'ios', city: 'Toronto'})
+
+
+data.insert({name: 'Joe', course: 'juggling'})
+data.insert({name: 'Ana', course: 'web'})
+
+console.log(data.find('course','web'))
+
 
 console.log(data)
 
-console.log(search('course','ios'))
