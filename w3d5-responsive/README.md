@@ -72,7 +72,7 @@ existing styles.
 
 After doing this, all we need is to pre-process our SCSS files:
 
-`sass my_scss.scss new_css.css`
+`npm run sass`
 
 This trick is powerful enough that we were able to create a Responsive version
 of our Tweeter project with just those few changes.
