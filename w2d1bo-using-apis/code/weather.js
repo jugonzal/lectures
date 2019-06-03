@@ -1,33 +1,34 @@
 var request = require('request');
 
-function getWeather(city, callback) {
+function getTemperature(params, callback) {
   request.get(
-    "https://www.metaweather.com/api/location/"+city+"/", 
+    "https://www.metaweather.com/api/location/"+params.city+"/"+params.year+"/"+params.month+"/"+params.day+"/", 
     function(error, response, body) {
       if (!error && response.statusCode == 200) {
-        // console.log('got the weather:', body)
 
         // JSON.parse helps us convert something that 
         // "looks" like data into an actual data object
         var data = JSON.parse(body);
-
-        // console.log(data.consolidated_weather[0].weather_state_name )
-        callback(data.consolidated_weather[0].weather_state_name )
-        // + " " + 
-        //   data.consolidated_weather[0].the_temp
-      }
+        // console.log("City: ",data.title)
+        // console.log("Current Temperature: ",data.consolidated_weather[0].the_temp )
+        callback( data[0].the_temp, data[0].applicable_date)
+      } else { console.log(body) }
     }
   )  
 }
   
-// We tried this approach but got _undefined_
-// console.log("Toronto: " , getWeather(4118))
-// console.log("Montreal: ", getWeather(3534))
+for (dd = 3; dd < 8; dd++) {
+  getTemperature({
+    city: 4118, 
+    year: 2019,
+    month: 6,
+    day: dd
+    },function(temp, date) {
+      console.log("Toronto on ",date , temp)
+    })
+}
 
-getWeather(4118, function(data) {
-  console.log("Toronto: ",data)
-})
 
-getWeather(3534, function(data) {
-  console.log("Montreal: ",data)
-})
+// getTemperature(3534, function(data) {
+//   console.log("Montreal " , data)
+// })
