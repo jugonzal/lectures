@@ -11,11 +11,11 @@
     "babel-preset-react": "^6.24.1"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "react": "./node_modules/.bin/babel full.jsx > public/app.js",
-    "step1": "./node_modules/.bin/babel simple.jsx > public/app.js",
-    "step2": "./node_modules/.bin/babel middle.jsx > public/app.js",
-    "step3": "./node_modules/.bin/babel full.jsx > public/app.js"
+    "step1": "./node_modules/.bin/babel step1.jsx > public/app.js",
+    "step2": "./node_modules/.bin/babel step2.jsx > public/app.js",
+    "step3": "./node_modules/.bin/babel step3.jsx > public/app.js",
+    "step4": "./node_modules/.bin/babel step4.jsx > public/app.js",
+    "step5": "./node_modules/.bin/babel step5.jsx > public/app.js"
   },
   "keywords": [],
   "author": "",
