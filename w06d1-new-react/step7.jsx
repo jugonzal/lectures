@@ -1,4 +1,3 @@
-
 class ExchangeApp extends React.Component {
   constructor(props) {
     super(props);
@@ -13,12 +12,13 @@ class ExchangeApp extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDateChange = this.handleDateChange.bind(this);
+    this.handleDateMove = this.handleDateMove.bind(this);
     this.refreshRates = this.refreshRates.bind(this);
   }
 
   refreshRates () {
     fetch("https://api.exchangeratesapi.io/"+this.state.date)
-    .then(response => {  //// 
+    .then(response => {  
       console.log(response.status, response.statusCode)
       if (response.ok) {
         return response.json()
@@ -33,8 +33,10 @@ class ExchangeApp extends React.Component {
     .catch(error => console.log(error))
   }
 
-  componentDidMount() {
-    this.refreshRates()
+  componentWillMount() {
+    this.setState({
+      date: (new Date()).toISOString().split('T')[0] 
+    }, this.refreshRates)
   }
 
   render() {
@@ -44,6 +46,7 @@ class ExchangeApp extends React.Component {
           <DatePicker 
             currentDate={this.state.date} 
             dateChange={this.handleDateChange}
+            dateMove={this.handleDateMove}
           />
 
         </h3>
@@ -71,6 +74,18 @@ class ExchangeApp extends React.Component {
     )
   }
 
+  handleDateMove(e) {
+    let newDate = new Date(this.state.date);
+    console.log(e.target);
+    newDate.setDate( newDate.getDate() + (e.target.name === "prev" ? -1 : 1 ))
+    console.log(e.target.name, newDate)
+    this.setState(
+      { date: newDate.toISOString().split('T')[0]  },  
+      this.refreshRates
+    )
+    e.preventDefault();
+  }
+
   handleChange(e) {
     this.setState({ text: e.target.value });
   }
@@ -95,25 +110,30 @@ class ExchangeApp extends React.Component {
 class DatePicker extends React.Component {
   render() {
     return (
-      <input
-        value={this.props.currentDate}
-        onChange={this.props.dateChange}
-      />      
+      <div>
+        <button name="prev" onClick={this.props.dateMove}>
+          Previous
+        </button>
+        <input
+          value={this.props.currentDate}
+          onChange={this.props.dateChange}
+        /> 
+        <button name="next" onClick={this.props.dateMove}>
+          Next
+        </button>
+      </div>
     );
   }
 }
 
-
-class CurrencyList extends React.Component {
-  render() {
-    return (
-      <ul>
-        {this.props.items.map(item => (
-          <Item key={item.id} text={item.text} rate={this.props.rates[item.text]} />
-        ))}
-      </ul>
-    );
-  }
+function CurrencyList(props) {
+  return (
+    <ul>
+      {props.items.map(item => (
+        <Item key={item.id} text={item.text} rate={props.rates[item.text]} />
+      ))}
+    </ul>
+  );
 }
 
 function Item(props) {

@@ -1,4 +1,3 @@
-
 class ExchangeApp extends React.Component {
   constructor(props) {
     super(props);
@@ -18,7 +17,7 @@ class ExchangeApp extends React.Component {
 
   refreshRates () {
     fetch("https://api.exchangeratesapi.io/"+this.state.date)
-    .then(response => {  //// 
+    .then(response => {  
       console.log(response.status, response.statusCode)
       if (response.ok) {
         return response.json()
@@ -33,8 +32,10 @@ class ExchangeApp extends React.Component {
     .catch(error => console.log(error))
   }
 
-  componentDidMount() {
-    this.refreshRates()
+  componentWillMount() {
+    this.setState({
+      date: (new Date()).toISOString().split('T')[0] 
+    }, this.refreshRates)
   }
 
   render() {
@@ -104,16 +105,14 @@ class DatePicker extends React.Component {
 }
 
 
-class CurrencyList extends React.Component {
-  render() {
-    return (
-      <ul>
-        {this.props.items.map(item => (
-          <Item key={item.id} text={item.text} rate={this.props.rates[item.text]} />
-        ))}
-      </ul>
-    );
-  }
+function CurrencyList(props) {
+  return (
+    <ul>
+      {props.items.map(item => (
+        <Item key={item.id} text={item.text} rate={props.rates[item.text]} />
+      ))}
+    </ul>
+  );
 }
 
 function Item(props) {

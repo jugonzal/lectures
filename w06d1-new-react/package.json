@@ -15,7 +15,9 @@
     "step2": "./node_modules/.bin/babel step2.jsx > public/app.js",
     "step3": "./node_modules/.bin/babel step3.jsx > public/app.js",
     "step4": "./node_modules/.bin/babel step4.jsx > public/app.js",
-    "step5": "./node_modules/.bin/babel step5.jsx > public/app.js"
+    "step5": "./node_modules/.bin/babel step5.jsx > public/app.js",
+    "step6": "./node_modules/.bin/babel step6.jsx > public/app.js",
+    "step7": "./node_modules/.bin/babel step7.jsx > public/app.js"
   },
   "keywords": [],
   "author": "",
