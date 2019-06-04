@@ -53,8 +53,8 @@ app.listen(PORT, () => {
 We continued to enhance our server by adding new "routes" or URLs that the server should understand.  In each case we would simply add another snippet such as:
 
 ```javascript
-app.get('/about', function(req, res) {
-  res.render('about');
+app.get('/toronto', function(req, res) {
+  res.render('toronto');
 });
 ```
 
@@ -69,7 +69,7 @@ to manage your static HTML, but can have logic within using the `<%  %>` tag.
 
 All these extensions to Express are [middleware](http://expressjs.com/en/guide/using-middleware.html), which is a way of adding functionality to the server.  
 
-Please look at the [code](https://github.com/jugonzal/lectures/tree/master/w2d2-webservers-101/code) we wrote in class to get a full Express server configured with some middleware to use EJS templates, server static files in a public directory and manage data from forms.
+Please look at the [code](https://github.com/jugonzal/lectures/tree/master/w2d2-webservers-101/code/weather.js) we wrote in class to get a full Express server configured with some middleware to use EJS templates, server static files in a public directory and manage data from forms.
 
 Note that when submitting a form:
 
@@ -80,7 +80,7 @@ Note that when submitting a form:
 </form>
 ```
 
-and then using the `body-parser` library to get those values
+you'll need to create a POST route on your server and use the `body-parser` library to get those values
 
 ```javascript
 const bodyParser = require('body-parser');

@@ -16,10 +16,10 @@ app.set("view engine", "ejs");
 // To work with forms and JSON data, we need to configure Express
 // to use the bodyParser middleware to convert those types of data
 // into JS objects inside our functions.
-app.use(function(req, res, next) {
-  console.log(req);
-  next()
-})
+// app.use(function(req, res, next) {
+//   console.log(req.url);
+//   next()
+// })
 
 app.use(bodyParser.urlencoded({extended: false})); // forms
 // app.use(bodyParser.json()); // JSON
@@ -35,8 +35,12 @@ app.get('/', function (req, res) {
   res.send('Welcome to Express Weather!')
 });
 
-// app.get('/toronto', function(req, res) {
-//   res.render('toronto',{city: "Toronto"})
+app.get('/toronto', function(req, res) {
+  res.render('toronto',{city: "Toronto"})
+})
+
+// app.get('/montreal',function(req, res) {
+//   res.render('toronto',{city: "Montreal"})
 // })
 
 app.get('/city/:someCity', (req, res) => {
@@ -53,7 +57,7 @@ app.get('/city/:someCity', (req, res) => {
 
 app.post('/pay', function(req, res) {
   console.log('Hello... ',req.body)
-  res.render('toronto',{city: 'Ottawa'})
+  res.send("Thank you for your payment...")
     // req.body will contain any fields submitted in the form
 });
 

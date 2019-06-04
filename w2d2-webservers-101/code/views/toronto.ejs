@@ -3,7 +3,7 @@
     <title>Welcome to <%= city %>!</title>
     <style>
       body {
-        background-color: salmon;
+        background-color: aquamarine;
       }
     </style>
   </head>
@@ -11,7 +11,7 @@
     <h1>Weather in <%= city %></h1>
     <h3><%= new Date()%></h3>
     <p>Today is very rainy... at least this morning.</p>
-    <img src="/static/MetaWeather-Showers.png">
+    <img src="/static/<%= forecast %>">
     <ul>
     <% for (i=0;i<10;i++) { %>
       <li>value is <%= i %></li>
