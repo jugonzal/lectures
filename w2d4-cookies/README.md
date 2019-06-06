@@ -22,9 +22,9 @@ We started the morning with a few exercises, we explored cookies as they exists/
 
 We used two different mini projects to demo:
 
-The first was use language switched: We demo'd using a `lang` cookie to switch between the preferred language for a user/browser. The user could click English or French to toggle their `lang` cookie.
+### [language_selection](https://github.com/jugonzal/lhl-lectures/tree/master/w2d4-cookies/language_selection)
 
-- [language_selection](https://github.com/jugonzal/lhl-lectures/tree/master/w2d4-cookies/language_selection)
+We demo'd using a `lang` cookie to switch between the preferred language for a user/browser. The user could click English or French to toggle their `lang` cookie.
 
 Another more "sensitive" thing we usually want to store in a cookie is the user's username (usually their ID if that existed). However, we see that we need to encrypt the cookie b/c we 
 

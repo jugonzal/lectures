@@ -1,6 +1,5 @@
 const express = require("express")
 const bodyParser = require("body-parser")
-const bcrypt = require("bcrypt")
 
 const app = express()
 const PORT = process.env.PORT || 8000; // default port 8000
@@ -17,13 +16,9 @@ app.set("view engine", "ejs")
 
 const data = {
   users: [
-    { username: 'monica', password: 'testing', token: '1234'},
+    { username: 'monica', password: 'testing'},
     { username: 'khurram', password: '12345' }
   ]
-}
-
-function createToken() {
-  Math.random().toString().substr(5,5)
 }
 
 function validUser (username) {
@@ -84,8 +79,6 @@ app.get("/signup", (req, res) => {
 app.post("/signup", (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
-  console.log("password: ", req.body.password);
-  console.log("bcrypt: ",bcrypt.hashSync(req.body.password, 15));
 
   data.users.push({username: username, password: password});
   res.cookie('username', username, {expires: new Date(Date.now() + 1000*60*60)}); 
