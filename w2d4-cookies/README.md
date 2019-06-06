@@ -22,7 +22,7 @@ We started the morning with a few exercises, we explored cookies as they exists/
 
 We used two different mini projects to demo:
 
-### [language_selection](https://github.com/jugonzal/lhl-lectures/tree/master/w2d4-cookies/language_selection)
+### [language_selection](https://github.com/jugonzal/lectures/tree/master/w2d4-cookies/language_selection)
 
 We demo'd using a `lang` cookie to switch between the preferred language for a user/browser. The user could click English or French to toggle their `lang` cookie.
 
@@ -31,12 +31,12 @@ Another more "sensitive" thing we usually want to store in a cookie is the user'
   - don't want the user to SEE it perhaps but more importantly 
   - we don't want it to be easily tamper-able by the user or people in the middle.
 
-### [user_authentication](https://github.com/jugonzal/lhl-lectures/tree/master/w2d4-cookies/user_authentication)
+### [user_authentication](https://github.com/jugonzal/lectures/tree/master/w2d4-cookies/user_authentication)
 
 In this folder you will find three different versions of the same app, with progressively better security:
 
-  - [Simple authentication](https://github.com/jugonzal/lhl-lectures/blob/master/w2d4-cookies/user_authentication/server.initial.js) where cookies are used to store user/pwd.  Not great!
-  - [Encrypted authentication](https://github.com/jugonzal/lhl-lectures/blob/master/w2d4-cookies/user_authentication/server.final.js) where password has been encrypted to our OWN protection, but still weak.
-  - [Token authentication](https://github.com/jugonzal/lhl-lectures/blob/master/w2d4-cookies/user_authentication/server.final.hash.js) where the only thing stored in a cookie is a random/unique token created upon authentication.
+  - [Simple authentication](https://github.com/jugonzal/lectures/blob/master/w2d4-cookies/user_authentication/server.initial.js) where cookies are used to store user/pwd.  Not great!
+  - [Encrypted authentication](https://github.com/jugonzal/lectures/blob/master/w2d4-cookies/user_authentication/server.final.js) where password has been encrypted to our OWN protection, but still weak.
+  - [Token authentication](https://github.com/jugonzal/lectures/blob/master/w2d4-cookies/user_authentication/server.final.hash.js) where the only thing stored in a cookie is a random/unique token created upon authentication.
 
 At the end of the lecture we went on a trip about how the advertising world is an accomplice to tracking you no matter where you go.  Bottom line: you should be paranoid about the ways in which sites use cookies.  
