@@ -2,25 +2,23 @@ require_relative("./account.rb")
 
 class MegaAccount < Account 
 
+  attr_reader :rewards
+
   def initialize(name)
-  	super(name)
-  	@miles = 0
+    super(name)
+    @rewards = 0
   end
 
-  def deposit(amount)
+  def withdraw(amount)
     super(amount)
-    @miles += amount * 0.1
-    @txn.push("You have #{@miles} miles and #{@balance}!")
+    @rewards += amount * 0.1
+  end
+
+  def useReward(amount)
+    if amount < @rewards
+      @rewards -= amount
+      puts "Used #{amount} in rewards"
+    end
   end
 end
 
-class SuperDuperMegaAccount < MegaAccount
-
-	def initialize(name)
-		super(name)
-	end
-
-	def log
-		super() + "Yes I am super duper"
-	end
-end

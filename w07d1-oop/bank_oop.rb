@@ -1,9 +1,14 @@
 require_relative("./megaaccount.rb")
 
-juanAccount = SuperDuperMegaAccount.new("Juan")
+juanAccount = MegaAccount.new("Juan")
+joseAccount = MegaAccount.new("Jose")
+
 
 juanAccount.deposit(500)
-juanAccount.withdraw(300)
+joseAccount.deposit(juanAccount.withdraw(300))
 
 puts juanAccount.log
 
+juanAccount.useReward(25)
+
+puts juanAccount.rewards
