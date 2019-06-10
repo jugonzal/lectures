@@ -3,29 +3,24 @@
  	<title>Weather Forecast</title>
  	<style>
 		body {
-			box-sizing: border-box;
+			/*box-sizing: border-box;*/
 			font-size: 1.2em;
 			font-family: Arial, Helvetica, sans-serif;
 		}
 
 		/* Rule Ordering matters */
-		dt#today {
+		#today {
 			background-color: lightgreen;
 		}
 
-		dt.weekday {
-			background-color: lightblue;
-		}
-
-
 		/* but can be easily superceded by the MATH */
-/*		dt.weekday {
+		section#forecast dt.weekday {
  			background-color: lightblue;
 		}
-*/
+
 
 		/* CSS Combinators: descendant selector */
- 		.weekday time {
+ 		body time {
  			background-color: aquamarine;
  		}
 
@@ -39,16 +34,16 @@
  			color: darkgray;
  		}
 
- 		dt.weekday ~ dd ~ dd {
+ 		dt.weekday + dd ~ dd {
  			color: lightgray;
  		}
 
-/* 		p {
+ 		p {
  			border-style: dotted;
  			border-color: red;
  			width: 80%;
  		}
-*/
+
  		/* display property... block vs inline */
  		dt time {
  			display: block;
@@ -56,12 +51,12 @@
 
 
  		/* auto centering */
-/* 		#forecast {
+ 		#forecast {
  			margin: auto;
  			width: 80%;
  		}
-*/ 		
-		/* a good navigation menu */
+ 		
+		/* a cheap navigation menu */
 
 		nav ul > li {
 			width: 30%;

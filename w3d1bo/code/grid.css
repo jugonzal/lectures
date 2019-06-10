@@ -6,7 +6,6 @@
 
 .row, .col {
   float: left;
-  padding: 5px;
 }
 .five {
   width: 100%;
