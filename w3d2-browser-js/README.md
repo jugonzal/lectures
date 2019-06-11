@@ -57,7 +57,7 @@ The first trick we learned was to use the various aspects of HTML to manipulate 
 var title = document.getElementById("firstHeading")
 title.innerText = "Juan Gonzalez"
 var avatar = document.getElementsByTagName("img")[0] // notice this assumes first item in array
-avatar.srcset="https://www.lighthouselabs.ca/uploads/team_member/avatar/134/medium_JuanPhoto.png"
+avatar.srcset="https://avatars0.githubusercontent.com/u/2307249?s=460&v=4"
 ```
 
 In the end we agreed that `document.querySelector` would probably the most useful of all function to find elements because it allows us to use the same CSS rules we've mastered to target specific elements in our page.   
