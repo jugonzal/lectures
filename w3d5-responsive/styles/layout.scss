@@ -5,7 +5,7 @@
  * Do not modify these two selectors, please
  */
 
-@import 'responsiveShifter';
+@import 'responsiveOffCanvas';
 
 /*
  * Global layout stuff
@@ -25,7 +25,7 @@ body {
 
 main {
   background: white; 
-  @extend .c1;
+  @extend .c2;
 }
 
 
@@ -34,7 +34,7 @@ main {
   color: #e8fdff;
   padding: 0 2em;
   z-index: 999;
-  @extend .c2;
+  @extend .c1;
 }
 
 #nav-bar .logo {
