@@ -1,6 +1,6 @@
 -- all tracks, with artist name and album name
 
-EXPLAIN ANALYZE SELECT
+SELECT
   tracks.title AS title,
   albums.title AS album,
   artists.name AS artist
@@ -26,6 +26,7 @@ FROM albums, artists
 WHERE albums.artist_id = artists.id
   AND albums.year < 2000;
 
+-- GROUP BY
 -- sometimes you need to step back and see the data
 -- as a whole
 
@@ -121,11 +122,14 @@ SELECT *
 FROM tags, artists, artists_tags
 WHERE artists_tags.artist_id = artists.id
   AND artists_tags.tag_id = tags.id 
-  AND tags.name in (
-    select name from tags where id > 2);
+  AND tags.name in ('instrumental', 'electronic');
 
 -- Lastly, to solve the question about which artists
 -- are categorized in two tags, we used GROUP BY 
+
+-- and we can add another query instead of a fixed list 
+-- of tags.  As long as that query returns a single column
+-- such as:
 
 SELECT 
   artists.name, 
@@ -134,7 +138,7 @@ FROM tags, artists, artists_tags
 WHERE artists_tags.artist_id = artists.id
   AND artists_tags.tag_id = tags.id 
   AND tags.name in (
-    select name from tags where id < 4) 
+    select name from tags) 
 GROUP BY artists.name 
 HAVING count(*) > 1;
 
@@ -145,34 +149,10 @@ SELECT
 FROM tags, artists, artists_tags
 WHERE artists_tags.artist_id = artists.id
   AND artists_tags.tag_id = tags.id 
-  AND tags.name in (select name from tags where id < 4) 
+  AND tags.name in (select name from tags) 
 GROUP BY artists.name 
 HAVING count(*) > 1;
 
-EXPLAIN ANALYZE SELECT 
-  artists.name, 
-  string_agg(tags.name, ' - ')
-FROM artists_tags
-JOIN artists ON artists_tags.artist_id = artists.id
-JOIN tags ON artists_tags.tag_id = tags.id 
-WHERE tags.name in ('instrumental', 'electronic') 
-GROUP BY artists.name 
-HAVING count(*) > 1;
-
--- and we can add another query instead of a fixed list 
--- of tags.  As long as that query returns a single column
--- such as:
-
-SELECT artists.name, count(*)
-FROM tags, artists, artists_tags
-WHERE artists_tags.artist_id = artists.id
-  AND artists_tags.tag_id = tags.id
-  AND tags.name in (
-    SELECT name 
-    FROM tags 
-    WHERE id > 2
-  )
-GROUP BY artists.name;
 
 -- demonstrate the usefulness of an outer join 
 -- when we don't know where data will exist
@@ -183,6 +163,8 @@ left outer join plays on plays.track_id = tracks.id
 inner join albums on tracks.album_id = albums.id
 group by albums.title;
 
+-- vs the inner join alternative that would ONLY show
+-- the matching results
 
 select albums.title, sum(count) 
 from tracks

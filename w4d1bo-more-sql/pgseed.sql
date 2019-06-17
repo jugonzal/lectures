@@ -3,6 +3,7 @@ DROP TABLE IF EXISTS albums CASCADE;
 DROP TABLE IF EXISTS tracks CASCADE;
 DROP TABLE IF EXISTS tags CASCADE;
 DROP TABLE IF EXISTS artists_tags CASCADE;
+DROP TABLE IF EXISTS plays CASCADE;
 
 CREATE TABLE artists (
   id SERIAL PRIMARY KEY NOT NULL,
@@ -33,6 +34,11 @@ CREATE TABLE artists_tags (
   tag_id INTEGER NOT NULL REFERENCES tags(id) ON DELETE CASCADE
 );
 
+CREATE TABLE plays (
+  id SERIAL PRIMARY KEY NOT NULL,
+  count INTEGER NOT NULL,
+  track_id INTEGER NOT NULL REFERENCES tracks(id) ON DELETE CASCADE
+);
 
 
 INSERT INTO "tags" (id, name) VALUES(1, 'post-rock');
@@ -188,3 +194,6 @@ INSERT INTO "tracks" (title, number, album_id) VALUES ('SPACE LION', 7, 9);
 INSERT INTO "tracks" (title, number, album_id) VALUES ('WALTZ for ZIZI', 8, 9);
 INSERT INTO "tracks" (title, number, album_id) VALUES ('PIANO BLACK', 9, 9);
 
+INSERT INTO "plays" (count, track_id) VALUES (1,87);
+INSERT INTO "plays" (count, track_id) VALUES (7,88);
+INSERT INTO "plays" (count, track_id) VALUES (3,89);
