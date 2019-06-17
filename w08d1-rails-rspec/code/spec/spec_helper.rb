@@ -13,12 +13,14 @@
 # it.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
+
+
 require 'database_cleaner'
 require 'factory_bot_rails'
 
 RSpec.configure do |config|
 
-  config.before(:suite) do
+ config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with(:truncation)
   end

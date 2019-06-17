@@ -85,7 +85,7 @@ These steps are necessary because RSpec is **not** a default Rails component, ev
 
 ## Code discussed in class
 
-The app we've used in class (more of a skeleton, really) can be found inside the [`/code`](code) folder. Be sure to check [`/code/spec/models`](code/spec/models) in particular.
+The app we've used in class (more of a skeleton, really) can be found inside the [`/code`](https://github.com/jugonzal/lectures/tree/master/w08d1-rails-rspec/code) folder. Be sure to check `/code/spec/models` in particular.
 
 ## Test steps
 In general a test case will have the following steps:
@@ -136,4 +136,4 @@ We also talked about how to use:
 
 ## FactoryBot
 
-[FactoryBot](http://www.rubydoc.info/gems/factory_bot/file/GETTING_STARTED.md) is a gem that allows you to create customizable test assets with different traits. Be sure to check out [`/code/spec/factories`](code/spec/factories) to see how to define them and [`bicycle_spec.rb`](code/spec/models/bicycle_spec.rb) to see it in use.
+[FactoryBot](http://www.rubydoc.info/gems/factory_bot/file/GETTING_STARTED.md) is a gem that allows you to create customizable test assets with different traits. Be sure to check out [`/code/spec/factories`](https://github.com/jugonzal/lectures/tree/master/w08d1-rails-rspec/code/spec/factories) to see how to define them and [`bicycle_spec.rb`](https://github.com/jugonzal/lectures/tree/master/w08d1-rails-rspec/code/spec/models/bicycle_spec.rb) to see it in use.
