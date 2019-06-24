@@ -40,18 +40,13 @@ const ancestry = [
   {"name": "Jacobus Bernardus van Brussel", "sex": "m", "born": 1736, "died": 1809, "father": "Jan van Brussel", "mother": "Elisabeth Haverbeke"}
   ];
 
+// Here we have a common
 function deadAfter1980(p) {
   return p.died > 1980
-}
-
-function theFather(person) {
-  return ancestry.filter(p => person.father == p.name)[0]
 }
 
 function onePersonAfter1980() {
   return ancestry.filter(deadAfter1980)[0]
 }
 
-console.log(theFather(theFather(onePersonAfter1980())))
-
-
+console.log(onePersonAfter1980())

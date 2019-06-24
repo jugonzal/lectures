@@ -38,92 +38,51 @@ const ancestry = [
   {"name": "Anna van Hecke", "sex": "f", "born": 1607, "died": 1670, "father": "Paschasius van Hecke", "mother": "Martijntken Beelaert"},
   {"name": "Maria Sturm", "sex": "f", "born": 1835, "died": 1917, "father": "Charles Sturm", "mother": "Seraphina Spelier"},
   {"name": "Jacobus Bernardus van Brussel", "sex": "m", "born": 1736, "died": 1809, "father": "Jan van Brussel", "mother": "Elisabeth Haverbeke"}
-];
+  ];
 
-console.log("How many: ",ancestry.length)
+// Here we have a common
+function deadAfter1980(p) {
+  return p.died > 1980
+}
 
-function diedRecently() {
-  for (var i=0; i<ancestry.length; i++) {
-    if (ancestry[i].sex == "m")
-      if (ancestry[i].died > 1900)
-        console.log(ancestry[i])
+function onePersonAfter1980() {
+  return ancestry.filter(deadAfter1980)[0]
+}
+
+// and here is a simple function to find one particular person
+function theFather(person) {
+  return ancestry.filter(p => person.father == p.name)[0]
+}
+
+
+console.log(onePersonAfter1980())
+console.log(theFather(onePersonAfter1980()))
+
+
+// Refactoring so we can always work with people
+
+class Person {
+
+  constructor (data) {
+      Object.assign(this, data)
   }
+
+  get theFather() {
+    return new Person(ancestry.filter(p => this.father == p.name)[0])
+  }
+
+  get theMother() {
+    return new Person(ancestry.filter(p => this.mother == p.name)[0])    
+  }
+
+  get theMaternalGrandFather() {
+    return this.theMother.theFather
+  }
+
 }
-
-// diedRecently()
-
-
-
-// function filter(array, test) {
-//   var passed = [];
-//   for (var i = 0; i < array.length; i++) {
-//     if (test(array[i]))
-//       passed.push(array[i]);
-//   }
-//   return passed;
-// }
-
-// console.log(filter(ancestry, diedAfter1900))
-
-function diedAfter1900 (person) {
-  return person.died > 1900
-}
-
-function male(p) { return p.sex == "m"; }
 
 console.log(
-  ancestry
-  .filter(diedAfter1900)
-  .filter(male)
-  .map(p => {
-    return `<li>${p.name} died on ${p.died}</li>`
-  })
-  // .map(p => {
-  //   p.liked = true;
-  //   return p;
-  // })
-  )
-
-
-
-
-
-
-// console.log("Filter: ",filter(ancestry, function(person) {
-//   return person.born > 1900 && person.born < 1925;
-// }));
-
-// console.log("Father: ",ancestry.filter(function(person) {
-//   return person.father == "Carel Haverbeke";
-// }));
-
-
-function map(array, transform) {
-  var mapped = [];
-  for (var i = 0; i < array.length; i++)
-    mapped.push(transform(array[i]));
-  return mapped;
-}
-
-// var overNinety = ancestry.filter(function(person) {
-//   return person.died - person.born > 90;
-// });
-
-// console.log("map: ",map(overNinety, function(person) {
-//   return person.name;
-// }));
-
-
-function age(p) { return p.died - p.born; }
-function male(p) { return p.sex == "m"; }
-function female(p) { return p.sex == "f"; }
-function over90(p) {  return p.died - p.born > 90; }
-
-console.log("males over 90: ", 
-  ancestry
-  .filter(over90)
-  .filter(male)
-  .map(p => {
-    p.liked = true;
-    return p
-  }))
+  (new Person(onePersonAfter1980()))
+    .theMother
+    .theFather
+)
