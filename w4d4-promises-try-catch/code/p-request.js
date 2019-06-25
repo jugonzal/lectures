@@ -27,7 +27,7 @@ const url2 = process.argv[3];
 // for both...  but we defer the processing of the
 // outcome to later.
 let p1 = promisifiedGet(url)
-// let p2 = promisifiedGet(url2)
+let p2 = promisifiedGet(url2)
 
 
 p1.then((data) => {
@@ -35,19 +35,19 @@ p1.then((data) => {
   // Throwing an error will trigger the .catch block
   // just like try/catch... Nice!
   //
-  // throw "First promise ERROR"
+  throw "First promise ERROR"
   return 1
 })
-// .then(id => {
-//     p2.then((data) => {
-//       console.log(`Second Data is ${data}.`);
-//       // throw "Second promise ERROR"
-//     })
-//     .catch(err => {
-//       console.log("Double wrong inside the .catch")
-//       // throw "Second promise ERROR"
-//     })
-// })
+.then(oldata => {
+    p2.then((data) => {
+      console.log(`Second Data is ${data}.`);
+      // throw "Second promise ERROR"
+    })
+    .catch(err => {
+      console.log("Double wrong inside the .catch")
+      // throw "Second promise ERROR"
+    })
+})
 .catch((err) => {
   console.log(`Something went wrong: ${err}`);
   // throw "Last .catch error"
@@ -57,15 +57,15 @@ p1.then((data) => {
 // at the same time.  Useful to dispatch many tasks at once
 // and wait for all of them to be finished.
 
-// Promise.race([
-//   promisifiedGet('http://reqres.in/api/users/2?delay=1'),
-//   promisifiedGet('http://reqres.in/api/user/1?delay=3')
-//   ])
-// .then((results, second) => {
-//   console.log(results)
-// })
-// .catch((err) => {
-//   console.log(`Something went wrong: ${err}`);
-//   // throw "Last .catch error"
-// })
+Promise.all([
+  promisifiedGet('http://reqres.in/api/users/2?delay=1'),
+  promisifiedGet('http://reqres.in/api/user/1?delay=3')
+  ])
+.then([first, second] => {
+  console.log(results)
+})
+.catch((err) => {
+  console.log(`Something went wrong: ${err}`);
+  // throw "Last .catch error"
+})
 

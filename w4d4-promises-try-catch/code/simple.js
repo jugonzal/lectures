@@ -1,12 +1,10 @@
 
 function Do () {
-
 	try {
-	    something.run()
-	    let a = 2 + 3
-	    // throw "Tantrum"
+		let a = 2 + 3 
+		throw "Tantrum"
 	} catch (err) {
-		console.log('Ooopps... ', err)
+		console.log("Something went wrong: ", err)
 	}
   
 }

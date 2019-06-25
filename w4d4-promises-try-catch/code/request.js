@@ -3,8 +3,8 @@ const request = require('request');
 function get(url, callback) {
     request.get(url, function (error, response, body) {
       if (error) {
-        console.log("Oh oh, error:", error)
-        callback("Couldn't complete GET")
+        // throw("Error inside get()")
+        callback(error, "")
       }
       else {
         callback("", body)
@@ -20,12 +20,12 @@ const url = process.argv[2];
 console.log(`URL: ${url}`);
 
 try {
-  get(url, function(err, resp) {
-    if (err) {
-      console.log("Kind of nice catch: ", err)
-    } else {
-      console.log("Got my response back", resp)
-    }
+  get(url, function(error, resp) {
+      if (error) {
+        console.log("callback error: ", error)
+      } else {
+        console.log("Got my response back", resp)
+      }
   }) 
 } catch (e) {
   console.log("Nice catch ",e)

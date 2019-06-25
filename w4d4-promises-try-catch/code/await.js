@@ -21,9 +21,11 @@ function promisifiedGet(url) {
 const url = process.argv[2];
 console.log(`URL: ${url}`);
 
-(async () => {
+
+let final = (async () => {
+  let body = ""
   try {
-    let body = await promisifiedGet(url)
+    body = await promisifiedGet(url)
     console.log("1st inside doGet ",body)
     body = await promisifiedGet(process.argv[3])
     console.log("2nd inside doGet ",body)
@@ -32,6 +34,10 @@ console.log(`URL: ${url}`);
     console.log('bad bad bad ',e)
   }
 })()
+
+final.then(() => {
+  console.log(final)
+})
 
 
 // async function twoGets() {
