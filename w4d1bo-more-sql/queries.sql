@@ -122,7 +122,7 @@ SELECT *
 FROM tags, artists, artists_tags
 WHERE artists_tags.artist_id = artists.id
   AND artists_tags.tag_id = tags.id 
-  AND tags.name in ('instrumental', 'electronic');
+  AND tags.name in (select name from tags where id <4);
 
 -- Lastly, to solve the question about which artists
 -- are categorized in two tags, we used GROUP BY 
