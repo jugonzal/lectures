@@ -42,14 +42,14 @@ const tweeps = [
 // manually change one tweep at a time
 
 // tweeps[2].like = true;
-
 // tweeps[3].when = new Date();
 // console.log(tweeps[0].said = tweeps[0].said.toUpperCase());
 
+
 // STAGE 1: writing functions to do one thing
-// Explore the various styles of functions:
-// declaration vs expression
-// Also, what happens to variables that go into functions?
+// Practice the notation for function expressions
+// Also, observe the scope of variables
+// Notice the linter will complain about `tweep` not being declared
 
 // const likeTweep = function(name) {
 //   for (tweep of tweeps) {
@@ -124,15 +124,12 @@ doToTweep('@fzero', function (tweep){ tweep.flag = true} )
 doToTweep('@fzero', (juan) => juan.love = true )
 
 
-
-
 // I've created a function that does ONE thing very
 // well, but at the same time is so generic that could
 // be used to make ANY change across all my tweeps.
 // That is the ultimate goal.
 
 // Javascript provides a range of high order function like `map`
-//
 tweeps.map(function(tweep) {
   tweep.when = (new Date());
 });
@@ -140,8 +137,6 @@ tweeps.map(function(tweep) {
 // Going back to our very first function method;
 
 lhl.allNames = () => Object.values(lhl.mentors).map(mentor => mentor.name)
-
 console.log(lhl.allNames())
 
-console.log(lhl.allNames)
-// console.log(tweeps);
+console.log(tweeps);
