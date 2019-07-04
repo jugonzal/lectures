@@ -18,7 +18,7 @@ function promisifiedGet(url) {
 // handling of responses, the code is clearer than if I had used
 // callbacks
 const url = process.argv[2];
-// const url2 = process.argv[3];
+const url2 = process.argv[3];
 // console.log(`URL: ${url}`);
 
 // when the following two promises are created, 
@@ -28,15 +28,22 @@ const url = process.argv[2];
 let p1 = promisifiedGet(url)
 // let p2 = promisifiedGet(url2)
 
-
 p1
   .then((data) => {
     console.log(`First Data is ${data}.`);
+    throw "Nasty"
   })
   .catch((err) => {
     console.log(`Something went wrong: ${err}`);
     // throw "Last .catch error"
   })
+
+// p2.then((data2) => {
+//       console.log(`Second Data is ${data2}`);
+//     })
+//     .catch((err2) => {
+//       console.log(`Something else went wrong`)
+//     })
 
 
 // p1.then((data) => {
@@ -70,7 +77,7 @@ p1
 //   promisifiedGet('http://reqres.in/api/users/2?delay=1'),
 //   promisifiedGet('http://reqres.in/api/user/1?delay=3')
 //   ])
-// .then([first, second] => {
+// .then((results) => {
 //   console.log(results)
 // })
 // .catch((err) => {
