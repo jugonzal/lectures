@@ -1,14 +1,21 @@
 <html>
   <head>
-    <title>Welcome to Toronto!</title>
+    <title>Welcome to <%=city %>!</title>
     <style>
       body {
-        background-color: #eeeeee;
+        background-color: #ececec;
       }
     </style>
   </head>
   <body>
-    <h1>Weather in Toronto</h1>
-    <p>Today is absolutely gorgeous.</p>
+    <h1>Weather in <%=city %></h1>
+    <h3>For <%= new Date() %></h3>
+    <p>Today is absolutely gorgeous... but it may rain</p>
+    <ul>
+    <%
+      for (let i=0; i<maximum; i++) {
+    %>
+      <li>One more thing <a href="/">Go Home</a></li>
+    <% } %>
   </body>
 </html>

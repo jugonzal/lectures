@@ -1,12 +1,12 @@
 const express = require('express');
 // const bodyParser = require('body-parser');
-// const morgan = require('morgan');
+const morgan = require('morgan');
 
 // Initialize express
 const app = express();
 
 // Use EJS for views
-// app.set("view engine", "ejs");
+app.set("view engine", "ejs");
 
 // As we discussed before, Express is a very barebones library.
 // We can add different functionality using middlewares, which are functions
@@ -16,17 +16,17 @@ const app = express();
 // To work with forms and JSON data, we need to configure Express
 // to use the bodyParser middleware to convert those types of data
 // into JS objects inside our functions.
-// app.use(function(req, res, next) {
-//   console.log(req.url);
-//   next()
-// })
+app.use(function(req, res, next) {
+  console.log('--> ', req.url);
+  next()
+})
 
 // app.use(bodyParser.urlencoded({extended: false})); // forms
 // app.use(bodyParser.json()); // JSON
 
 // I'm also adding a logging middleware so we can see what's going on
 // with our server. More info: https://github.com/expressjs/morgan
-// app.use(morgan('dev'));
+app.use(morgan('dev'));
 app.use('/static', express.static('public'))
 
 
@@ -35,21 +35,26 @@ app.get('/', function (req, res) {
   res.send('Welcome to Express Weather!')
 });
 
-app.get('/toronto', function(req, res) {
-  res.render('toronto')
-})
-
-// app.get('/montreal',function(req, res) {
-//   res.render('toronto',{city: "Montreal"})
+// app.get('/toronto', function(req, res) {
+// 	res.send('Weather in Toronto is fantastic!')
 // })
 
-// app.get('/city/:someCity', (req, res) => {
-// 	console.log("Req Params: ", req.params)
-//   let templateVars = { 
-//   	city: req.params.someCity,
-//   	forecast: "MetaWeather-LightCloud.png" }
-//   res.render('toronto',templateVars)
-// });
+app.get('/toronto', function(req, res) {
+  res.render('toronto',{city: 'Toronto', maximum: 5})
+})
+
+app.get('/montreal', function(req, res) {
+  res.render('toronto',{city: 'Montreal', maximum: 3})
+})
+
+app.get('/city/:someCity', (req, res) => {
+	console.log("Req Params: ", req.params)
+  let templateVars = { 
+  	city: req.params.someCity,
+  	maximum: req.params.length }
+  	// forecast: "MetaWeather-LightCloud.png" }
+  res.render('toronto',templateVars)
+});
 
 // app.post('/pay', function(req, res) {
 //   console.log('Hello... ',req.body)
