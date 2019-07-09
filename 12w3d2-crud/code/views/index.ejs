@@ -1,0 +1,24 @@
+<html><body>
+  <h1>Juan's Blog</h1>
+
+ <p>This is where you will see the list of all my articles</p>
+ 
+ <ul>
+<% for (post of posts) 
+  { %>
+
+  <li><a href="/posts/<%=post.id %>"><%=post.title %></a></li>
+
+<% } %>
+  <li>or <a href="/posts/new">add a new one</a></li>
+</ul>
+
+ <footer>
+  <p>Current date and time is <%= new Date() %></p>
+</footer>
+
+<script>
+  console.log('Hello World');
+</script>
+
+</body></html>
