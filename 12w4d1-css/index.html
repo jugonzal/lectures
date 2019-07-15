@@ -9,9 +9,36 @@
       font-size: 1.5em;
       font-family: Arial;
     }
+
+    #today {
+      background-color: yellow;
+    }
+
+    p {
+      margin-top: 12px;
+      margin-bottom: 12px;
+      padding: 6px;
+      width: 40%;
+    }
+
+    tr {
+      background-color: lightsalmon;
+    }
+
+    .tuesday {
+      background-color: lightblue;
+    }
+
+    * {
+      border-style: dotted;
+      border-color: red;
+    }
+
+
   </style>
 </head>
   <body>
+    <p>The forecast for this week...</p>
     <table>
       <tr>
         <td>
@@ -21,15 +48,15 @@
           Temp
         </td>
       </tr>
-      <tr>
-        <td>
+      <tr id="today">
+        <td style="background-color: red;">
           Monday
         </td>
         <td>
           28
         </td>
       </tr>
-      <tr>
+      <tr class="tuesday">
         <td>
           Tuesday
         </td>
@@ -43,6 +70,14 @@
         </td>
         <td>
           24
+        </td>
+      </tr>
+      <tr class="tuesday">
+        <td>
+          Thursday
+        </td>
+        <td>
+          21
         </td>
       </tr>
     </table>

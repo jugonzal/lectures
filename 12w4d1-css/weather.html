@@ -2,79 +2,79 @@
 <head>
  	<title>Weather Forecast</title>
  	<style>
-/*		body {
+		body {
 			font-size: 1.2em;
 			font-family: Arial, Helvetica, sans-serif;
 		}
-*/
+
 		/* Rule Ordering matters */
-/*		.today {
+		.today {
 			background-color: lightgreen;
 		}
 		.today {
-			background-color: lightblue;
+			background-color: lightsalmon;
 		}
-*/
-
 
 		/* but can be easily superceded by the MATH */
-/*		section#forecast dt.weekday {
+		section#forecast dt.weekday {
  			background-color: lightblue;
 		}
-*/
+
 		/* if nothing else works INLINE!! */
 
 
 		/* CSS Combinators: descendant selector */
-/* 		body time {
+ 		dl time {
  			background-color: aquamarine;
+ 			font-style: normal;
  		}
-*/
+
  		/* Direct Child */
-/* 		.daylist dt > time {
+ 		.daylist dt > time {
+ 			background-color: yellow;
  			font-style: oblique;
  		}
-*/
+
  		/* General vs Adjacent Siblings */
-/* 		dt.weekday + dd {
+ 		dt.weekday + dd {
  			color: darkgray;
  		}
-*/
-/* 		dt.weekday + dd ~ dd {
+
+ 		dt.weekday + dd ~ dd {
  			color: lightgray;
  		}
-*/
-/* 		p {
+
+ 		p {
  			border-style: dotted;
  			border-color: red;
  			width: 80%;
  		}
-*/
+
  		/* display property... block vs inline */
-/* 		dt time {
+ 		dt time {
  			display: block;
  		}
-*/
+
 
  		/* auto centering */
-/* 		#forecast {
+ 		#forecast {
  			margin: auto;
  			width: 80%;
  		}
-*/ 		
+ 		
 		/* a cheap navigation menu */
 
-/*		nav ul > li {
+		nav ul > li {
 			width: 30%;
-      		float: left;
+  		float: left;
 		}
 
     nav li:hover {
 			color: red;
 		}
-*/
+
 	</style>
-	<!-- <link rel="stylesheet" href="flex.css" /> -->
+	<link rel="stylesheet" href="flex.css" />
 </head>
 <body>
 	<header>
