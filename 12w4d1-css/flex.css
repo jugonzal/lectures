@@ -1,0 +1,32 @@
+
+.daylist dl {
+    border-style: solid;
+    border-width: medium;
+    margin: auto;
+    justify-content: space-between;
+    padding: 20px;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    box-sizing: border-box;
+    display:flex;
+/*width:80%;*/
+}
+.weekday {
+    padding: 5px;
+    /*height: 400px;*/
+    border-style: solid;
+    border-width: thin;
+    box-sizing: border-box;
+}
+.today {
+    order: 1;
+    flex-basis: 40%;
+}
+.tomorrow {
+    order: 2;
+    flex-basis: 30%;
+}
+.later {
+    order: 3;
+    flex-basis: 25%;
+}

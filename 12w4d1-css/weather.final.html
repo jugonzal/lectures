@@ -1,0 +1,114 @@
+<html>
+<head>
+ 	<title>Weather Forecast</title>
+ 	<style>
+		body {
+			/*box-sizing: border-box;*/
+			font-size: 1.2em;
+			font-family: Arial, Helvetica, sans-serif;
+		}
+
+		/* Rule Ordering matters */
+		.today {
+			background-color: lightgreen;
+		}
+
+		/* but can be easily superceded by the MATH */
+		section#forecast dt.weekday {
+ 			background-color: lightblue;
+		}
+
+
+		/* CSS Combinators: descendant selector */
+ 		body time {
+ 			background-color: aquamarine;
+ 		}
+
+ 		/* Direct Child */
+ 		.daylist dt > time {
+ 			font-style: oblique;
+ 		}
+
+ 		/* General vs Adjacent Siblings */
+ 		dt.weekday + dd {
+ 			color: darkgray;
+ 		}
+
+ 		dt.weekday + dd ~ dd {
+ 			color: lightgray;
+ 		}
+
+ 		p {
+ 			border-style: dotted;
+ 			border-color: red;
+ 			width: 80%;
+ 		}
+
+ 		/* display property... block vs inline */
+ 		dt time {
+ 			/*display: block;*/
+ 		}
+
+
+ 		/* auto centering */
+ 		#forecast {
+ 			margin: auto;
+ 			width: 80%;
+ 		}
+ 		
+		/* a cheap navigation menu */
+
+		nav ul > li {
+			width: 30%;
+      		float: left;
+		}
+
+    nav li:hover {
+			color: red;
+		}
+
+	</style>
+	<link rel="stylesheet" href="flex.css" />
+</head>
+<body>
+	<header class="row">
+		<h1>Weather Forecast</h1>
+			<nav>
+				<ul>
+					<li>Toronto</li>
+					<li>Montreal</li>
+					<li>Cancun</li>
+				</ul>
+			</nav>
+	</header>
+	<section class="row daylist" id="forecast">
+		<p>Forecast for Toronto, ON generated on <time datetime="2019-05-13">May 13, 2019</time></p>
+		<dl>
+			<div class="today">
+			    <dt class="weekday">Today, Monday <time datetime="2019-04-15">April 15, 2019</time></dt>
+			    <dd>Partly cloudy and windy. 
+			    <dd>High 46F. 
+			   	<dd>Winds NW at 20 to 30 mph. Winds could occasionally gust over 40 mph.
+		   	</div>
+			<div class="tomorrow">
+			    <dt class="weekday">Tomorrow, Tuesday <time datetime="2019-04-16">April 16, 2019</time></dt>
+			    <dd>Cloudy. 
+			    <dd>Slight chance of a rain shower. 
+			    <dd>High 47F. 
+			    <dd>Winds WSW at 10 to 15 mph.
+			</div>
+			<div class="later">
+			    <dt class="weekday">Wednesday <time datetime="2019-04-17">April 17, 2019</time></dt>
+			    <dd>Partly cloudy skies in the morning will give way to cloudy skies during the afternoon. 
+			    <dd>Slight chance of a rain shower. 
+			    <dd>High 46F.
+			    <dd>Winds ENE at 10 to 20 mph.
+			</div>
+			<div class="later">
+			    <dt class="weekday">Thursday <time datetime="2019-04-18">April 18, 2019</time></dt>
+			    <dd>Cloudy skies. 
+			    <dd>High 57F. 
+			    <dd>Winds SSE at 10 to 20 mph.
+			</div>
+		</dl>
+	</section>
