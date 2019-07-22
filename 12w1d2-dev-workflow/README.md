@@ -65,7 +65,7 @@ And while you can run the entire debugger in your command line, there is a way t
 In your terminal
 
 ``` 
-$ node inspect arrays.js
+$ node --inspect-brk=0.0.0.0:9229 arrays.js
 
 Debugger listening on ws://127.0.0.1:9229/87bdfe7e-a44c-4545-9808-b6c7f1458561
 
