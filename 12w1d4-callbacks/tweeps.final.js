@@ -126,6 +126,31 @@ console.log(lhl.allNames());
 
 // console.log(tweeps);
 
+// STAGE N: We can always find refactorings to make things even
+// more generic
+
+// const doToTweep = function(name, callback, ...params) {
+//   for (let tweep of tweeps) {
+//     let allNames = [tweep.who]
+//     if (tweep.alias) {
+//       allNames = [tweep.who, ...tweep.alias ]
+//     } 
+//     if (allNames.includes(name) ) {
+//       callback(tweep, ...params)
+//     }
+//   }
+// };
+
+// const addAlias = function(tweep, newAlias) {
+//   if (tweep.alias) {
+//     tweep.alias.push(newAlias)
+//   } else {
+//     tweep.alias = [ newAlias ]
+//   }
+// }
+
+
+
 // I've created a function that does ONE thing very
 // well, but at the same time is so generic that could
 // be used to make ANY change across all my tweeps.

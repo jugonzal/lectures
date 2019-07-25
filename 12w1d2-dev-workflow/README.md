@@ -22,7 +22,7 @@ Once we were very confident with the various elements needed to solve the soluti
 1. Simple LOOP to add values
 2. Use FUNCTIONS to process numbers correctly
 3. Test using `console.log` and `node inspect`
-4. Use CONDITIONALS to formalize tests
+4. Use ASSERTIONS to formalize tests
 5. Clean up our code with ESLint
 6. Refactor to take data as we should
 7. Confirm tests
