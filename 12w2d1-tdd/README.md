@@ -2,32 +2,50 @@
 
 ## Just want the `Family` code?
 
-Take a look inside [`/family`](https://github.com/jugonzal/lhl-lectures/tree/master/w1d5-modules-testing/family) for the complete example including modules, packages and tests.
+Take a look inside [`/family`](https://github.com/jugonzal/lhl-lectures/tree/master/12w2d1-tdd/family) for the complete example including modules, packages and tests.
 
-## Writing better code
+## Writing tests cases
 
-I started the lecture today by writing what seemed like a perfectly good function:
+Today we started by *NOT* writing code first.  Instead, we spend a few minutes imagining what the resulting code would do for us and wrote a series of scenarios, which we shall call *test cases*:
 
 ```javascript
-function greatestGeneration () {
-  var newArray = [];
-  ancestry.forEach(function(person) {
-    if (person.born >= 1900 && person.born <= 1924) {
-      // console.log("Found one: ", person)
-      newArray.push(person)
-    }
-  })
-  return newArray;
-}
+
+// If I look at Phil's ancestry I should find Emile
+console.log(ancestors('Philibert Haverbeke')) 
+  // should return an array that includes Emile
+
+// I should also find Carolus
+// and keep going to Carel
+// I should find Maria to be in Phil's ancestry on the grand-mother's line
+// Should find that Clara has only father and mother
+// Should figure out that Maria has no ancestry
 ```
 
-While we were quite happy with the version and we found it useful, we realized that a better version of that function would not hard code the years and so we decided to refactor it to accept some parameters.
+Doing this helped us narrow down our ideas about how the function should be written and made it easier to get going with code.  Also, it made it trivial to verify that the resulting code was doing what it was supposed to.
 
-However, at this point we wanted to make sure that any changes to our code would not *break* it so decided to create a test harness for it.  The first version was very rudimentary but eventually we found a way to write them using Mocha/Chai.
+This was an exercise on *TDD* or Test-Driven Development, which is a major trend in software these days.
 
-Before looking into our tests, take a look at the final version of our `greatestGeneration()` function and see how it is built on `filter` which is built into *every* array, making it the ideal way to solve our problem without writing too much code.  Notice how elegant the final version is, acting on the array itself, sending the data through as many stages of filtering as needed by chaining those calls, using callbacks where each individual callback is a very simple function that does ONE thing alone.
+During our lecture we learned about **Mocha/Chai** and how they allow us to write better, more expressive test cases, such as:
 
-The rest of the lecture we learned how to create a proper set of tests for our new functions, organizing them into a module that can be imported (`require()`) into others.
+```javascript
+ describe('looking into Philibert Haverbeke ancestors', function() {
+    let philAncestors = ancestryCode.ancestors('Philibert Haverbeke')
+
+    it('should return ancestry as an array', function() {
+      expect(philAncestors).is.an('array')
+    })
+
+    it('should find that Emile is an ancestor to Philibert', function() {
+      expect(philAncestors).to.include.members(['Emile Haverbeke'])
+    })
+  })
+```
+
+You'll want to read through the full documentation for *Chai* to get a rich vocabulary of BDD-styled assertions, or assertions that are written in the form _"expect to do something like..."_.
+
+[Chai BDD-styled assertions](https://www.chaijs.com/api/bdd/)
+
+Below you'll find a few more notes about Modules, Packages and Testing, but the code examples will probably be a lot more useful at this point.
 
 ## About Modules
 
@@ -66,24 +84,26 @@ Here's a complete `package.json` example:
 
 ```json
 {
-  "name": "w1d5",
+  "name": "ancestry",
   "version": "1.0.0",
-  "description": "LHL - Automated testing example",
-  "main": "index.js",
+  "description": "This module can explore ancestry",
+  "main": "ancestry.js",
+  "directories": {
+    "test": "test"
+  },
   "scripts": {
-    "start": "node index.js",
-    "test": "mocha"
+    "test": "./node_modules/mocha/bin/mocha"
   },
-  "author": "Fabio Neves",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
+  "dependencies": {},
   "devDependencies": {
-    "chai": "^3.5.0",
-    "mocha": "^3.2.0"
-  },
-  "dependencies": {
-    "request": "^2.79.0"
+    "chai": "^4.2.0",
+    "mocha": "^6.0.2"
   }
 }
+
 ```
 
 ## Creating a module
@@ -170,7 +190,7 @@ if (squared(4) === 16) {
 }
 else {
   console.log("squared() isn't squaring (either that or you broke math!).")
-});
+};
 ```
 
 But we're writing a lot of custom code to achieve this, which isn't ideal. We looked at [Mocha](https://mochajs.org/) to make testing easier, and used it in conjunction with the built-in [assert](https://nodejs.org/api/assert.html) package. You can also require [Chai](http://chaijs.com), which provides [several different ways to match and verify return values](http://chaijs.com/api/bdd/).
