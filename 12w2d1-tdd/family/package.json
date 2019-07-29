@@ -1,8 +1,8 @@
 {
-  "name": "family",
+  "name": "ancestry",
   "version": "1.0.0",
-  "description": "This is a module that can tell you the father and grandfather of people",
-  "main": "family.js",
+  "description": "This module can explore ancestry",
+  "main": "ancestry.js",
   "directories": {
     "test": "test"
   },
