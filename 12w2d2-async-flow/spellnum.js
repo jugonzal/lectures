@@ -1,55 +1,46 @@
-// setTimeout(() => {
-//   console.log('four')
-// }, 1000);
-
 // console.log('one')
-
 // setTimeout(() => {
-//   console.log('five')
+//   console.log('two')
 // }, 2000);
-
-// console.log('two');
-
 // console.log('three');
 
+// const spellZero = function() {
+
+//   setTimeout(() => console.log('zero'), 100)
+//   // return 'starting'
+// }
+
+// console.log(spellZero())
 
 const spellit = function(number, callback) {
-  let spell = "";
-  setTimeout(() => {
+
+  const whatToDo = function() { 
     switch(number) {
       case 1:
-        callback('one');
+        callback ('one');
         break;
       case 2:
-        callback('two');
+        callback ('two');
         break;
       case 3:
-        callback('three');
+        callback ('three');
         break;
     }
-  }, number * 100);
+  }
 
-  // this doesn't work!
-  // return spell
+  setTimeout(whatToDo, number*1000)
+
 };
 
-// console.log(spellit(2));
-let phrase = "";
-// spellit(2, label => phrase += label)
-// spellit(1, label => phrase += label)
-// spellit(3, label => phrase += label)
-// console.log('My phrase: ', phrase);
-
-
-phrase = "";
-spellit(2, label => { 
-  phrase += label;
-  spellit(1, label => {
-    phrase += label;
-    spellit(3, label => { 
-      phrase += label
-      console.log('My phrase: ', phrase);
+let numbers = "";
+spellit(3, (literal) => {
+  numbers += literal
+  spellit(1, (literal) => {
+    numbers = literal
+    spellit(2, (literal) => {
+      numbers += literal
+      console.log(numbers)
     });
   });
-})
+});
 

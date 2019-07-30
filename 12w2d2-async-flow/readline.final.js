@@ -4,28 +4,28 @@ const ask = readline.createInterface({
   output: process.stdout
 });
 
-// timers are useful in some contexts, but they are not
-// the only reason we worry about asynchronous behaviour
+const nuclear = {
+  prompt: 'You are in a nuclear facility, with one door north and one south.  Where would you go next?',
+  south: () => console.log('Exiting the building'),
+  north: () => visit(dashboard)
+}
 
-console.log('Maze Adventure')
+const dashboard = {
+  prompt: 'Found the dashboard... with tons of buttons, one of which is labeled "START". To the south there is an exit door. What would you do next?',
+  south: () => visit(nuclear),
+  start: () => visit(nuclear), // you did ask to START, right?
+  'push': () => console.log('pushed the wrong button')
+}
 
-ask.question(`You are at the start block,
-  with doors to the south and east,
-  where would you want to go next?`, (answer) => {
-    switch (answer) {
-      case 'south':
-        console.log('You are now at a dead end')
-        break;
-      case 'east':
-        console.log('You are now in a long hall')
-        break
-      default:
-        console.log('You can not go that way')
+const visit = function (room) {
+  ask.question(room.prompt, 
+    answer => {
+      console.log('Go ',answer)
+      if (room[answer]) {
+        room[answer]();
+      }
+    });
+}
 
-    }
-  }
-);
-
-console.log('ktxbye')
-
+visit(nuclear)
 

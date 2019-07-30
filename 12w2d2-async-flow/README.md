@@ -22,6 +22,7 @@ This led to a more complex code organization as a result of the two flows: now a
 
 - The role of callbacks
 - Passing data back
+- Waiting for all events to wrap up
 - Chaining events
 
 You can look at the code we wrote together in my [repo/12w2d2/spellnum.js](https://github.com/jugonzal/lectures/blob/master/12w2d2-async-flow/spellnum.js)
