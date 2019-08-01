@@ -25,16 +25,17 @@ Look at [`try.js`](https://github.com/jugonzal/lectures/tree/master/12w2d4-promi
 
 After that we spent a good amount of time reasoning how to build the appropriate flow whenever we have asynchronous conditions. It turns out it is all about how we use the callbacks to manage the flow.
 
-```
+```javascript
 const get = function(url, callback) {
   request.get(url, function (error, response, body) {
     if (error) {
-      callback(error)
+      callback(error,null)
     } else {
       callback(null,body)
     }
   })
-}```
+}
+```
 
 You can explore [`request.js`](https://github.com/jugonzal/lectures/tree/master/12w2d4-promises/code/request.js) to see what happens when certain error conditions happen.  Notice we have replaced the `try/catch` blocks with `if` statements that look at the data passed via callbacks. Of course that means that in more complex scenarios where multiple asynchronous calls are made the code can end up being quite convoluted.
 
@@ -63,7 +64,7 @@ See [`promises.js`](https://github.com/jugonzal/lectures/tree/master/12w2d4-prom
 
 The ultimate pattern for dealing with async issues AND having a simple error handling flow looks like this:
 
-```
+```javascript
 (async () => {
   try {
     let body = await promisifiedGet(url)

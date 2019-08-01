@@ -1,17 +1,16 @@
 
 function doit(task) {
-  if (!task) {
-    throw "Forgot to give me a task!"
-  } else {
+  if (task) {
     task.something()
+  } else {
+    throw 'Fail! Forgot to give me a task'
   }
-  console.log('just did something')
 }
 
 try {
-  console.log("about to start...")
   doit()
-  console.log("seems to have done it...")
 } catch(error) {
-  console.log("was not expecting that ", error)
+  console.log('Plan B: Dont do it\n', error)
 }
+
+console.log('pfew... that was a close one')

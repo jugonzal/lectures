@@ -3,10 +3,10 @@ const request = require('request');
 const get = function(url, callback) {
     request.get(url, function (error, response, body) {
       if (error) {
-        callback(error)
+        callback(error, null)
         // throw "Error getting URL "+error
       } else {
-        callback(null,body)
+        callback(null, body)
       }
     })
 }
@@ -17,21 +17,28 @@ const get = function(url, callback) {
 //    https://reqres.bin/api/users/2?delay=3  // DNS error
 const url = process.argv[2];
 const url2 = process.argv[3];
-console.log(`URL: ${url}`);
+// console.log(`URL: ${url}`);
 
-get(url, function(error, resp) {
-  if (error) {
-    console.log("Phew, that was a close call... ",error)
-  } else {
-    console.log("Response received: ", resp)
-    get(url2, function(error, resp) {
-      if (error) {
-        console.log("Phew, that was a close call... ",error)
+// try {
+//   get(url, function(resp) {
+//     console.log("Response received: ", resp)
+//   }) 
+// } catch(e) {
+//   console.log('Error instead ',e)
+// }
+
+get(url, function(err, resp) {
+  if (!err) {
+    console.log("First Response received: ", resp)
+    get(url2, function(err, resp) {
+      if (!err) {
+        console.log("Second Response received: ", resp)
       } else {
-        console.log("Response received: ", resp)
-        
+        console.log("Plan C: ask again because ", err)
       }
-    })     
+    }) 
+  } else {
+    console.log("Plan B: ask again because ", err)
   }
 }) 
 
