@@ -16,10 +16,10 @@ app.set("view engine", "ejs");
 // To work with forms and JSON data, we need to configure Express
 // to use the bodyParser middleware to convert those types of data
 // into JS objects inside our functions.
-app.use(function(req, res, next) {
-  console.log('--> ', req.url);
-  next()
-})
+// app.use(function(req, res, next) {
+//   console.log(req.url);
+//   next()
+// })
 
 // app.use(bodyParser.urlencoded({extended: false})); // forms
 // app.use(bodyParser.json()); // JSON
@@ -35,24 +35,20 @@ app.get('/', function (req, res) {
   res.send('Welcome to Express Weather!')
 });
 
-// app.get('/toronto', function(req, res) {
-// 	res.send('Weather in Toronto is fantastic!')
-// })
-
 app.get('/toronto', function(req, res) {
-  res.render('toronto',{city: 'Toronto', maximum: 5})
+  res.render('toronto',{city: 'Toronto', forecast: 'SO nice'})
 })
 
-app.get('/montreal', function(req, res) {
-  res.render('toronto',{city: 'Montreal', maximum: 3})
+app.get('/montreal',function(req, res) {
+  res.render('toronto',{city: "Montreal", forecast: 'still warm and sunny'})
 })
 
 app.get('/city/:someCity', (req, res) => {
-	console.log("Req Params: ", req.params)
+ console.log("Req Params: ", req.params)
   let templateVars = { 
-  	city: req.params.someCity,
-  	maximum: req.params.length }
-  	// forecast: "MetaWeather-LightCloud.png" }
+   city: req.params.someCity,
+   forecast: "the same as yesterday",
+   icon: 'MetaWeather-LightCloud.png' }
   res.render('toronto',templateVars)
 });
 
