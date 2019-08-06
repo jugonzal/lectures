@@ -1,4 +1,4 @@
-var db = [
+const db = [
   {
     "id": 0,
     "title": "The Aleph",

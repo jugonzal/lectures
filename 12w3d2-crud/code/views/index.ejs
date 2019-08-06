@@ -3,22 +3,18 @@
 
  <p>This is where you will see the list of all my articles</p>
  
- <ul>
-<% for (post of posts) 
-  { %>
+ Currently in our blog: <%=posts.length %> articles.
 
-  <li><a href="/posts/<%=post.id %>"><%=post.title %></a></li>
+ <% for (post of posts) { %>
+ <section>
+  <strong><a href="/posts/<%=post.id%>"><%=post.title %></a></strong>
+</section>
+ <% } %>
 
-<% } %>
-  <li>or <a href="/posts/new">add a new one</a></li>
-</ul>
+ You can also <a href="/new">write a new article</a>.
 
  <footer>
   <p>Current date and time is <%= new Date() %></p>
 </footer>
-
-<script>
-  console.log('Hello World');
-</script>
 
 </body></html>
