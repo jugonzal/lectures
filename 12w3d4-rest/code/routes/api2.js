@@ -3,7 +3,7 @@ var router = express.Router();
 const db = require('../data');
 
 router.get('/articles', function(req, res) {
-  res.json({ok:true, articles: db.all().map(article => "/api/articles/"+article.id)});
+  res.json({ok:true, articles: db.all().map(article => "/api2/articles/"+article.title.toLowerCase().split(' ').join('-'))});
 })
 
 router.post('/articles', express.json({}), function(req, res) {
@@ -13,7 +13,7 @@ router.post('/articles', express.json({}), function(req, res) {
 })
 
 router.get('/articles/:id', function(req,res) {
-  res.json({ok:true, article: db.one(req.params.id)})
+  res.json({ok:true, article: db.search(article => req.params.id === article.title.toLowerCase().split(' ').join('-') )[0]})
 })
 
 router.put('/articles/:id', express.json({}), function(req, res) {

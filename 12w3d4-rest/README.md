@@ -9,30 +9,33 @@ However we soon realized the conventions to learn are quite trivial and come dow
 Here is the short list of routes that we designed for our potential API:
 
 ```
-GET /users
-  [{id: 1, name:'Juan'}]
+Blog
 
-GET /users/1
-  {id: 1, name:'Juan'}
+/articles
+  GET - read them
+  POST - add to them
 
-POST /users
-  {id: 2, name:'Jose'}
+/articles/id
+  GET - read it
+  PUT - edit it
+  DELETE - delete it
 
-PUT /users/1
-  {id: 1, name:'Juan', email:'juan@lhl.ca'}
+/articles/the-title
 
-DELETE /users/1
+/articles/id/comments
+  GET - read them
+  POST - add to them
 
-GET /posts
-GET /posts?name=juan
-GET /posts/the-aleph/commenters
-GET /posts/the-aleph
-POST /posts
-PUT /posts/the-aleph
-DELETE /posts/the-aleph
+/articles/id/comments/comment-id
 
-GET /users/1/posts
-GET /users/1/posts/the-aleph
+/users
+  GET - read them
+  POST - add new user
+
+/users/jose
+  GET - all state from jose
+
+/users/jose/comments
 ```
 
 What matters with these routes is that the URL itself is self-documenting and its meaning should be unambiguous. How it is implemented by the server is a different thing.
@@ -44,8 +47,8 @@ You can find the whole project under [repo / 12W3D4-rest / code ](https://github
 If you need to test some of the operations, here is the snippet of javascript to use in your browser console:
 
 ```javascript
-fetch('/api/posts', {
-  method: 'POST', // replace with PUT
+fetch('/api/articles/2', {
+  method: 'PUT', // replace with PUT
   mode:'cors',
   credentials:'same-origin',
   headers: 
@@ -54,6 +57,7 @@ fetch('/api/posts', {
     },
   body: JSON.stringify(
     {
+      id:2,
       title:"New Works", 
       body:"By Juan Gonzalez"
     }
@@ -67,5 +71,7 @@ We didn't try it together, but the following `curl` command line should work too
 curl --header "Content-Type: application/json" \
   --request POST \
   --data '{"title":"New Works","body":"By Juan Gonzalez"}' \
-  http://localhost:8000/api/posts
+  http://localhost:8000/api/articles
 ```
+
+Towards the end, one of the questions led to us revisiting our API specs and deciding to *upgrade* it.  However, before we did, we had a good conversation about managing your developer ecosystem by versioning your API.  You can find the modified version in [12W3D4-rest/code/routes/api2.js](https://github.com/jugonzal/lectures/tree/master/12w3d4-rest/code/routes/api2.js)

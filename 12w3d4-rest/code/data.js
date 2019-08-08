@@ -22,5 +22,5 @@ module.exports = {
   add: (obj) => db.push(Object.assign({id: db.length}, obj)),
   one: (id) => db.find(e => e.id == id),
   update: (id, obj) => Object.assign(db.find(e => e.id == id),obj),
-  search: (query) => db.filter(e => e.title.includes(query))
+  search: (callback) => db.filter(callback)
 }
