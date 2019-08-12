@@ -1,5 +1,5 @@
 
-.daylist dl {
+section.daylist dl {
     border-style: solid;
     border-width: medium;
     margin: auto;
@@ -11,7 +11,7 @@
     display:flex;
 /*width:80%;*/
 }
-.weekday {
+dt.weekday {
     padding: 5px;
     /*height: 400px;*/
     border-style: solid;
@@ -19,14 +19,14 @@
     box-sizing: border-box;
 }
 .today {
-    order: 3;
+    order: 1;
     flex-basis: 75%;
 }
 .tomorrow {
-    order: 1;
+    order: 2;
     flex-basis: 30%;
 }
 .later {
-    order: 2;
+    order: 3;
     flex-basis: 25%;
 }
