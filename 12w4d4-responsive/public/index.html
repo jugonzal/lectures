@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Responsive Tweeter</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,700,700i" rel="stylesheet">
+    <link rel="stylesheet" href="styles/layout.css" type="text/css" />
+    <link rel="stylesheet" href="styles/tweet.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"
+      integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+      crossorigin="anonymous"></script>
+    <script type="text/javascript" src="scripts/app.js"></script> 
+
+  </head>
+
+  <body>
+
+    <!-- Top nav bar (fixed) -->
+    <nav id="nav-bar">
+      <img class="logo" src="images/bird.png">
+      <span class="header">Tweeter</span>
+    </nav>
+
+    <!-- Page-specific (main) content here -->
+    <main class="container" id="mainPanel">
+
+      <div id="tweet-notification"></div>
+
+      <section id="tweets-container">
+   
+      </section>
+    </main>
+
+    <sidebar id="rightDrawer">
+      <h2>Responsive Tweeter</h2>
+      <p>Responsive web design, originally defined by <a href="http://alistapart.com/article/responsive-web-design/">Ethan Marcotte in A List Apart</a>, responds to the needs of the users and the devices they're using. The layout changes based on the size and capabilities of the device. For example, on a phone users would see content shown in a single column view; a tablet might show the same content in two columns.</p>
+
+ 
+    </sidebar>
+    <script type="text/javascript">
+      var position = 0;
+      var mainPanel = document.getElementById("mainPanel");
+      var leftDrawer = document.getElementById("nav-bar");
+      var rightDrawer = document.getElementById("rightDrawer");
+
+      function toggle(evt) {
+        position++;
+        if (position % 3 == 0) {
+          leftDrawer.classList.remove("open");
+          rightDrawer.classList.remove("open");
+        } else if (position % 3 == 1) {
+          leftDrawer.classList.add("open");
+          rightDrawer.classList.remove("open");
+        } else {
+          leftDrawer.classList.remove("open");
+          rightDrawer.classList.add("open");
+        }  
+      }
+
+      mainPanel.addEventListener("click", toggle);
+      leftDrawer.addEventListener("click", toggle);
+      rightDrawer.addEventListener("click", toggle);
+      
+    </script>
+  </body>
+</html>
