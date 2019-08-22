@@ -1,30 +1,31 @@
 // // REVIEW: how are we doing with objects?
 
-// const lhl = {
-//   mentors: {
-//     juan: {
-//       name: 'Juan Gonzalez',
-//       age: 73
-//     },
-//     vasily: {
-//       name: 'Vasiliy Klimkin',
-//       age: 13
-//     },
-//     tim: {
-//       name: 'Tim Johns',
-//       expertise: 'web'
-//     }
-//   },
-//   allNames: function getNames() {
-//     let names = [];
-//     for (let mentor of Object.values(this.mentors)) {
-//       names.push(mentor.name);
-//     }
-//     return names;
-//   }
-// };
+const lhl = {
+  mentors: {
+    juan: {
+      name: 'Juan Gonzalez',
+      age: 73
+    },
+    vasily: {
+      name: 'Vasiliy Klimkin',
+      age: 13
+    },
+    tim: {
+      name: 'Tim Johns',
+      expertise: 'web'
+    }
+  },
+  allNames: function() {
+    let names = [];
+    for (let mentor of Object.values(this.mentors)) {
+      names.push(mentor.name);
+    }
+    return names;
+  }
+};
 
-// // console.log(lhl.mentors.juan.age)
+
+// console.log(lhl.mentors.juan.age)
 
 // console.log(lhl.allNames());
 
@@ -43,9 +44,12 @@ const tweeps = [
 // STAGE 0: Our first stage is to
 // manually change one tweep at a time
 
-// tweeps[1]['like'] = true;
-// tweeps[0].read = new Date();
+// console.log(tweeps[0].said)
+// tweeps[0].like = true;
 
+// tweeps[0].like = false;
+
+// tweeps[3]['when'] = new Date();
 
 
 // STAGE 1: writing functions to do one thing (like, flag, timestamp)
@@ -53,93 +57,121 @@ const tweeps = [
 // Also, observe the scope of variables
 // Notice the linter will complain about `tweep` not being declared
 
-// const likeTweep = function (who) {
+
+// const likeTweep = function(name) {
 //   for (let tweep of tweeps) {
-//     if (tweep.who === who) {
+//     if (tweep.who === name) {
 //       tweep.like = true;
 //     }
 //   }
-// }
+// };
 
-// likeTweep('@fzero');
+// likeTweep('@kevinroose');
 
-// const timestampTweep = function (who) {
+// example: passing object by reference
+// const timestampTweep = function(tweep) {
+//   tweep.when = new Date();
+// };
+
+// const timestampTweep = function(name) {
 //   for (let tweep of tweeps) {
-//     if (tweep.who === who) {
-//       tweep.timestamp = new Date();
+//     if (tweep.who === name) {
+//       tweep.when = new Date();
 //     }
 //   }
-// }
 
-// timestampTweep('@mozilla')
-// timestampTweep('@kevinroose')
+// };
+
+// timestampTweep('@fzero');
+// timestampTweep('@mozilla');
 
 // STAGE 2: finding ways to create generic functions,
 // using bracket notation
 
+let findTweep = function(name) {
+  for (let tweep of tweeps) {
+    if (tweep.who === name) {
+      // tweep.when = new Date();
+      return tweep
+    }
+  }
+};
 
-// const markTweep = function (who, what, value) {
-//   for (let tweep of tweeps) {
-//     if (tweep.who === who) {
-//       tweep[what] = value;
-//     }
-//   }
-// }
+findTweep('@mozilla').like = true;
+findTweep('@fzero').when = new Date();
 
-// markTweep('@mozilla', 'like', true);
-// markTweep('@fzero','timestamp', new Date());
-// markTweep('@kevinroose','flag','unruly');
-// markTweep('@fzero','who','@fabio');
+// let updateTweep = function(name, what, value) {
+//   findTweep(name)[what] = value;
+// };
+
+// updateTweep('@mozilla','loved', true)
+// updateTweep('@kevinroose','flag', 'trolling')
+// updateTweep('@kevinroose','when', new Date())
+
+
 
 
 // STAGE 3: certain things that our function above
 // can not do, such as changing what was said.
 // How about keep track of aliases for tweeps?
 
-const yellTweep = function (tweep) {
-  tweep.said = tweep.said.toUpperCase();
+const yellOut = function(tweep) {
+  tweep.said = tweep.said.toUpperCase() + '!!!'
 }
 
-const doTweep = function (who, callback, param) {
-  for (let tweep of tweeps) {
-    if (tweep.who === who) {
-      callback(tweep, param)
-    } else if (tweep.alias && tweep.alias.includes(who)) {
-      callback(tweep, param)
-    }
+yellOut(tweeps[0])
+
+let updateTweep = function(name, callback) {
+  callback(findTweep(name))
+};
+
+updateTweep('@fzero', yellOut)
+
+updateTweep('@mozilla', function(tweep) {
+  if (!tweep.when) {
+    tweep.when = new Date()
   }
-}
-
-const addAlias = function(tweep, alias) {
-  if (tweep.alias) {
-    tweep.alias.push(alias)
-  } else {
-    tweep.alias = [alias]
-  }
-}
-
-doTweep('@fzero', addAlias, 'fabio')
-doTweep('fabio', yellTweep)
-doTweep('@mozilla', function(tweep) {
-  tweep.like = true;
+  tweep.quote = `${tweep.who} said "${tweep.said}" on ${tweep.when}`;
 })
 
-// tweeps.map(yellTweep)
 
+// ONE MORE THING...
+// We talked about this additional update
 
-// I've created a function that does ONE thing very
-// well, but at the same time is so generic that could
-// be used to make ANY change across all my tweeps.
-// That is the ultimate goal.
+// I'm redefining how we find Tweeps... 
+// assuming the possibility of aliases
 
-// Javascript provides a range of high order function like `map`
-tweeps.map(function(tweep) {
-  tweep.when = (new Date());
-});
+findTweep = function(name) {
+  for (let tweep of tweeps) {
+    let allNames = [tweep.who]
+    if (tweep.alias) {
+      allNames = [tweep.who, ...tweep.alias ]
+    } 
+    if (allNames.includes(name) ) {
+      return tweep
+    }
+  }
+};
 
-// Going back to our very first function method;
+// an even more generic version of this function
+// allows for other parameters to be passed TO
+// THE CALLBACK
+// we are using the spread operator to generalize
+// how many parameters can be handled
+updateTweep = function(name, callback, ...params) {
+  callback(findTweep(name), ...params)
+};
 
-// lhl.allNames = () => Object.values(lhl.mentors).map(mentor => mentor.name)
-// console.log(lhl.allNames())
+const addAlias = function(tweep, newAlias) {
+  if (tweep.alias) {
+    tweep.alias.push(newAlias)
+  } else {
+    tweep.alias = [ newAlias ]
+  }
+}
+
+updateTweep('@mozilla', addAlias, 'moz');
+updateTweep('moz', yellOut)
 
 console.log(tweeps);
+
