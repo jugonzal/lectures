@@ -1,15 +1,12 @@
 <html><body>
   <h1>Juan's Blog</h1>
-  <form method="POST" action="/posts">
+
+  <form method="POST" action="/articles">
     <input name="title" value="">
-    <br />
-    <textarea name="body"
-          rows="20" cols="50">
-          
-        </textarea>
+    <textarea name="body" rows="20" cols="50"></textarea>
     <input type="submit">
   </form>
-  <p>Go back to <a href="/">home page</a></p>
+
  <footer>
   <p>Current date and time is <%= new Date() %></p>
 </footer>

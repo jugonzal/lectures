@@ -24,3 +24,9 @@ module.exports = {
   update: (id, obj) => Object.assign(db.find(e => e.id == id),obj),
   search: (query) => db.filter(e => e.title.includes(query))
 }
+
+
+
+
+
+

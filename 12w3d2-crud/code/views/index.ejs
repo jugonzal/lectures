@@ -1,18 +1,15 @@
 <html><body>
   <h1>Juan's Blog</h1>
 
- <p>This is where you will see the list of all my articles</p>
- 
- Currently in our blog: <%=posts.length %> articles.
+ <p>This is where you will see the list of all my <%= posts.length %> articles</p>
+  
+ <ul>
+  <% for (post of posts) { %>
+    <li><a href="/articles/<%=post.id%>"><%=post.title %></a></li>
+  <% } %>
+ </ul>
 
- <% for (post of posts) { %>
- <section>
-  <strong><a href="/posts/<%=post.id%>"><%=post.title %></a></strong>
-</section>
- <% } %>
-
- You can also <a href="/new">write a new article</a>.
-
+ <p>Or <a href="/new">CREATE</a> a new post altogether.
  <footer>
   <p>Current date and time is <%= new Date() %></p>
 </footer>
