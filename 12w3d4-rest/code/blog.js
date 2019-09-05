@@ -23,12 +23,12 @@ app.use(methodOverride('_method'));
 const logger = require('morgan');
 app.use(logger('dev'));
 
-// delegate all API routes to a module
 const api = require('./routes/api');
 app.use('/api', api);
 
 const api2 = require('./routes/api2');
-app.use('/api2/',api2)
+app.use('/api2', api2);
+
 
 app.get('/', function (req, res) {
   res.render('index', { posts: db.all() })
