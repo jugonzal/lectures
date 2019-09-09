@@ -6,31 +6,23 @@
   <title>Weather Forecast</title>
   <style>
     table {
-      font-family: arial;
+      background-color: lightgray;
     }
 
-    body {
-      margin: 15px;
+    .heading {
+      background-color: lightblue;
     }
 
-    p {
-      color: red;
-      padding: 10px;
-      margin-left: 15px;
-      margin-right: 5px;
-      border-style: dotted;
-      border-width: 1px;
-      width: 40%;
-      float: left;
+    #hottest {
+      background-color: red;
     }
 
   </style>
 </head>
   <body>
     <p>The forecast for this week...</p>
-    <p>Where will this show?</p>
     <table>
-      <tr>
+      <tr class="heading">
         <td>
           Day
         </td>
@@ -38,7 +30,7 @@
           Temp
         </td>
       </tr>
-      <tr class="monday">
+      <tr>
         <td>
           Monday
         </td>
@@ -50,11 +42,11 @@
         <td>
           Tuesday
         </td>
-        <td>
+        <td id="hottest">
           29
         </td>
       </tr>
-      <tr class="monday">
+      <tr>
         <td>
           Wednesday
         </td>

@@ -8,16 +8,17 @@
 		}
 
 		/* Rule Ordering matters */
-		dt.weekday {
+		.today {
 			background-color: lightgreen;
-		}
-		.weekday {
-			background-color: lightsalmon;
 		}
 
 		/* but can be easily superceded by the MATH */
 		section#forecast dt.weekday {
  			background-color: lightblue;
+		}
+
+		.today {
+			background-color: lightsalmon;
 		}
 
 		/* if nothing else works INLINE!! */
@@ -47,7 +48,7 @@
  		p {
  			border-style: dotted;
  			border-color: red;
- 			width: 80%;
+ 			width: 40%;
  		}
 
  		/* display property... block vs inline */
@@ -121,4 +122,3 @@
 
 		</dl>
 	</section>
-</body>
