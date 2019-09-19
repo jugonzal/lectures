@@ -1,28 +1,28 @@
 // // REVIEW: how are we doing with objects?
 
-const lhl = {
-  mentors: {
-    juan: {
-      name: 'Juan Gonzalez',
-      age: 73
-    },
-    vasily: {
-      name: 'Vasiliy Klimkin',
-      age: 13
-    },
-    tim: {
-      name: 'Tim Johns',
-      expertise: 'web'
-    }
-  },
-  allNames: function() {
-    let names = [];
-    for (let mentor of Object.values(this.mentors)) {
-      names.push(mentor.name);
-    }
-    return names;
-  }
-};
+// const lhl = {
+//   mentors: {
+//     juan: {
+//       name: 'Juan Gonzalez',
+//       age: 73
+//     },
+//     vasily: {
+//       name: 'Vasiliy Klimkin',
+//       age: 13
+//     },
+//     tim: {
+//       name: 'Tim Johns',
+//       expertise: 'web'
+//     }
+//   },
+//   allNames: function() {
+//     let names = [];
+//     for (let mentor of Object.values(this.mentors)) {
+//       names.push(mentor.name);
+//     }
+//     return names;
+//   }
+// };
 
 
 // console.log(lhl.mentors.juan.age)
@@ -41,15 +41,25 @@ const tweeps = [
     said: "Today, Mozilla is publishing the 2019 #InternetHealth Report"}
 ];
 
+
+
 // STAGE 0: Our first stage is to
 // manually change one tweep at a time
 
-// console.log(tweeps[0].said)
-// tweeps[0].like = true;
+// tweeps[2].like = true;
+// tweeps[1].like = false;
+// tweeps[1].dislike = true;
+// tweeps[0].like = undefined;
+// tweeps[0].dislike = null;
 
-// tweeps[0].like = false;
+// console.log(tweeps[0].like ? "Yes" : "No")
+// console.log(tweeps[1].like ? "Yes" : "No")
+// console.log(tweeps[2].like ? "Yes" : "No")
+// console.log(tweeps[2].love ? "Yes" : "No")
+// console.log(tweeps[2].love)
 
-// tweeps[3]['when'] = new Date();
+
+
 
 
 // STAGE 1: writing functions to do one thing (like, flag, timestamp)
@@ -57,56 +67,54 @@ const tweeps = [
 // Also, observe the scope of variables
 // Notice the linter will complain about `tweep` not being declared
 
+// tweep = false;
 
-// const likeTweep = function(name) {
+// const likeTweep = function(handle) {
 //   for (let tweep of tweeps) {
-//     if (tweep.who === name) {
+//     if (tweep.who === handle) {
 //       tweep.like = true;
+//       return tweep;
 //     }
 //   }
-// };
+// }
 
-// likeTweep('@kevinroose');
+// // function dislikeTweep () {
 
-// example: passing object by reference
-// const timestampTweep = function(tweep) {
-//   tweep.when = new Date();
-// };
+// // }
 
-// const timestampTweep = function(name) {
+// console.log(likeTweep('@mozilla'))
+
+// // console.log("aftermath: ", tweep)
+
+// const flagTweep = function(handle) {
 //   for (let tweep of tweeps) {
-//     if (tweep.who === name) {
-//       tweep.when = new Date();
+//     if (tweep.who === handle) {
+//       tweep.flag = true;
+//       return tweep;
 //     }
 //   }
+// }
 
-// };
+// flagTweep('@kevinroose')
 
-// timestampTweep('@fzero');
-// timestampTweep('@mozilla');
 
 // STAGE 2: finding ways to create generic functions,
 // using bracket notation
 
-let findTweep = function(name) {
-  for (let tweep of tweeps) {
-    if (tweep.who === name) {
-      // tweep.when = new Date();
-      return tweep
-    }
-  }
-};
 
-findTweep('@mozilla').like = true;
-findTweep('@fzero').when = new Date();
+// const changeTweep = function(handle, action) {
+//   for (let tweep of tweeps) {
+//     if (tweep.who === handle) {
+//       tweep[action] = true;
+//       return tweep;
+//     }
+//   }
+// }
 
-// let updateTweep = function(name, what, value) {
-//   findTweep(name)[what] = value;
-// };
-
-// updateTweep('@mozilla','loved', true)
-// updateTweep('@kevinroose','flag', 'trolling')
-// updateTweep('@kevinroose','when', new Date())
+// let thingToAdd = 'complicated'
+// changeTweep('@mozilla','love')
+// changeTweep('@fzero','awesome')
+// changeTweep('@mozilla',thingToAdd)
 
 
 
@@ -115,63 +123,32 @@ findTweep('@fzero').when = new Date();
 // can not do, such as changing what was said.
 // How about keep track of aliases for tweeps?
 
-const yellOut = function(tweep) {
-  tweep.said = tweep.said.toUpperCase() + '!!!'
+const quotable = function (tweep) {
+  return `${tweep['who']} said "${tweep.said}"`
 }
 
-yellOut(tweeps[0])
+const likable = function (tweep) {
+  tweep.like = true
+}
 
-let updateTweep = function(name, callback) {
-  callback(findTweep(name))
-};
+// console.log(quotable(tweeps[0]))
 
-updateTweep('@fzero', yellOut)
-
-updateTweep('@mozilla', function(tweep) {
-  if (!tweep.when) {
-    tweep.when = new Date()
+const changeTweep = function(handle, callback) {
+  for (let tweep of tweeps) {
+    if (tweep.who === handle) {
+      callback(tweep)
+      // return tweep;
+    }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          uyy7                          
   }
-  tweep.quote = `${tweep.who} said "${tweep.said}" on ${tweep.when}`;
+}
+
+// console.log(changeTweep('@mozilla',quotable))
+console.log(changeTweep('@mozilla',likable))
+
+changeTweep('@mozilla', function(tweep) {
+  tweep.said = tweep.said.toUpperCase()
 })
 
-
-// ONE MORE THING...
-// We talked about this additional update
-
-// I'm redefining how we find Tweeps... 
-// assuming the possibility of aliases
-
-findTweep = function(name) {
-  for (let tweep of tweeps) {
-    let allNames = [tweep.who]
-    if (tweep.alias) {
-      allNames = [tweep.who, ...tweep.alias ]
-    } 
-    if (allNames.includes(name) ) {
-      return tweep
-    }
-  }
-};
-
-// an even more generic version of this function
-// allows for other parameters to be passed TO
-// THE CALLBACK
-// we are using the spread operator to generalize
-// how many parameters can be handled
-updateTweep = function(name, callback, ...params) {
-  callback(findTweep(name), ...params)
-};
-
-const addAlias = function(tweep, newAlias) {
-  if (tweep.alias) {
-    tweep.alias.push(newAlias)
-  } else {
-    tweep.alias = [ newAlias ]
-  }
-}
-
-updateTweep('@mozilla', addAlias, 'moz');
-updateTweep('moz', yellOut)
+console.log(tweeps.map(quotable))
 
 console.log(tweeps);
-
