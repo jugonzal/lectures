@@ -2,7 +2,7 @@ var assert = require('chai').assert;
 var expect = require('chai').expect;
 
 describe('Testing Ancestry', function() {
-  var ancestryCode = require('../ancestry.js');
+  var ancestryCode = require('../ancestry.final.js');
 
   describe('looking into Philibert Haverbeke ancestors', function() {
     let philAncestors = ancestryCode.ancestors('Philibert Haverbeke')
@@ -40,6 +40,10 @@ describe('Testing Ancestry', function() {
 
     it('should find that Phil´s father was alive during WWI', function() {
       expect(ancestryCode.witnessed('Philibert Haverbeke',1910)).to.include.members(['Emile Haverbeke'])
+    })
+
+    it('should find that Carolus was alive in 1850', function() {
+      expect(ancestryCode.witnessed('Philibert Haverbeke',1850)).to.include.members(['Carolus Haverbeke'])
     })
   })
 
