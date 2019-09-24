@@ -1,46 +1,45 @@
+let breakfast = ''
+
+const howDoYouLikeThem = function(wait, food, callback) {
+  // console.log('two')
+  setTimeout(() => {
+    // console.log('about to cook my eggs ',style)
+    food = food + '!'
+    // console.log('eggs already cooked ', eggs)
+    callback(food);
+  }, wait)
+}
+
+howDoYouLikeThem(1000,'scrambled eggs',(something) => {
+  breakfast += something;
+  console.log(breakfast)
+  howDoYouLikeThem(500,'beans',(something) => {
+    breakfast += something;
+    console.log(breakfast)
+    howDoYouLikeThem(2500,'juice',(something) => {
+      breakfast += something;
+      console.log(breakfast)
+    })
+  })
+})
+
+console.log(breakfast)
+
+// howDoYouLikeThem(1000, 'sunny side up')
+
+// howDoYouLikeThem(4000, 'boiled')
+
+// howDoYouLikeThem(7000, 'divorciados')
+
+// setTimeout(() => console.log('four'),4000)
 // console.log('one')
+// setTimeout(sayTwo, 2000);
 // setTimeout(() => {
-//   console.log('two')
-// }, 2000);
-// console.log('three');
+//   console.log('five')
+//   let eggs = 'divorciados'
+// },5000)
+// setTimeout(() => console.log('three'),3000)
 
-// const spellZero = function() {
-
-//   setTimeout(() => console.log('zero'), 100)
-//   // return 'starting'
-// }
-
-// console.log(spellZero())
-
-const spellit = function(number, callback) {
-
-  const whatToDo = function() { 
-    switch(number) {
-      case 1:
-        callback ('one');
-        break;
-      case 2:
-        callback ('two');
-        break;
-      case 3:
-        callback ('three');
-        break;
-    }
-  }
-
-  setTimeout(whatToDo, number*1000)
-
-};
-
-let numbers = "";
-spellit(3, (literal) => {
-  numbers += literal
-  spellit(1, (literal) => {
-    numbers = literal
-    spellit(2, (literal) => {
-      numbers += literal
-      console.log(numbers)
-    });
-  });
-});
-
+setTimeout(() => {
+  console.log("spying ... ", breakfast)
+},2000)

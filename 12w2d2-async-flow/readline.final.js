@@ -7,7 +7,12 @@ const ask = readline.createInterface({
 const nuclear = {
   prompt: 'You are in a nuclear facility, with one door north and one south.  Where would you go next?',
   south: () => console.log('Exiting the building'),
-  north: () => visit(dashboard)
+  north: () => visit(lobby)
+}
+
+const lobby = {
+  prompt: 'You find yourself in a nice lobby, with only one door to the south.',
+  south: () => visit(dashboard)
 }
 
 const dashboard = {
@@ -23,6 +28,9 @@ const visit = function (room) {
       console.log('Go ',answer)
       if (room[answer]) {
         room[answer]();
+      } else {
+        console.log('I do not know how to do that')
+        visit(room)
       }
     });
 }

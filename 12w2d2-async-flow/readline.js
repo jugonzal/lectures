@@ -12,43 +12,23 @@ const ask = readline.createInterface({
 
 // 30/07/2019  11:00 AM    <DIR>          .
 // 30/07/2019  11:00 AM    <DIR>          ..
-// `, command)
+// `)
 // })
 
-// console.log('You are in a massive abandoned school and a long corridor north of you.')
-// ask.question('Where should you go next?', function(answer) {
-//   if (answer == 'north') {
-//     console.log('You found a cookie on the floor. Enjoy')
-//     ask.question('Cookie was delicious but the cookie monster is jealous... He is running towards you', function(answer) {
-//       if (answer == 'run') {
-//         console.log('You escaped')
-//       } else {
-//         console.log('You died. An awful dead. Cookie moster got its cookie.')
-//       }
-//     })
-//   } else {
-//     console.log('There is nothing there')
-//   }
-// })
 
-const building = {
-  prompt: 'You are in a nuclear facility, with doors to north and south.',
-  north: () => visit(dashboard),
-  south: () => visit(garden)
-}
+ask.question('You are at the front of LHL. What do you next?', function(command) {
+  if (command == 'go inside') {
+    ask.question('You see a room full of nerds, staring at computers. What do you do?', function(command) {
+      if (command == 'find kitchen') {
+        ask.question('You notice an unbroken coffee machine', function(command) {
+          if (command == 'get coffee') {
+            console.log('You win. You are fullty caffeinated')
+          }
+        })
+      }
+    })
+  }
+})
 
-const dashboard = {
-  prompt: 'You are in a nuclear facility, with doors to north and south.',
-  north: () => visit(dashboard),
-  south: () => visit(garden)
-}
-
-const visit = function (scene) {
-  ask.question(scene.prompt, function(answer) {
-    if (scene[answer]) {
-      scene[answer]()
-    }
-  })
-}
 
 
