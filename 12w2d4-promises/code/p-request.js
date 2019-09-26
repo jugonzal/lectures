@@ -1,17 +1,27 @@
 const request = require('request');
 
-const promisifiedGet = function(url) {
-  return new Promise(function(resolve, reject) {
+const get = function(url, callback) {
     request.get(url, function (error, response, body) {
       if (error) {
-        reject(error)
-        // throw "Error getting URL "+error
+        callback("Error getting URL "+error, null)
+      } else {
+        callback(null, body)
+      }
+    })
+}
+
+const promisifiedGet = function(url) {
+  return new Promise((resolve, reject) => {
+    request.get(url, function (error, response, body) {
+      if (error) {
+        reject("Error getting URL "+error)
       } else {
         resolve(body)
       }
     })
   })
 }
+
 // In this next section we are "chaining" to API requests
 // Notice that even though there is still nesting of the 
 // handling of responses, the code is clearer than if I had used
@@ -30,15 +40,31 @@ const url2 = process.argv[3];
 // for both...  but we defer the processing of the
 // outcome to later.
 
-let p1 = promisifiedGet(url)
-let p2 = promisifiedGet(url2)
+// let p1 = promisifiedGet(url)
+// let p2 = promisifiedGet(url2)
 
 // console.log('do a whole bunch of other things')
 
 // p1
 //   .then((data) => {
 //     console.log(`First Data is ${data}.`);
+//     // throw 'Didnt like the outcome'
+//     return "answer"
 //   })
+//   .then((data) => { // data == "answer"
+//     p2.then((data2) => {
+//           console.log(`Second Data is ${data2}`);
+//         })
+//         .catch((err2) => {
+//           console.log(`Something else went wrong`)
+//         })
+//   })
+//   .catch((err) => {
+//     console.log(`Something went wrong: ${err}`);
+//   })
+
+// console.log("in the meantime...")
+
 //   .then(() => {
 //     throw 'Didnt like the outcome'
 //     p2.then((data2) => {
@@ -56,36 +82,36 @@ let p2 = promisifiedGet(url2)
 
 
 
-p1.then((data) => {
-  console.log(`First Data is ${data}.`);
-  // Throwing an error will trigger the .catch block
-  // just like try/catch... Nice!
-  //
-  throw "First promise ERROR"
-  return 1
-})
-.then(oldata => {
-    p2.then((data) => {
-      console.log(`Second Data is ${data}.`);
-      // throw "Second promise ERROR"
-    })
-    .catch(err => {
-      console.log("Double wrong inside the .catch")
-      // throw "Second promise ERROR"
-    })
-})
-.catch((err) => {
-  console.log(`Something went wrong: ${err}`);
-  // throw "Last .catch error"
-})
+// p1.then((data) => {
+//   console.log(`First Data is ${data}.`);
+//   // Throwing an error will trigger the .catch block
+//   // just like try/catch... Nice!
+//   //
+//   throw "First promise ERROR"
+//   return 1
+// })
+// .then(oldata => {
+//     p2.then((data) => {
+//       console.log(`Second Data is ${data}.`);
+//       // throw "Second promise ERROR"
+//     })
+//     .catch(err => {
+//       console.log("Double wrong inside the .catch")
+//       // throw "Second promise ERROR"
+//     })
+// })
+// .catch((err) => {
+//   console.log(`Something went wrong: ${err}`);
+//   // throw "Last .catch error"
+// })
 
 // This next section is to show handling multiple promises
 // at the same time.  Useful to dispatch many tasks at once
 // and wait for all of them to be finished.
 
-Promise.race([
+Promise.all([
   promisifiedGet('http://reqres.in/api/users/2?delay=1'),
-  promisifiedGet('http://reqres.in/api/user/1?delay=3')
+  promisifiedGet('http://reqres.in/api/user/1?delay=5')
   ])
 .then((results) => {
   console.log(results)

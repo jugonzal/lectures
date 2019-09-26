@@ -3,8 +3,7 @@ const request = require('request');
 const get = function(url, callback) {
     request.get(url, function (error, response, body) {
       if (error) {
-        callback(error, null)
-        // throw "Error getting URL "+error
+        callback("Error getting URL "+error, null)
       } else {
         callback(null, body)
       }
@@ -26,6 +25,14 @@ const url2 = process.argv[3];
 // } catch(e) {
 //   console.log('Error instead ',e)
 // }
+
+// get(url, function(err, resp) {
+//   if (!err) {
+//     console.log('GOOD: ', resp)
+//   } else {
+//     console.log('BAD: ',err)
+//   }
+// })
 
 get(url, function(err, resp) {
   if (!err) {

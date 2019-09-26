@@ -1,16 +1,18 @@
 
 function doit(task) {
-  if (task) {
+  if (task && task.something) {
     task.something()
   } else {
-    throw 'Fail! Forgot to give me a task'
+    throw "Nothing was done Error"
   }
 }
 
 try {
-  doit()
+  let dontforget = "I won't"
+  doit(dontforget)
 } catch(error) {
-  console.log('Plan B: Dont do it\n', error)
+  console.log('pfew... close one', error)
+
 }
 
-console.log('pfew... that was a close one')
+console.log('ktxby')
