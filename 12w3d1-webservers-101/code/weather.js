@@ -17,7 +17,7 @@ app.set("view engine", "ejs");
 // to use the bodyParser middleware to convert those types of data
 // into JS objects inside our functions.
 // app.use(function(req, res, next) {
-//   console.log(req.url);
+//   console.log("logger: ",req.url);
 //   next()
 // })
 
@@ -36,19 +36,19 @@ app.get('/', function (req, res) {
 });
 
 app.get('/toronto', function(req, res) {
-  res.render('toronto',{city: 'Toronto', forecast: 'SO nice'})
+  res.render('toronto', {city: 'Toronto'})
+  // res.send('Weather in toronto is cloudy')
 })
 
 app.get('/montreal',function(req, res) {
-  res.render('toronto',{city: "Montreal", forecast: 'still warm and sunny'})
+  res.render('toronto',{city: "Montreal"})
 })
 
 app.get('/city/:someCity', (req, res) => {
  console.log("Req Params: ", req.params)
   let templateVars = { 
    city: req.params.someCity,
-   forecast: "the same as yesterday",
-   icon: 'MetaWeather-LightCloud.png' }
+   forecast: "MetaWeather-LightCloud.png" }
   res.render('toronto',templateVars)
 });
 

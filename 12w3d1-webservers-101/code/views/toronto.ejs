@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>Welcome to <%=city%>!</title>
+    <title>Welcome to Toronto!</title>
     <style>
       body {
         background-color: #eeeeee;
@@ -8,15 +8,13 @@
     </style>
   </head>
   <body>
-    <h1>Weather in <%=city %></h1>
-    <h3>Weather forecast for <%=new Date()%>
-    <p><img src="/static/<%=icon%>">Today is <%=forecast%>, you should go out and do one of these things:</p>
+    <h1>Weather in <%= city %></h1>
+    <p>Today is absolutely gorgeous.</p>
     <ul>
-      <% for (let k=0; k < 5; k++) { %> 
-      <li>
-        Thing #<%=k%>
-      </li>
-      <% } %>
+    <% for (let i = 0; i < 5; i++) { %>
+      <li><a href="/<%= city %>"><%= city %></a><img src="/static/<%= forecast %>"></li>
+    <% } %>
     </ul>
+    <p>Generated on: <%= new Date() %> </p>
   </body>
 </html>
