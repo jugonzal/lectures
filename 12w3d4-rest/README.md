@@ -47,7 +47,7 @@ You can find the whole project under [repo / 12W3D4-rest / code ](https://github
 If you need to test some of the operations, here is the snippet of javascript to use in your browser console:
 
 ```javascript
-fetch('/api/articles/2', {
+fetch('/api/posts/2', {
   method: 'PUT', // replace with PUT
   mode:'cors',
   credentials:'same-origin',
@@ -62,7 +62,7 @@ fetch('/api/articles/2', {
       body:"By Juan Gonzalez"
     }
   )
-}).then(response => console.log(response));
+}).then(response => console.log(response.json()));
 ```
 
 We didn't try it together, but the following `curl` command line should work too:
@@ -70,8 +70,8 @@ We didn't try it together, but the following `curl` command line should work too
 ```shell
 curl --header "Content-Type: application/json" \
   --request POST \
-  --data '{"title":"New Works","body":"By Juan Gonzalez"}' \
-  http://localhost:8000/api/articles
+  --data '{"title":"Very New Works","body":"By Juan Gonzalez"}' \
+  http://localhost:8000/api/posts
 ```
 
 Towards the end, one of the questions led to us revisiting our API specs and deciding to *upgrade* it.  However, before we did, we had a good conversation about managing your developer ecosystem by versioning your API.  You can find the modified version in [12W3D4-rest/code/routes/api2.js](https://github.com/jugonzal/lectures/tree/master/12w3d4-rest/code/routes/api2.js)
