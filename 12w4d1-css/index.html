@@ -4,25 +4,44 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>Weather Forecast</title>
+
+  <!-- <link rel="stylesheet" type="text/css" href="thecssfile.css"> -->
   <style>
+
+    * {
+      border-style: dotted;
+      border-color: green;
+    }
+
     table {
-      background-color: lightgray;
+      color: red; 
+      font-family: arial;
     }
 
-    .heading {
-      background-color: lightblue;
+    td {
+      margin: 5px; 
     }
 
-    #hottest {
-      background-color: red;
+    span {
+      font-weight: bold;
+      /*display: block;*/
+    }
+
+     .highlighted {
+      /*! color: green; */
+    }
+
+    #today {
+      background-color: yellow;
     }
 
   </style>
+
 </head>
   <body>
-    <p>The forecast for this week...</p>
+    <p class="highlighted">The <span>forecast</span> for this week...</p>
     <table>
-      <tr class="heading">
+      <tr>
         <td>
           Day
         </td>
@@ -30,36 +49,36 @@
           Temp
         </td>
       </tr>
-      <tr>
-        <td>
+      <tr id="today">
+        <td >
           Monday
         </td>
-        <td>
-          28
+        <td class="highlighted">
+          18
         </td>
       </tr>
       <tr>
         <td>
           Tuesday
         </td>
-        <td id="hottest">
-          29
+        <td class="highlighted">
+          19
         </td>
       </tr>
       <tr>
         <td>
           Wednesday
         </td>
-        <td>
-          24
+        <td class="highlighted">
+          14
         </td>
       </tr>
       <tr>
         <td>
           Thursday
         </td>
-        <td>
-          21
+        <td style="color: lightblue">
+          -17
         </td>
       </tr>
     </table>

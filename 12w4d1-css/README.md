@@ -6,7 +6,7 @@ This week you'll learn a very different way of thinking about web applications. 
 
 ## HTML
 
-You can find the first page we wrote: [index.html](./index.html)
+You can find the first page we wrote: [index.html](https://github.com/jugonzal/lectures/tree/master/12w4d1-css/index.html)
 
 This is an example of a basic HTML template to start with.
 
@@ -166,7 +166,7 @@ More [shorthand properties](https://developer.mozilla.org/en-US/docs/Web/CSS/Sho
 
 For a while HTML was used heavily to describe the *structure* of a document.  But around 2005 its use started to evolve to focus more on describing the content and its meaning. HTML allows us to provide context to the content in a document. HTML5 has a number of semantic elements. This means that we can use HTML to highlight the meaning of content. Tags like `<article>`, `<nav>`, `<section>` and `<footer>` are good examples of this. It's not a bad idea to check what tags are available on [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element).
 
-You can find the more advanced version of our page, the one using the semantic approach and all the advanced CSS rules at [weather.html](./weather.html)
+You can find the more advanced version of our page, the one using the semantic approach and all the advanced CSS rules at [weather.html](https://github.com/jugonzal/lectures/tree/master/12w4d1-css/weather.html)
 
 ## CSS Specificity
 
