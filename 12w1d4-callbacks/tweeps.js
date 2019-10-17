@@ -1,4 +1,4 @@
-// // REVIEW: how are we doing with objects?
+// REVIEW: how are we doing with objects?
 
 // const lhl = {
 //   mentors: {
@@ -24,10 +24,9 @@
 //   }
 // };
 
+// console.log(lhl.mentors.vasily.age)
+// console.log(lhl.allNames())
 
-// console.log(lhl.mentors.juan.age)
-
-// console.log(lhl.allNames());
 
 
 const tweeps = [
@@ -41,24 +40,15 @@ const tweeps = [
     said: "Today, Mozilla is publishing the 2019 #InternetHealth Report"}
 ];
 
-
-
 // STAGE 0: Our first stage is to
 // manually change one tweep at a time
 
-// tweeps[2].like = true;
-// tweeps[1].like = false;
-// tweeps[1].dislike = true;
-// tweeps[0].like = undefined;
-// tweeps[0].dislike = null;
+// console.log(tweeps[1].said)
 
-// console.log(tweeps[0].like ? "Yes" : "No")
-// console.log(tweeps[1].like ? "Yes" : "No")
-// console.log(tweeps[2].like ? "Yes" : "No")
-// console.log(tweeps[2].love ? "Yes" : "No")
-// console.log(tweeps[2].love)
+// tweeps[2]['like'] = true;
+// tweeps[2].likeCount = 4;
 
-
+// tweeps[3]['like'] = true;
 
 
 
@@ -67,88 +57,90 @@ const tweeps = [
 // Also, observe the scope of variables
 // Notice the linter will complain about `tweep` not being declared
 
-// tweep = false;
 
-// const likeTweep = function(handle) {
-//   for (let tweep of tweeps) {
-//     if (tweep.who === handle) {
-//       tweep.like = true;
-//       return tweep;
+// const likeTweep = function (name) {
+
+//   for (let aTweep of tweeps) {
+//     if (aTweep.who === name) {
+//       if (aTweep.like) {
+//         aTweep.likeCount++
+//       } else {
+//         aTweep.like = true
+//         aTweep.likeCount = 1
+//       }
+//       break;
 //     }
 //   }
+
+//   // for (let i=0; i < tweeps.length; i++) {
+//   //   let aTweep = tweeps[i]
+
+//   // }
+
 // }
 
-// // function dislikeTweep () {
+const likeTweep = function (aTweep) {
 
-// // }
+  if (aTweep.like) {
+    aTweep.likeCount++
+  } else {
+    aTweep.like = true
+    aTweep.likeCount = 1
+  }
+}
 
-// console.log(likeTweep('@mozilla'))
+const findsTweep = function(name) {
+  for (let aTweep of tweeps) {
+    if (aTweep.who === name) {
+      return aTweep;
+    }
+    // TODO: what happens when it is not found ??
+  }
+}
 
-// // console.log("aftermath: ", tweep)
 
-// const flagTweep = function(handle) {
-//   for (let tweep of tweeps) {
-//     if (tweep.who === handle) {
-//       tweep.flag = true;
-//       return tweep;
-//     }
-//   }
-// }
-
-// flagTweep('@kevinroose')
+// likeTweep(findsTweep('@mozilla'))
+// likeTweep(findsTweep('@mozilla'))
+// likeTweep(findsTweep('@fzero'))
 
 
 // STAGE 2: finding ways to create generic functions,
 // using bracket notation
 
+const changeTweep = function (aTweep, action) {
 
-// const changeTweep = function(handle, action) {
-//   for (let tweep of tweeps) {
-//     if (tweep.who === handle) {
-//       tweep[action] = true;
-//       return tweep;
-//     }
-//   }
-// }
+  if (aTweep[action]) {
+    aTweep[action + 'Count']++
+  } else {
+    aTweep[action] = true
+    aTweep[action + 'Count'] = 1
+  }
+}
 
-// let thingToAdd = 'complicated'
-// changeTweep('@mozilla','love')
-// changeTweep('@fzero','awesome')
-// changeTweep('@mozilla',thingToAdd)
-
-
+// changeTweep(findsTweep('@mozilla'), 'like')
+// changeTweep(findsTweep('@mozilla'), 'love')
+// changeTweep(findsTweep('@fzero'), 'troll')
+// changeTweep(findsTweep('@0xUID'), 'who')
 
 
 // STAGE 3: certain things that our function above
 // can not do, such as changing what was said.
 // How about keep track of aliases for tweeps?
 
-const quotable = function (tweep) {
-  return `${tweep['who']} said "${tweep.said}"`
-}
 
-const likable = function (tweep) {
-  tweep.like = true
-}
 
-// console.log(quotable(tweeps[0]))
 
-const changeTweep = function(handle, callback) {
-  for (let tweep of tweeps) {
-    if (tweep.who === handle) {
-      callback(tweep)
-      // return tweep;
-    }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          uyy7                          
+const doToTweep = function(name, callback) {
+  for (let aTweep of tweeps) {
+    if (aTweep.who === name) {
+      callback(aTweep);
+    }
   }
 }
 
-// console.log(changeTweep('@mozilla',quotable))
-console.log(changeTweep('@mozilla',likable))
-
-changeTweep('@mozilla', function(tweep) {
-  tweep.said = tweep.said.toUpperCase()
+doToTweep('@mozilla', likeTweep)
+doToTweep('@fzero', function(aTweep) {
+  aTweep.said = aTweep.said.toUpperCase()
 })
 
-console.log(tweeps.map(quotable))
-
-console.log(tweeps);
+console.log(tweeps)

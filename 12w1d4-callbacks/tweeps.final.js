@@ -4,11 +4,11 @@ const lhl = {
   mentors: {
     juan: {
       name: 'Juan Gonzalez',
-      age: 73
+      age: 63
     },
     vasily: {
       name: 'Vasiliy Klimkin',
-      age: 13
+      age: 23
     },
     tim: {
       name: 'Tim Johns',
@@ -27,16 +27,16 @@ const lhl = {
 console.log(lhl.allNames());
 
 
-// const tweeps = [
-//   { who: '@fzero',
-//     said: "Callbacks are control flow as designed by M.C. Escher."},
-//   { who: '@kevinroose',
-//     said: "The solution to Bad Facebook is always More Facebook"},
-//   { who: '@0xUID',
-//     said: "Macintosh OS X was beautiful, intuitive and user-friendly......and it was #UNIX!"},
-//   { who: '@mozilla',
-//     said: "Today, Mozilla is publishing the 2019 #InternetHealth Report"}
-// ];
+const tweeps = [
+  { who: '@fzero',
+    said: "Callbacks are control flow as designed by M.C. Escher."},
+  { who: '@kevinroose',
+    said: "The solution to Bad Facebook is always More Facebook"},
+  { who: '@0xUID',
+    said: "Macintosh OS X was beautiful, intuitive and user-friendly......and it was #UNIX!"},
+  { who: '@mozilla',
+    said: "Today, Mozilla is publishing the 2019 #InternetHealth Report"}
+];
 
 // STAGE 0: Our first stage is to
 // manually change one tweep at a time
@@ -109,10 +109,10 @@ console.log(lhl.allNames());
 //   }
 // };
 
-// const likeTweep = function(tweep) {
-//   // console.log('likeTweep', tweep)
-//   tweep.like = true;
-// };
+const likeTweep = function(tweep) {
+  // console.log('likeTweep', tweep)
+  tweep.like = true;
+};
 
 // changeTweep('@fzero',likeTweep);
 
@@ -129,27 +129,28 @@ console.log(lhl.allNames());
 // STAGE N: We can always find refactorings to make things even
 // more generic
 
-// const doToTweep = function(name, callback, ...params) {
-//   for (let tweep of tweeps) {
-//     let allNames = [tweep.who]
-//     if (tweep.alias) {
-//       allNames = [tweep.who, ...tweep.alias ]
-//     } 
-//     if (allNames.includes(name) ) {
-//       callback(tweep, ...params)
-//     }
-//   }
-// };
+const doToTweep = function(name, callback, ...params) {
+  for (let tweep of tweeps) {
+    let allNames = [tweep.who]
+    if (tweep.alias) {
+      allNames = [tweep.who, ...tweep.alias ]
+    } 
+    if (allNames.includes(name) ) {
+      callback(tweep, ...params)
+    }
+  }
+};
 
-// const addAlias = function(tweep, newAlias) {
-//   if (tweep.alias) {
-//     tweep.alias.push(newAlias)
-//   } else {
-//     tweep.alias = [ newAlias ]
-//   }
-// }
+const addAlias = function(tweep, newAlias) {
+  if (tweep.alias) {
+    tweep.alias.push(newAlias)
+  } else {
+    tweep.alias = [ newAlias ]
+  }
+}
 
-
+doToTweep('@mozilla', addAlias, '@theMoz')
+doToTweep('@theMoz', likeTweep)
 
 // I've created a function that does ONE thing very
 // well, but at the same time is so generic that could
@@ -169,4 +170,4 @@ console.log(lhl.allNames());
 // console.log(lhl.allNames())
 
 
-// console.log(tweeps);
+console.log(tweeps);
