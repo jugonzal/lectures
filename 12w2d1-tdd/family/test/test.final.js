@@ -28,7 +28,7 @@ describe('Testing Ancestry', function() {
     })
 
     it('should return an empty array if no ancestors found', function() {
-      expect(ancestryCode.ancestors('Clara Aernoudts')).is.an('array').to.be.empty
+      expect(ancestryCode.ancestors('Lievijne Jans')).is.an('array').to.be.empty
     })
 
   })
