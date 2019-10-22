@@ -1,45 +1,64 @@
-let breakfast = ''
+// learning about setTimeout
 
-const howDoYouLikeThem = function(wait, food, callback) {
-  // console.log('two')
+// setTimeout(function() {
+//   console.log('three')
+// }, 3000);
+
+// setTimeout(function() {
+//   console.log('two')
+// }, 2000);
+
+// console.log('one')
+
+// function alsoRemindMe() {
+
+// }
+
+let importantMeeting = "LHL"
+let justFinished = null
+
+// let jugglingBalls = 0
+
+// const reminder = function(callback, delay) {
+//   setTimeout(() => {
+//     justFinished += callback() + ' '
+//     jugglingBalls--
+//     if (!jugglingBalls) {
+//       console.log("Day's log: ", justFinished)
+//     }
+//   }, delay*1000)
+//   jugglingBalls++
+// }
+
+const reminder = function(callback, delay, next) {
   setTimeout(() => {
-    // console.log('about to cook my eggs ',style)
-    food = food + '!'
-    // console.log('eggs already cooked ', eggs)
-    callback(food);
-  }, wait)
+    justFinished = justFinished + callback() + ' '
+    if (next) {
+      next(justFinished)
+    }
+  }, delay*1000)
 }
 
-howDoYouLikeThem(1000,'scrambled eggs',(something) => {
-  breakfast += something;
-  console.log(breakfast)
-  howDoYouLikeThem(500,'beans',(something) => {
-    breakfast += something;
-    console.log(breakfast)
-    howDoYouLikeThem(2500,'juice',(something) => {
-      breakfast += something;
-      console.log(breakfast)
-    })
-  })
-})
 
-console.log(breakfast)
+reminder(() => { 
+  console.log('wake up')
+  return "woken up"
+}, 2)
 
-// howDoYouLikeThem(1000, 'sunny side up')
+reminder(() => {
+  console.log('have breakfast')
+  return "had a good breakfast"
+} , 3)
 
-// howDoYouLikeThem(4000, 'boiled')
+reminder(() => {
+    console.log('working at ', importantMeeting) 
+    return "went to work"
+  }, 
+  5, 
+  (daysLog) => reminder(() => {
+    console.log('go to bed')
+    return "went to bed"
+  }, 2 ))
 
-// howDoYouLikeThem(7000, 'divorciados')
+importantMeeting = "My other gig"
 
-// setTimeout(() => console.log('four'),4000)
-// console.log('one')
-// setTimeout(sayTwo, 2000);
-// setTimeout(() => {
-//   console.log('five')
-//   let eggs = 'divorciados'
-// },5000)
-// setTimeout(() => console.log('three'),3000)
-
-setTimeout(() => {
-  console.log("spying ... ", breakfast)
-},2000)

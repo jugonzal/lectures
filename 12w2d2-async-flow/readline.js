@@ -15,19 +15,10 @@ const ask = readline.createInterface({
 // `)
 // })
 
-
-ask.question('You are at the front of LHL. What do you next?', function(command) {
-  if (command == 'go inside') {
-    ask.question('You see a room full of nerds, staring at computers. What do you do?', function(command) {
-      if (command == 'find kitchen') {
-        ask.question('You notice an unbroken coffee machine', function(command) {
-          if (command == 'get coffee') {
-            console.log('You win. You are fullty caffeinated')
-          }
-        })
-      }
-    })
-  }
+ask.question('Account #', (account) => {
+  ask.question('Last name of account holder for Account #'+account, (name) => {
+    console.log('Welcome M ', name)
+  })
 })
 
 

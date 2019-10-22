@@ -12,7 +12,8 @@ const nuclear = {
 
 const lobby = {
   prompt: 'You find yourself in a nice lobby, with only one door to the south.',
-  south: () => visit(dashboard)
+  north: () => visit(dashboard),
+  south: () => visit(nuclear)
 }
 
 const dashboard = {
