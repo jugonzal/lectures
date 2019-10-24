@@ -40,8 +40,8 @@ const url2 = process.argv[3];
 // for both...  but we defer the processing of the
 // outcome to later.
 
-// let p1 = promisifiedGet(url)
-// let p2 = promisifiedGet(url2)
+let p1 = promisifiedGet(url)
+let p2 = promisifiedGet(url2)
 
 // console.log('do a whole bunch of other things')
 
@@ -49,19 +49,21 @@ const url2 = process.argv[3];
 //   .then((data) => {
 //     console.log(`First Data is ${data}.`);
 //     // throw 'Didnt like the outcome'
+//     promisifiedGet(url2)
+//       .then((data) => {
+//         console.log(`2nd Data is ${data}.`);
+//         throw 'Didnt like the 2nd outcome'
+//         return "answer"
+//       })
+//       .catch((err) => {
+//         console.log(`2nd Something went wrong: ${err}`);
+//       })
 //     return "answer"
-//   })
-//   .then((data) => { // data == "answer"
-//     p2.then((data2) => {
-//           console.log(`Second Data is ${data2}`);
-//         })
-//         .catch((err2) => {
-//           console.log(`Something else went wrong`)
-//         })
 //   })
 //   .catch((err) => {
 //     console.log(`Something went wrong: ${err}`);
 //   })
+
 
 // console.log("in the meantime...")
 
@@ -87,8 +89,8 @@ const url2 = process.argv[3];
 //   // Throwing an error will trigger the .catch block
 //   // just like try/catch... Nice!
 //   //
-//   throw "First promise ERROR"
-//   return 1
+//   // throw "First promise ERROR"
+//   return JSON.parse(data)
 // })
 // .then(oldata => {
 //     p2.then((data) => {
@@ -109,10 +111,7 @@ const url2 = process.argv[3];
 // at the same time.  Useful to dispatch many tasks at once
 // and wait for all of them to be finished.
 
-Promise.all([
-  promisifiedGet('http://reqres.in/api/users/2?delay=1'),
-  promisifiedGet('http://reqres.in/api/user/1?delay=5')
-  ])
+Promise.race([ p1, p2 ])
 .then((results) => {
   console.log(results)
 })

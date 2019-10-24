@@ -2,10 +2,10 @@ const request = require('request');
 
 const get = function(url, callback) {
     request.get(url, function (error, response, body) {
-      if (error) {
-        callback("Error getting URL "+error, null)
+      if (!error) {
+        callback(null, body);
       } else {
-        callback(null, body)
+        callback(error, null)
       }
     })
 }
@@ -26,27 +26,20 @@ const url2 = process.argv[3];
 //   console.log('Error instead ',e)
 // }
 
-// get(url, function(err, resp) {
-//   if (!err) {
-//     console.log('GOOD: ', resp)
-//   } else {
-//     console.log('BAD: ',err)
-//   }
-// })
+  get(url, function(error, resp) {
+    if (!error) {
+      console.log("Response received: ", resp)
+      get(url2, function(error, resp) {
+        if (!error) {
+          console.log("2nd Response received: ", resp)
+        } else {
+          console.log('2nd Error instead ',error)
+        }
+      }) 
+    } else {
+      console.log('Error instead ',error)
+    }
+  }) 
 
-get(url, function(err, resp) {
-  if (!err) {
-    console.log("First Response received: ", resp)
-    get(url2, function(err, resp) {
-      if (!err) {
-        console.log("Second Response received: ", resp)
-      } else {
-        console.log("Plan C: ask again because ", err)
-      }
-    }) 
-  } else {
-    console.log("Plan B: ask again because ", err)
-  }
-}) 
 
 console.log("ktxby")
