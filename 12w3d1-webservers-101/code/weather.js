@@ -17,7 +17,7 @@ app.set("view engine", "ejs");
 // to use the bodyParser middleware to convert those types of data
 // into JS objects inside our functions.
 // app.use(function(req, res, next) {
-//   console.log("logger: ",req.url);
+//   console.log(req.url);
 //   next()
 // })
 
@@ -36,8 +36,7 @@ app.get('/', function (req, res) {
 });
 
 app.get('/toronto', function(req, res) {
-  res.render('toronto', {city: 'Toronto'})
-  // res.send('Weather in toronto is cloudy')
+  res.render('toronto',{city: "Toronto"})
 })
 
 app.get('/montreal',function(req, res) {

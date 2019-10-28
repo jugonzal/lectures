@@ -1,20 +1,21 @@
 <html>
+<% let someData = true %>
   <head>
-    <title>Welcome to Toronto!</title>
+    <title>Welcome to <%= city %></title>
     <style>
       body {
-        background-color: #eeeeee;
+        background-color: #cecece;
       }
     </style>
   </head>
   <body>
     <h1>Weather in <%= city %></h1>
-    <p>Today is absolutely gorgeous.</p>
-    <ul>
-    <% for (let i = 0; i < 5; i++) { %>
-      <li><a href="/<%= city %>"><%= city %></a><img src="/static/<%= forecast %>"></li>
+    <% if (city === 'Toronto') { %>
+      <p>Today is absolutely gorgeous.</p>
+    <% } else if (city === 'Montreal') { %>
+      <p>Today is freezing below zero... likely</p>
     <% } %>
-    </ul>
-    <p>Generated on: <%= new Date() %> </p>
+    <img src="/static/<%= forecast %>">
+      <p>Generated on: <%= new Date() %></p>
   </body>
 </html>

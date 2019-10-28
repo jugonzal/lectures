@@ -1,4 +1,4 @@
-let http = require('http');
+const http = require('http');
 
 // request.method
 // request.url
@@ -8,19 +8,33 @@ let http = require('http');
 // define app constants
 const PORT = 8000;
 
+const routes = {
+  '/weather/tomorrow': "Sunny with a hint of brisky wind",
+  '/weather/dayafter': "Time to build your snowman",
+  '/weather/halloween': "Spooky to be out there",
+  '/weather': `<html>
+  <body>
+    <h1>LHL Weather Forecast</h1>
+    <p>Welcome to our weather system. Select from one of these options:</p>
+      <ul>
+        <li><a href="/weather/tomorrow">Tomorrow</a></li>
+        <li><a href="/weather/dayafter">Wednesday</a></li>
+        <li><a href="/weather/halloween">Thursday</a></li>
+      </ul>
+  </body>
+  </html>`
+}
+
 // create a server with a responder function
 let server = http.createServer(function (request, response){
     console.log("Request: ", request.method, request.url)
 
-    let route = request.method + request.url
-    if (route == 'GET/toronto' ) {
-      response.end("Weather in Toronto is cloudy");
-    } else if (route == 'GET/montreal') {
-      response.end("Weather in Montreal is snowy")
-    } else if (route == 'GET/' ) {
-      response.end("<html><body><h1>Weather Forecast</h1><p>Welcome to your weather forecast. Pick from one of our cities:</p><ul><li><a href='/toronto'>Toronto</a></li><li><a href='/montreal'>Montreal</a></li></ul></body></html>")
+    if (routes[request.url]) {
+      response.end(routes[request.url])
     } else {
-      response.end("We do not know yet")
+      response.statusCode = 404
+      response.end("Hello from the other siiiiide...");
+
     }
 
 });
