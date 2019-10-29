@@ -1,17 +1,15 @@
 <html><body>
   <h1>Juan's Blog</h1>
 
- <p>This is where you will see the list of all my articles</p>
+ <p>This is where you will see the list of all my <%= posts.length %> articles</p>
+ 
+ <ul>
+  <% for (post of posts) { %>
+    <li><a href="/posts/<%= post.id %>"><%= post.title %></a></li>
+  <% } %>
+ </ul>
 
-<ul>
-<% for (post of posts) { %>
-
-  <li><a href="/posts/<%= post.id %>"><%= post.title %></a></li>
-
-<% } %>
-</ul>
-  
-<p>and if you didn't like any of these... you can <a href="/new">write your own</a></p>
+ <p>Or feel free to <a href="/new">add a new</a> post</p>
 
  <footer>
   <p>Current date and time is <%= new Date() %></p>

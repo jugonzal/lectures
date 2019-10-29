@@ -3,7 +3,11 @@
 
   <form method="POST" action="/posts/<%= post.id %>?_method=PUT">
     <input name="title" value="<%= post.title %>">
-    <textarea name="body" rows="20" cols="50"><%= post.body %></textarea>
+    <br />
+    <textarea name="body" rows="20" cols="50">
+      <%= post.body %>
+    </textarea>
+    <br />
     <input type="submit">
   </form>
 

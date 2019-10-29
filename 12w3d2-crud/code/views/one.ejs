@@ -1,10 +1,13 @@
 <html><body>
   <h1>Juan's Blog</h1>
-  <h3><%= post.title%></h3>
-  <p><%= post.body %></p>
+  <h3><%= post.title %></h3>
 
-  <p> if you don't like it, you can always <a href="/edit/<%= post.id %>">edit the post</a></p>
+ <p><%= post.body %></p>
+
+ <p>Go <a href="/posts/<%= post.id - 1 > 0? post.id - 1 : 0 %>">back</a> or go <a href="/posts/<%= post.id + 1 < count ? post.id + 1 : count - 1 %>">forth</a>, or if you don't like it, just <a href="/edit/<%= post.id %>">change it</a></p>
+
  <footer>
   <p>Current date and time is <%= new Date() %></p>
 </footer>
+
 </body></html>
