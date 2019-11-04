@@ -3,84 +3,89 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>Weather Forecast</title>
-
-  <!-- <link rel="stylesheet" type="text/css" href="thecssfile.css"> -->
+  <title>Forecast</title>
   <style>
-
-    * {
-      border-style: dotted;
-      border-color: green;
-    }
-
     table {
-      color: red; 
-      font-family: arial;
+      font-family: arial; 
+      background-color: lightblue;
     }
 
-    td {
-      margin: 5px; 
+    h1 {
+      margin-left: 50px;
+      margin-top: 0px;
+      margin-bottom: 10px;
+      padding: 5px 6px 7px 8px;
+      border: solid 15px red;
     }
 
-    span {
-      font-weight: bold;
-      /*display: block;*/
-    }
-
-     .highlighted {
-      /*! color: green; */
+    .weekday {
+      color: blue;
     }
 
     #today {
       background-color: yellow;
+      color: red;
     }
 
+    * {
+      border-style: dotted;
+      border-color: red;
+    }
   </style>
 
 </head>
   <body>
-    <p class="highlighted">The <span>forecast</span> for this week...</p>
+    <h1>Weather Forecast</h1>
+    <p>This week, looks to be our first really cold week of the year</p>
     <table>
       <tr>
         <td>
           Day
         </td>
         <td>
-          Temp
+          o
         </td>
       </tr>
-      <tr id="today">
-        <td >
+      <tr class="weekday" id="today">
+        <td>
           Monday
         </td>
-        <td class="highlighted">
-          18
+        <td >
+          12
         </td>
       </tr>
-      <tr>
+      <tr class="weekday">
         <td>
           Tuesday
         </td>
-        <td class="highlighted">
-          19
+        <td>
+          7
         </td>
       </tr>
-      <tr>
+      <tr class="weekday">
         <td>
           Wednesday
         </td>
-        <td class="highlighted">
-          14
+        <td>
+          5
         </td>
       </tr>
-      <tr>
+      <tr class="weekday">
         <td>
           Thursday
         </td>
-        <td style="color: lightblue">
-          -17
+        <td>
+          2
         </td>
       </tr>
+      <tr class="weekday">
+        <td>
+          Friday
+        </td>
+        <td>
+          -2
+        </td>
+      </tr>    
     </table>
   </body>
 </html>

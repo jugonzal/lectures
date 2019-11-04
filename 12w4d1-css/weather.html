@@ -11,22 +11,17 @@
 		.today {
 			background-color: lightgreen;
 		}
-		.today {
-			background-color: lightsalmon;
-		}
 
 		/* but can be easily superceded by the MATH */
 		section#forecast dt.weekday {
  			background-color: lightblue;
 		}
 
-		/* if nothing else works INLINE!! */
+		.today {
+			background-color: lightsalmon;
+		}
+		 /*if nothing else works INLINE!! */
 
- 		/* Direct Child */
- 		.daylist dt > time {
- 			background-color: yellow;
- 			font-style: oblique;
- 		}
 
 		/* CSS Combinators: descendant selector */
  		dl time {
@@ -34,13 +29,18 @@
  			font-style: normal;
  		}
 
+ 		/* Direct Child */
+ 		.daylist dt > time {
+ 			background-color: yellow;
+ 			font-style: oblique;
+ 		}
 
  		/* General vs Adjacent Siblings */
- 		dt.weekday + p {
+ 		dt.weekday + dd {
  			color: darkgray;
  		}
 
- 		dt.weekday ~ dd {
+ 		dt.weekday + dd ~ dd {
  			color: lightgray;
  		}
 
@@ -64,15 +64,15 @@
  		
 		/* a cheap navigation menu */
 
-/*		nav ul > li {
+		nav ul > li {
 			width: 30%;
   		float: left;
 		}
-*/
-/*    nav li:hover {
+
+    nav li:hover {
 			color: red;
 		}
-*/
+
 	</style>
 	<link rel="stylesheet" href="flex.css" />
 </head>
@@ -105,9 +105,7 @@
 			</section>
 
 			<section class="later">
-		    <p>Before</p>
 		    <dt class="weekday">Wednesday <time datetime="2019-04-17">April 17, 2019</time></dt>
-		    <p>After</p>
 		    <dd>Partly cloudy skies in the morning will give way to cloudy skies during the afternoon. 
 		    <dd>Slight chance of a rain shower. 
 		    <dd>High 46F.
