@@ -6,7 +6,6 @@ class Account {
     this.owner = owner;
     this._balance = 0;
     this.transactions = [];
-    this.dontforget = true; // i did forget
   }
 
   deposit(amount) {
@@ -16,7 +15,7 @@ class Account {
 
   withdraw(amount) {
     this._balance -= amount;
-    this.transactions.push(`WIT- ${amount}`)
+    this.transactions.push(`WITHDRAW- ${amount}`)
   }
 
   get balance() {
@@ -31,12 +30,11 @@ class Account {
   // }
 
   log() {
-    if (this.dontforget)    
-      console.log(`${this.owner}: $${this.balance}`);
+    console.log(`${this.owner}: `);
     for(let transaction of this.transactions) {
       console.log("\t"+transaction);
     }
-    console.log();
+    console.log("\t"+`$${this.balance}`);
   }
 }
 
@@ -46,22 +44,22 @@ class SavingsAccount extends Account {
     if(this._balance - amount > 0) {
       super.withdraw(amount);
     } else {
-      this.transactions.push(`W- ${amount} X`);
+      this.transactions.push(`NOT- ${amount} X`);
     }
   }
 }
 
-class ProAccount extends SavingsAccount {
+class ChequingAccount extends SavingsAccount {
 
-  constructor(owner, kick) {
+  constructor(owner, fee) {
     super(owner)
-    this.kick = kick
+    this._fee = fee
   }
 
   withdraw(amount) {
-    super.withdraw(amount);
-    if (this._balance >= 1000) {
-      super.deposit(this.kick);
+    if (this._balance >= amount+this._fee) {
+      super.withdraw(amount);
+      super.withdraw(this._fee);
     }
   }
 
@@ -69,17 +67,25 @@ class ProAccount extends SavingsAccount {
 
 /* program */
 
-let accountABC = new ProAccount("Juan", 20);
+let accountABC = new ChequingAccount("Bob",3.5);
+let accountDEF = new Account("Alice");
 
 accountABC.deposit(1500);
 accountABC.withdraw(100);
 accountABC.withdraw(500);
 accountABC.withdraw(1000);
-// accountABC._balance = 1000000
 accountABC.log();
-console.log('From getter: ',accountABC.balance);
-// accountABC._balance = 3000;``
-// console.log('From attribute: ',accountABC._balance);
+// console.log("getter: ",accountABC.balance)
+// console.log("_balance: ",++accountABC._balance)
+
+
+
+
+
+
+
+
+
 
 
 

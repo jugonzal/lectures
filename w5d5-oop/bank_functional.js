@@ -39,10 +39,6 @@ function createAccount(owner) {
            transactions: [] };
 }
 
-function createProAccount(owner) {
-  return set(createAccount(owner), {type: "pro"});
-}
-
 function deposit(account, amount) {
   return set(account,
             { balance: account.balance + amount,
@@ -55,46 +51,53 @@ function withdraw(account, amount) {
       transactions: conj(account.transactions, `W${amount}`) });
 }
 
-function withdrawPro(account, amount) {
-  let tempAccount = withdraw(account, amount);
-  if (account.balance >= 1000) {
-    return deposit(tempAccount, 10)
-  } else {
-    return tempAccount;
+function createChqAccount(owner) {
+  return set(createAccount(owner), {type: "CHQ"});
+}
+
+function cashCheque(account, amount) {
+  let tempAccount = account
+  if (account.balance >= amount + 2.5) {
+    tempAccount = withdraw(tempAccount, amount);
+    tempAccount = withdraw(tempAccount, 2.5);
   }
+  return tempAccount;
 }
 
 function toString(account) {
-  let out = `${account.owner}: $${account.balance}`;
-  return out + "\n\t"+account.transactions.join("\n\t") + "\n";
+  let out = `${account.owner}:`;
+  return `${account.owner}
+  \t${account.transactions.join("\n\t")}
+  \t======
+  \t$${account.balance}`;
 }
 
 /* program */
 
-// let accountABC = createProAccount("Juan");
+let accountABC = createAccount("Bob");
 
-// accountABC = deposit(accountABC, 1500);
+accountABC = deposit(accountABC, 1500);
 
-// accountABC = withdrawPro(accountABC, 300);
-// // // accountABC.balance = 5000;
-// // accountABC = withdraw(accountABC, 1000);
+accountABC = withdraw(accountABC, 3000);
+// accountABC.balance = 5000;
+// accountABC = withdraw(accountABC, 1000);
 
-// console.log(toString(accountABC));
+console.log(toString(accountABC));
 
 
 /* or... */
 
-console.log(
-  toString(
-    withdrawPro(
-      withdrawPro(
-        deposit(
-          createProAccount("Bob"), 
-          1500), 
-        400), 
-      200)
-    )
-  )
+// console.log(
+//   toString(
+//     withdraw(
+//       withdraw(
+//         deposit(
+//           createAccount("Bob"), 
+//           1500), 
+//         400), 
+//       200)
+//     )
+//   )
 
 // console.log(toString(bobsAccount))
 
